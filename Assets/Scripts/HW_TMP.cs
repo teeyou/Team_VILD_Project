@@ -6,10 +6,10 @@ public class HW_TMP : MonoBehaviour
     [SerializeField] private TMP_Text[] _textArr; 
     void Start()
     {
-        _textArr[0].text = "TEAM VILD х╜юлфц";
-        _textArr[1].text = "╢ы╣И ╧о╫ю╢о╢ы ";
-        _textArr[2].text = "юЗхЯ юъ╣г╟зар...?";
-        _textArr[3].text = "ажа╕╪╠а╓╨нем ╫╠аЖ╟║ ╬йЁв©Д.........";
-        _textArr[4].text = "╠Хеб©Уют╢о╢ы.";
+        _textArr[0].text = "TEAM VILD М≥■Л²╢М▄┘";
+        _textArr[1].text = "К▀╓К⌠╓ К╞©Л┼╣К▀┬К▀╓ ";
+        _textArr[2].text = "Л═─М²╛ Л·≤К░≤Й╡═Лё═...?";
+        _textArr[3].text = "Лё╪Л═°Л└═Л═∙К╤─М└╟ Л┴╫Л╖─Й╟─ Л∙┼К└╓Л ■.........";
+        _textArr[4].text = "Й╧─М┐°Л⌡┘Л·┘К▀┬К▀╓.";
     }
 }
