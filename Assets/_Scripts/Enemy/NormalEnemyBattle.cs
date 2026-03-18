@@ -32,6 +32,11 @@ public class NormalEnemyBattle : Unit
     //public bool IsDead => _isDead;
     public Unit Target => _target;
 
+    protected virtual void Awake()
+    {
+        _targetLayer = LayerMask.GetMask("Player");
+    }
+
     // 시작 시 스탯 초기화
     protected virtual void Start()
     {
