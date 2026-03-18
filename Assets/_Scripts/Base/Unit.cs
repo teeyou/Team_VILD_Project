@@ -43,7 +43,10 @@ public abstract class Unit : MonoBehaviour, IDamageable
     protected float _lifetime;      // 전투 중 살아남은 시간
     
     protected Transform _targetTr;  // 공격 대상 (몬스터 -> 플레이어, 플레이어 -> 몬스터)
-    
+
+    protected bool _isDead;
+    public bool IsDead => _isDead;
+
     public virtual void Attack()
     {
 
