@@ -5,6 +5,12 @@ using UnityEngine;
 /*
 
 - 플레이어 생성함
+
+필드 씬 -> 배틀 씬 -> 필드 씬
+
+필드씬의 데이터 저장 필요
+- cart, path 관련 데이터 (Cart의 Position, )
+
  
 */
 

@@ -11,6 +11,9 @@ public class FieldAutoMove : MonoBehaviour
     [SerializeField] private CinemachineSmoothPath _path;
     [SerializeField] private float _moveSpeed = 10f;
 
+    private Animator _animator;
+    private AutoAttack _autoAttack;
+
     private List<float> _cartPositionList = new List<float>();  //웨이포인트 별 카트의 Position 정보를 가지고 있는 리스트
 
     private bool _isMoving = false;
@@ -18,10 +21,15 @@ public class FieldAutoMove : MonoBehaviour
     
     public bool IsMoving { get { return _isMoving; } }
 
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+        _autoAttack = GetComponent<AutoAttack>();
+    }
+
     private void Start()
     {
-        _cart = FindObjectOfType<CinemachineDollyCart>();
-        _path = FindObjectOfType<CinemachineSmoothPath>();
+        SetCartAndPath();
 
         transform.rotation = _cart.transform.rotation;
 
@@ -36,8 +44,20 @@ public class FieldAutoMove : MonoBehaviour
         }
     }
 
+    private void SetCartAndPath()
+    {
+        _cart = FindObjectOfType<CinemachineDollyCart>();
+        _path = FindObjectOfType<CinemachineSmoothPath>();
+    }
+
     private void Update()
     {
+        // 씬 전환하고 돌아올 때 참조가 끊어지면 세팅
+        //if (_cart == null || _path == null)
+        //{
+        //    SetCartAndPath();
+        //}
+
         if (!_isMoving && InputManager.Instance.IsPressedSpace)
         {
             MoveNextPoint();
@@ -77,15 +97,21 @@ public class FieldAutoMove : MonoBehaviour
         if (_currentIdx >= FieldManager.Instance.GetStageLength())
             return;
 
+        _autoAttack.enabled = false;    // 이동 중에는 전투 발생 안함. 꺼놓음 
+
         _isMoving = true;
         _cart.m_Speed = _moveSpeed;
+        _animator.SetBool("Move", true);
     }
 
     public void Stop()
     {
+        _autoAttack.enabled = true;     // 필드에서 일정 시간 지나면 몬스터 스폰되기 때문에 활성화
+
         _isMoving = false;
         _cart.m_Speed = 0f;
         _currentIdx++;
+        _animator.SetBool("Move", false);
     }
 
 }
