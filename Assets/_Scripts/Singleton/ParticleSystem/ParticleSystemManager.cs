@@ -21,6 +21,8 @@ public class ParticleSystemManager : Singleton<ParticleSystemManager>
         base.Awake();
 
         Init();
+
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Init()

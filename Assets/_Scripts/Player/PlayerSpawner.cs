@@ -27,11 +27,11 @@ public class PlayerSpawner : MonoBehaviour
 
     private void Awake()
     {
-        SpawnAllPlayer();
+        //SpawnAllPlayer();
         //SpawnPlayer((int)ECharacterNumber.BowGirl_01, Vector3.zero, Quaternion.identity);
     }
 
-    private void SpawnAllPlayer()
+    public void SpawnAllPlayer()
     {
         for (int i = 0; i < _baseStatsList.Count; i++)
         {
@@ -42,12 +42,14 @@ public class PlayerSpawner : MonoBehaviour
         }
     }
 
-    private void SpawnPlayer(int idx, Vector3 pos, Quaternion rot)
+    public GameObject SpawnPlayer(int idx, Vector3 pos, Quaternion rot)
     {
         GameObject go = Instantiate(_baseStatsList[idx].Prefab);
         go.transform.position = pos;
         go.transform.rotation = rot;
         AutoAttack autoAttack = go.GetComponent<AutoAttack>();
         autoAttack.Init(_baseStatsList[idx]);
+
+        return go;
     }
 }

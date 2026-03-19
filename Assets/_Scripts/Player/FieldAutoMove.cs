@@ -2,6 +2,7 @@ using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FieldAutoMove : MonoBehaviour
@@ -15,16 +16,23 @@ public class FieldAutoMove : MonoBehaviour
     private bool _isMoving = false;
     private int _currentIdx = 0;    //플레이어의 현재 웨이포인트 인덱스
     
+    public bool IsMoving { get { return _isMoving; } }
 
     private void Start()
     {
+        _cart = FindObjectOfType<CinemachineDollyCart>();
+        _path = FindObjectOfType<CinemachineSmoothPath>();
+
+        transform.rotation = _cart.transform.rotation;
+
         _cart.m_Speed = 0f;
         _cart.m_Position = 0f;
 
-        for (int i = 0; i < _path.m_Waypoints.Length; i++)
+        // 트랙의 웨이포인트 위치를 카트의 Position으로 변환
+        int stageLength =  FieldManager.Instance.GetStageLength();
+        for (int i = 0; i < stageLength; i++)
         {
-            _cartPositionList.Add(GetWaypointDistance(i));
-            //Debug.Log($"{i}의 Cart Position : {GetWaypointDistance(i)}");
+            _cartPositionList.Add(GetCartPositionFromWaypoint(i));
         }
     }
 
@@ -41,28 +49,21 @@ public class FieldAutoMove : MonoBehaviour
             if (_cart.m_Position >= _cartPositionList[_currentIdx])
             {
                 Stop();
+                return;
             }
-        }
 
-    }
-
-    private void LateUpdate()
-    {
-        if (_isMoving)
-        {
             Vector3 pos = _cart.transform.position;
-            pos.y = 1f;
             transform.position = pos;
-            transform.rotation = _cart.transform.rotation * Quaternion.AngleAxis(-180f, Vector3.up);
+            transform.rotation = _cart.transform.rotation;
         }
 
     }
 
     // 웨이포인트의 월드좌표 -> Cart Position 변환
-    private float GetWaypointDistance(int index)
+    private float GetCartPositionFromWaypoint(int idx)
     {
         // 웨이포인트의 월드 좌표
-        Vector3 waypointPos = _path.m_Waypoints[index].position;
+        Vector3 waypointPos = _path.transform.TransformPoint(FieldManager.Instance.GetStagePosition(idx));
 
         // 트랙 상에서 가장 가까운 지점(내부 좌표) 찾기
         float nativePos = _path.FindClosestPoint(waypointPos, -1, -1, 10);
@@ -73,15 +74,18 @@ public class FieldAutoMove : MonoBehaviour
 
     public void MoveNextPoint()
     {
+        if (_currentIdx >= FieldManager.Instance.GetStageLength())
+            return;
+
         _isMoving = true;
         _cart.m_Speed = _moveSpeed;
-        _currentIdx++;
     }
 
     public void Stop()
     {
         _isMoving = false;
         _cart.m_Speed = 0f;
+        _currentIdx++;
     }
 
 }

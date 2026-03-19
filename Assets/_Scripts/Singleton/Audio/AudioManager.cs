@@ -32,7 +32,8 @@ public class AudioManager : Singleton<AudioManager>
         base.Awake();
 
         Init();
-
+        
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Init()
