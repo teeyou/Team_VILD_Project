@@ -11,7 +11,7 @@ public enum EnemyState
 public class NormalEnemyBattle : Unit
 {
     [Header("애니메이터 연결")]
-    [SerializeField] private Animator _animator;
+    [SerializeField] public Animator _animator;
 
     [Header("타겟 레이어")]
     [SerializeField] private LayerMask _targetLayer;
