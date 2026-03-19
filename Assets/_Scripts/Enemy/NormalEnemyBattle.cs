@@ -1,7 +1,18 @@
 using UnityEngine;
 
+public enum EnemyState
+{
+    Idle,
+    Move,
+    Attack,
+    Die
+}
+
 public class NormalEnemyBattle : Unit
 {
+    [Header("애니메이터 연결")]
+    [SerializeField] private Animator _animator;
+
     [Header("타겟 레이어")]
     [SerializeField] private LayerMask _targetLayer;
 
@@ -23,13 +34,15 @@ public class NormalEnemyBattle : Unit
     [SerializeField] private bool _deathLog = true;
     [SerializeField] private bool _drawGizmos = true;
 
-    //protected bool _isDead;
+    private bool _isAttacking;
+    private bool _canAct;
+
+
     protected float _searchTimer;
     protected float _lastAttackTime = -999f;
 
     protected Unit _target;
 
-    //public bool IsDead => _isDead;
     public Unit Target => _target;
 
     // 시작 시 스탯 초기화
@@ -59,10 +72,20 @@ public class NormalEnemyBattle : Unit
 
         float distance = GetDistanceTo(_target);
 
+        if (_target == null)
+        {
+            if (_animator != null)
+            {
+                _animator.SetBool("Move", false);
+            }
+            return;
+        }
+
         if (distance > _attackRange + _stopDistanceOffset)
         {
             MoveToTarget();
         }
+
         else
         {
             Attack();
@@ -75,9 +98,21 @@ public class NormalEnemyBattle : Unit
         if (_target == null)
             return;
 
+        if (_isAttacking)
+            return;
+
+        if (_isDead)
+            return;
+
         float distance = GetDistanceTo(_target);
         if (distance <= _attackRange + _stopDistanceOffset)
+        {
+            if (_animator != null)
+            {
+                _animator.SetBool("Move", false);
+            }
             return;
+        }
 
         Vector3 targetPos = _target.transform.position;
         Vector3 myPos = transform.position;
@@ -91,6 +126,11 @@ public class NormalEnemyBattle : Unit
         if (direction != Vector3.zero)
         {
             transform.forward = direction;
+        }
+
+        if (_animator != null)
+        {
+            _animator.SetBool("Move", true);
         }
     }
 
@@ -187,33 +227,52 @@ public class NormalEnemyBattle : Unit
         return closestEnemy;
     }
 
-    // 공격 가능 조건을 확인한 뒤 타겟에게 데미지 전달
+    // 공격 가능한 조건을 통과하면 Attack 애니메이션 실행
     public override void Attack()
     {
         if (_target == null)
             return;
 
-        NormalEnemyBattle enemy = _target.GetComponent<NormalEnemyBattle>();
-        bool targetDead = false;
+        if (_target.IsDead)
+            return;
 
-        if (enemy != null)
-            targetDead = enemy.IsDead;
-
-        if (targetDead)
+        if (_isAttacking)
             return;
 
         if (Time.time < _lastAttackTime + _attackCooldown)
             return;
 
         float distance = GetDistanceTo(_target);
-
         if (distance > _attackRange + _stopDistanceOffset)
             return;
 
         _lastAttackTime = Time.time;
+        _isAttacking = true;
+
+        if (_animator != null)
+        {
+            _animator.SetBool("Move", false);
+            _animator.SetTrigger("Attack");
+        }
+    }
+
+    // Attack 애니메이션에서 이벤트로 호출되서 타겟에게 TakeDamage를 호출해서 실제 공격
+    private void ApplyDamage()
+    {
+        if (_isDead) 
+            return;
+
+        if (_target == null) 
+            return;
+
+        if (_target.IsDead)
+            return;
+
+        float distance = GetDistanceTo(_target);
+        if (distance > _attackRange + _stopDistanceOffset)
+            return;
 
         _target.TakeDamage(_atk, transform);
-        _totalDamage += _atk;
 
         if (_battleLog)
         {
@@ -221,8 +280,16 @@ public class NormalEnemyBattle : Unit
         }
     }
 
+    // Attack 애니메이션에 마지막에 공격이 끝났으니 공격중이 아님을 체크
+    private void EndAttack()
+    {
+        _isAttacking = false;
+    }
+
+
     public override void Skill()
     {
+
     }
 
     public override void Heal(int value)
@@ -266,13 +333,20 @@ public class NormalEnemyBattle : Unit
             return;
 
         _isDead = true;
+        _isAttacking = false;
+
+        if (_animator != null)
+        {
+            _animator.SetBool("Move", false);
+            _animator.SetTrigger("Die");
+        }
 
         if (_deathLog)
         {
             Debug.Log($"{name} 죽음");
         }
 
-        Destroy(gameObject);
+        // Destroy(gameObject);
     }
 
     // 감지 범위와 공격 범위를 Scene 뷰에 표시
