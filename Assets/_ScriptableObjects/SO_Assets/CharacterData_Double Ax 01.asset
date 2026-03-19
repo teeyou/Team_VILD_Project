@@ -10,11 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfac172417e50d841ae426d75949a43d, type: 3}
-  m_Name: CharacterData_Ch1
+  m_Name: CharacterData_Double Ax 01
   m_EditorClassIdentifier: 
-  _id: 1
-  _chName: Warrior
-  _defaultMaxHp: 100
-  _defaultAtk: 10
-  _defaultDef: 10
-  _prefab: {fileID: 8563781440306956277, guid: 7296160eb0c27664da2183a1dfd7e000, type: 3}
+  _id: 11
+  _chName: Double Ax 01
+  _defaultMaxHp: 1000
+  _defaultAtk: 100
+  _defaultDef: 100
+  _range: 2
+  _moveSpeed: 10
+  _skillCool: 5
+  _attackType: 0
+  _prefab: {fileID: 5018975388342461931, guid: d610dfbcbf8de89418c6138a20bb6060, type: 3}

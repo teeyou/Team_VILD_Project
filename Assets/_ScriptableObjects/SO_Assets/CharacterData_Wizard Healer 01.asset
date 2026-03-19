@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfac172417e50d841ae426d75949a43d, type: 3}
+  m_Name: CharacterData_Wizard Healer 01
+  m_EditorClassIdentifier: 
+  _id: 62
+  _chName: Wizard Healer 01
+  _defaultMaxHp: 1000
+  _defaultAtk: 100
+  _defaultDef: 100
+  _range: 20
+  _moveSpeed: 10
+  _skillCool: 5
+  _attackType: 1
+  _prefab: {fileID: 7830136049655510298, guid: 6778861e920e27c4287bf58535cadf4f, type: 3}

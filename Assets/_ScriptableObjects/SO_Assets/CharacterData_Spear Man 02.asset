@@ -10,11 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfac172417e50d841ae426d75949a43d, type: 3}
-  m_Name: CharacterData_Ch2
+  m_Name: CharacterData_Spear Man 02
   m_EditorClassIdentifier: 
-  _id: 2
-  _chName: Knight
-  _defaultMaxHp: 80
-  _defaultAtk: 15
-  _defaultDef: 10
-  _prefab: {fileID: 6736661584828368618, guid: dec5b0349df211c4bb60489b3762eb12, type: 3}
+  _id: 32
+  _chName: Spear Man 02
+  _defaultMaxHp: 1000
+  _defaultAtk: 100
+  _defaultDef: 100
+  _range: 2
+  _moveSpeed: 10
+  _skillCool: 5
+  _attackType: 0
+  _prefab: {fileID: 1290376450363407221, guid: 2c9e836d8a3b1fc47a8c6d17c1cbdc69, type: 3}

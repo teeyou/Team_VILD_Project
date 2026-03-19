@@ -19,19 +19,31 @@ public enum EPositionLine
     Rear,
 }
 
+// 현재 씬이 필드씬 or 배틀씬
 public enum ECombatMap
 {
     Field,
     Battle,
 }
 
+// 근거리 공격 or 원거리 공격
+public enum EAttackType
+{
+    Melee,
+    Range,
+}
+
 public abstract class Unit : MonoBehaviour, IDamageable
 {
+    protected float _moveSpeed;
     protected int _curHp;
     protected int _maxHp;
     protected int _atk;
     protected int _def;
     protected int _cp;
+    protected bool _isAttack;           // 공격중인지 확인
+
+    protected EAttackType _attackType; // 근거리 또는 원거리
 
     protected ECombatMap _map;      // 필드씬 , 배틀씬
 
@@ -45,17 +57,29 @@ public abstract class Unit : MonoBehaviour, IDamageable
     protected Transform _targetTr;  // 공격 대상 (몬스터 -> 플레이어, 플레이어 -> 몬스터)
 
     protected bool _isDead;
-    public bool IsDead => _isDead;
+    public bool IsDead {get { return _isDead; } set { _isDead = value; } }
 
-    public virtual void Attack()
-    {
+    public float MoveSpeed { get { return _moveSpeed; } set { _moveSpeed = value; } }
+    public int CurHp { get { return _curHp; } set { _curHp = value; } }
+    public int MaxHp { get { return _maxHp; } set { _maxHp = value; } }
+    public int Atk { get { return _atk; } set { _atk = value; } }
+    public int Def { get { return _def; } set { _def = value; } }
+    public int Cp { get { return _cp; } set { _cp = value; } }
+    public bool IsAttack { get { return _isAttack; } set { _isAttack = value; } }
 
-    }
+    public EAttackType AttackType { get { return _attackType; } set { _attackType = value; } }
+    public ECombatMap Map { get { return _map; } set { _map = value; } }
+    public EPositionLine Line { get { return _line; } set { _line = value; } }
+    public float Range { get { return _range; } set { _range = value; } }
+    public int TotalDamage { get { return _totalDamage; } set { _totalDamage = value; } }
+    public int TotalDamaged { get { return _totalDamaged; } set { _totalDamaged = value; } }
+    public float LifeTime { get { return _lifetime; } set { _lifetime = value; } }
+    public Transform TargetTr { get { return _targetTr; } set { _targetTr = value; } }
 
-    public virtual void Skill()
-    {
 
-    }
+    public abstract void Attack();
+
+    public abstract void Skill();
 
     public virtual void Heal(int value)
     {
@@ -70,13 +94,4 @@ public abstract class Unit : MonoBehaviour, IDamageable
     {
         
     }
-
-    //public void SetMaxHp(int maxHp)
-    //{
-    //    _maxHp = maxHp;
-    //}
-
-    //public int GetMaxHp() => _maxHp;
-
-
 }

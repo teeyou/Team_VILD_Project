@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfac172417e50d841ae426d75949a43d, type: 3}
+  m_Name: CharacterData_Spear Man 01
+  m_EditorClassIdentifier: 
+  _id: 31
+  _chName: Spear Man 01
+  _defaultMaxHp: 1000
+  _defaultAtk: 100
+  _defaultDef: 100
+  _range: 2
+  _moveSpeed: 10
+  _skillCool: 5
+  _attackType: 0
+  _prefab: {fileID: 1153002606908561107, guid: 87116b1ddebd2b54fb0af4c36bd8a339, type: 3}
