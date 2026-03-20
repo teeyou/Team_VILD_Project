@@ -48,6 +48,11 @@ public class NormalEnemyBattle : Unit
     // 시작 시 스탯 초기화
     protected virtual void Start()
     {
+        if (_animator == null)
+        {
+            _animator = GetComponent<Animator>();
+        }
+
         _maxHp = _defaultMaxHp;
         _curHp = _maxHp;
         _atk = _defaultAtk;
