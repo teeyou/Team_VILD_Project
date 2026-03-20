@@ -2838,6 +2838,7 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 1048576
+  _attackDelay: 0.5
 --- !u!95 &2839209044511978422
 Animator:
   serializedVersion: 5

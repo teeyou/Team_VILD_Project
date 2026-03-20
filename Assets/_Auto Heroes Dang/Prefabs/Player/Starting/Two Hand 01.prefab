@@ -11652,6 +11652,7 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 1048576
+  _attackDelay: 0.5
 --- !u!114 &3172588396811428148
 MonoBehaviour:
   m_ObjectHideFlags: 0

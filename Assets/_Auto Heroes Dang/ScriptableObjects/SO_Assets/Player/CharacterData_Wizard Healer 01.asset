@@ -17,8 +17,10 @@ MonoBehaviour:
   _defaultMaxHp: 1000
   _defaultAtk: 100
   _defaultDef: 100
-  _range: 20
-  _moveSpeed: 10
+  _range: 10
+  _moveSpeed: 5
   _skillCool: 5
   _attackType: 1
   _prefab: {fileID: 7830136049655510298, guid: 6778861e920e27c4287bf58535cadf4f, type: 3}
+  _level: 1
+  _grade: 1

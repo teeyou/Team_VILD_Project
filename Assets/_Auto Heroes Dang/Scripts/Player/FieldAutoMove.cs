@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FieldAutoMove : MonoBehaviour
 {
@@ -29,6 +30,17 @@ public class FieldAutoMove : MonoBehaviour
 
     private void Start()
     {
+        // 씬에 따라서 스크립트 활성화 / 비활성화
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        
+        // 현재 씬이 필드 씬이 아니면 비활성화
+        if (currentSceneName != ESceneId.FieldScene.ToString())
+        {
+            enabled = false;
+            Debug.Log("FieldAutoMove disabled.");
+            return;
+        }
+        
         SetCartAndPath();
 
         transform.rotation = _cart.transform.rotation;

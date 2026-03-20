@@ -6,7 +6,9 @@ public class AutoAttack : Unit
 {
     [SerializeField] private float _searchRadius;
     [SerializeField] private LayerMask _layerMask;
-    
+
+    [SerializeField] private float _attackDelay = 0.5f;
+
     private Animator _animator;
 
     private float _skillCool;
@@ -23,13 +25,16 @@ public class AutoAttack : Unit
         _cp = _curHp + _atk + _def;
 
         _range = data.Range;
-        
+
         _moveSpeed = data.MoveSpeed;
 
         _skillCool = data.SkillCool;
         _currentSkillCool = _skillCool;
 
         _attackType = data.AttackType;
+
+        _level = data.Level;
+        _grade = data.Grade;
 
         _line = EPositionLine.None;
         _map = ECombatMap.Field;
@@ -81,10 +86,10 @@ public class AutoAttack : Unit
 
                 if (_isAttack)
                 {
-                    Debug.Log("이미 공격중");
                     return;
                 }
 
+                
                 if (_currentSkillCool < 0f)
                 {
                     _isAttack = true;
@@ -133,53 +138,57 @@ public class AutoAttack : Unit
     {
         Debug.Log("Attack");
 
-        if (_attackType == EAttackType.Melee)
+        if (_attackType == EAttackType.Melee || _attackType == EAttackType.Tank)
         {
-            Debug.Log("근거리 공격");
+            // 근거리 공격
         }
 
         else
         {
-            Debug.Log("원거리 공격");
+            // 원거리 공격
         }
     }
 
     public void AttackEnd()
     {
         Debug.Log("AttackEnd");
-        StartCoroutine(CoDelay(1f));
+        StartCoroutine(CoAttackDelay(_attackDelay));
+    }
+
+    private IEnumerator CoAttackDelay(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+
         _isAttack = false;
     }
 
-    private IEnumerator CoDelay(float sec)
+    private IEnumerator CoSkillDelay(float sec)
     {
-        Debug.Log("CoDelay");
         yield return new WaitForSeconds(sec);
+
+        _isAttack = false;
+        _currentSkillCool = _skillCool;
+        _skillEnd = true;   //스킬 쿨다운 시작
     }
+
     public override void Skill()
     {
         Debug.Log("Skill");
-
-        if (_attackType == EAttackType.Melee)
+        if (_attackType == EAttackType.Melee || _attackType == EAttackType.Tank)
         {
-            Debug.Log("!!! 근거리 스킬");
+            // 근거리 스킬
         }
 
         else
         {
-            Debug.Log("!!! 원거리 스킬");
+            // 원거리 스킬
         }
     }
 
     public void SkillEnd()
     {
         Debug.Log("SkillEnd");
-        StartCoroutine(CoDelay(2f));
-
-        _isAttack = false;
-
-        _currentSkillCool = _skillCool;
-        _skillEnd = true;   //스킬 쿨다운 시작
+        StartCoroutine(CoSkillDelay(_attackDelay));
     }
 
     private void OnDrawGizmosSelected()

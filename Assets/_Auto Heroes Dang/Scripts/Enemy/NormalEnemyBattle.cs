@@ -22,7 +22,7 @@ public class NormalEnemyBattle : Unit
     [SerializeField] private int _defaultDef = 1;
 
     [Header("자동 전투")]
-    [SerializeField] private float _moveSpeed = 2f;
+    //[SerializeField] private float _moveSpeed = 2f;
     [SerializeField] private float _detectRange = 10f;
     [SerializeField] private float _attackRange = 1.5f;
     [SerializeField] private float _attackCooldown = 1f;

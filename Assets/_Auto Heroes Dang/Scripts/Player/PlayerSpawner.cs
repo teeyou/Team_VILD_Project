@@ -1,7 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/*
+스타팅
+
+BowGirl_01 = 0,
+Shield_01 = 4,
+SpearMan_01 = 6,
+TwoHand_01 = 10,
+Wizard_01 = 13,
+WizardHealer_01 = 14,
+
+*/
 public enum ECharacterNumber
 {
     BowGirl_01 = 0,
@@ -28,7 +41,45 @@ public class PlayerSpawner : MonoBehaviour
     private void Awake()
     {
         //SpawnAllPlayer();
+
         //SpawnPlayer((int)ECharacterNumber.BowGirl_01, Vector3.zero, Quaternion.identity);
+
+        
+    }
+
+    private void Start()
+    {
+        SpawnStarting();
+        //TestSpawnPlayerBattleScene();
+    }
+
+    private void TestSpawnPlayerBattleScene()
+    {
+        IReadOnlyList<Vector3> pPosList = BattleManager.Instance.PlayerStartingPosList;
+        for (int i = 0; i < pPosList.Count; i++)
+        {
+            SpawnPlayer(i, pPosList[i], BattleManager.Instance.PlayerStartingRotation);
+        }
+    }
+
+    public void SpawnStarting()
+    {
+        /*
+        BowGirl_01 = 0,
+        Shield_01 = 4,
+        SpearMan_01 = 6,
+        TwoHand_01 = 10,
+        Wizard_01 = 13,
+        WizardHealer_01 = 14, 
+        */
+
+        IReadOnlyList<Vector3> pPosList = BattleManager.Instance.PlayerStartingPosList;
+        SpawnPlayer(0, pPosList[0], BattleManager.Instance.PlayerStartingRotation);
+        SpawnPlayer(4, pPosList[1], BattleManager.Instance.PlayerStartingRotation);
+        SpawnPlayer(6, pPosList[2], BattleManager.Instance.PlayerStartingRotation);
+        SpawnPlayer(10, pPosList[3], BattleManager.Instance.PlayerStartingRotation);
+        SpawnPlayer(13, pPosList[4], BattleManager.Instance.PlayerStartingRotation);
+        SpawnPlayer(14, pPosList[5], BattleManager.Instance.PlayerStartingRotation);
     }
 
     public void SpawnAllPlayer()
