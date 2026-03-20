@@ -1,65 +1,77 @@
 using UnityEngine;
 
-public enum EnemyState
-{
-    Idle,
-    Move,
-    Attack,
-    Die
-}
-
 public class NormalEnemyBattle : Unit
 {
     [Header("애니메이터 연결")]
-    [SerializeField] public Animator _animator;
+    [SerializeField] protected Animator _animator;
+
+    [Header("스탯 데이터")]
+    [SerializeField] protected BaseStatus_SO _statusData;
 
     [Header("타겟 레이어")]
     [SerializeField] private LayerMask _targetLayer;
 
-    [Header("기본 스탯")]
-    [SerializeField] private int _defaultMaxHp = 100;
-    [SerializeField] private int _defaultAtk = 10;
-    [SerializeField] private int _defaultDef = 1;
-
     [Header("자동 전투")]
-    [SerializeField] private float _moveSpeed = 2f;
     [SerializeField] private float _detectRange = 10f;
-    [SerializeField] private float _attackRange = 1.5f;
     [SerializeField] private float _attackCooldown = 1f;
     [SerializeField] private float _searchInterval = 0.2f;
     [SerializeField] private float _stopDistanceOffset = 0.5f;
+
+    [Header("원거리 공격")]
+    [SerializeField] private GameObject _projectilePrefab;
+    [SerializeField] private float _projectileSpawnForwardOffset = 0.5f;
+    [SerializeField] private float _projectileSpeed = 8f;
+    [SerializeField] private Transform _projectileSpawnPoint;
 
     [Header("디버그")]
     [SerializeField] private bool _battleLog = true;
     [SerializeField] private bool _deathLog = true;
     [SerializeField] private bool _drawGizmos = true;
 
-    private bool _isAttacking;
-    private bool _canAct;
-
+    [Header("런타임 확인용")]
+    //[SerializeField] protected float _moveSpeed = 2f;
+    [SerializeField] protected float _attackRange = 1.5f;
+    [SerializeField] protected float _skillCool;
+    //[SerializeField] protected EAttackType _attackType;
 
     protected float _searchTimer;
     protected float _lastAttackTime = -999f;
 
     protected Unit _target;
+    protected bool _isAttacking;
 
     public Unit Target => _target;
 
-    // 시작 시 스탯 초기화
     protected virtual void Start()
     {
         if (_animator == null)
-        {
             _animator = GetComponent<Animator>();
-        }
 
-        _maxHp = _defaultMaxHp;
-        _curHp = _maxHp;
-        _atk = _defaultAtk;
-        _def = _defaultDef;
+        if (_targetLayer == 0)
+            _targetLayer = LayerMask.GetMask("Player");
+
+        ApplyStatusData();
     }
 
-    // 매 프레임 타겟 갱신과 전투 행동 처리
+    protected virtual void ApplyStatusData()
+    {
+        if (_statusData == null)
+        {
+            Debug.LogWarning($"{name} : BaseStatus_SO가 연결되지 않았습니다.");
+            return;
+        }
+
+        _maxHp = _statusData.DefaultMaxHp;
+        _curHp = _maxHp;
+        _atk = _statusData.DefaultAtk;
+        _def = _statusData.DefaultDef;
+
+        _attackRange = _statusData.Range;
+        _moveSpeed = _statusData.MoveSpeed;
+        _skillCool = _statusData.SkillCool;
+        _attackType = _statusData.AttackType;
+    }
+
     protected virtual void Update()
     {
         if (_isDead)
@@ -69,35 +81,37 @@ public class NormalEnemyBattle : Unit
         HandleCombat();
     }
 
-    // 현재 타겟과의 거리를 기준으로 이동 또는 공격을 결정
     protected virtual void HandleCombat()
     {
-        if (_target == null)
+        if (_isDead)
             return;
 
-        float distance = GetDistanceTo(_target);
+        if (_isAttacking)
+            return;
 
         if (_target == null)
         {
-            if (_animator != null)
-            {
-                _animator.SetBool("Move", false);
-            }
+            SetMoveAnimation(false);
             return;
         }
+
+        float distance = GetDistanceTo(_target);
 
         if (distance > _attackRange + _stopDistanceOffset)
         {
             MoveToTarget();
         }
-
         else
         {
-            Attack();
+            LookAtTarget();
+            SetMoveAnimation(false);
+            if (!_isAttacking)
+            {
+                Attack();
+            }
         }
     }
 
-    // 현재 타겟 방향으로 이동
     protected virtual void MoveToTarget()
     {
         if (_target == null)
@@ -112,10 +126,7 @@ public class NormalEnemyBattle : Unit
         float distance = GetDistanceTo(_target);
         if (distance <= _attackRange + _stopDistanceOffset)
         {
-            if (_animator != null)
-            {
-                _animator.SetBool("Move", false);
-            }
+            SetMoveAnimation(false);
             return;
         }
 
@@ -128,46 +139,25 @@ public class NormalEnemyBattle : Unit
 
         transform.position += direction * _moveSpeed * Time.deltaTime;
 
-        if (direction != Vector3.zero)
-        {
-            transform.forward = direction;
-        }
+        LookAtTarget();
 
-        if (_animator != null)
-        {
-            _animator.SetBool("Move", true);
-        }
+        SetMoveAnimation(true);
     }
 
-    // 현재 타겟이 유효한지 확인하고 필요하면 새 타겟 탐색
     protected virtual void UpdateTarget()
     {
         _searchTimer += Time.deltaTime;
 
-        bool needNewTarget = _target == null;
+        bool needNewTarget = _target == null || _target.IsDead;
 
         if (!needNewTarget && _target != null)
         {
-            NormalEnemyBattle enemy = _target.GetComponent<NormalEnemyBattle>();
-            bool targetDead = false;
+            float distance = GetDistanceTo(_target);
 
-            if (enemy != null)
-                targetDead = enemy.IsDead;
-
-            if (targetDead)
+            if (distance > _detectRange)
             {
                 _target = null;
                 needNewTarget = true;
-            }
-            else
-            {
-                float distance = GetDistanceTo(_target);
-
-                if (distance > _detectRange)
-                {
-                    _target = null;
-                    needNewTarget = true;
-                }
             }
         }
 
@@ -181,19 +171,15 @@ public class NormalEnemyBattle : Unit
         _target = FindEnemyInRange();
     }
 
-    // 다른 유닛과의 평면 거리 계산
     protected virtual float GetDistanceTo(Unit other)
     {
         Vector3 a = transform.position;
         Vector3 b = other.transform.position;
-
         a.y = 0f;
         b.y = 0f;
-
         return Vector3.Distance(a, b);
     }
 
-    // 감지 범위 안에서 타겟 레이어에 해당하는 가장 가까운 유닛 탐색
     protected virtual Unit FindEnemyInRange()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, _detectRange, _targetLayer);
@@ -207,17 +193,9 @@ public class NormalEnemyBattle : Unit
 
             if (other == null)
                 continue;
-
             if (other == this)
                 continue;
-
-            NormalEnemyBattle enemy = other.GetComponent<NormalEnemyBattle>();
-            bool otherDead = false;
-
-            if (enemy != null)
-                otherDead = enemy.IsDead;
-
-            if (otherDead)
+            if (other.IsDead)
                 continue;
 
             float distance = GetDistanceTo(other);
@@ -232,7 +210,24 @@ public class NormalEnemyBattle : Unit
         return closestEnemy;
     }
 
-    // 공격 가능한 조건을 통과하면 Attack 애니메이션 실행
+    protected virtual void LookAtTarget()
+    {
+        if (_target == null)
+            return;
+
+        Vector3 targetPos = _target.transform.position;
+        Vector3 myPos = transform.position;
+
+        targetPos.y = myPos.y;
+
+        Vector3 direction = (targetPos - myPos).normalized;
+
+        if (direction != Vector3.zero)
+        {
+            transform.forward = direction;
+        }
+    }
+
     public override void Attack()
     {
         if (_target == null)
@@ -254,22 +249,21 @@ public class NormalEnemyBattle : Unit
         _lastAttackTime = Time.time;
         _isAttacking = true;
 
-        if (_animator != null)
+        SetMoveAnimation(false);
+
+        if (_animator != null && _animator.runtimeAnimatorController != null)
         {
-            _animator.SetBool("Move", false);
             _animator.SetTrigger("Attack");
         }
     }
 
-    // Attack 애니메이션에서 이벤트로 호출되서 타겟에게 TakeDamage를 호출해서 실제 공격
+    // 근접 공격용 이벤트
     private void ApplyDamage()
     {
-        if (_isDead) 
+        if (_isDead)
             return;
-
-        if (_target == null) 
+        if (_target == null)
             return;
-
         if (_target.IsDead)
             return;
 
@@ -278,24 +272,77 @@ public class NormalEnemyBattle : Unit
             return;
 
         _target.TakeDamage(_atk, transform);
+        _totalDamage += _atk;
 
         if (_battleLog)
         {
-            Debug.Log($"{name} >> {_target.name} 공격 / 데미지 : {_atk}");
+            Debug.Log($"{name} >> {_target.name} 근접 공격 / 데미지 : {_atk}");
         }
     }
 
-    // Attack 애니메이션에 마지막에 공격이 끝났으니 공격중이 아님을 체크
+    // 원거리 공격용 이벤트
+    private void FireProjectile()
+    {
+        if (_isDead)
+            return;
+
+        if (_target == null)
+            return;
+
+        if (_target.IsDead)
+            return;
+
+        if (_projectilePrefab == null)
+        {
+            Debug.LogWarning($"{name} : 투사체 프리팹이 연결되지 않았습니다.");
+            return;
+        }
+
+        Collider _targetCollider = _target.GetComponent<Collider>();
+        if (_targetCollider == null)
+        {
+            Debug.LogWarning($"{name} : 타겟에 콜라이더가 없음");
+            return;
+        }
+
+        // Vector3 spawnPos = transform.position + transform.forward * _projectileSpawnForwardOffset;
+        // spawnPos.y = transform.position.y;
+
+        Vector3 spawnPos = GetProjectileSpawnPosition();
+
+        GameObject projectileObj = Instantiate(_projectilePrefab, spawnPos, Quaternion.identity);
+
+        HomingProjectile projectile = projectileObj.GetComponent<HomingProjectile>();
+        if (projectile == null)
+        {
+            Debug.LogWarning($"{name} : 투사체 프리팹에 HomingProjectile 스크립트가 없습니다.");
+            return;
+        }
+
+        projectile.Init(_target, _atk, _projectileSpeed, transform, _targetCollider);
+
+        if (_battleLog)
+        {
+            Debug.Log($"{name} >> {_target.name} 투사체 발사 / 데미지 : {_atk}");
+        }
+    }
+
+    protected virtual Vector3 GetProjectileSpawnPosition()
+    {
+        if (_projectileSpawnPoint != null)
+            return _projectileSpawnPoint.position;
+
+        Vector3 spawnPos = transform.position + transform.forward * _projectileSpawnForwardOffset;
+        spawnPos.y = transform.position.y;
+        return spawnPos;
+    }
+
     private void EndAttack()
     {
         _isAttacking = false;
     }
 
-
-    public override void Skill()
-    {
-
-    }
+    public override void Skill() { }
 
     public override void Heal(int value)
     {
@@ -308,7 +355,6 @@ public class NormalEnemyBattle : Unit
             _curHp = _maxHp;
     }
 
-    // 데미지를 받아 체력을 감소시키고 사망 여부 확인
     public override void TakeDamage(int damage, Transform attacker)
     {
         if (_isDead)
@@ -331,7 +377,6 @@ public class NormalEnemyBattle : Unit
         }
     }
 
-    // 사망 처리 후 오브젝트 제거
     public override void Die()
     {
         if (_isDead)
@@ -340,9 +385,10 @@ public class NormalEnemyBattle : Unit
         _isDead = true;
         _isAttacking = false;
 
-        if (_animator != null)
+        SetMoveAnimation(false);
+
+        if (_animator != null && _animator.runtimeAnimatorController != null)
         {
-            _animator.SetBool("Move", false);
             _animator.SetTrigger("Die");
         }
 
@@ -350,11 +396,21 @@ public class NormalEnemyBattle : Unit
         {
             Debug.Log($"{name} 죽음");
         }
-
-        // Destroy(gameObject);
     }
 
-    // 감지 범위와 공격 범위를 Scene 뷰에 표시
+    private void DestroySelf()
+    {
+        Destroy(gameObject);
+    }
+
+    protected virtual void SetMoveAnimation(bool isMove)
+    {
+        if (_animator != null && _animator.runtimeAnimatorController != null)
+        {
+            _animator.SetBool("Move", isMove);
+        }
+    }
+
     protected virtual void OnDrawGizmosSelected()
     {
         if (!_drawGizmos)
