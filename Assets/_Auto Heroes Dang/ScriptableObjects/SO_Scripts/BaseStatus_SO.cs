@@ -16,6 +16,9 @@ public class BaseStatus_SO : ScriptableObject
     [SerializeField] private EAttackType _attackType;
     [SerializeField] private GameObject _prefab;
 
+    [SerializeField] private int _level;
+    [SerializeField] private EGrade _grade;
+
     public string Id { get { return _id; } }
     public string ChName { get { return _chName; } }
     public int DefaultMaxHp { get { return _defaultMaxHp; } }
@@ -26,5 +29,8 @@ public class BaseStatus_SO : ScriptableObject
     public float SkillCool { get { return _skillCool; } }
     public EAttackType AttackType { get { return _attackType; } }
     public GameObject Prefab { get { return _prefab; } }
+
+    public int Level { get { return _level; } }
+    public EGrade Grade { get { return _grade; } }
 
 }

@@ -31,6 +31,14 @@ public enum EAttackType
 {
     Melee,
     Range,
+    Tank,
+}
+
+public enum EGrade
+{
+    B,
+    A,
+    S
 }
 
 public abstract class Unit : MonoBehaviour, IDamageable
@@ -41,6 +49,9 @@ public abstract class Unit : MonoBehaviour, IDamageable
     protected int _atk;
     protected int _def;
     protected int _cp;
+    protected int _level;
+    protected EGrade _grade;
+    
     protected bool _isAttack;           // 공격중인지 확인
 
     protected EAttackType _attackType; // 근거리 또는 원거리
@@ -65,8 +76,11 @@ public abstract class Unit : MonoBehaviour, IDamageable
     public int Atk { get { return _atk; } set { _atk = value; } }
     public int Def { get { return _def; } set { _def = value; } }
     public int Cp { get { return _cp; } set { _cp = value; } }
+    public int Level { get { return _level; } set { _level = value; } }
+
     public bool IsAttack { get { return _isAttack; } set { _isAttack = value; } }
 
+    public EGrade Grade { get { return _grade; } set { _grade = value; } }
     public EAttackType AttackType { get { return _attackType; } set { _attackType = value; } }
     public ECombatMap Map { get { return _map; } set { _map = value; } }
     public EPositionLine Line { get { return _line; } set { _line = value; } }
