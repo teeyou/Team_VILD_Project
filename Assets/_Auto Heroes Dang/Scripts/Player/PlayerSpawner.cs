@@ -32,6 +32,8 @@ public enum ECharacterNumber
     TwoHand_03 = 12,
     Wizard_01 = 13,
     WizardHealer_01 = 14,
+    TwoHand_TU = 15,
+    SpearMan_JH = 16,
 }
 
 public class PlayerSpawner : MonoBehaviour
@@ -74,12 +76,15 @@ public class PlayerSpawner : MonoBehaviour
         */
 
         IReadOnlyList<Vector3> pPosList = BattleManager.Instance.PlayerStartingPosList;
-        SpawnPlayer(0, pPosList[0], BattleManager.Instance.PlayerStartingRotation);
-        SpawnPlayer(4, pPosList[1], BattleManager.Instance.PlayerStartingRotation);
-        SpawnPlayer(6, pPosList[2], BattleManager.Instance.PlayerStartingRotation);
-        SpawnPlayer(10, pPosList[3], BattleManager.Instance.PlayerStartingRotation);
-        SpawnPlayer(13, pPosList[4], BattleManager.Instance.PlayerStartingRotation);
-        SpawnPlayer(14, pPosList[5], BattleManager.Instance.PlayerStartingRotation);
+        //SpawnPlayer(0, pPosList[0], BattleManager.Instance.PlayerStartingRotation);
+        //SpawnPlayer(4, pPosList[1], BattleManager.Instance.PlayerStartingRotation);
+        //SpawnPlayer(6, pPosList[2], BattleManager.Instance.PlayerStartingRotation);
+        //SpawnPlayer(10, pPosList[3], BattleManager.Instance.PlayerStartingRotation);
+        //SpawnPlayer(13, pPosList[4], BattleManager.Instance.PlayerStartingRotation);
+        //SpawnPlayer(14, pPosList[5], BattleManager.Instance.PlayerStartingRotation);
+
+        SpawnPlayer((int)ECharacterNumber.TwoHand_TU, pPosList[0], BattleManager.Instance.PlayerStartingRotation);
+        SpawnPlayer((int)ECharacterNumber.SpearMan_JH, pPosList[1], BattleManager.Instance.PlayerStartingRotation);
     }
 
     public void SpawnAllPlayer()
