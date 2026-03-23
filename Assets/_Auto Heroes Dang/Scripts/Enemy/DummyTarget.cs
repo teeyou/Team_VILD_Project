@@ -46,7 +46,7 @@ public class DummyTarget : Unit
 
     void Start()
     {
-        _maxHp = 100;
+        _maxHp = 200;
         _curHp = _maxHp;
         _def = 2;
     }

@@ -579,7 +579,7 @@ GameObject:
   - component: {fileID: 1792029717008244499}
   - component: {fileID: 8852400686468192300}
   - component: {fileID: 6512994228888785190}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Orc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -646,6 +646,15 @@ MonoBehaviour:
   _searchInterval: 0.2
   _stopDistanceOffset: 0.5
   _postAttackDelay: 0.2
+  _hitVfxPrefab: {fileID: 5724093481334579524, guid: eb24c3da2a84b7b4ca5d850dd712182b, type: 3}
+  _hitVfxForwardOffset: 0.5
+  _hitVfxHeightOffset: 1
+  _hitVfxLifeTime: 0.2
+  _meleeHitVfxScale: {x: 1, y: 1, z: 1}
+  _projectilePrefab: {fileID: 0}
+  _projectileSpawnPoint: {fileID: 0}
+  _projectileSpawnForwardOffset: 0.5
+  _projectileSpeed: 8
   _rotateDuration: 0.2
   _battleLog: 1
   _deathLog: 1
