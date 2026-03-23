@@ -51,6 +51,11 @@ public class AutoAttack : Unit
         _animator = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+
+    }
+
     void Update()
     {
         if (_skillEnd)
