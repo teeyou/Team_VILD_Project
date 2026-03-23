@@ -453,6 +453,11 @@ public class NormalEnemyBattle : Unit
         }
     }
 
+    private void FireProjectile()
+    {
+
+    }
+
     // Move bool 제어용 공통 함수
     protected virtual void SetMoveAnimation(bool isMove)
     {
