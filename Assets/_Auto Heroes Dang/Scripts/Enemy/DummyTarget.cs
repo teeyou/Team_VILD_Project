@@ -43,6 +43,7 @@ public class DummyTarget : Unit
         Destroy(gameObject);
     }
 
+
     void Start()
     {
         _maxHp = 100;

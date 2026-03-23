@@ -112,6 +112,7 @@ public class NormalEnemyBattle : Unit
         }
     }
 
+
     protected virtual void MoveToTarget()
     {
         if (_target == null)

@@ -47,6 +47,7 @@ public class HomingProjectile : MonoBehaviour
         CheckHit();
     }
 
+
     private void MoveToTarget()
     {
         Vector3 targetPos = _target.transform.position;

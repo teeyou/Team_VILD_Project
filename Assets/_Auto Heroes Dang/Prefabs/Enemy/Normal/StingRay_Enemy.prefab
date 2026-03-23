@@ -1515,7 +1515,7 @@ GameObject:
   - component: {fileID: 3756922824667761329}
   - component: {fileID: 4133204894946635103}
   m_Layer: 0
-  m_Name: StingRay
+  m_Name: StingRay_Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

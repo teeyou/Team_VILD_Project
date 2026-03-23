@@ -50,6 +50,7 @@ public class NamedEnemyBattle : NormalEnemyBattle
         return true;
     }
 
+    
     protected virtual void StartSkill()
     {
         _isUsingSkill = true;

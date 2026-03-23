@@ -494,7 +494,7 @@ GameObject:
   - component: {fileID: 5983577126579798115}
   - component: {fileID: 6788297941750059382}
   m_Layer: 0
-  m_Name: Cactus
+  m_Name: Cactus_Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

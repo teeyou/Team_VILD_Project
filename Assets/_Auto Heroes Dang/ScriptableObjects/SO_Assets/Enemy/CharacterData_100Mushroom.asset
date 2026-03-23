@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfac172417e50d841ae426d75949a43d, type: 3}
-  m_Name: CharacterData_103StingRayEnemy
+  m_Name: CharacterData_100Mushroom
   m_EditorClassIdentifier: 
-  _id: 103
-  _chName: StingRay
-  _defaultMaxHp: 80
-  _defaultAtk: 22
-  _defaultDef: 1
-  _range: 10
-  _moveSpeed: 3
+  _id: 101
+  _chName: Mushroom
+  _defaultMaxHp: 100
+  _defaultAtk: 7
+  _defaultDef: 2
+  _range: 1.5
+  _moveSpeed: 2
   _skillCool: 0
-  _attackType: 1
+  _attackType: 0
   _prefab: {fileID: 0}
