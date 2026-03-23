@@ -5958,7 +5958,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2606371381517510266, guid: 4f3d4b6be9f642b8a056dcaf6db9d05b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.1870208
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2606371381517510266, guid: 4f3d4b6be9f642b8a056dcaf6db9d05b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5966,7 +5966,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2606371381517510266, guid: 4f3d4b6be9f642b8a056dcaf6db9d05b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -28.25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2606371381517510266, guid: 4f3d4b6be9f642b8a056dcaf6db9d05b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6007,8 +6007,55 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2606371381518006874, guid: 4f3d4b6be9f642b8a056dcaf6db9d05b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1348064743}
   m_SourcePrefab: {fileID: 100100000, guid: 4f3d4b6be9f642b8a056dcaf6db9d05b, type: 3}
+--- !u!1 &1348064741 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2606371381518006874, guid: 4f3d4b6be9f642b8a056dcaf6db9d05b, type: 3}
+  m_PrefabInstance: {fileID: 1348064740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1348064742 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2606371381525252484, guid: 4f3d4b6be9f642b8a056dcaf6db9d05b, type: 3}
+  m_PrefabInstance: {fileID: 1348064740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1348064743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348064741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4ae949929462014a8913680298601dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 1348064742}
+  _statusData: {fileID: 0}
+  _targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  _detectRange: 10
+  _attackCooldown: 1
+  _searchInterval: 0.2
+  _stopDistanceOffset: 0.5
+  _projectilePrefab: {fileID: 0}
+  _projectileSpawnForwardOffset: 0.5
+  _projectileSpeed: 8
+  _projectileSpawnPoint: {fileID: 0}
+  _battleLog: 1
+  _deathLog: 1
+  _drawGizmos: 1
+  _attackRange: 1.5
+  _skillCool: 0
+  _skillCooldown: 5
+  _skillRange: 3
+  _skillDamage: 50
+  _skillLoopCount: 1
 --- !u!1001 &1368240795
 PrefabInstance:
   m_ObjectHideFlags: 0
