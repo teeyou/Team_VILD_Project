@@ -552,7 +552,7 @@ GameObject:
   - component: {fileID: 5862803388312644325}
   - component: {fileID: 4659941355503938077}
   - component: {fileID: 574623131836721513}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Werewolf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -618,10 +618,17 @@ MonoBehaviour:
   _attackCooldown: 1
   _searchInterval: 0.2
   _stopDistanceOffset: 0.5
+  _postAttackDelay: 0.2
+  _hitVfxPrefab: {fileID: 5724093481334579524, guid: eb24c3da2a84b7b4ca5d850dd712182b, type: 3}
+  _hitVfxForwardOffset: 0.5
+  _hitVfxHeightOffset: 1
+  _hitVfxLifeTime: 0.2
+  _meleeHitVfxScale: {x: 1, y: 1, z: 1}
   _projectilePrefab: {fileID: 0}
+  _projectileSpawnPoint: {fileID: 0}
   _projectileSpawnForwardOffset: 0.5
   _projectileSpeed: 8
-  _projectileSpawnPoint: {fileID: 0}
+  _rotateDuration: 0.2
   _battleLog: 1
   _deathLog: 1
   _drawGizmos: 1

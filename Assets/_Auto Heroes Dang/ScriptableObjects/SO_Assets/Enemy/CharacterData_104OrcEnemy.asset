@@ -17,7 +17,7 @@ MonoBehaviour:
   _defaultMaxHp: 300
   _defaultAtk: 20
   _defaultDef: 4
-  _range: 1.5
+  _range: 2
   _moveSpeed: 3
   _skillCool: 15
   _attackType: 0

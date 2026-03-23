@@ -9,10 +9,15 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: SpiralAB_02
   m_Shader: {fileID: 4800000, guid: 8dd944eaa6c5f9d40a31d383a07fd824, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _BUILTIN_ALPHATEST_ON
+  - _BUILTIN_AlphaClip
+  - _BUILTIN_SURFACE_TYPE_TRANSPARENT
+  m_InvalidKeywords:
   - _ALPHATEST_ON
   - _SURFACE_TYPE_TRANSPARENT
-  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -21,6 +26,7 @@ Material:
     RenderType: Transparent
   disabledShaderPasses:
   - DepthOnly
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
