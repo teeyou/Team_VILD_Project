@@ -170,57 +170,39 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7639948831721748841, guid: ba3819b754dc6274b836d43063678b9a, type: 3}
-      propertyPath: _psList.Array.data[0].ps
+    - target: {fileID: 4128182507106614291, guid: ba3819b754dc6274b836d43063678b9a, type: 3}
+      propertyPath: _psList.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4128182507106614291, guid: ba3819b754dc6274b836d43063678b9a, type: 3}
+      propertyPath: _psList.Array.data[6].ps
       value: 
-      objectReference: {fileID: 1519917727902751064, guid: 796186203667e70439a1d35cbc973f48, type: 3}
-    - target: {fileID: 7639948831721748841, guid: ba3819b754dc6274b836d43063678b9a, type: 3}
-      propertyPath: _psList.Array.data[0].name
-      value: RedSlash
+      objectReference: {fileID: 5664242771672321102, guid: 49af2808fc7401a449da60d20334e2fc, type: 3}
+    - target: {fileID: 4128182507106614291, guid: ba3819b754dc6274b836d43063678b9a, type: 3}
+      propertyPath: _psList.Array.data[7].ps
+      value: 
+      objectReference: {fileID: 86440126411197902, guid: 7caa615b3ebb4e942ad568035a40ab0b, type: 3}
+    - target: {fileID: 4128182507106614291, guid: ba3819b754dc6274b836d43063678b9a, type: 3}
+      propertyPath: _psList.Array.data[2].name
+      value: SlashWaterBlue
+      objectReference: {fileID: 0}
+    - target: {fileID: 4128182507106614291, guid: ba3819b754dc6274b836d43063678b9a, type: 3}
+      propertyPath: _psList.Array.data[6].name
+      value: SlashBlue
+      objectReference: {fileID: 0}
+    - target: {fileID: 4128182507106614291, guid: ba3819b754dc6274b836d43063678b9a, type: 3}
+      propertyPath: _psList.Array.data[7].name
+      value: Skill_HitBlue
       objectReference: {fileID: 0}
     - target: {fileID: 7670408708129622865, guid: ba3819b754dc6274b836d43063678b9a, type: 3}
       propertyPath: m_Name
       value: Particle Manager
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7639948831721748841, guid: ba3819b754dc6274b836d43063678b9a, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7670408708129622865, guid: ba3819b754dc6274b836d43063678b9a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 313199990}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba3819b754dc6274b836d43063678b9a, type: 3}
---- !u!1 &313199987 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7670408708129622865, guid: ba3819b754dc6274b836d43063678b9a, type: 3}
-  m_PrefabInstance: {fileID: 171797975}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &313199990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 313199987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17b1c61099d0b2f4ab576eaf611537c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _psList:
-  - name: SlashRed
-    ps: {fileID: 1519917727902751064, guid: 796186203667e70439a1d35cbc973f48, type: 3}
-  - name: Skill_CartoonRedSlash
-    ps: {fileID: 4281933461799025675, guid: da913cacf347dea498b62e22f93affef, type: 3}
-  - name: SlashBlue
-    ps: {fileID: 7384259772824605108, guid: 80007fe54cd26e049aeb7ff2a968d3c3, type: 3}
-  - name: Skill_HitFrost
-    ps: {fileID: 6998615408967639308, guid: 2cda9f24ce5a46941a85e6ab734dbdc4, type: 3}
-  - name: ArrowGreen
-    ps: {fileID: 5684714502376403680, guid: 64aab2a6dcc274a438dc14aa3b9eb72c, type: 3}
-  - name: Skill_LongArrowGreen
-    ps: {fileID: 2123751515349667368, guid: 106598ce3bc185749bb14915b1e38125, type: 3}
 --- !u!1001 &579397473
 PrefabInstance:
   m_ObjectHideFlags: 0

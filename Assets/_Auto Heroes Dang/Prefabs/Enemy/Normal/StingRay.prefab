@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 6579097026585482089}
   - component: {fileID: 5306342619391686242}
   - component: {fileID: 3715392279177513748}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: StingRay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,10 +270,17 @@ MonoBehaviour:
   _attackCooldown: 1
   _searchInterval: 0.2
   _stopDistanceOffset: 0.5
+  _postAttackDelay: 0.2
+  _hitVfxPrefab: {fileID: 0}
+  _hitVfxForwardOffset: 1
+  _hitVfxHeightOffset: 1
+  _hitVfxLifeTime: 0.2
+  _meleeHitVfxScale: {x: 1, y: 1, z: 1}
   _projectilePrefab: {fileID: 1546270019344898752, guid: d396b42aa84070f44afe10a83a63899f, type: 3}
+  _projectileSpawnPoint: {fileID: 7238795952845621195}
   _projectileSpawnForwardOffset: 0.5
   _projectileSpeed: 8
-  _projectileSpawnPoint: {fileID: 7238795952845621195}
+  _rotateDuration: 0.2
   _battleLog: 1
   _deathLog: 1
   _drawGizmos: 1
