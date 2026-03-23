@@ -3,7 +3,6 @@ using UnityEngine;
 public enum EnemyState
 {
     Idle,
-    Rotate,
     Move,
     Attack,
     Die
@@ -12,91 +11,60 @@ public enum EnemyState
 public class NormalEnemyBattle : Unit
 {
     [Header("애니메이터 연결")]
-    [SerializeField] protected Animator _animator;
-
-    [Header("스탯 데이터")]
-    [SerializeField] protected BaseStatus_SO _statusData;
+    [SerializeField] public Animator _animator;
 
     [Header("타겟 레이어")]
-    [SerializeField] protected LayerMask _targetLayer;
+    [SerializeField] private LayerMask _targetLayer;
+
+    [Header("기본 스탯")]
+    [SerializeField] private int _defaultMaxHp = 100;
+    [SerializeField] private int _defaultAtk = 10;
+    [SerializeField] private int _defaultDef = 1;
 
     [Header("자동 전투")]
-    [SerializeField] protected float _detectRange = 10f;
-    [SerializeField] protected float _attackCooldown = 1f;
-    [SerializeField] protected float _searchInterval = 0.2f;
-    [SerializeField] protected float _stopDistanceOffset = 0.5f;
-    [SerializeField] protected float _postAttackDelay = 0.2f;
-
-    [Header("회전 설정")]
-    [SerializeField] protected float _rotateDuration = 0.2f;
+    //[SerializeField] private float _moveSpeed = 2f;
+    [SerializeField] private float _detectRange = 10f;
+    [SerializeField] private float _attackRange = 1.5f;
+    [SerializeField] private float _attackCooldown = 1f;
+    [SerializeField] private float _searchInterval = 0.2f;
+    [SerializeField] private float _stopDistanceOffset = 0.5f;
 
     [Header("디버그")]
-    [SerializeField] protected bool _battleLog = true;
-    [SerializeField] protected bool _deathLog = true;
-    [SerializeField] protected bool _drawGizmos = true;
+    [SerializeField] private bool _battleLog = true;
+    [SerializeField] private bool _deathLog = true;
+    [SerializeField] private bool _drawGizmos = true;
 
-    [Header("런타임 확인용")]
-    //[SerializeField] protected float _moveSpeed = 2f;
-    [SerializeField] protected float _attackRange = 1.5f;
-    [SerializeField] protected float _skillCool;
-    //[SerializeField] protected EAttackType _attackType;
+    private bool _isAttacking;
+    private bool _canAct;
+
 
     protected float _searchTimer;
     protected float _lastAttackTime = -999f;
-    protected float _nextActionTime;
 
     protected Unit _target;
-    protected Unit _lockedAttackTarget;
-
-    protected bool _isAttacking;
-
-    protected bool _isRotating;
-    protected Quaternion _startRotation;
-    protected Quaternion _targetRotation;
-    protected float _rotateTimer;
-    protected Unit _lastLookTarget;
 
     public Unit Target => _target;
 
-    // 시작 시 Animator 자동 연결 및 SO 데이터 적용
+    // 시작 시 스탯 초기화
     protected virtual void Start()
     {
         if (_animator == null)
-            _animator = GetComponent<Animator>();
-
-        if (_targetLayer == 0)
-            _targetLayer = LayerMask.GetMask("Player");
-
-        ApplyStatusData();
-    }
-
-    // SO 값을 실제 전투 변수에 적용
-    protected virtual void ApplyStatusData()
-    {
-        if (_statusData == null)
         {
-            Debug.LogWarning($"{name} : BaseStatus_SO가 연결되지 않았습니다.");
-            return;
+            _animator = GetComponent<Animator>();
         }
 
-        _maxHp = _statusData.DefaultMaxHp;
+        _maxHp = _defaultMaxHp;
         _curHp = _maxHp;
-        _atk = _statusData.DefaultAtk;
-        _def = _statusData.DefaultDef;
-
-        _attackRange = _statusData.Range;
-        _moveSpeed = _statusData.MoveSpeed;
-        _skillCool = _statusData.SkillCool;
-        _attackType = _statusData.AttackType;
+        _atk = _defaultAtk;
+        _def = _defaultDef;
     }
 
-    // 매 프레임 회전, 타겟 갱신, 전투 행동 처리
+    // 매 프레임 타겟 갱신과 전투 행동 처리
     protected virtual void Update()
     {
         if (_isDead)
             return;
 
-        UpdateRotation();
         UpdateTarget();
         HandleCombat();
     }
@@ -104,50 +72,27 @@ public class NormalEnemyBattle : Unit
     // 현재 타겟과의 거리를 기준으로 이동 또는 공격을 결정
     protected virtual void HandleCombat()
     {
-        if (_isDead)
+        if (_target == null)
             return;
 
-        if (Time.time < _nextActionTime)
-        {
-            SetMoveAnimation(false);
-            return;
-        }
+        float distance = GetDistanceTo(_target);
 
         if (_target == null)
         {
-            SetMoveAnimation(false);
+            if (_animator != null)
+            {
+                _animator.SetBool("Move", false);
+            }
             return;
         }
-
-        if (_isAttacking)
-        {
-            SetMoveAnimation(false);
-            return;
-        }
-
-        if (_isRotating)
-        {
-            SetMoveAnimation(false);
-            return;
-        }
-
-        // 새 타겟이면 먼저 방향부터 맞춤
-        if (_lastLookTarget != _target)
-        {
-            _lastLookTarget = _target;
-            StartRotateToTarget();
-            return;
-        }
-
-        float distance = GetDistanceTo(_target);
 
         if (distance > _attackRange + _stopDistanceOffset)
         {
             MoveToTarget();
         }
+
         else
         {
-            SetMoveAnimation(false);
             Attack();
         }
     }
@@ -164,16 +109,13 @@ public class NormalEnemyBattle : Unit
         if (_isDead)
             return;
 
-        if (_isRotating)
-            return;
-
-        if (Time.time < _nextActionTime)
-            return;
-
         float distance = GetDistanceTo(_target);
         if (distance <= _attackRange + _stopDistanceOffset)
         {
-            SetMoveAnimation(false);
+            if (_animator != null)
+            {
+                _animator.SetBool("Move", false);
+            }
             return;
         }
 
@@ -191,33 +133,41 @@ public class NormalEnemyBattle : Unit
             transform.forward = direction;
         }
 
-        SetMoveAnimation(true);
+        if (_animator != null)
+        {
+            _animator.SetBool("Move", true);
+        }
     }
 
-    // 공격 중/행동 대기 중에는 타겟 갱신을 잠깐 막음
+    // 현재 타겟이 유효한지 확인하고 필요하면 새 타겟 탐색
     protected virtual void UpdateTarget()
     {
-        if (_isAttacking)
-            return;
-
-        if (_isRotating)
-            return;
-
-        if (Time.time < _nextActionTime)
-            return;
-
         _searchTimer += Time.deltaTime;
 
-        bool needNewTarget = _target == null || _target.IsDead;
+        bool needNewTarget = _target == null;
 
         if (!needNewTarget && _target != null)
         {
-            float distance = GetDistanceTo(_target);
+            NormalEnemyBattle enemy = _target.GetComponent<NormalEnemyBattle>();
+            bool targetDead = false;
 
-            if (distance > _detectRange)
+            if (enemy != null)
+                targetDead = enemy.IsDead;
+
+            if (targetDead)
             {
                 _target = null;
                 needNewTarget = true;
+            }
+            else
+            {
+                float distance = GetDistanceTo(_target);
+
+                if (distance > _detectRange)
+                {
+                    _target = null;
+                    needNewTarget = true;
+                }
             }
         }
 
@@ -261,7 +211,13 @@ public class NormalEnemyBattle : Unit
             if (other == this)
                 continue;
 
-            if (other.IsDead)
+            NormalEnemyBattle enemy = other.GetComponent<NormalEnemyBattle>();
+            bool otherDead = false;
+
+            if (enemy != null)
+                otherDead = enemy.IsDead;
+
+            if (otherDead)
                 continue;
 
             float distance = GetDistanceTo(other);
@@ -288,9 +244,6 @@ public class NormalEnemyBattle : Unit
         if (_isAttacking)
             return;
 
-        if (_isRotating)
-            return;
-
         if (Time.time < _lastAttackTime + _attackCooldown)
             return;
 
@@ -298,55 +251,50 @@ public class NormalEnemyBattle : Unit
         if (distance > _attackRange + _stopDistanceOffset)
             return;
 
-        // 공격 시작 시점의 타겟을 잠금
-        _lockedAttackTarget = _target;
-
         _lastAttackTime = Time.time;
         _isAttacking = true;
 
-        SetMoveAnimation(false);
-
-        if (_animator != null && _animator.runtimeAnimatorController != null)
+        if (_animator != null)
         {
+            _animator.SetBool("Move", false);
             _animator.SetTrigger("Attack");
         }
     }
 
-    // Attack 애니메이션 이벤트에서 호출되어 실제 데미지 적용
+    // Attack 애니메이션에서 이벤트로 호출되서 타겟에게 TakeDamage를 호출해서 실제 공격
     private void ApplyDamage()
     {
-        if (_isDead)
+        if (_isDead) 
             return;
 
-        if (_lockedAttackTarget == null)
+        if (_target == null) 
             return;
 
-        if (_lockedAttackTarget.IsDead)
+        if (_target.IsDead)
             return;
 
-        float distance = GetDistanceTo(_lockedAttackTarget);
+        float distance = GetDistanceTo(_target);
         if (distance > _attackRange + _stopDistanceOffset)
             return;
 
-        _lockedAttackTarget.TakeDamage(_atk, transform);
-        _totalDamage += _atk;
+        _target.TakeDamage(_atk, transform);
 
         if (_battleLog)
         {
-            Debug.Log($"{name} >> {_lockedAttackTarget.name} 공격 / 데미지 : {_atk}");
+            Debug.Log($"{name} >> {_target.name} 공격 / 데미지 : {_atk}");
         }
     }
 
-    // Attack 애니메이션 마지막 이벤트에서 호출
+    // Attack 애니메이션에 마지막에 공격이 끝났으니 공격중이 아님을 체크
     private void EndAttack()
     {
         _isAttacking = false;
-        _lockedAttackTarget = null;
-        _nextActionTime = Time.time + _postAttackDelay;
     }
+
 
     public override void Skill()
     {
+
     }
 
     public override void Heal(int value)
@@ -383,7 +331,7 @@ public class NormalEnemyBattle : Unit
         }
     }
 
-    // 사망 처리 후 Die 애니메이션 재생
+    // 사망 처리 후 오브젝트 제거
     public override void Die()
     {
         if (_isDead)
@@ -391,13 +339,10 @@ public class NormalEnemyBattle : Unit
 
         _isDead = true;
         _isAttacking = false;
-        _isRotating = false;
-        _lockedAttackTarget = null;
 
-        SetMoveAnimation(false);
-
-        if (_animator != null && _animator.runtimeAnimatorController != null)
+        if (_animator != null)
         {
+            _animator.SetBool("Move", false);
             _animator.SetTrigger("Die");
         }
 
@@ -405,61 +350,8 @@ public class NormalEnemyBattle : Unit
         {
             Debug.Log($"{name} 죽음");
         }
-    }
 
-    // Die 애니메이션 마지막 이벤트에서 호출
-    private void DestroySelf()
-    {
-        Destroy(gameObject);
-    }
-
-    // 새 타겟을 향해 잠깐 멈춘 뒤 회전 시작
-    protected virtual void StartRotateToTarget()
-    {
-        if (_target == null)
-            return;
-
-        Vector3 targetPos = _target.transform.position;
-        Vector3 myPos = transform.position;
-
-        targetPos.y = myPos.y;
-        Vector3 direction = (targetPos - myPos).normalized;
-
-        if (direction == Vector3.zero)
-            return;
-
-        _isRotating = true;
-        _rotateTimer = 0f;
-        _startRotation = transform.rotation;
-        _targetRotation = Quaternion.LookRotation(direction);
-
-        SetMoveAnimation(false);
-    }
-
-    // 회전 처리
-    protected virtual void UpdateRotation()
-    {
-        if (!_isRotating)
-            return;
-
-        _rotateTimer += Time.deltaTime;
-        float t = Mathf.Clamp01(_rotateTimer / _rotateDuration);
-
-        transform.rotation = Quaternion.Slerp(_startRotation, _targetRotation, t);
-
-        if (t >= 1f)
-        {
-            _isRotating = false;
-        }
-    }
-
-    // Move bool 제어용 공통 함수
-    protected virtual void SetMoveAnimation(bool isMove)
-    {
-        if (_animator != null && _animator.runtimeAnimatorController != null)
-        {
-            _animator.SetBool("Move", isMove);
-        }
+        // Destroy(gameObject);
     }
 
     // 감지 범위와 공격 범위를 Scene 뷰에 표시
