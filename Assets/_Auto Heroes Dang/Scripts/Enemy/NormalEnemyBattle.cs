@@ -537,8 +537,6 @@ public class NormalEnemyBattle : Unit
 
         Vector3 hitPos = transform.position + transform.forward * (_hitVfxForwardOffset + _attackRange);
 
-
-
         if (_target != null)
         {
             hitPos.y = _target.transform.position.y + _hitVfxHeightOffset;
