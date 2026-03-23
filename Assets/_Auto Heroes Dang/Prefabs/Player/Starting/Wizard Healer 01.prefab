@@ -17587,7 +17587,10 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 1048576
+<<<<<<< Updated upstream:Assets/_Auto Heroes Dang/Prefabs/Player/Starting/Wizard Healer 01.prefab
   _attackDelay: 0.5
+=======
+>>>>>>> Stashed changes:Assets/_Prefabs/Player/Starting/Wizard Healer 01.prefab
 --- !u!95 &5638176993995481698
 Animator:
   serializedVersion: 5

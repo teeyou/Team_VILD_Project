@@ -2332,7 +2332,10 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 1048576
+<<<<<<< Updated upstream:Assets/_Auto Heroes Dang/Prefabs/Player/Spear Man 02.prefab
   _attackDelay: 0.5
+=======
+>>>>>>> Stashed changes:Assets/_Prefabs/Player/Spear Man 02.prefab
 --- !u!95 &8247048579611607253
 Animator:
   serializedVersion: 5

@@ -18,9 +18,16 @@ MonoBehaviour:
   _defaultAtk: 100
   _defaultDef: 100
   _range: 2
+<<<<<<< Updated upstream:Assets/_Auto Heroes Dang/ScriptableObjects/SO_Assets/Player/CharacterData_Double Ax 01.asset
   _moveSpeed: 5
   _skillCool: 5
   _attackType: 0
   _prefab: {fileID: 5018975388342461931, guid: d610dfbcbf8de89418c6138a20bb6060, type: 3}
   _level: 1
   _grade: 1
+=======
+  _moveSpeed: 10
+  _skillCool: 5
+  _attackType: 0
+  _prefab: {fileID: 5018975388342461931, guid: d610dfbcbf8de89418c6138a20bb6060, type: 3}
+>>>>>>> Stashed changes:Assets/_ScriptableObjects/SO_Assets/CharacterData_Double Ax 01.asset

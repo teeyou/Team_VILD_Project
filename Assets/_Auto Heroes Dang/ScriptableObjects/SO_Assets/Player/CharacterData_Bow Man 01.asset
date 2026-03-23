@@ -17,6 +17,7 @@ MonoBehaviour:
   _defaultMaxHp: 1000
   _defaultAtk: 100
   _defaultDef: 100
+<<<<<<< Updated upstream:Assets/_Auto Heroes Dang/ScriptableObjects/SO_Assets/Player/CharacterData_Bow Man 01.asset
   _range: 10
   _moveSpeed: 5
   _skillCool: 5
@@ -24,3 +25,10 @@ MonoBehaviour:
   _prefab: {fileID: 7987037320265019186, guid: cb9b26ad350f3304ba87944bbe01f435, type: 3}
   _level: 1
   _grade: 1
+=======
+  _range: 20
+  _moveSpeed: 10
+  _skillCool: 5
+  _attackType: 1
+  _prefab: {fileID: 7987037320265019186, guid: cb9b26ad350f3304ba87944bbe01f435, type: 3}
+>>>>>>> Stashed changes:Assets/_ScriptableObjects/SO_Assets/CharacterData_Bow Man 01.asset

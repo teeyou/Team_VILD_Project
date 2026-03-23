@@ -4900,7 +4900,10 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 1048576
+<<<<<<< Updated upstream:Assets/_Auto Heroes Dang/Prefabs/Player/Strong Shield 01.prefab
   _attackDelay: 0.5
+=======
+>>>>>>> Stashed changes:Assets/_Prefabs/Player/Strong Shield 01.prefab
 --- !u!95 &2906947478610958514
 Animator:
   serializedVersion: 5

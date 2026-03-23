@@ -7430,6 +7430,7 @@ AnimationClip:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
+<<<<<<< Updated upstream:Assets/_Auto Heroes Dang/Animations/Enemy Aniamtion/WereWolf/Attack03.anim
     genericBindings:
     - serializedVersion: 2
       path: 2073732236
@@ -9177,6 +9178,9 @@ AnimationClip:
       isPPtrCurve: 0
       isIntCurve: 0
       isSerializeReferenceCurve: 0
+=======
+    genericBindings: []
+>>>>>>> Stashed changes:Assets/_Animations/Enemy/WereWolf/Attack03.anim
     pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
@@ -9198,6 +9202,7 @@ AnimationClip:
     m_KeepOriginalPositionXZ: 0
     m_HeightFromFeet: 0
     m_Mirror: 0
+<<<<<<< Updated upstream:Assets/_Auto Heroes Dang/Animations/Enemy Aniamtion/WereWolf/Attack03.anim
   m_EditorCurves:
   - serializedVersion: 2
     curve:
@@ -51370,3 +51375,10 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+=======
+  m_EditorCurves: []
+  m_EulerEditorCurves: []
+  m_HasGenericRootTransform: 0
+  m_HasMotionFloatCurves: 0
+  m_Events: []
+>>>>>>> Stashed changes:Assets/_Animations/Enemy/WereWolf/Attack03.anim

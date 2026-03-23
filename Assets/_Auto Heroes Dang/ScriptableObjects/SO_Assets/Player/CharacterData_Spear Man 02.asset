@@ -18,9 +18,16 @@ MonoBehaviour:
   _defaultAtk: 100
   _defaultDef: 100
   _range: 2
+<<<<<<< Updated upstream:Assets/_Auto Heroes Dang/ScriptableObjects/SO_Assets/Player/CharacterData_Spear Man 02.asset
   _moveSpeed: 5
   _skillCool: 5
   _attackType: 0
   _prefab: {fileID: 1290376450363407221, guid: 2c9e836d8a3b1fc47a8c6d17c1cbdc69, type: 3}
   _level: 1
   _grade: 1
+=======
+  _moveSpeed: 10
+  _skillCool: 5
+  _attackType: 0
+  _prefab: {fileID: 1290376450363407221, guid: 2c9e836d8a3b1fc47a8c6d17c1cbdc69, type: 3}
+>>>>>>> Stashed changes:Assets/_ScriptableObjects/SO_Assets/CharacterData_Spear Man 02.asset

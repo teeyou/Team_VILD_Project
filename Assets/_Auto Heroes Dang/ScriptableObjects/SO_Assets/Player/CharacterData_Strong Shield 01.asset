@@ -18,9 +18,16 @@ MonoBehaviour:
   _defaultAtk: 100
   _defaultDef: 100
   _range: 2
+<<<<<<< Updated upstream:Assets/_Auto Heroes Dang/ScriptableObjects/SO_Assets/Player/CharacterData_Strong Shield 01.asset
   _moveSpeed: 5
   _skillCool: 5
   _attackType: 2
   _prefab: {fileID: 2250584472575438354, guid: abed887acd854ad4cb1bfa2494b546ba, type: 3}
   _level: 1
   _grade: 1
+=======
+  _moveSpeed: 10
+  _skillCool: 5
+  _attackType: 0
+  _prefab: {fileID: 2250584472575438354, guid: abed887acd854ad4cb1bfa2494b546ba, type: 3}
+>>>>>>> Stashed changes:Assets/_ScriptableObjects/SO_Assets/CharacterData_Strong Shield 01.asset

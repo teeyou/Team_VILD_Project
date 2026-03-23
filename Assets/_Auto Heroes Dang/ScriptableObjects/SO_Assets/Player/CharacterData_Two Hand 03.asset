@@ -18,9 +18,16 @@ MonoBehaviour:
   _defaultAtk: 100
   _defaultDef: 100
   _range: 2
+<<<<<<< Updated upstream:Assets/_Auto Heroes Dang/ScriptableObjects/SO_Assets/Player/CharacterData_Two Hand 03.asset
   _moveSpeed: 5
   _skillCool: 5
   _attackType: 0
   _prefab: {fileID: 5955811356132622373, guid: 3272aac08bdb7574cb78306d734f6bda, type: 3}
   _level: 1
   _grade: 1
+=======
+  _moveSpeed: 10
+  _skillCool: 5
+  _attackType: 0
+  _prefab: {fileID: 5955811356132622373, guid: 3272aac08bdb7574cb78306d734f6bda, type: 3}
+>>>>>>> Stashed changes:Assets/_ScriptableObjects/SO_Assets/CharacterData_Two Hand 03.asset

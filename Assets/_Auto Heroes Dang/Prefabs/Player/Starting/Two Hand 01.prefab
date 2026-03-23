@@ -11587,7 +11587,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5989533526837612956}
   - component: {fileID: 560142377505179454}
+<<<<<<< Updated upstream:Assets/_Auto Heroes Dang/Prefabs/Player/Starting/Two Hand 01.prefab
   - component: {fileID: 3172588396811428148}
+=======
+>>>>>>> Stashed changes:Assets/_Prefabs/Player/Starting/Two Hand 01.prefab
   - component: {fileID: 7948348387857713613}
   - component: {fileID: 770700406168214804}
   m_Layer: 10
@@ -11652,6 +11655,7 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 1048576
+<<<<<<< Updated upstream:Assets/_Auto Heroes Dang/Prefabs/Player/Starting/Two Hand 01.prefab
   _attackDelay: 0.5
 --- !u!114 &3172588396811428148
 MonoBehaviour:
@@ -11668,6 +11672,8 @@ MonoBehaviour:
   _cart: {fileID: 0}
   _path: {fileID: 0}
   _moveSpeed: 10
+=======
+>>>>>>> Stashed changes:Assets/_Prefabs/Player/Starting/Two Hand 01.prefab
 --- !u!95 &7948348387857713613
 Animator:
   serializedVersion: 5
