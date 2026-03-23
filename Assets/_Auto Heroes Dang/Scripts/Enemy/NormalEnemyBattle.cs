@@ -27,6 +27,19 @@ public class NormalEnemyBattle : Unit
     [SerializeField] protected float _stopDistanceOffset = 0.5f;
     [SerializeField] protected float _postAttackDelay = 0.2f;
 
+    [Header("히트 VFX")]
+    [SerializeField] private GameObject _hitVfxPrefab;
+    [SerializeField] private float _hitVfxForwardOffset = 1.0f;
+    [SerializeField] private float _hitVfxHeightOffset = 1.0f;
+    [SerializeField] private float _hitVfxLifeTime = 0.2f;
+    [SerializeField] private Vector3 _meleeHitVfxScale = Vector3.one;
+
+    [Header("원거리 공격")]
+    [SerializeField] protected GameObject _projectilePrefab;
+    [SerializeField] protected Transform _projectileSpawnPoint;
+    [SerializeField] protected float _projectileSpawnForwardOffset = 0.5f;
+    [SerializeField] protected float _projectileSpeed = 8f;
+
     [Header("회전 설정")]
     [SerializeField] protected float _rotateDuration = 0.2f;
 
@@ -331,6 +344,8 @@ public class NormalEnemyBattle : Unit
         _lockedAttackTarget.TakeDamage(_atk, transform);
         _totalDamage += _atk;
 
+        SpawnMeleeHitVfx();
+
         if (_battleLog)
         {
             Debug.Log($"{name} >> {_lockedAttackTarget.name} 공격 / 데미지 : {_atk}");
@@ -453,9 +468,57 @@ public class NormalEnemyBattle : Unit
         }
     }
 
+    protected virtual Vector3 GetProjectileSpawnPosition()
+    {
+        if (_projectileSpawnPoint != null)
+            return _projectileSpawnPoint.position;
+
+        Vector3 spawnPos = transform.position + transform.forward * _projectileSpawnForwardOffset;
+        spawnPos.y = transform.position.y;
+        return spawnPos;
+    }
+
     private void FireProjectile()
     {
+        if (_isDead)
+            return;
 
+        if (_target == null)
+            return;
+
+        if (_target.IsDead)
+            return;
+
+        if (_projectilePrefab == null)
+        {
+            Debug.LogWarning($"{name} : 투사체 프리팹이 연결되지 않았습니다.");
+            return;
+        }
+
+        Collider targetCollider = _target.GetComponent<Collider>();
+        if (targetCollider == null)
+        {
+            Debug.LogWarning($"{name} : 타겟에 Collider가 없습니다.");
+            return;
+        }
+
+        Vector3 spawnPos = GetProjectileSpawnPosition();
+
+        GameObject projectileObj = Instantiate(_projectilePrefab, spawnPos, Quaternion.identity);
+
+        HomingProjectile projectile = projectileObj.GetComponent<HomingProjectile>();
+        if (projectile == null)
+        {
+            Debug.LogWarning($"{name} : 투사체 프리팹에 HomingProjectile 스크립트가 없습니다.");
+            return;
+        }
+
+        projectile.Init(_target, _atk, _projectileSpeed, transform, targetCollider);
+
+        if (_battleLog)
+        {
+            Debug.Log($"{name} >> {_target.name} 투사체 발사 / 데미지 : {_atk}");
+        }
     }
 
     // Move bool 제어용 공통 함수
@@ -465,6 +528,29 @@ public class NormalEnemyBattle : Unit
         {
             _animator.SetBool("Move", isMove);
         }
+    }
+
+    private void SpawnMeleeHitVfx()
+    {
+        if (_hitVfxPrefab == null)
+            return;
+
+        Vector3 hitPos = transform.position + transform.forward * (_hitVfxForwardOffset + _attackRange);
+
+
+
+        if (_target != null)
+        {
+            hitPos.y = _target.transform.position.y + _hitVfxHeightOffset;
+        }
+        else
+        {
+            hitPos.y = transform.position.y + _hitVfxHeightOffset;
+        }
+
+        GameObject hitVfx = Instantiate(_hitVfxPrefab, hitPos, Quaternion.identity);
+        hitVfx.transform.localScale = _meleeHitVfxScale;
+        Destroy(hitVfx, _hitVfxLifeTime);
     }
 
     // 감지 범위와 공격 범위를 Scene 뷰에 표시
