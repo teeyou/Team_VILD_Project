@@ -32,6 +32,9 @@ public enum ECharacterNumber
     TwoHand_03 = 12,
     Wizard_01 = 13,
     WizardHealer_01 = 14,
+    TwoHand_TU = 15,
+    SpearMan_JH = 16,
+    BowMan_JJ = 17,
 }
 
 public class PlayerSpawner : MonoBehaviour
@@ -44,12 +47,15 @@ public class PlayerSpawner : MonoBehaviour
 
         //SpawnPlayer((int)ECharacterNumber.BowGirl_01, Vector3.zero, Quaternion.identity);
 
-        
+        // VFX 완료
+        SpawnPlayer((int)ECharacterNumber.TwoHand_TU, new Vector3(4f,0f,3f), Quaternion.identity);
+        SpawnPlayer((int)ECharacterNumber.SpearMan_JH, new Vector3(4f, 0f, -3f), Quaternion.identity);
+        SpawnPlayer((int)ECharacterNumber.BowMan_JJ, new Vector3(4f, 0f, 0f), Quaternion.identity);
     }
 
     private void Start()
     {
-        SpawnStarting();
+        //SpawnStarting();
         //TestSpawnPlayerBattleScene();
     }
 
@@ -61,7 +67,7 @@ public class PlayerSpawner : MonoBehaviour
             SpawnPlayer(i, pPosList[i], BattleManager.Instance.PlayerStartingRotation);
         }
     }
-
+    
     public void SpawnStarting()
     {
         /*
@@ -74,12 +80,16 @@ public class PlayerSpawner : MonoBehaviour
         */
 
         IReadOnlyList<Vector3> pPosList = BattleManager.Instance.PlayerStartingPosList;
-        SpawnPlayer(0, pPosList[0], BattleManager.Instance.PlayerStartingRotation);
-        SpawnPlayer(4, pPosList[1], BattleManager.Instance.PlayerStartingRotation);
-        SpawnPlayer(6, pPosList[2], BattleManager.Instance.PlayerStartingRotation);
-        SpawnPlayer(10, pPosList[3], BattleManager.Instance.PlayerStartingRotation);
-        SpawnPlayer(13, pPosList[4], BattleManager.Instance.PlayerStartingRotation);
-        SpawnPlayer(14, pPosList[5], BattleManager.Instance.PlayerStartingRotation);
+        //SpawnPlayer(0, pPosList[0], BattleManager.Instance.PlayerStartingRotation);
+        //SpawnPlayer(4, pPosList[1], BattleManager.Instance.PlayerStartingRotation);
+        //SpawnPlayer(6, pPosList[2], BattleManager.Instance.PlayerStartingRotation);
+        //SpawnPlayer(10, pPosList[3], BattleManager.Instance.PlayerStartingRotation);
+        //SpawnPlayer(13, pPosList[4], BattleManager.Instance.PlayerStartingRotation);
+        //SpawnPlayer(14, pPosList[5], BattleManager.Instance.PlayerStartingRotation);
+
+        SpawnPlayer((int)ECharacterNumber.TwoHand_TU, pPosList[0], BattleManager.Instance.PlayerStartingRotation);
+        //SpawnPlayer((int)ECharacterNumber.SpearMan_JH, pPosList[1], BattleManager.Instance.PlayerStartingRotation);
+        //SpawnPlayer((int)ECharacterNumber.BowMan_JJ, pPosList[3], BattleManager.Instance.PlayerStartingRotation);
     }
 
     public void SpawnAllPlayer()
