@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 113004599289882718}
-  - component: {fileID: 7639948831721748841}
+  - component: {fileID: 4128182507106614291}
   m_Layer: 0
   m_Name: Particle Manager
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7639948831721748841
+--- !u!114 &4128182507106614291
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,9 +41,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 7670408708129622865}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08aeb27a9b5c89b4fbeb7703d69254e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 17b1c61099d0b2f4ab576eaf611537c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _psList:
-  - name: Test
-    ps: {fileID: 8218445804016372250, guid: a35fec1cc9ef4f346a417d94de36a843, type: 3}
+  - name: SlashRed
+    ps: {fileID: 1519917727902751064, guid: 796186203667e70439a1d35cbc973f48, type: 3}
+  - name: Skill_CartoonRedSlash
+    ps: {fileID: 4281933461799025675, guid: da913cacf347dea498b62e22f93affef, type: 3}
+  - name: SlashBlue
+    ps: {fileID: 7384259772824605108, guid: 80007fe54cd26e049aeb7ff2a968d3c3, type: 3}
+  - name: Skill_HitFrost
+    ps: {fileID: 6998615408967639308, guid: 2cda9f24ce5a46941a85e6ab734dbdc4, type: 3}
+  - name: ArrowGreen
+    ps: {fileID: 5684714502376403680, guid: 64aab2a6dcc274a438dc14aa3b9eb72c, type: 3}
+  - name: Skill_LongArrowGreen
+    ps: {fileID: 2123751515349667368, guid: 106598ce3bc185749bb14915b1e38125, type: 3}
