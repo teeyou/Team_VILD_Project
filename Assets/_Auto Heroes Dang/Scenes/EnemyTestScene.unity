@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FylingDemonPBRMaskTint
       objectReference: {fileID: 0}
+    - target: {fileID: 1134332420552193122, guid: d2ac9f7836834bfdaede21bc65a556d1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1134332420552615936, guid: d2ac9f7836834bfdaede21bc65a556d1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 7.913934e-15
@@ -1055,6 +1059,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NagaWizardPBRMaskTint
       objectReference: {fileID: 0}
+    - target: {fileID: 5494008500244076339, guid: 8a1bbc58c13335646bcdbeccd449ba19, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1183,6 +1191,10 @@ PrefabInstance:
     - target: {fileID: 996807925013608545, guid: 8417a9a1d79ae5a4fa1f17b68ccfc6e8, type: 3}
       propertyPath: m_Name
       value: FishmanPBRMaskTint
+      objectReference: {fileID: 0}
+    - target: {fileID: 996807925013608545, guid: 8417a9a1d79ae5a4fa1f17b68ccfc6e8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1113202103823439857, guid: 8417a9a1d79ae5a4fa1f17b68ccfc6e8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1821,6 +1833,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkeletonPBRMaskTint
       objectReference: {fileID: 0}
+    - target: {fileID: 7695038878699845317, guid: 4cc63521a3064a7caf7483604701f939, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7695038878700202725, guid: 4cc63521a3064a7caf7483604701f939, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.374369
@@ -1933,6 +1949,10 @@ PrefabInstance:
     - target: {fileID: 1316590647590212054, guid: 8d78333431bedcb4593c590334576313, type: 3}
       propertyPath: m_Name
       value: SalamanderPBRMaskTint
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316590647590212054, guid: 8d78333431bedcb4593c590334576313, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1487862578677496513, guid: 8d78333431bedcb4593c590334576313, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2466,6 +2486,10 @@ PrefabInstance:
     - target: {fileID: 4527530870830567824, guid: f6afbf562746422abed4dc52f6a15304, type: 3}
       propertyPath: m_Name
       value: LizardWarriorPBRMaskTint
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527530870830567824, guid: f6afbf562746422abed4dc52f6a15304, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4527530870830992448, guid: f6afbf562746422abed4dc52f6a15304, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3464,6 +3488,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EvilMagePBRMaskTint
       objectReference: {fileID: 0}
+    - target: {fileID: 5360181621231125501, guid: 8e48989d9ccb46098fb72b75d73902ce, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3620,6 +3648,10 @@ PrefabInstance:
     - target: {fileID: 87622709017586928, guid: 5ebe239a78ec49d286e84888b28d432b, type: 3}
       propertyPath: m_Name
       value: BlackKnightPBRMaskTint
+      objectReference: {fileID: 0}
+    - target: {fileID: 87622709017586928, guid: 5ebe239a78ec49d286e84888b28d432b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 87622709018079360, guid: 5ebe239a78ec49d286e84888b28d432b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4806,6 +4838,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GolemPBRMaskTint
       objectReference: {fileID: 0}
+    - target: {fileID: 2783849587530926222, guid: 32b03395adb34219a97835d72f19b663, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2786264063262482458, guid: 32b03395adb34219a97835d72f19b663, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.2699795
@@ -5573,6 +5609,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CrabMonsterPBRMaskTint
       objectReference: {fileID: 0}
+    - target: {fileID: 8603436559300484423, guid: 54181c5e52724b5b9f062064de1efc03, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5589,6 +5629,10 @@ PrefabInstance:
     - target: {fileID: 4735800100427854253, guid: 169927d1d4124fed9e6a7ffbe1ce3873, type: 3}
       propertyPath: m_Name
       value: ChestMonsterPBRMaskTint
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735800100427854253, guid: 169927d1d4124fed9e6a7ffbe1ce3873, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4735800100428017037, guid: 169927d1d4124fed9e6a7ffbe1ce3873, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5829,6 +5873,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CyclopsPBRMaskTint
       objectReference: {fileID: 0}
+    - target: {fileID: 2931905550362880583, guid: b6c6fb8528c47ee4d800e29857b381ee, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5845,6 +5893,10 @@ PrefabInstance:
     - target: {fileID: 4217819327208913062, guid: 29ee2d65799a4844886925096cfa124b, type: 3}
       propertyPath: m_Name
       value: TurtleShellPBRMaskTint
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217819327208913062, guid: 29ee2d65799a4844886925096cfa124b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4223807814750752608, guid: 29ee2d65799a4844886925096cfa124b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5943,6 +5995,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RatAssassinPBRMaskTint
       objectReference: {fileID: 0}
+    - target: {fileID: 4701395883959241788, guid: a6c344a395fe4d05817b52018b5f22c9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6000,10 +6056,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: OrcPBRMaskTint
       objectReference: {fileID: 0}
+    - target: {fileID: 2606371381518006874, guid: 4f3d4b6be9f642b8a056dcaf6db9d05b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2606371381525252484, guid: 4f3d4b6be9f642b8a056dcaf6db9d05b, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 4f39e985e4d1c944bb3aa87481bb9f01, type: 2}
+      objectReference: {fileID: 9100000, guid: 8588444349c64e44b92e6adcaadd2fc9, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6035,27 +6095,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 1348064742}
-  _statusData: {fileID: 0}
+  _statusData: {fileID: 11400000, guid: 86c61e68c60fb8440a6faf05c2a60f4f, type: 2}
   _targetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   _detectRange: 10
   _attackCooldown: 1
   _searchInterval: 0.2
   _stopDistanceOffset: 0.5
-  _projectilePrefab: {fileID: 0}
-  _projectileSpawnForwardOffset: 0.5
-  _projectileSpeed: 8
-  _projectileSpawnPoint: {fileID: 0}
+  _postAttackDelay: 0.2
+  _rotateDuration: 0.2
   _battleLog: 1
   _deathLog: 1
   _drawGizmos: 1
+  _moveSpeed: 0
   _attackRange: 1.5
   _skillCool: 0
-  _skillCooldown: 5
+  _attackType: 0
   _skillRange: 3
-  _skillDamage: 50
+  _skillDamage: 10
   _skillLoopCount: 1
+  _skillAreaType: 0
+  _skillRadius: 3
+  _skillAngle: 120
 --- !u!1001 &1368240795
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6067,6 +6129,10 @@ PrefabInstance:
     - target: {fileID: 6017196609115446882, guid: 644e7c61292542328496d511e3404c60, type: 3}
       propertyPath: m_Name
       value: MonsterPBRMaskTint
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017196609115446882, guid: 644e7c61292542328496d511e3404c60, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6019065563847916542, guid: 644e7c61292542328496d511e3404c60, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7173,6 +7239,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DragonPBRMaskTint
       objectReference: {fileID: 0}
+    - target: {fileID: 3492455130390485712, guid: b8127e13091546149b8171fbb5e3276d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3492455130390709936, guid: b8127e13091546149b8171fbb5e3276d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.1111445
@@ -7229,6 +7299,10 @@ PrefabInstance:
     - target: {fileID: 3611285726400744981, guid: 5287ae92358b5054db736e0bcdcc0583, type: 3}
       propertyPath: m_Name
       value: BishopKnightPBRMaskTint
+      objectReference: {fileID: 0}
+    - target: {fileID: 3611285726400744981, guid: 5287ae92358b5054db736e0bcdcc0583, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4131504622470583471, guid: 5287ae92358b5054db736e0bcdcc0583, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7469,6 +7543,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BatPBRMaskTint
       objectReference: {fileID: 0}
+    - target: {fileID: 2164510317257436141, guid: 8548284a291048abae762142d442f688, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7665,6 +7743,10 @@ PrefabInstance:
     - target: {fileID: 7695083982941622397, guid: 14cedf78be974185bb62477b130ca2dd, type: 3}
       propertyPath: m_Name
       value: SpiderPBRMaskTint
+      objectReference: {fileID: 0}
+    - target: {fileID: 7695083982941622397, guid: 14cedf78be974185bb62477b130ca2dd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7700704644815922651, guid: 14cedf78be974185bb62477b130ca2dd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7983,6 +8065,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BattleBeePBRMaskTint
       objectReference: {fileID: 0}
+    - target: {fileID: 9166538251162596159, guid: 8db3e03a93be1f44fa9cce3ff3e46460, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8093,6 +8179,10 @@ PrefabInstance:
     - target: {fileID: 1868034469679089911, guid: abce44efcafe4971956fc6ac24de2382, type: 3}
       propertyPath: m_Name
       value: WormMonsterPBRMaskTint
+      objectReference: {fileID: 0}
+    - target: {fileID: 1868034469679089911, guid: abce44efcafe4971956fc6ac24de2382, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1868034469679584385, guid: abce44efcafe4971956fc6ac24de2382, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -8763,6 +8853,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpecterPBRMaskTint
       objectReference: {fileID: 0}
+    - target: {fileID: 7638419679063239658, guid: 7d38f8740f5649c792bc289926016b36, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7638419679063406088, guid: 7d38f8740f5649c792bc289926016b36, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.50741
@@ -9063,6 +9157,10 @@ PrefabInstance:
     - target: {fileID: 3385869482707081639, guid: 98f60b07bbb02d24a9b459c269514cd5, type: 3}
       propertyPath: m_Name
       value: DemonKingPBRMaskTint
+      objectReference: {fileID: 0}
+    - target: {fileID: 3385869482707081639, guid: 98f60b07bbb02d24a9b459c269514cd5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3672492443474723099, guid: 98f60b07bbb02d24a9b459c269514cd5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
