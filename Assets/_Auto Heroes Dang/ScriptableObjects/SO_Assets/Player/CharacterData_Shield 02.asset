@@ -21,6 +21,6 @@ MonoBehaviour:
   _moveSpeed: 5
   _skillCool: 2
   _attackType: 2
-  _prefab: {fileID: 2250584472575438354, guid: abed887acd854ad4cb1bfa2494b546ba, type: 3}
+  _prefab: {fileID: 2250584472575438354, guid: bbe613fd8ce3ed640852a1b8f20b693c, type: 3}
   _level: 1
   _grade: 1
