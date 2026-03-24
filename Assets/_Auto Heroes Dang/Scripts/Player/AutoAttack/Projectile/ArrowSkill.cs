@@ -6,17 +6,24 @@ public class ArrowSkill : Projectile
 {
     protected new void Update()
     {
+        // 차징 스킬 딜레이
         _timer += Time.deltaTime;
+        
         if (_timer < _delay)
+        {
             return;
+        }
 
         transform.position += transform.forward * _moveSpeed * Time.deltaTime;
     }
 
-    protected new void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
+            Vector3 hitPoint = other.ClosestPoint(transform.position);
+            hitPoint.y += 0.5f;
+            ParticleManager.Instance.Play("Hit_GreenLarge", hitPoint);
             Debug.Log($" ArrowSkill - {other.name} - 데미지 {Atk} 입음");
             Destroy(gameObject);
         }

@@ -19633,7 +19633,7 @@ GameObject:
   - component: {fileID: 6715958939670815439}
   - component: {fileID: 4281933461799025675}
   - component: {fileID: 4367059679550935714}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Skill Slash Cartoon Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}

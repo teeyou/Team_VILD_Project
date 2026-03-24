@@ -14,6 +14,8 @@ public class ParticleManager : Singleton<ParticleManager>
 
     [SerializeField] private List<Particle> _psList;
 
+    [SerializeField] private List<Particle> _hitList;
+
     public Dictionary<string, ParticleSystem> ParticleDict { get; private set; } = new Dictionary<string, ParticleSystem>();
 
     protected override void Awake()
@@ -33,6 +35,12 @@ public class ParticleManager : Singleton<ParticleManager>
         {
             ParticleDict[_psList[i].name] = _psList[i].ps;
         }
+
+        for (int i = 0; i < _hitList.Count; i++)
+        {
+            ParticleDict[_hitList[i].name] = _hitList[i].ps;
+        }
+
     }
     public GameObject Play(string psName, Vector3 pos, Quaternion rot)
     {
@@ -59,6 +67,7 @@ public class ParticleManager : Singleton<ParticleManager>
 
             return ps.gameObject;
         }
+
 
         Debug.LogError("!!! Particle Manager - Play Error !!!");
         return null;
