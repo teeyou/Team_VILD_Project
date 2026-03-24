@@ -193,6 +193,7 @@ public class NamedEnemyBattle : NormalEnemyBattle
         if (_currentSkillLoop >= _skillLoopCount)
         {
             _isUsingSkill = false;
+            Debug.Log($"{name} 스킬 종료 / _isUsingSkill = false");
             return;
         }
 

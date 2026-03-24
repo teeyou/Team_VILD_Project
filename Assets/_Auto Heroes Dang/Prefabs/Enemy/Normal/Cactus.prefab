@@ -322,7 +322,7 @@ Transform:
   m_GameObject: {fileID: 3595316216206217821}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.4061072, y: 0.00000023841858, z: 6.896482}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -368,7 +368,7 @@ MonoBehaviour:
   _targetLayer:
     serializedVersion: 2
     m_Bits: 1024
-  _detectRange: 10
+  _detectRange: 30
   _attackCooldown: 1
   _searchInterval: 0.2
   _stopDistanceOffset: 0.5

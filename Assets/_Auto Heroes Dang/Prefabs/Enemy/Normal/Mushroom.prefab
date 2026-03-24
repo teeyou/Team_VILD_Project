@@ -222,7 +222,7 @@ Transform:
   m_GameObject: {fileID: 3108217223468749528}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.61, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -285,21 +285,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 1328710631425329667}
+  _statusData: {fileID: 0}
   _targetLayer:
     serializedVersion: 2
     m_Bits: 1024
-  _defaultMaxHp: 100
-  _defaultAtk: 10
-  _defaultDef: 1
-  _moveSpeed: 2
-  _detectRange: 10
-  _attackRange: 1.5
+  _detectRange: 30
   _attackCooldown: 1
   _searchInterval: 0.2
   _stopDistanceOffset: 0.5
+  _postAttackDelay: 0.2
+  _hitVfxPrefab: {fileID: 0}
+  _hitVfxForwardOffset: 1
+  _hitVfxHeightOffset: 1
+  _hitVfxLifeTime: 0.2
+  _meleeHitVfxScale: {x: 1, y: 1, z: 1}
+  _projectilePrefab: {fileID: 0}
+  _projectileSpawnPoint: {fileID: 0}
+  _projectileSpawnForwardOffset: 0.5
+  _projectileSpeed: 8
+  _rotateDuration: 0.2
   _battleLog: 1
   _deathLog: 1
   _drawGizmos: 1
+  _attackRange: 1.5
+  _skillCool: 0
 --- !u!1 &3147948992583509268
 GameObject:
   m_ObjectHideFlags: 0

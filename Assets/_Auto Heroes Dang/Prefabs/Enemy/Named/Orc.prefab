@@ -642,7 +642,7 @@ MonoBehaviour:
   _targetLayer:
     serializedVersion: 2
     m_Bits: 1024
-  _detectRange: 10
+  _detectRange: 30
   _attackCooldown: 1
   _searchInterval: 0.2
   _stopDistanceOffset: 0.5
