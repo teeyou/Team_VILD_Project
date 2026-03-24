@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class TwoHandAutoAttack : AutoAttack
 {
-    //[SerializeField] private float _x = 270;
-    //[SerializeField] private float _y = 0f;
-    //[SerializeField] private float _z = 270;
 
     public override void Attack()
     {
@@ -14,8 +11,11 @@ public class TwoHandAutoAttack : AutoAttack
         pos.y += 1f;
         Quaternion rot = Quaternion.AngleAxis(90f, transform.up) * transform.rotation;
         ParticleManager.Instance.Play("SlashRed", pos, rot);
-
-        _targetUnit.TakeDamage(_atk, transform);
+        
+        if (_targetTr != null && _targetUnit != null)
+        {
+            _targetUnit.TakeDamage(_atk, transform);
+        }
     }
 
     public override void Skill()
@@ -26,11 +26,10 @@ public class TwoHandAutoAttack : AutoAttack
         Quaternion rot = Quaternion.AngleAxis(270f, transform.right) * Quaternion.AngleAxis(0f, transform.up) * Quaternion.AngleAxis(270f, transform.forward) * transform.rotation;
         ParticleManager.Instance.Play("Skill_CartoonRedSlash", pos, rot);
 
-        _targetUnit.TakeDamage((int)(_atk * _skillMultiplier), transform);
-    }
+        if (_targetTr != null && _targetUnit != null)
+        {
+            _targetUnit.TakeDamage((int)(_atk * _skillMultiplier), transform);
+        }
 
-    //public override void TakeDamage(int damage, Transform target)
-    //{
-    //    Debug.Log($"{target.name} - {damage}");
-    //}
+    }
 }

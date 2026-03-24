@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class WizardAutoAttack : AutoAttack
 {
-    [SerializeField] private float _x = 0f;
-    [SerializeField] private float _y = 0f;
-    [SerializeField] private float _z = 0f;
-
     [SerializeField] private float _fpOffset = 1f;
     public override void Attack()
     {
@@ -38,9 +34,4 @@ public class WizardAutoAttack : AutoAttack
         proj.TargetTr = _targetTr;
         proj.Atk = (int)(_atk * _skillMultiplier);
     }
-
-    //public override void TakeDamage(int damage, Transform target)
-    //{
-    //    Debug.Log($"{target.name} - {damage}");
-    //}
 }
