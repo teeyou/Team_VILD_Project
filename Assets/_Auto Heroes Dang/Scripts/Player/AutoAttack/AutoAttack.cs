@@ -9,12 +9,18 @@ public class AutoAttack : Unit
 
     [SerializeField] private float _attackDelay = 0.5f;
 
+    [SerializeField] protected float _skillMultiplier = 1.5f;
+
     private Animator _animator;
+    private Collider _col;
 
     private float _skillCool;
     private float _currentSkillCool;
 
     private bool _skillEnd;
+
+    protected Unit _targetUnit = null;
+
     public void Init(BaseStatus_SO data)
     {
         _maxHp = data.DefaultMaxHp;
@@ -49,6 +55,7 @@ public class AutoAttack : Unit
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _col = GetComponent<Collider>();
     }
 
     private void Start()
@@ -58,6 +65,11 @@ public class AutoAttack : Unit
 
     void Update()
     {
+        if (_isDead)
+        {
+            return;
+        }
+
         if (_skillEnd)
             _currentSkillCool -= Time.deltaTime;
 
@@ -70,6 +82,20 @@ public class AutoAttack : Unit
 
         if (_targetTr != null)
         {
+            // _targetUnit 캐싱
+            if (_targetUnit == null)
+            {
+                Debug.Log("_targetUnit 최초 캐싱");
+                _targetUnit = _targetTr.GetComponent<Unit>();
+            }
+
+            if (_targetUnit.IsDead)
+            {
+                _targetTr = null;
+                _targetUnit = null;
+                return;
+            }
+
             // 타겟 방향으로 회전
             Vector3 dir = _targetTr.transform.position - transform.position;
             dir.y = 0f;
@@ -144,16 +170,6 @@ public class AutoAttack : Unit
     public override void Attack()
     {
         Debug.Log("Attack");
-
-        if (_attackType == EAttackType.Melee || _attackType == EAttackType.Tank)
-        {
-            // 근거리 공격
-        }
-
-        else
-        {
-            // 원거리 공격
-        }
     }
 
     public void AttackEnd()
@@ -181,21 +197,39 @@ public class AutoAttack : Unit
     public override void Skill()
     {
         Debug.Log("Skill");
-        if (_attackType == EAttackType.Melee || _attackType == EAttackType.Tank)
-        {
-            // 근거리 스킬
-        }
-
-        else
-        {
-            // 원거리 스킬
-        }
     }
 
     public void SkillEnd()
     {
         Debug.Log("SkillEnd");
         StartCoroutine(CoSkillDelay(_attackDelay));
+    }
+
+    public override void TakeDamage(int damage, Transform target)
+    {
+        if (_isDead)
+        {
+            return;
+        }
+
+        Debug.Log($"{target.name} 로부터 데미지 {damage} 받음");
+
+        _curHp -= damage;
+        Debug.Log($"현재 HP : {_curHp}");
+        
+        //_animator.SetTrigger("Hit");
+
+        if (_curHp <= 0)
+        {
+            Die();
+        }
+
+    }
+    public override void Die()
+    {
+        _isDead = true;
+        _animator.SetTrigger("Die");
+        _col.enabled = false;
     }
 
     private void OnDrawGizmosSelected()

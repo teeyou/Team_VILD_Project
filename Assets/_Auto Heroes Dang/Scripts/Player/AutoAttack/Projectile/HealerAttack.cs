@@ -12,7 +12,11 @@ public class HealerAttack : Projectile
             hitPoint.y += 0.5f;
 
             ParticleManager.Instance.Play("Hit_HealerAttack", hitPoint);
+
+            other.GetComponent<Unit>().TakeDamage(Atk, transform);
+
             Debug.Log($"{other.name} - WizardAttack 데미지 {Atk} 입음");
+
             Destroy(gameObject);
         }
     }

@@ -414,6 +414,8 @@ public class NormalEnemyBattle : Unit
         _isAttacking = false;
         _isRotating = false;
         _lockedAttackTarget = null;
+        
+        GetComponent<Collider>().enabled = false;
 
         SetMoveAnimation(false);
 

@@ -12,7 +12,11 @@ public class WizardSkill : Projectile
             hitPoint.y -= 0.8f;
 
             ParticleManager.Instance.Play("Hit_WizardSkill", hitPoint);
+
+            other.GetComponent<Unit>().TakeDamage(Atk, transform);
+
             Debug.Log($"{other.name} - 데미지 {Atk} 입음");
+
             Destroy(gameObject);
         }
     }

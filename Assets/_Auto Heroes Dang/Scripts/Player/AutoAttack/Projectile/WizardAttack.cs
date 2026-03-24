@@ -12,7 +12,11 @@ public class WizardAttack : Projectile
             hitPoint.y += 0.5f;
 
             ParticleManager.Instance.Play("Hit_WizardAttack", hitPoint);
+            
+            other.GetComponent<Unit>().TakeDamage(Atk, transform);
+
             Debug.Log($"{other.name} - 데미지 {Atk} 입음");
+            
             Destroy(gameObject);
         }
     }

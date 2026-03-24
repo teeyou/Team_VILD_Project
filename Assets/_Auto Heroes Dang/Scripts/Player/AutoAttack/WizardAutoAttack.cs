@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class WizardAutoAttack : AutoAttack
 {
-    [SerializeField] private float _skillMultiplier = 1.2f;
     [SerializeField] private float _x = 0f;
     [SerializeField] private float _y = 0f;
     [SerializeField] private float _z = 0f;
@@ -37,11 +36,11 @@ public class WizardAutoAttack : AutoAttack
         GameObject projGo = ParticleManager.Instance.Play("Skill_EnergyBallBlue", pos, rot);
         Projectile proj = projGo.GetComponent<Projectile>();
         proj.TargetTr = _targetTr;
-        proj.Atk = _atk;
+        proj.Atk = (int)(_atk * _skillMultiplier);
     }
 
-    public override void TakeDamage(int damage, Transform target)
-    {
-        Debug.Log($"{target.name} - {damage}");
-    }
+    //public override void TakeDamage(int damage, Transform target)
+    //{
+    //    Debug.Log($"{target.name} - {damage}");
+    //}
 }

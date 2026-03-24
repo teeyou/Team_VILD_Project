@@ -4897,10 +4897,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c48190dd24c254ca609e2980d6e96f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _searchRadius: 0
+  _searchRadius: 50
   _layerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1048576
   _attackDelay: 0.5
   _skillMultiplier: 1.2
   _type: 2
