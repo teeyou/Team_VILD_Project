@@ -4873,12 +4873,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4254978899485050729}
+  - component: {fileID: 2892535225154283432}
+  - component: {fileID: 4732150343697328605}
   - component: {fileID: 4447868871839614726}
   - component: {fileID: 1085621864063943761}
   - component: {fileID: 7120862630795853571}
   - component: {fileID: 8580796892725537770}
-  m_Layer: 0
-  m_Name: Skill_Enegy Ball Blue
+  m_Layer: 10
+  m_Name: Skill_Energy Ball Blue
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4910,6 +4912,34 @@ Transform:
   - {fileID: 5478493534276067777}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2892535225154283432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872288453847982926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d39523d233f70bc4999dc4168c6538fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveSpeed: 15
+  _delay: 0.5
+--- !u!114 &4732150343697328605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872288453847982926}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e89aa6fe28e8c2c44b4b8d934b7d23ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveSpeed: 15
+  _delay: 0.5
 --- !u!198 &4447868871839614726
 ParticleSystem:
   m_ObjectHideFlags: 0

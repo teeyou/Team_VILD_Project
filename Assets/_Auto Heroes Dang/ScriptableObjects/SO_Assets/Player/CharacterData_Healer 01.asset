@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfac172417e50d841ae426d75949a43d, type: 3}
-  m_Name: CharacterData_Wizard Healer 01
+  m_Name: CharacterData_Healer 01
   m_EditorClassIdentifier: 
   _id: 62
-  _chName: Wizard Healer 01
+  _chName: Healer 01
   _defaultMaxHp: 1000
   _defaultAtk: 100
   _defaultDef: 100

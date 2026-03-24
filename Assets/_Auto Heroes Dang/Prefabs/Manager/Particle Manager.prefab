@@ -49,7 +49,7 @@ MonoBehaviour:
     ps: {fileID: 1519917727902751064, guid: 796186203667e70439a1d35cbc973f48, type: 3}
   - name: Skill_CartoonRedSlash
     ps: {fileID: 4281933461799025675, guid: da913cacf347dea498b62e22f93affef, type: 3}
-  - name: SlashBlue
+  - name: SlashWaterBlue
     ps: {fileID: 7384259772824605108, guid: 80007fe54cd26e049aeb7ff2a968d3c3, type: 3}
   - name: Skill_HitFrost
     ps: {fileID: 6998615408967639308, guid: 2cda9f24ce5a46941a85e6ab734dbdc4, type: 3}
@@ -57,3 +57,26 @@ MonoBehaviour:
     ps: {fileID: 5684714502376403680, guid: 64aab2a6dcc274a438dc14aa3b9eb72c, type: 3}
   - name: Skill_LongArrowGreen
     ps: {fileID: 2123751515349667368, guid: 106598ce3bc185749bb14915b1e38125, type: 3}
+  - name: SlashBlue
+    ps: {fileID: 5664242771672321102, guid: 49af2808fc7401a449da60d20334e2fc, type: 3}
+  - name: Skill_HitBlue
+    ps: {fileID: 86440126411197902, guid: 7caa615b3ebb4e942ad568035a40ab0b, type: 3}
+  - name: ProjectilePurple
+    ps: {fileID: 2719720252744791411, guid: 2811880692937404db0a47254bccd755, type: 3}
+  - name: Skill_HealArea
+    ps: {fileID: 1738641533307909175, guid: a8a0862a7d0538147b7e7b8605ec9b90, type: 3}
+  - name: EnergyBallBlue
+    ps: {fileID: 807904391526534965, guid: 651b6112b63c4944298312e6ff0c24a8, type: 3}
+  - name: Skill_EnergyBallBlue
+    ps: {fileID: 4447868871839614726, guid: 36e50428083be6748aa3546ad847774d, type: 3}
+  _hitList:
+  - name: Hit_GreenMedium
+    ps: {fileID: 2306308137858165338, guid: 7e110ea83896f8943a91a6eed3db1b54, type: 3}
+  - name: Hit_GreenLarge
+    ps: {fileID: 4537118637637418571, guid: b233d28807aaa8b4e9e108269816b599, type: 3}
+  - name: Hit_HealerAttack
+    ps: {fileID: 5203604036106778600, guid: e0d73ae39e7dee547bfde94e984040d1, type: 3}
+  - name: Hit_WizardAttack
+    ps: {fileID: 4353296977784868361, guid: 973aef5ce97754d43ac22894c39db0b5, type: 3}
+  - name: Hit_WizardSkill
+    ps: {fileID: 3376466506129541479, guid: ec6cb5b2ea92b0a488fd8d3d3ea8abef, type: 3}

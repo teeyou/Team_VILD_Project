@@ -21385,6 +21385,7 @@ MonoBehaviour:
     m_Bits: 1048576
   _attackDelay: 0.5
   _skillMultiplier: 1.2
+  _type: 1
 --- !u!114 &3286275749850180740
 MonoBehaviour:
   m_ObjectHideFlags: 0

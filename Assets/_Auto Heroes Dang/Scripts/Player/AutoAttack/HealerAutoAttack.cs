@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WizardAutoAttack : AutoAttack
+public class HealerAutoAttack : AutoAttack
 {
     [SerializeField] private float _skillMultiplier = 1.2f;
     [SerializeField] private float _x = 0f;
@@ -19,7 +19,7 @@ public class WizardAutoAttack : AutoAttack
         //Quaternion rot = Quaternion.AngleAxis(_x, transform.right) * Quaternion.AngleAxis(_y, transform.up) * Quaternion.AngleAxis(_z, transform.forward) * transform.rotation;
         Quaternion rot = transform.rotation;
 
-        GameObject projGo = ParticleManager.Instance.Play("EnergyBallBlue", pos, rot);
+        GameObject projGo = ParticleManager.Instance.Play("ProjectilePurple", pos, rot);
         Projectile proj = projGo.GetComponent<Projectile>();
         proj.TargetTr = _targetTr;
         proj.Atk = _atk;
@@ -28,16 +28,13 @@ public class WizardAutoAttack : AutoAttack
     public override void Skill()
     {
         Vector3 pos = transform.position;
-        pos.y += 0.5f;
-        pos += transform.forward * _fpOffset;
+        //pos.y += 0.5f;
+        //pos += transform.forward * _fpOffset;
 
         //Quaternion rot = Quaternion.AngleAxis(_x, transform.right) * Quaternion.AngleAxis(_y, transform.up) * Quaternion.AngleAxis(_z, transform.forward) * transform.rotation;
-        Quaternion rot = transform.rotation;
+        //Quaternion rot = transform.rotation;
 
-        GameObject projGo = ParticleManager.Instance.Play("Skill_EnergyBallBlue", pos, rot);
-        Projectile proj = projGo.GetComponent<Projectile>();
-        proj.TargetTr = _targetTr;
-        proj.Atk = _atk;
+        GameObject projGo = ParticleManager.Instance.Play("Skill_HealArea", pos);
     }
 
     public override void TakeDamage(int damage, Transform target)

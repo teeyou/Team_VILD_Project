@@ -118,7 +118,9 @@ public class AutoAttack : Unit
         Collider[] cols = Physics.OverlapSphere(transform.position, _searchRadius, _layerMask);
 
         if (cols.Length <= 0)
+        {
             return;
+        }
 
         float minDist = float.MaxValue;
         int idx = 0;
@@ -128,7 +130,7 @@ public class AutoAttack : Unit
         {
             float dist = Vector3.Distance(transform.position, cols[i].transform.position);
 
-            if (Vector3.Distance(transform.position, cols[i].transform.position) < dist)
+            if (Vector3.Distance(transform.position, cols[i].transform.position) < minDist)
             {
                 minDist = dist;
                 idx = i;
