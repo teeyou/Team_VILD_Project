@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Projectile : MonoBehaviour
 {
@@ -17,7 +18,9 @@ public class Projectile : MonoBehaviour
         _timer += Time.deltaTime;
 
         if (_timer < _delay)
+        {
             return;
+        }
 
         if (TargetTr == null)
         {
@@ -38,12 +41,5 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    protected virtual void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            Debug.Log($"{other.name} - 데미지 {Atk} 입음");
-            Destroy(gameObject);
-        }
-    }
+    
 }
