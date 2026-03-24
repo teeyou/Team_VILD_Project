@@ -18,6 +18,8 @@ public class ParticleManager : Singleton<ParticleManager>
 
     public Dictionary<string, ParticleSystem> ParticleDict { get; private set; } = new Dictionary<string, ParticleSystem>();
 
+    private Transform _vfxRoot = null;
+
     protected override void Awake()
     {
         base.Awake();
@@ -29,6 +31,11 @@ public class ParticleManager : Singleton<ParticleManager>
 
     private void Init()
     {
+        if (_vfxRoot == null)
+        {
+            _vfxRoot = new GameObject("VFX Root").transform;
+        }
+
         ParticleDict.Clear();
 
         for (int i = 0; i < _psList.Count; i++)
@@ -46,7 +53,7 @@ public class ParticleManager : Singleton<ParticleManager>
     {
         if (ParticleDict.TryGetValue(psName, out ParticleSystem psPrefab))
         {
-            ParticleSystem ps = Instantiate(psPrefab, pos, rot);
+            ParticleSystem ps = Instantiate(psPrefab, pos, rot, _vfxRoot);
             ps.Play();
             Destroy(ps.gameObject, ps.main.duration);
 
@@ -61,7 +68,7 @@ public class ParticleManager : Singleton<ParticleManager>
     {
         if (ParticleDict.TryGetValue(psName, out ParticleSystem psPrefab))
         {
-            ParticleSystem ps = Instantiate(psPrefab, pos, Quaternion.identity);
+            ParticleSystem ps = Instantiate(psPrefab, pos, Quaternion.identity, _vfxRoot);
             ps.Play();
             Destroy(ps.gameObject, ps.main.duration);
 

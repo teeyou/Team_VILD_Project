@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+
+
+// 유도 미사일 베이스
+// 각 직업 별로 스크립트 만들고, 상속받아서 OnTrrigerEnter 구현하기
+
+
+
 public class Projectile : MonoBehaviour
 {
     [SerializeField] protected float _moveSpeed;
@@ -24,13 +31,13 @@ public class Projectile : MonoBehaviour
 
         if (TargetTr == null)
         {
-            Debug.Log("forward 이동");
+            //Debug.Log("forward 이동");
             transform.position += transform.forward * _moveSpeed * Time.deltaTime;
         }
 
         else
         {
-            Debug.Log("타겟으로 이동");
+            //Debug.Log("타겟으로 이동");
             Vector3 dir = (TargetTr.position - transform.position).normalized;
             dir.y = 0f;
 
