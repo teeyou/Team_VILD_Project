@@ -23,8 +23,13 @@ public class ArrowSkill : Projectile
         {
             Vector3 hitPoint = other.ClosestPoint(transform.position);
             hitPoint.y += 0.5f;
+            
             ParticleManager.Instance.Play("Hit_GreenLarge", hitPoint);
+
+            other.GetComponent<Unit>().TakeDamage(Atk, transform);
+
             Debug.Log($" ArrowSkill - {other.name} - 데미지 {Atk} 입음");
+            
             Destroy(gameObject);
         }
     }

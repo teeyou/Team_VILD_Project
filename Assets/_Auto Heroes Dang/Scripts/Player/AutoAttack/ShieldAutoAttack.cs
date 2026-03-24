@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI.Table;
 
 public class ShieldAutoAttack : AutoAttack
 {
-    [SerializeField] private float _skillMultiplier = 1.2f;
     [SerializeField] private int _type = 0;
 
     //[SerializeField] private float _x = 270;
@@ -14,6 +12,11 @@ public class ShieldAutoAttack : AutoAttack
 
     public override void Attack()
     {
+        if (_targetTr == null)
+        {
+            return;
+        }
+
         Vector3 pos = transform.position;
         pos.y += 1f;
         Quaternion rot = Quaternion.AngleAxis(270f, transform.up) * transform.rotation;
@@ -25,13 +28,19 @@ public class ShieldAutoAttack : AutoAttack
 
         else if (_type == 2)
         {
-            ParticleManager.Instance.Play("SlashBlue", pos, rot);
+            ParticleManager.Instance.Play("SlashPink", pos, rot);
         }
-        
+
+        _targetUnit.TakeDamage(_atk, transform);
     }
 
     public override void Skill()
     {
+        if (_targetTr == null)
+        {
+            return;
+        }
+
         Vector3 pos = _targetTr.position;
         pos.y += 1f;
         pos.x += Random.Range(-0.3f, 0.3f);
@@ -44,13 +53,14 @@ public class ShieldAutoAttack : AutoAttack
 
         else if (_type == 2)
         {
-            ParticleManager.Instance.Play("Skill_HitBlue", pos);
+            ParticleManager.Instance.Play("Skill_HitPink", pos);
         }
-        
+
+        _targetUnit.TakeDamage((int)(_atk * _skillMultiplier), transform);
     }
 
-    public override void TakeDamage(int damage, Transform target)
-    {
-        Debug.Log($"{target.name} - {damage}");
-    }
+    //public override void TakeDamage(int damage, Transform target)
+    //{
+    //    Debug.Log($"{target.name} - {damage}");
+    //}
 }

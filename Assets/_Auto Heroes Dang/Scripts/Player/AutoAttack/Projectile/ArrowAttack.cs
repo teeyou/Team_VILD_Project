@@ -12,7 +12,11 @@ public class ArrowAttack : Projectile
             hitPoint.y += 0.5f;
 
             ParticleManager.Instance.Play("Hit_GreenMedium", hitPoint);
+
+            other.GetComponent<Unit>().TakeDamage(Atk, transform);
+
             Debug.Log($"{other.name} - 데미지 {Atk} 입음");
+            
             Destroy(gameObject);
         }
     }
