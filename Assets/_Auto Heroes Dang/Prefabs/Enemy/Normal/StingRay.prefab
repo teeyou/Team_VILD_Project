@@ -204,6 +204,7 @@ GameObject:
   - component: {fileID: 6579097026585482089}
   - component: {fileID: 5306342619391686242}
   - component: {fileID: 3715392279177513748}
+  - component: {fileID: 8260227199831818821}
   m_Layer: 20
   m_Name: StingRay
   m_TagString: Untagged
@@ -286,6 +287,27 @@ MonoBehaviour:
   _drawGizmos: 1
   _attackRange: 1.5
   _skillCool: 0
+--- !u!65 &8260227199831818821
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1747872091307827592}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.91, y: 2.5, z: 2.22}
+  m_Center: {x: 0, y: 0.87, z: -0.36}
 --- !u!1 &1870831769964882572
 GameObject:
   m_ObjectHideFlags: 0

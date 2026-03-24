@@ -305,6 +305,7 @@ GameObject:
   - component: {fileID: 5077432949836666966}
   - component: {fileID: 5302265253999633394}
   - component: {fileID: 1899420479465804201}
+  - component: {fileID: 8071837195857788802}
   m_Layer: 20
   m_Name: Cactus
   m_TagString: Untagged
@@ -387,6 +388,27 @@ MonoBehaviour:
   _drawGizmos: 1
   _attackRange: 1.5
   _skillCool: 0
+--- !u!65 &8071837195857788802
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3595316216206217821}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.48, z: 1}
+  m_Center: {x: 0, y: 0.69, z: 0}
 --- !u!1 &4203402984819239889
 GameObject:
   m_ObjectHideFlags: 0
