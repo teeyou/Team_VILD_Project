@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BishopKnightSkill : MonoBehaviour
+public class EvilMageSkill : MonoBehaviour
 {
     void Start()
     {

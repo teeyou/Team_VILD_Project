@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public enum EnemyState
 {
@@ -29,7 +30,7 @@ public class NormalEnemyBattle : Unit
 
     [Header("히트 VFX")]
     [SerializeField] private GameObject _hitVfxPrefab;
-    [SerializeField] private float _hitVfxForwardOffset = 1.0f;
+    [SerializeField] private float _hitVfxForwardOffset = 0.5f;
     [SerializeField] private float _hitVfxHeightOffset = 1.0f;
     [SerializeField] private float _hitVfxLifeTime = 0.2f;
     [SerializeField] private Vector3 _meleeHitVfxScale = Vector3.one;
@@ -68,6 +69,9 @@ public class NormalEnemyBattle : Unit
     protected Quaternion _targetRotation;
     protected float _rotateTimer;
     protected Unit _lastLookTarget;
+
+    protected Coroutine _defBuffCoroutine;
+    protected int _currentDefBuffAmount;
 
     public Unit Target => _target;
 
@@ -358,6 +362,8 @@ public class NormalEnemyBattle : Unit
         _isAttacking = false;
         _lockedAttackTarget = null;
         _nextActionTime = Time.time + _postAttackDelay;
+
+        //Debug.Log("어택 상태 해제");
     }
 
     public override void Skill()
@@ -549,6 +555,39 @@ public class NormalEnemyBattle : Unit
         GameObject hitVfx = Instantiate(_hitVfxPrefab, hitPos, Quaternion.identity);
         hitVfx.transform.localScale = _meleeHitVfxScale;
         Destroy(hitVfx, _hitVfxLifeTime);
+    }
+
+    public void ApplyDefenseBuff(int amount, float duration)
+    {
+        if (_isDead)
+            return;
+
+        // 기존 버프가 있으면 먼저 제거
+        if (_defBuffCoroutine != null)
+        {
+            StopCoroutine(_defBuffCoroutine);
+            _def -= _currentDefBuffAmount;
+            _currentDefBuffAmount = 0;
+        }
+
+        _def += amount;
+        _currentDefBuffAmount = amount;
+
+        _defBuffCoroutine = StartCoroutine(Co_DefenseBuff(duration));
+    }
+
+    private IEnumerator Co_DefenseBuff(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+
+        _def -= _currentDefBuffAmount;
+        _currentDefBuffAmount = 0;
+        _defBuffCoroutine = null;
+    }
+
+    public int GetCurrentDef()
+    {
+        return _def;
     }
 
     // 감지 범위와 공격 범위를 Scene 뷰에 표시
