@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class SpearAutoAttack : AutoAttack
 {
-    //[SerializeField] private float _x = 0f;
-    //[SerializeField] private float _y = 0f;
-    //[SerializeField] private float _z = 0f;
-
     public override void Attack()
     {
         Vector3 pos = transform.position;
@@ -16,11 +12,19 @@ public class SpearAutoAttack : AutoAttack
         Quaternion rot = Quaternion.AngleAxis(270f, transform.up) * transform.rotation;
         ParticleManager.Instance.Play("SlashWaterBlue", pos, rot);
 
-        _targetUnit.TakeDamage(_atk, transform);
+        if (_targetTr != null && _targetUnit != null)
+        {
+            _targetUnit.TakeDamage(_atk, transform);
+        }
     }
 
     public override void Skill()
     {
+        if (_targetTr == null)
+        {
+            return;
+        }
+
         Vector3 pos = _targetTr.position;
         pos.y += 1f;
         pos.x += Random.Range(-0.3f, 0.3f);
@@ -28,11 +32,9 @@ public class SpearAutoAttack : AutoAttack
 
         ParticleManager.Instance.Play("Skill_HitFrost", pos);
 
-        _targetUnit.TakeDamage((int)(_atk * _skillMultiplier), transform);
+        if (_targetTr != null && _targetUnit != null)
+        {
+            _targetUnit.TakeDamage((int)(_atk * _skillMultiplier), transform);
+        }
     }
-
-    //public override void TakeDamage(int damage, Transform target)
-    //{
-    //    Debug.Log($"{target.name} - {damage}");
-    //}
 }

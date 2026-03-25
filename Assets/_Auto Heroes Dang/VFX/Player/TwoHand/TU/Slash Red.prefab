@@ -34315,7 +34315,7 @@ GameObject:
   - component: {fileID: 545212105250881039}
   - component: {fileID: 1519917727902751064}
   - component: {fileID: 7150267465376942286}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Slash Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}

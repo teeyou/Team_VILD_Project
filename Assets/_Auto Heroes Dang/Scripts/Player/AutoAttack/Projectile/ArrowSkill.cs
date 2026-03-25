@@ -14,6 +14,13 @@ public class ArrowSkill : Projectile
             return;
         }
 
+        // 차징 스킬 기 모을 때 충돌 판정 방지
+        if (!_col.enabled)
+        {
+            _col.enabled = true;
+        }
+
+
         transform.position += transform.forward * _moveSpeed * Time.deltaTime;
     }
 

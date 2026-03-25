@@ -9676,7 +9676,7 @@ GameObject:
   - component: {fileID: 7136550635082088459}
   - component: {fileID: 6998615408967639308}
   - component: {fileID: 7519148141395086397}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Skill Hit Frost
   m_TagString: Untagged
   m_Icon: {fileID: 0}

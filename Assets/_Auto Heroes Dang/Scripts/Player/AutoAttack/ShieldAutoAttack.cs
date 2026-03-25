@@ -6,10 +6,6 @@ public class ShieldAutoAttack : AutoAttack
 {
     [SerializeField] private int _type = 0;
 
-    //[SerializeField] private float _x = 270;
-    //[SerializeField] private float _y = 0f;
-    //[SerializeField] private float _z = 270;
-
     public override void Attack()
     {
         if (_targetTr == null)
@@ -31,7 +27,10 @@ public class ShieldAutoAttack : AutoAttack
             ParticleManager.Instance.Play("SlashPink", pos, rot);
         }
 
-        _targetUnit.TakeDamage(_atk, transform);
+        if (_targetTr != null && _targetUnit != null)
+        {
+            _targetUnit.TakeDamage(_atk, transform);
+        }
     }
 
     public override void Skill()
@@ -56,11 +55,9 @@ public class ShieldAutoAttack : AutoAttack
             ParticleManager.Instance.Play("Skill_HitPink", pos);
         }
 
-        _targetUnit.TakeDamage((int)(_atk * _skillMultiplier), transform);
+        if (_targetTr != null && _targetUnit != null)
+        {
+            _targetUnit.TakeDamage((int)(_atk * _skillMultiplier), transform);
+        }
     }
-
-    //public override void TakeDamage(int damage, Transform target)
-    //{
-    //    Debug.Log($"{target.name} - {damage}");
-    //}
 }

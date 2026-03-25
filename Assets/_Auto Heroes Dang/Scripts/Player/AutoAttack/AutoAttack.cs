@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class AutoAttack : Unit
 {
-    [SerializeField] private float _searchRadius;
-    [SerializeField] private LayerMask _layerMask;
+    [SerializeField] protected float _searchRadius;
+    [SerializeField] protected LayerMask _layerMask;
+    [SerializeField] protected float _skillMultiplier = 1.5f;
 
     [SerializeField] private float _attackDelay = 0.5f;
-
-    [SerializeField] protected float _skillMultiplier = 1.5f;
 
     private Animator _animator;
     private Collider _col;
@@ -221,10 +220,22 @@ public class AutoAttack : Unit
 
         if (_curHp <= 0)
         {
+            if (_isDead)
+            {
+                return;
+            }
+
             Die();
         }
-
     }
+    public override void Heal(int value)
+    {
+        Debug.Log($"{transform.name} Heal - {value}");
+        _curHp += value;
+
+        _curHp = Mathf.Clamp(_curHp, 0, _maxHp);
+    }
+
     public override void Die()
     {
         _isDead = true;

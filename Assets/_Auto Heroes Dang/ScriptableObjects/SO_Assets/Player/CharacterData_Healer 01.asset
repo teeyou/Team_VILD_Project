@@ -15,7 +15,7 @@ MonoBehaviour:
   _id: 62
   _chName: Healer 01
   _defaultMaxHp: 1000
-  _defaultAtk: 100
+  _defaultAtk: 0
   _defaultDef: 100
   _range: 10
   _moveSpeed: 5

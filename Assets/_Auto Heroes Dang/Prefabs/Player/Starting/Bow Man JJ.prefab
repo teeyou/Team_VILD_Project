@@ -5524,9 +5524,9 @@ GameObject:
   - component: {fileID: -2085568288427767573}
   - component: {fileID: 7897959072490845054}
   - component: {fileID: 6699995191896024900}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bow Man JJ
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5591,6 +5591,7 @@ MonoBehaviour:
   _x: 0
   _y: 0
   _z: 0
+  _fpOffset: 1
 --- !u!114 &-2085568288427767573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5608,6 +5609,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1048576
   _attackDelay: 0.5
+  _skillMultiplier: 1.2
 --- !u!136 &7897959072490845054
 CapsuleCollider:
   m_ObjectHideFlags: 0
