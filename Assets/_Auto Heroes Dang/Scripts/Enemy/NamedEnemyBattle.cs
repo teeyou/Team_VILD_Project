@@ -14,6 +14,9 @@ public class NamedEnemyBattle : NormalEnemyBattle
     [SerializeField] protected int _skillDamage = 50;
     [SerializeField] protected int _skillLoopCount = 1;
 
+    [Header("첫 스킬 대기")]
+    [SerializeField] protected float _firstSkillDelay = 2f;
+
     [Header("범위 스킬 설정")]
     [SerializeField] protected SkillAreaType _skillAreaType = SkillAreaType.Circle;
     [SerializeField] protected float _skillRadius = 3f;
@@ -31,6 +34,17 @@ public class NamedEnemyBattle : NormalEnemyBattle
     protected bool _isUsingSkill;
     protected int _currentSkillLoop;
 
+    protected float _spawnTime;
+    protected bool _hasUsedSkillOnce;
+
+    protected override void Start()
+    {
+        base.Start();
+
+        _spawnTime = Time.time;
+        _hasUsedSkillOnce = false;
+    }
+
     protected override void HandleCombat()
     {
         if (_isDead)
@@ -41,8 +55,6 @@ public class NamedEnemyBattle : NormalEnemyBattle
             SetMoveAnimation(false);
             return;
         }
-
-        //LookAtTarget();
 
         if (_isUsingSkill)
             return;
@@ -64,8 +76,18 @@ public class NamedEnemyBattle : NormalEnemyBattle
         if (_target.IsDead)
             return false;
 
-        if (Time.time < _lastSkillTime + _skillCool)
-            return false;
+        // 첫 스킬은 따로 대기시간 체크
+        if (!_hasUsedSkillOnce)
+        {
+            if (Time.time < _spawnTime + _firstSkillDelay)
+                return false;
+        }
+        else
+        {
+            // 두 번째부터는 기존 스킬 쿨타임 사용
+            if (Time.time < _lastSkillTime + _skillCool)
+                return false;
+        }
 
         float distance = GetDistanceTo(_target);
         if (distance > _skillRange)
@@ -79,11 +101,13 @@ public class NamedEnemyBattle : NormalEnemyBattle
         _isUsingSkill = true;
         _lastSkillTime = Time.time;
         _currentSkillLoop = 0;
+        _hasUsedSkillOnce = true;
 
         SetMoveAnimation(false);
 
         if (_animator != null && _animator.runtimeAnimatorController != null)
         {
+            _animator.ResetTrigger("Skill");
             _animator.SetTrigger("Skill");
         }
     }
@@ -193,12 +217,12 @@ public class NamedEnemyBattle : NormalEnemyBattle
         if (_currentSkillLoop >= _skillLoopCount)
         {
             _isUsingSkill = false;
-            Debug.Log($"{name} 스킬 종료 / _isUsingSkill = false");
             return;
         }
 
         if (_animator != null && _animator.runtimeAnimatorController != null)
         {
+            _animator.ResetTrigger("Skill");
             _animator.SetTrigger("Skill");
         }
     }
@@ -221,7 +245,6 @@ public class NamedEnemyBattle : NormalEnemyBattle
 
         return baseRotation * Quaternion.Euler(_skillVfxRotationOffset);
     }
-
 
     public virtual void SpawnSkillVfx()
     {
@@ -248,5 +271,4 @@ public class NamedEnemyBattle : NormalEnemyBattle
             main.simulationSpeed = speedMultiplier;
         }
     }
-
 }
