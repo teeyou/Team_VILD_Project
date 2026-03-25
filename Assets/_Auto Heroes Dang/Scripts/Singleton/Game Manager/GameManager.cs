@@ -50,6 +50,10 @@ public class GameManager : Singleton<GameManager>
             SpawnPlayer((int)ECharacterNumber.TwoHand_01, 
             _startPosition, 
             Quaternion.identity).transform;
+        //PlayerTr = _playerSpawner.
+        //    SpawnPlayer((int)ECharacterNumber.TwoHand_01, 
+        //    _startPosition, 
+        //    Quaternion.identity).transform;
     }
 
     private void Update()
