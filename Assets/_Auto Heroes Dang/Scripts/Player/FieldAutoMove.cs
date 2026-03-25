@@ -46,9 +46,6 @@ public class FieldAutoMove : MonoBehaviour
 
         transform.rotation = _cart.transform.rotation;
 
-        _cart.m_Speed = 0f;
-        _cart.m_Position = 0f;
-
         // 트랙의 웨이포인트 위치를 카트의 Position으로 변환
         int stageLength =  FieldManager.Instance.GetStageLength();
         for (int i = 0; i < stageLength; i++)
@@ -62,15 +59,18 @@ public class FieldAutoMove : MonoBehaviour
         _cart = FindObjectOfType<CinemachineDollyCart>();
         _path = FindObjectOfType<CinemachineSmoothPath>();
         _fieldUI = FindObjectOfType<FieldUI>();             // 스테이지 정보 팝업용으로 추가 0325 진주
+
+        _cart.m_Speed = 0f;
+        _cart.m_Position = 6.5f;
     }
 
     private void Update()
     {
         // 씬 전환하고 돌아올 때 참조가 끊어지면 세팅
-        //if (_cart == null || _path == null)
-        //{
-        //    SetCartAndPath();
-        //}
+        if (_cart == null || _path == null)
+        {
+            SetCartAndPath();
+        }
 
         if (!_isMoving && InputManager.Instance.IsPressedSpace)
         {

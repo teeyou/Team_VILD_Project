@@ -50,10 +50,8 @@ public class NormalEnemyBattle : Unit
     [SerializeField] protected bool _drawGizmos = true;
 
     [Header("런타임 확인용")]
-    //[SerializeField] protected float _moveSpeed = 2f;
     [SerializeField] protected float _attackRange = 1.5f;
     [SerializeField] protected float _skillCool;
-    //[SerializeField] protected EAttackType _attackType;
 
     protected float _searchTimer;
     protected float _lastAttackTime = -999f;
@@ -72,6 +70,9 @@ public class NormalEnemyBattle : Unit
 
     protected Coroutine _defBuffCoroutine;
     protected int _currentDefBuffAmount;
+
+    protected Coroutine _atkBuffCoroutine;
+    protected int _currentAtkBuffAmount;
 
     public Unit Target => _target;
 
@@ -330,7 +331,7 @@ public class NormalEnemyBattle : Unit
     }
 
     // Attack 애니메이션 이벤트에서 호출되어 실제 데미지 적용
-    private void ApplyDamage()
+    protected virtual void ApplyDamage()
     {
         if (_isDead)
             return;
@@ -457,6 +458,8 @@ public class NormalEnemyBattle : Unit
         _targetRotation = Quaternion.LookRotation(direction);
 
         SetMoveAnimation(false);
+
+
     }
 
     // 회전 처리
@@ -590,6 +593,33 @@ public class NormalEnemyBattle : Unit
     public int GetCurrentDef()
     {
         return _def;
+    }
+
+    public void ApplyAttackBuff(int amount, float duration)
+    {
+        if (_isDead)
+            return;
+
+        if (_atkBuffCoroutine != null)
+        {
+            StopCoroutine(_atkBuffCoroutine);
+            _atk -= _currentAtkBuffAmount;
+            _currentAtkBuffAmount = 0;
+        }
+
+        _atk += amount;
+        _currentAtkBuffAmount = amount;
+
+        _atkBuffCoroutine = StartCoroutine(Co_AttackBuff(duration));
+    }
+
+    private IEnumerator Co_AttackBuff(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+
+        _atk -= _currentAtkBuffAmount;
+        _currentAtkBuffAmount = 0;
+        _atkBuffCoroutine = null;
     }
 
     // 감지 범위와 공격 범위를 Scene 뷰에 표시

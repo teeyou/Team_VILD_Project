@@ -11,7 +11,15 @@ using UnityEngine;
 필드씬의 데이터 저장 필요
 - cart, path 관련 데이터 (Cart의 Position, )
 
- 
+
+
+- 흐름 정리
+
+진행 버튼 클릭
+-> UI Manager : MovePlayer()
+-> GameManager : MoveNextPoint()
+
+
 */
 
 public enum EGameStage
@@ -33,9 +41,11 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] Vector3 _startPosition = new Vector3(52f, 0f, 32f);
     
     private EGameStage _currentStage = EGameStage.Stage1_1;
-    public Transform PlayerTr { get; private set; } = null;
-    private FieldAutoMove _autoMove;
 
+    private FieldAutoMove _autoMove;
+    public Transform MainCharacterTr { get; private set; } = null;
+    
+    private List<Transform> _subCharacterTrList = new List<Transform>();
 
     protected override void Awake()
     {
@@ -46,14 +56,29 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        PlayerTr = _playerSpawner.
-            SpawnPlayer((int)ECharacterNumber.TwoHand_01, 
-            _startPosition, 
-            Quaternion.identity).transform;
-        //PlayerTr = _playerSpawner.
-        //    SpawnPlayer((int)ECharacterNumber.TwoHand_01, 
-        //    _startPosition, 
-        //    Quaternion.identity).transform;
+
+        if (DataSource.Instance.MainCharacterIdx == -1)
+        {
+            MainCharacterTr = _playerSpawner.SpawnPlayer((int)ECharacterNumber.Shield_01, _startPosition, Quaternion.identity).transform;
+        }
+
+        else
+        {
+            MainCharacterTr = _playerSpawner.SpawnPlayer(DataSource.Instance.MainCharacterIdx, _startPosition, Quaternion.identity).transform;
+        }
+        
+        // 메인 제외 다른 캐릭터들 생성
+        List<int> subNumberList = DataSource.Instance.GetCharacterList();
+        
+        for (int i = 0; i < subNumberList.Count; i++)
+        {
+            GameObject go = _playerSpawner.SpawnPlayer(subNumberList[i], _startPosition + new Vector3(-2f * i - 2f, 0f, 0f), Quaternion.identity);
+            PartyFollow pf = go.GetComponent<PartyFollow>();
+            pf.FollowOrder = i + 1;
+            _subCharacterTrList.Add(go.transform);
+            
+        }
+
     }
 
     private void Update()
@@ -65,7 +90,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (_autoMove == null)
         {
-            _autoMove = PlayerTr.GetComponent<FieldAutoMove>();
+            _autoMove = MainCharacterTr.GetComponent<FieldAutoMove>();
         }
 
         // 이미 이동중이면 종료

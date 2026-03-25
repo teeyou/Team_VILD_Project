@@ -62,13 +62,17 @@ MonoBehaviour:
   - name: Skill_HitBlue
     ps: {fileID: 86440126411197902, guid: 7caa615b3ebb4e942ad568035a40ab0b, type: 3}
   - name: ProjectilePurple
-    ps: {fileID: 2719720252744791411, guid: 2811880692937404db0a47254bccd755, type: 3}
+    ps: {fileID: 3118083788462123026, guid: c0f960fb0edbe2d4599ae32c2b4dfb71, type: 3}
   - name: Skill_HealArea
     ps: {fileID: 1738641533307909175, guid: a8a0862a7d0538147b7e7b8605ec9b90, type: 3}
   - name: EnergyBallBlue
     ps: {fileID: 807904391526534965, guid: 651b6112b63c4944298312e6ff0c24a8, type: 3}
   - name: Skill_EnergyBallBlue
     ps: {fileID: 4447868871839614726, guid: 36e50428083be6748aa3546ad847774d, type: 3}
+  - name: SlashPink
+    ps: {fileID: 882109370960602740, guid: 452d9863a9f1cb34393d8d58da10523f, type: 3}
+  - name: Skill_HitPink
+    ps: {fileID: 8153339033412087143, guid: bf61cf88429232d409db88cdd0e6fdd5, type: 3}
   _hitList:
   - name: Hit_GreenMedium
     ps: {fileID: 2306308137858165338, guid: 7e110ea83896f8943a91a6eed3db1b54, type: 3}

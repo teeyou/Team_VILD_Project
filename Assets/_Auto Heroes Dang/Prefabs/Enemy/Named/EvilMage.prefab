@@ -2061,7 +2061,7 @@ GameObject:
   - component: {fileID: 769017133700382919}
   m_Layer: 20
   m_Name: EvilMage
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
