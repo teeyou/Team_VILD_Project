@@ -15,11 +15,11 @@ MonoBehaviour:
   _id: 1
   _chName: Bow Girl 01
   _defaultMaxHp: 1000
-  _defaultAtk: 100
+  _defaultAtk: 0
   _defaultDef: 100
   _range: 10
   _moveSpeed: 5
-  _skillCool: 2
+  _skillCool: 5
   _attackType: 1
   _prefab: {fileID: 2310223849482628190, guid: 7646092f272eb064d8dbf388a150fcb0, type: 3}
   _level: 1

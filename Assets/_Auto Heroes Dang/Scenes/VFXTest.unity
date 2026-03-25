@@ -257,7 +257,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3108217223468749528, guid: dbb750b412020c84f814db761a3c80b7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3108217223468749528, guid: dbb750b412020c84f814db761a3c80b7, type: 3}
       propertyPath: m_TagString
@@ -319,6 +319,10 @@ PrefabInstance:
     - target: {fileID: 1396177782149944523, guid: bc100e369a4c5c341871e4827cb90a40, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1721183820608347981, guid: bc100e369a4c5c341871e4827cb90a40, type: 3}
+      propertyPath: _characterNumber
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 5606656086849698264, guid: bc100e369a4c5c341871e4827cb90a40, type: 3}
       propertyPath: m_Name
@@ -619,7 +623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3108217223468749528, guid: dbb750b412020c84f814db761a3c80b7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3108217223468749528, guid: dbb750b412020c84f814db761a3c80b7, type: 3}
       propertyPath: m_TagString

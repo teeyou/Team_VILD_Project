@@ -38888,9 +38888,9 @@ GameObject:
   - component: {fileID: 9100857024695660062}
   - component: {fileID: 653231236039396701}
   - component: {fileID: 4607078670376030937}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Skill_Long Arrow Greem
-  m_TagString: Projectile
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

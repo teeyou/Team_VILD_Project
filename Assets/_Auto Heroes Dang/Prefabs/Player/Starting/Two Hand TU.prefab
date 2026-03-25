@@ -377,9 +377,9 @@ GameObject:
   - component: {fileID: -5405557813724273461}
   - component: {fileID: -8444946556126729907}
   - component: {fileID: -2924516930730662103}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Two Hand TU
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -458,6 +458,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1048576
   _attackDelay: 0.5
+  _skillMultiplier: 1.2
 --- !u!114 &-5405557813724273461
 MonoBehaviour:
   m_ObjectHideFlags: 0

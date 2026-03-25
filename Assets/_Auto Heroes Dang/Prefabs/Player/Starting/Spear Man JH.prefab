@@ -591,9 +591,9 @@ GameObject:
   - component: {fileID: -2309353546837195946}
   - component: {fileID: 8526516832878359357}
   - component: {fileID: 6078234160055973452}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Spear Man JH
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -672,6 +672,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1048576
   _attackDelay: 0.5
+  _skillMultiplier: 1.2
 --- !u!136 &8526516832878359357
 CapsuleCollider:
   m_ObjectHideFlags: 0
