@@ -22,6 +22,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: ImpactOrb01
   m_Shader: {fileID: -6465566751694194690, guid: 9665439ac7e1b83489c673e35dcefd05, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _BUILTIN_ALPHATEST_ON
   - _BUILTIN_AlphaClip
@@ -37,6 +39,7 @@ Material:
   disabledShaderPasses:
   - DepthOnly
   - SHADOWCASTER
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -85,7 +88,7 @@ Material:
     - _BUILTIN_AlphaClip: 1
     - _BUILTIN_Blend: 0
     - _BUILTIN_CullMode: 0
-    - _BUILTIN_DstBlend: 1
+    - _BUILTIN_DstBlend: 10
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _BUILTIN_SrcBlend: 5
