@@ -17522,8 +17522,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 206940068948185359}
+  - component: {fileID: -7384326393891915668}
+  - component: {fileID: 2663201582771132355}
   - component: {fileID: 7783695439953254513}
-  - component: {fileID: -2319999444639472776}
   - component: {fileID: 5638176993995481698}
   - component: {fileID: 8093568733261741325}
   m_Layer: 10
@@ -17572,6 +17573,36 @@ Transform:
   - {fileID: 4947553962992375769}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7384326393891915668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7830136049655510298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 225a9d9580c4248498cc84c3867269b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cart: {fileID: 0}
+  _path: {fileID: 0}
+  _spacing: 2
+--- !u!114 &2663201582771132355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7830136049655510298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63bed002c9455754993e8f0d75731554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cart: {fileID: 0}
+  _path: {fileID: 0}
+  _moveSpeed: 10
 --- !u!114 &7783695439953254513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17588,29 +17619,10 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 1048576
-  _attackDelay: 0.5
   _skillMultiplier: 1.2
-  _x: 0
-  _y: 0
-  _z: 0
-  _fpOffset: 1
---- !u!114 &-2319999444639472776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7830136049655510298}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6a193ec6313c954e9e8ae252a9abad7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _searchRadius: 50
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 1048576
   _attackDelay: 0.5
+  _healAmount: 100
+  _fpOffset: 1
 --- !u!95 &5638176993995481698
 Animator:
   serializedVersion: 5
