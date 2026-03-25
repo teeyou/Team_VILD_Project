@@ -23,6 +23,12 @@ public class UIManager : MonoBehaviour
 
     private void MovePlayer()
     {
+        ToggleProgressButton(false);
         GameManager.Instance.MoveNextPoint();
+    }
+
+    private void ToggleProgressButton(bool flag)
+    {
+        _autoProgressButton.gameObject.SetActive(flag);
     }
 }

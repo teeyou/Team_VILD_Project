@@ -49,16 +49,16 @@ public class PlayerSpawner : MonoBehaviour
         //SpawnPlayer((int)ECharacterNumber.BowGirl_01, Vector3.zero, Quaternion.identity);
 
         // VFX 완료
-        SpawnPlayer((int)ECharacterNumber.TwoHand_TU, new Vector3(-2f, 0f, 0f), Quaternion.identity);
-        SpawnPlayer((int)ECharacterNumber.SpearMan_JH, new Vector3(3f, 0f, 2f), Quaternion.identity);
-        SpawnPlayer((int)ECharacterNumber.BowMan_JJ, new Vector3(2f, 0f, -3f), Quaternion.identity);
+        //SpawnPlayer((int)ECharacterNumber.TwoHand_TU, new Vector3(-2f, 0f, 0f), Quaternion.identity);
+        //SpawnPlayer((int)ECharacterNumber.SpearMan_JH, new Vector3(3f, 0f, 2f), Quaternion.identity);
+        //SpawnPlayer((int)ECharacterNumber.BowMan_JJ, new Vector3(2f, 0f, -3f), Quaternion.identity);
 
-        SpawnPlayer((int)ECharacterNumber.Shield_01, new Vector3(0f, 0f, -2f), Quaternion.identity);
-        SpawnPlayer((int)ECharacterNumber.Wizard_01, new Vector3(0f, 0f, 2f), Quaternion.identity);
+        //SpawnPlayer((int)ECharacterNumber.Shield_01, new Vector3(0f, 0f, -2f), Quaternion.identity);
+        //SpawnPlayer((int)ECharacterNumber.Wizard_01, new Vector3(0f, 0f, 2f), Quaternion.identity);
 
-        SpawnPlayer((int)ECharacterNumber.Healer_01, new Vector3(2f, 0f, 0f), Quaternion.identity);
+        //SpawnPlayer((int)ECharacterNumber.Healer_01, new Vector3(2f, 0f, 0f), Quaternion.identity);
 
-        SpawnPlayer((int)ECharacterNumber.Shield_02, new Vector3(4f, 0f, 0f), Quaternion.identity);
+        //SpawnPlayer((int)ECharacterNumber.Shield_02, new Vector3(4f, 0f, 0f), Quaternion.identity);
 
         //SpawnPlayer((int)_characterNumber, new Vector3(4f, 0f, 0f), Quaternion.identity);
     }

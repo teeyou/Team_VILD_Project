@@ -19,7 +19,7 @@ MonoBehaviour:
   _defaultDef: 100
   _range: 2
   _moveSpeed: 5
-  _skillCool: 2
+  _skillCool: 5
   _attackType: 0
   _prefab: {fileID: 5018975388342461931, guid: d610dfbcbf8de89418c6138a20bb6060, type: 3}
   _level: 1
