@@ -28,7 +28,7 @@ public class CameraController : MonoBehaviour
         // 플레이어 동적 생성 후 카메라에 할당
         if (_playerCam.m_Follow == null)
         {
-            Transform playerTr = GameManager.Instance.PlayerTr;
+            Transform playerTr = GameManager.Instance.MainCharacterTr;
 
             if (playerTr != null)
             {
