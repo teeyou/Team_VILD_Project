@@ -66,7 +66,7 @@ public class PlayerSpawner : MonoBehaviour
     private void Start()
     {
         //SpawnStarting();
-        //TestSpawnPlayerBattleScene();
+        TestSpawnPlayerBattleScene();
     }
 
     private void TestSpawnPlayerBattleScene()
