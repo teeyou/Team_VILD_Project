@@ -88,13 +88,14 @@ public class BattleManager : Singleton<BattleManager>
 
     void Start()
     {
+        
         // 테스트용 코드
-        for (int i = 0; i < _enemies.Length; i++)
-        {
-            GameObject go = Instantiate(_enemies[i]);
-            go.transform.position = _enemyStartingPosList[i];
-            go.transform.rotation = EnemyStartingRotation;
-        }
+        //for (int i = 0; i < _enemies.Length; i++)
+        //{
+        //    GameObject go = Instantiate(_enemies[i]);
+        //    go.transform.position = _enemyStartingPosList[i];
+        //    go.transform.rotation = EnemyStartingRotation;
+        //}
     }
 
     void Update()

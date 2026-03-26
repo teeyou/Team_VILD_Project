@@ -54,11 +54,11 @@ public class PlayerSpawner : MonoBehaviour
         //SpawnPlayer((int)ECharacterNumber.BowMan_JJ, new Vector3(2f, 0f, -3f), Quaternion.identity);
 
         //SpawnPlayer((int)ECharacterNumber.Shield_01, new Vector3(0f, 0f, -2f), Quaternion.identity);
-        //SpawnPlayer((int)ECharacterNumber.Wizard_01, new Vector3(0f, 0f, 2f), Quaternion.identity);
+        SpawnPlayer((int)ECharacterNumber.Wizard_01, new Vector3(0f, 0f, 2f), Quaternion.identity);
 
-        //SpawnPlayer((int)ECharacterNumber.Healer_01, new Vector3(2f, 0f, 0f), Quaternion.identity);
+        SpawnPlayer((int)ECharacterNumber.Healer_01, new Vector3(2f, 0f, 0f), Quaternion.identity);
 
-        //SpawnPlayer((int)ECharacterNumber.Shield_02, new Vector3(4f, 0f, 0f), Quaternion.identity);
+        SpawnPlayer((int)ECharacterNumber.Shield_02, new Vector3(4f, 0f, 0f), Quaternion.identity);
 
         //SpawnPlayer((int)_characterNumber, new Vector3(4f, 0f, 0f), Quaternion.identity);
     }
@@ -66,7 +66,7 @@ public class PlayerSpawner : MonoBehaviour
     private void Start()
     {
         //SpawnStarting();
-        TestSpawnPlayerBattleScene();
+        //TestSpawnPlayerBattleScene();
     }
 
     private void TestSpawnPlayerBattleScene()

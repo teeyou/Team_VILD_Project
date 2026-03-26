@@ -7,6 +7,8 @@ public class DataSource : Singleton<DataSource>
     public int MainCharacterIdx { get; set; } = -1;
     private List<int> _playerCharacterList = new List<int>();
 
+    private List<Transform> _characterTransformList = new List<Transform>();
+
     protected override void Awake()
     {
         base.Awake();
@@ -24,4 +26,12 @@ public class DataSource : Singleton<DataSource>
     {
         _playerCharacterList.Add((int)number);
     }
+
+    public void SetTransform(int idx, Transform t)
+    {
+        Debug.Log($"{idx} - Transform Set {t}");
+        _characterTransformList[idx] = t;
+    }
+
+    public Transform GetTransform(int idx) => _characterTransformList[idx];
 }
