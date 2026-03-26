@@ -16414,7 +16414,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1408073691
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31611,6 +31611,10 @@ PrefabInstance:
       propertyPath: _path
       value: 
       objectReference: {fileID: 946973895}
+    - target: {fileID: 5600211753882803890, guid: f0d5c0ca17d51634b8d4319c88f62512, type: 3}
+      propertyPath: _playerSpawner
+      value: 
+      objectReference: {fileID: 1546001423}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -47530,8 +47534,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3851820690412811893, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
       propertyPath: m_Name
-      value: UI Manager
+      value: Field UI Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 6350793667211965918, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
+      propertyPath: _startStageButton
+      value: 
+      objectReference: {fileID: 6341323171574256192}
     - target: {fileID: 6350793667211965918, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
       propertyPath: _autoProgressButton
       value: 

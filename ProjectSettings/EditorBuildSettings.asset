@@ -20,4 +20,34 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Auto Heroes Dang/Scenes/LoadingScene.unity
     guid: 49bc1e1a9995675468b7cce06eeeba76
+  - enabled: 1
+    path: Assets/_Auto Heroes Dang/Scenes/ZFieldTest.unity
+    guid: 8a592e290a5d35446835204e457b8e33
+  - enabled: 1
+    path: Assets/_Auto Heroes Dang/Scenes/BattleScene/Stage1_1.unity
+    guid: 5c63d6da43e97b54587eb2fbf0514006
+  - enabled: 1
+    path: Assets/_Auto Heroes Dang/Scenes/BattleScene/Stage1_2.unity
+    guid: 93c40a89600d15447baa85a638cb45ce
+  - enabled: 1
+    path: Assets/_Auto Heroes Dang/Scenes/BattleScene/Stage1_3.unity
+    guid: 930f2c883e0910441a6091af04824cb7
+  - enabled: 1
+    path: Assets/_Auto Heroes Dang/Scenes/BattleScene/Stage2_1.unity
+    guid: 43c72ee992d7e5e48b2ab4dfdff6693d
+  - enabled: 1
+    path: Assets/_Auto Heroes Dang/Scenes/BattleScene/Stage2_2.unity
+    guid: 866a48c1ce9cfa54cab4491f75287891
+  - enabled: 1
+    path: Assets/_Auto Heroes Dang/Scenes/BattleScene/Stage2_3.unity
+    guid: 2ddf31ab6724001479f125ed8047b88a
+  - enabled: 1
+    path: Assets/_Auto Heroes Dang/Scenes/BattleScene/Stage3_1.unity
+    guid: af44d7aa34399b646874242288165f43
+  - enabled: 1
+    path: Assets/_Auto Heroes Dang/Scenes/BattleScene/Stage3_2.unity
+    guid: 093cfbeefe530154c9e199a1783ac7cb
+  - enabled: 1
+    path: Assets/_Auto Heroes Dang/Scenes/BattleScene/Stage3_3.unity
+    guid: cf80019595e6f9347beb1456ff9d2a20
   m_configObjects: {}

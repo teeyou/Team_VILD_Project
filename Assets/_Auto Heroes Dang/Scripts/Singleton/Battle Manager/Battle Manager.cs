@@ -88,7 +88,7 @@ public class BattleManager : Singleton<BattleManager>
 
     void Start()
     {
-        
+
         // 테스트용 코드
         //for (int i = 0; i < _enemies.Length; i++)
         //{

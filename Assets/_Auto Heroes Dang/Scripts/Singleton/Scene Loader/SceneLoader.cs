@@ -9,6 +9,16 @@ public enum ESceneId
     FieldScene = 2,
     BattleScene = 3,
     LoadingScene = 4,
+    Stage1_1,
+    Stage1_2,
+    Stage1_3,
+    Stage2_1,
+    Stage2_2,
+    Stage2_3,
+    Stage3_1,
+    Stage3_2,
+    Stage3_3,
+    ZFieldTest,
 }
 
 public class SceneLoader : Singleton<SceneLoader>
@@ -20,6 +30,11 @@ public class SceneLoader : Singleton<SceneLoader>
         base.Awake();
 
         DontDestroyOnLoad(gameObject);
+    }
+
+    public void LoadScene(EGameStage id)
+    {
+        LoadScene(id.ToString());
     }
 
     public void LoadScene(ESceneId id)
