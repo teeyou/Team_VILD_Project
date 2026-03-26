@@ -34,7 +34,9 @@ public class BattleManager : Singleton<BattleManager>
 
     private List<Vector3> _playerStartingPosList = new List<Vector3>();
     private List<Vector3> _enemyStartingPosList = new List<Vector3>();
-    
+
+    public GameObject[] _enemies;
+
     public IReadOnlyList<Vector3> PlayerStartingPosList { get { return _playerStartingPosList; } }
     public IReadOnlyList<Vector3> EnemyStartingPosList { get { return _enemyStartingPosList; } }
 
@@ -82,7 +84,12 @@ public class BattleManager : Singleton<BattleManager>
 
     void Start()
     {
-        
+        for (int i = 0; i < _enemies.Length; i++)
+        {
+            GameObject go = Instantiate(_enemies[i]);
+            go.transform.position = _enemyStartingPosList[i];
+            go.transform.rotation = EnemyStartingRotation;
+        }
     }
 
     void Update()
