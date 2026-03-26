@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 1328710631425329667}
-  _statusData: {fileID: 0}
+  _statusData: {fileID: 11400000, guid: e7313c000d76e8143ba98dae63f45351, type: 2}
   _targetLayer:
     serializedVersion: 2
     m_Bits: 1024
