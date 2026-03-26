@@ -15,10 +15,18 @@ public class Projectile : MonoBehaviour
     [SerializeField] protected float _moveSpeed;
     [SerializeField] protected float _delay = 0f;
 
+    protected Collider _col;
     protected float _timer = 0f;
 
     public int Atk { get; set; }
     public Transform TargetTr {  get; set; }
+
+    private void Awake()
+    {
+        _col = GetComponent<Collider>();
+
+        _col.enabled = false;
+    }
 
     protected virtual void Update()
     {
@@ -27,6 +35,12 @@ public class Projectile : MonoBehaviour
         if (_timer < _delay)
         {
             return;
+        }
+
+        // 차징 스킬 기 모을 때 충돌 판정 방지
+        if (!_col.enabled)
+        {
+            _col.enabled = true;
         }
 
         if (TargetTr == null)

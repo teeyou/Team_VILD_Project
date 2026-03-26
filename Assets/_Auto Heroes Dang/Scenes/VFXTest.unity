@@ -170,30 +170,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4128182507106614291, guid: ba3819b754dc6274b836d43063678b9a, type: 3}
-      propertyPath: _psList.Array.size
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 4128182507106614291, guid: ba3819b754dc6274b836d43063678b9a, type: 3}
-      propertyPath: _psList.Array.data[8].ps
-      value: 
-      objectReference: {fileID: 3118083788462123026, guid: c0f960fb0edbe2d4599ae32c2b4dfb71, type: 3}
-    - target: {fileID: 4128182507106614291, guid: ba3819b754dc6274b836d43063678b9a, type: 3}
-      propertyPath: _psList.Array.data[12].ps
-      value: 
-      objectReference: {fileID: 882109370960602740, guid: 452d9863a9f1cb34393d8d58da10523f, type: 3}
-    - target: {fileID: 4128182507106614291, guid: ba3819b754dc6274b836d43063678b9a, type: 3}
-      propertyPath: _psList.Array.data[13].ps
-      value: 
-      objectReference: {fileID: 8153339033412087143, guid: bf61cf88429232d409db88cdd0e6fdd5, type: 3}
-    - target: {fileID: 4128182507106614291, guid: ba3819b754dc6274b836d43063678b9a, type: 3}
-      propertyPath: _psList.Array.data[12].name
-      value: SlashPink
-      objectReference: {fileID: 0}
-    - target: {fileID: 4128182507106614291, guid: ba3819b754dc6274b836d43063678b9a, type: 3}
-      propertyPath: _psList.Array.data[13].name
-      value: Skill_HitPink
-      objectReference: {fileID: 0}
     - target: {fileID: 7670408708129622865, guid: ba3819b754dc6274b836d43063678b9a, type: 3}
       propertyPath: m_Name
       value: Particle Manager
@@ -257,7 +233,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3108217223468749528, guid: dbb750b412020c84f814db761a3c80b7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3108217223468749528, guid: dbb750b412020c84f814db761a3c80b7, type: 3}
       propertyPath: m_TagString
@@ -319,6 +295,10 @@ PrefabInstance:
     - target: {fileID: 1396177782149944523, guid: bc100e369a4c5c341871e4827cb90a40, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1721183820608347981, guid: bc100e369a4c5c341871e4827cb90a40, type: 3}
+      propertyPath: _characterNumber
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 5606656086849698264, guid: bc100e369a4c5c341871e4827cb90a40, type: 3}
       propertyPath: m_Name
@@ -619,7 +599,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3108217223468749528, guid: dbb750b412020c84f814db761a3c80b7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3108217223468749528, guid: dbb750b412020c84f814db761a3c80b7, type: 3}
       propertyPath: m_TagString

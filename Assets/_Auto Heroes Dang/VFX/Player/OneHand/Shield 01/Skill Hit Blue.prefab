@@ -9886,7 +9886,7 @@ GameObject:
   - component: {fileID: 3078908470736760778}
   - component: {fileID: 86440126411197902}
   - component: {fileID: 4323686979533365459}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Skill Hit Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}

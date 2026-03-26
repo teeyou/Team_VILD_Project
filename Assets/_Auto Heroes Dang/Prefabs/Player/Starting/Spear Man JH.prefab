@@ -587,13 +587,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6576713830477488130}
+  - component: {fileID: -2633200835545932120}
   - component: {fileID: 2426372149079932115}
-  - component: {fileID: -2309353546837195946}
+  - component: {fileID: -1648807249238889472}
   - component: {fileID: 8526516832878359357}
   - component: {fileID: 6078234160055973452}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Spear Man JH
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -637,6 +638,21 @@ Transform:
   - {fileID: 4216801089615569913}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-2633200835545932120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1707291927435930329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 225a9d9580c4248498cc84c3867269b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cart: {fileID: 0}
+  _path: {fileID: 0}
+  _spacing: 2
 --- !u!114 &2426372149079932115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -653,9 +669,9 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 1048576
-  _attackDelay: 0.5
   _skillMultiplier: 1.2
---- !u!114 &-2309353546837195946
+  _attackDelay: 0.5
+--- !u!114 &-1648807249238889472
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -664,14 +680,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1707291927435930329}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6a193ec6313c954e9e8ae252a9abad7, type: 3}
+  m_Script: {fileID: 11500000, guid: 63bed002c9455754993e8f0d75731554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _searchRadius: 50
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 1048576
-  _attackDelay: 0.5
+  _cart: {fileID: 0}
+  _path: {fileID: 0}
+  _moveSpeed: 10
 --- !u!136 &8526516832878359357
 CapsuleCollider:
   m_ObjectHideFlags: 0

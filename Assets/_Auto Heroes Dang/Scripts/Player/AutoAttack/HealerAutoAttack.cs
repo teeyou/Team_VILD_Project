@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class HealerAutoAttack : AutoAttack
 {
-    [SerializeField] private float _x = 0f;
-    [SerializeField] private float _y = 0f;
-    [SerializeField] private float _z = 0f;
+    [SerializeField] private int _healAmount = 100;
 
     [SerializeField] private float _fpOffset = 1f;
     public override void Attack()
@@ -33,11 +31,23 @@ public class HealerAutoAttack : AutoAttack
         //Quaternion rot = Quaternion.AngleAxis(_x, transform.right) * Quaternion.AngleAxis(_y, transform.up) * Quaternion.AngleAxis(_z, transform.forward) * transform.rotation;
         //Quaternion rot = transform.rotation;
 
-        GameObject projGo = ParticleManager.Instance.Play("Skill_HealArea", pos);
-    }
+        GameObject go = ParticleManager.Instance.Play("Skill_HealArea", pos);
+        go.transform.SetParent(transform);
 
-    //public override void TakeDamage(int damage, Transform target)
-    //{
-    //    Debug.Log($"{target.name} - {damage}");
-    //}
+        // 아군 전부 회복
+        Collider[] cols = Physics.OverlapSphere(transform.position, _searchRadius, LayerMask.GetMask("Player"));
+
+        for (int i = 0; i < cols.Length; i++)
+        {
+            Unit unit = cols[i].GetComponent<Unit>();
+
+            if (unit == null)
+            {
+                Debug.Log("unit NULL");
+                return;
+            }
+
+            unit.Heal(_healAmount);
+        }
+    }
 }

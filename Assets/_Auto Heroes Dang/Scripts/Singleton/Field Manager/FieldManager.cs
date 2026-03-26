@@ -17,8 +17,8 @@ public class FieldManager : Singleton<FieldManager>
     {
         base.Awake();
 
-        _stagePosList.Add(_path.m_Waypoints[5].position);   // 1 - 1
-        _stagePosList.Add(_path.m_Waypoints[8].position);   // 1 - 2
+        _stagePosList.Add(_path.m_Waypoints[6].position);   // 1 - 1
+        _stagePosList.Add(_path.m_Waypoints[9].position);   // 1 - 2
 
     }
     void Start()
