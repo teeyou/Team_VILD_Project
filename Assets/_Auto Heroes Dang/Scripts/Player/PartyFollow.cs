@@ -28,7 +28,8 @@ public class PartyFollow : MonoBehaviour
         string currentSceneName = SceneManager.GetActiveScene().name;
 
         // 현재 씬이 필드 씬이 아니면 비활성화
-        if (currentSceneName != ESceneId.FieldScene.ToString())
+        //ESceneId.FieldScene.ToString()
+        if (currentSceneName != ESceneId.ZFieldTest.ToString())
         {
             enabled = false;
             Debug.Log("FieldAutoMove disabled.");

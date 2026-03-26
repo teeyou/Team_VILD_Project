@@ -73,6 +73,8 @@ MonoBehaviour:
     ps: {fileID: 882109370960602740, guid: 452d9863a9f1cb34393d8d58da10523f, type: 3}
   - name: Skill_HitPink
     ps: {fileID: 8153339033412087143, guid: bf61cf88429232d409db88cdd0e6fdd5, type: 3}
+  - name: Heal
+    ps: {fileID: 2906407546484109721, guid: bfca4f87f235ef741b7403dcbec334dd, type: 3}
   _hitList:
   - name: Hit_GreenMedium
     ps: {fileID: 2306308137858165338, guid: 7e110ea83896f8943a91a6eed3db1b54, type: 3}

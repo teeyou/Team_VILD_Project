@@ -47,6 +47,9 @@ public class HealerAutoAttack : AutoAttack
                 return;
             }
 
+            GameObject heal = ParticleManager.Instance.Play("Heal", unit.transform.position);
+            heal.transform.SetParent(unit.transform);
+
             unit.Heal(_healAmount);
         }
     }

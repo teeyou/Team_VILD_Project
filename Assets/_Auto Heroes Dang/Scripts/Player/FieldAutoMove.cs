@@ -33,15 +33,15 @@ public class FieldAutoMove : MonoBehaviour
     {
         // 씬에 따라서 스크립트 활성화 / 비활성화
         string currentSceneName = SceneManager.GetActiveScene().name;
-        
+
         // 현재 씬이 필드 씬이 아니면 비활성화
-        if (currentSceneName != ESceneId.FieldScene.ToString())
+        if (currentSceneName != ESceneId.ZFieldTest.ToString())
         {
             enabled = false;
             Debug.Log("FieldAutoMove disabled.");
             return;
         }
-        
+
         SetCartAndPath();
 
         transform.rotation = _cart.transform.rotation;
@@ -52,6 +52,9 @@ public class FieldAutoMove : MonoBehaviour
         {
             _cartPositionList.Add(GetCartPositionFromWaypoint(i));
         }
+
+        // track 웨이포인트 인덱스
+        _currentIdx = DataSource.Instance.CurrentIdx;
     }
 
     private void SetCartAndPath()
@@ -61,7 +64,7 @@ public class FieldAutoMove : MonoBehaviour
         _fieldUI = FindObjectOfType<FieldUI>();             // 스테이지 정보 팝업용으로 추가 0325 진주
 
         _cart.m_Speed = 0f;
-        _cart.m_Position = 6.5f;
+        _cart.m_Position = DataSource.Instance.CartPosition;
     }
 
     private void Update()
@@ -124,7 +127,7 @@ public class FieldAutoMove : MonoBehaviour
 
         _isMoving = false;
         _cart.m_Speed = 0f;
-        _currentIdx++;
+        DataSource.Instance.CurrentIdx++;
         _animator.SetBool("Move", false);
 
         _fieldUI.PopUpFieldInfo(); // 스테이지 정보 UI 팝업.

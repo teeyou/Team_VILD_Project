@@ -113,6 +113,6 @@ public class SelectManager : MonoBehaviour
         _isPressedStartButton = true;
 
         DataSource.Instance.MainCharacterIdx = _selectedCharacterNumber;
-        SceneLoader.Instance.LoadScene(ESceneId.FieldScene);
+        SceneLoader.Instance.LoadScene(ESceneId.ZFieldTest);
     }
 }

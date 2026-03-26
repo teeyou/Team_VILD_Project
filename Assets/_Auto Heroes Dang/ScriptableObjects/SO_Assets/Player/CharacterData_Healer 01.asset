@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 62
   _chName: Healer 01
-  _defaultMaxHp: 1000
-  _defaultAtk: 0
-  _defaultDef: 100
+  _defaultMaxHp: 800
+  _defaultAtk: 80
+  _defaultDef: 50
   _range: 10
-  _moveSpeed: 5
-  _skillCool: 5
+  _moveSpeed: 3
+  _skillCool: 0
   _attackType: 1
   _prefab: {fileID: 7830136049655510298, guid: 6778861e920e27c4287bf58535cadf4f, type: 3}
   _level: 1

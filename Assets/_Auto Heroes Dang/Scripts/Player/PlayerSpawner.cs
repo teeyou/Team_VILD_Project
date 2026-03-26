@@ -66,18 +66,27 @@ public class PlayerSpawner : MonoBehaviour
     private void Start()
     {
         //SpawnStarting();
-        TestSpawnPlayerBattleScene();
+        //TestSpawnPlayerBattleScene();
     }
 
     private void TestSpawnPlayerBattleScene()
     {
         IReadOnlyList<Vector3> pPosList = BattleManager.Instance.PlayerStartingPosList;
-        for (int i = 0; i < pPosList.Count; i++)
-        {
-            SpawnPlayer(i, pPosList[i], BattleManager.Instance.PlayerStartingRotation);
-        }
+        //for (int i = 0; i < pPosList.Count; i++)
+        //{
+        //    SpawnPlayer(i, pPosList[i], BattleManager.Instance.PlayerStartingRotation);
+        //}
+
+        SpawnPlayer((int)ECharacterNumber.Shield_01, pPosList[1], BattleManager.Instance.PlayerStartingRotation);
+        SpawnPlayer((int)ECharacterNumber.TwoHand_TU, pPosList[3], BattleManager.Instance.PlayerStartingRotation);
+        SpawnPlayer((int)ECharacterNumber.SpearMan_JH, pPosList[5], BattleManager.Instance.PlayerStartingRotation);
+        SpawnPlayer((int)ECharacterNumber.BowMan_JJ, pPosList[8], BattleManager.Instance.PlayerStartingRotation);
+
+        SpawnPlayer((int)ECharacterNumber.Wizard_01, pPosList[7], BattleManager.Instance.PlayerStartingRotation);
+
+        SpawnPlayer((int)ECharacterNumber.Healer_01, pPosList[6], BattleManager.Instance.PlayerStartingRotation);
     }
-    
+
     public void SpawnStarting()
     {
         /*

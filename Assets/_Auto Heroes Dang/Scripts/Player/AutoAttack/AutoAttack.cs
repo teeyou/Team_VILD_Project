@@ -241,6 +241,9 @@ public class AutoAttack : Unit
         _isDead = true;
         _animator.SetTrigger("Die");
         _col.enabled = false;
+
+        // 5초 뒤에 파괴
+        Destroy(gameObject, 5f);
     }
 
     private void OnDrawGizmosSelected()
