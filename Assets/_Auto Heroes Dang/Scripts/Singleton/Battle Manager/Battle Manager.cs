@@ -35,7 +35,11 @@ public class BattleManager : Singleton<BattleManager>
     private List<Vector3> _playerStartingPosList = new List<Vector3>();
     private List<Vector3> _enemyStartingPosList = new List<Vector3>();
 
-    public GameObject[] _enemies;
+    public bool IsStart { get; set; } = false;      // 시작 여부 (배치 후 스타트 버튼)
+    public bool IsVictory { get; set; } = false;    // 배틀 승리 or 패배 여부
+    public bool IsFinish { get; set; } = false;     // 배틀 종료 여부
+
+    public GameObject[] _enemies;       // 테스트용 코드
 
     public IReadOnlyList<Vector3> PlayerStartingPosList { get { return _playerStartingPosList; } }
     public IReadOnlyList<Vector3> EnemyStartingPosList { get { return _enemyStartingPosList; } }
@@ -84,6 +88,7 @@ public class BattleManager : Singleton<BattleManager>
 
     void Start()
     {
+        // 테스트용 코드
         for (int i = 0; i < _enemies.Length; i++)
         {
             GameObject go = Instantiate(_enemies[i]);

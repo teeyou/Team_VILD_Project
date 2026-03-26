@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 32
   _chName: Spear Man JH
-  _defaultMaxHp: 1000
-  _defaultAtk: 0
-  _defaultDef: 100
+  _defaultMaxHp: 1200
+  _defaultAtk: 120
+  _defaultDef: 80
   _range: 2
-  _moveSpeed: 5
+  _moveSpeed: 3
   _skillCool: 5
   _attackType: 0
   _prefab: {fileID: 1707291927435930329, guid: 05ebd7bd672c1534197ca9c05d2e831d, type: 3}

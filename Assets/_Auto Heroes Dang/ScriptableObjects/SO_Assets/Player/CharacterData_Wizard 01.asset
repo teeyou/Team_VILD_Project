@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 61
   _chName: Wizard 01
-  _defaultMaxHp: 1000
-  _defaultAtk: 0
-  _defaultDef: 100
+  _defaultMaxHp: 800
+  _defaultAtk: 110
+  _defaultDef: 50
   _range: 10
-  _moveSpeed: 5
-  _skillCool: 5
+  _moveSpeed: 3
+  _skillCool: 4
   _attackType: 1
   _prefab: {fileID: 2639939542224209217, guid: 3ba5ad39404ecf549a51c7db61eb225d, type: 3}
   _level: 1
