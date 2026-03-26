@@ -136,7 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1134332420552193122, guid: d2ac9f7836834bfdaede21bc65a556d1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1134332420552615936, guid: d2ac9f7836834bfdaede21bc65a556d1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -520,7 +520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1134332420552616002, guid: d2ac9f7836834bfdaede21bc65a556d1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.96
+      value: -32.9
       objectReference: {fileID: 0}
     - target: {fileID: 1134332420552616002, guid: d2ac9f7836834bfdaede21bc65a556d1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7298,7 +7298,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2171725931676780728, guid: abb08a9325c3a3b44a5f0ffff2c57843, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4676431238331135663, guid: abb08a9325c3a3b44a5f0ffff2c57843, type: 3}
       propertyPath: _drawGizmos
@@ -8977,6 +8977,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 170792959045976762, guid: 803f3b14f9edc034b881ab9874fe056c, type: 3}
+      propertyPath: _detectRange
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 170792959045976762, guid: 803f3b14f9edc034b881ab9874fe056c, type: 3}
+      propertyPath: _firstSkillDelay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 529370580742565222, guid: 803f3b14f9edc034b881ab9874fe056c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.6783767
@@ -9023,7 +9031,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6715194415053190782, guid: 803f3b14f9edc034b881ab9874fe056c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
