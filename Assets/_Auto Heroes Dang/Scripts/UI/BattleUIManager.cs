@@ -18,6 +18,6 @@ public class BattleUIManager : MonoBehaviour
 
     private void ReturnField()
     {
-        SceneLoader.Instance.LoadScene(ESceneId.ZFieldTest);
+        SceneLoader.Instance.LoadScene(ESceneId.FieldScene);
     }
 }

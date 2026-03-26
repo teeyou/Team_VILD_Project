@@ -35,7 +35,7 @@ public class FieldAutoMove : MonoBehaviour
         string currentSceneName = SceneManager.GetActiveScene().name;
 
         // 현재 씬이 필드 씬이 아니면 비활성화
-        if (currentSceneName != ESceneId.ZFieldTest.ToString())
+        if (currentSceneName != ESceneId.FieldScene.ToString())
         {
             enabled = false;
             Debug.Log("FieldAutoMove disabled.");

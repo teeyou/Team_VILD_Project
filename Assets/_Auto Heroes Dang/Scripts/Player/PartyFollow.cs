@@ -29,7 +29,7 @@ public class PartyFollow : MonoBehaviour
 
         // 현재 씬이 필드 씬이 아니면 비활성화
         //ESceneId.FieldScene.ToString()
-        if (currentSceneName != ESceneId.ZFieldTest.ToString())
+        if (currentSceneName != ESceneId.FieldScene.ToString())
         {
             enabled = false;
             Debug.Log("FieldAutoMove disabled.");

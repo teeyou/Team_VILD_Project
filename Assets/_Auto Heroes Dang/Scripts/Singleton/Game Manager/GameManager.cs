@@ -58,43 +58,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
 
-        //// 현재는 게임 시작 시 여기로만 들어옴
-        //if (DataSource.Instance.MainCharacterIdx == -1)
-        //{
-        //    MainCharacterTr = _playerSpawner.SpawnPlayer((int)ECharacterNumber.Shield_01, _startPosition, Quaternion.identity).transform;
-
-        //    // 메인 제외 다른 캐릭터들 생성
-        //    List<int> subNumberList = DataSource.Instance.GetCharacterList();
-
-        //    // 서브 캐릭터 생성
-        //    for (int i = 0; i < subNumberList.Count; i++)
-        //    {
-        //        GameObject go = _playerSpawner.SpawnPlayer(subNumberList[i], _startPosition + new Vector3(-2f * i - 2f, 0f, 0f), Quaternion.identity);
-        //        PartyFollow pf = go.GetComponent<PartyFollow>();
-        //        pf.FollowOrder = i + 1;
-        //        _subCharacterTrList.Add(go.transform);
-
-        //    }
-        //}
-
-        //else
-        //{
-        //    // Save / Load 기능 추가하면 여기로 들어옴 pos, rot 바꿔야함
-        //    MainCharacterTr = _playerSpawner.SpawnPlayer(DataSource.Instance.MainCharacterIdx, _startPosition, Quaternion.identity).transform;
-
-        //    // 서브 캐릭터 생성
-        //    List<int> subNumberList = DataSource.Instance.GetCharacterList();
-        //    for (int i = 0; i < subNumberList.Count; i++)
-        //    {
-        //        GameObject go = _playerSpawner.SpawnPlayer(subNumberList[i], _startPosition + new Vector3(-2f * i - 2f, 0f, 0f), Quaternion.identity);
-        //        PartyFollow pf = go.GetComponent<PartyFollow>();
-        //        pf.FollowOrder = i + 1;
-        //        _subCharacterTrList.Add(go.transform);
-
-        //    }
-        //}
-        
-        
+    
 
     }
 
@@ -102,20 +66,4 @@ public class GameManager : Singleton<GameManager>
     {
         
     }
-
-    //public void MoveNextPoint()
-    //{
-    //    if (_autoMove == null)
-    //    {
-    //        _autoMove = MainCharacterTr.GetComponent<FieldAutoMove>();
-    //    }
-
-    //    // 이미 이동중이면 종료
-    //    if (_autoMove.IsMoving)
-    //    {
-    //        return;
-    //    }
-
-    //    _autoMove.MoveNextPoint();
-    //}
 }
