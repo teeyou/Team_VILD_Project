@@ -1374,7 +1374,7 @@ GameObject:
   - component: {fileID: 7791651038336636038}
   - component: {fileID: 2626042209859143692}
   - component: {fileID: 2281514647294233239}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Salamander
   m_TagString: Enemy
   m_Icon: {fileID: 0}
