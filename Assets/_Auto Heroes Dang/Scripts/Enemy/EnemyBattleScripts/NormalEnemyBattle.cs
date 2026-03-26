@@ -415,10 +415,15 @@ public class NormalEnemyBattle : Unit
         _isAttacking = false;
         _isRotating = false;
         _lockedAttackTarget = null;
-        
-        GetComponent<Collider>().enabled = false;
+
+        Collider col = GetComponent<Collider>();
+        if (col != null)
+            col.enabled = false;
 
         SetMoveAnimation(false);
+
+        DisableBuffVfx("DefBuff");
+        DisableBuffVfx("AttackBuff");
 
         if (_animator != null && _animator.runtimeAnimatorController != null)
         {
@@ -428,6 +433,18 @@ public class NormalEnemyBattle : Unit
         if (_deathLog)
         {
             Debug.Log($"{name} 죽음");
+        }
+
+        Destroy(gameObject, 3f);
+    }
+
+    private void DisableBuffVfx(string childName)
+    {
+        Transform child = transform.Find(childName);
+
+        if (child != null)
+        {
+            child.gameObject.SetActive(false);
         }
     }
 
