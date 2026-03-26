@@ -37,15 +37,8 @@ public enum EGameStage
 
 public class GameManager : Singleton<GameManager>
 {
-    //[SerializeField] PlayerSpawner _playerSpawner;
-    //[SerializeField] Vector3 _startPosition = new Vector3(52f, 0f, 32f);
-    
     private EGameStage _currentStage = EGameStage.Stage1_1;
 
-    //private FieldAutoMove _autoMove;
-    
-    //private List<Transform> _subCharacterTrList = new List<Transform>();
-    //public Transform MainCharacterTr { get; private set; } = null;
     public EGameStage CurrentStage { get { return _currentStage; } }
 
     protected override void Awake()
