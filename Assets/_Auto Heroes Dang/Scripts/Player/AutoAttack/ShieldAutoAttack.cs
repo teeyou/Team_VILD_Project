@@ -9,7 +9,7 @@ public class ShieldAutoAttack : AutoAttack
     private int _skillHitCount = 2;
     private void Start()
     {
-        _skillMultiplier = 1.5f;
+        //_skillMultiplier = 1.5f;
     }
     
     public override void Attack()

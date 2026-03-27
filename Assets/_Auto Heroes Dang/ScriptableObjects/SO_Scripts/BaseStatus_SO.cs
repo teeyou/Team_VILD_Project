@@ -13,6 +13,7 @@ public class BaseStatus_SO : ScriptableObject
     [SerializeField] private float _range;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _skillCool;
+    [SerializeField] private float _skillMultiplier;
     [SerializeField] private EAttackType _attackType;
     [SerializeField] private GameObject _prefab;
 
@@ -27,6 +28,7 @@ public class BaseStatus_SO : ScriptableObject
     public float Range { get { return _range; } }
     public float MoveSpeed { get { return _moveSpeed; } }
     public float SkillCool { get { return _skillCool; } }
+    public float SkillMultiplier { get { return _skillMultiplier; } }
     public EAttackType AttackType { get { return _attackType; } }
     public GameObject Prefab { get { return _prefab; } }
 

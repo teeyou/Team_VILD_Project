@@ -8,7 +8,7 @@ public class WizardAutoAttack : AutoAttack
 
     private void Start()
     {
-        _skillMultiplier = 1.8f;
+        //_skillMultiplier = 1.8f;
     }
 
     public override void Attack()
@@ -22,10 +22,17 @@ public class WizardAutoAttack : AutoAttack
 
         GameObject projGo = ParticleManager.Instance.Play("EnergyBallBlue", pos, rot);
         Projectile proj = projGo.GetComponent<Projectile>();
-        proj.TargetTr = _targetTr;
 
-        int damage = DamageCalculator.CalculateDamage(_atk, _targetUnit.Def);
-        proj.Atk = damage;
+        if (_targetTr != null)
+        {
+            proj.TargetTr = _targetTr;
+        }
+
+        if (_targetUnit != null)
+        {
+            int damage = DamageCalculator.CalculateDamage(_atk, _targetUnit.Def);
+            proj.Atk = damage;
+        }
     }
 
     public override void Skill()
@@ -39,9 +46,16 @@ public class WizardAutoAttack : AutoAttack
 
         GameObject projGo = ParticleManager.Instance.Play("Skill_EnergyBallBlue", pos, rot);
         Projectile proj = projGo.GetComponent<Projectile>();
-        proj.TargetTr = _targetTr;
 
-        int damage = DamageCalculator.CalculateDamage(_atk, _targetUnit.Def);
-        proj.Atk = (int)(damage * _skillMultiplier);
+        if (_targetTr != null)
+        {
+            proj.TargetTr = _targetTr;
+        }
+
+        if (_targetUnit != null)
+        {
+            int damage = DamageCalculator.CalculateDamage(_atk, _targetUnit.Def);
+            proj.Atk = (int)(damage * _skillMultiplier);
+        }
     }
 }

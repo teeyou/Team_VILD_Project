@@ -8,7 +8,7 @@ public class SpearAutoAttack : AutoAttack
 
     private void Start()
     {
-        _skillMultiplier = 2f;
+        //_skillMultiplier = 2f;
     }
 
     public override void Attack()
