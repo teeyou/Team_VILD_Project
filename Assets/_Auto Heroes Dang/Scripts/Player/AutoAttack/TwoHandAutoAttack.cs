@@ -13,6 +13,8 @@ public class TwoHandAutoAttack : AutoAttack
 
     public override void Attack()
     {
+        base.Attack();
+
         Vector3 pos = transform.position;
         pos.y += 1f;
         Quaternion rot = Quaternion.AngleAxis(90f, transform.up) * transform.rotation;

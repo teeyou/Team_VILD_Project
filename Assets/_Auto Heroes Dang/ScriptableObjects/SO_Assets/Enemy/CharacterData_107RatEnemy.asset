@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 107
   _chName: Rat
-  _defaultMaxHp: 80
-  _defaultAtk: 18
-  _defaultDef: 1
+  _defaultMaxHp: 1000
+  _defaultAtk: 120
+  _defaultDef: 50
   _range: 1.5
   _moveSpeed: 3
   _skillCool: 0
+  _skillMultiplier: 0
   _attackType: 0
   _prefab: {fileID: 0}
   _level: 0

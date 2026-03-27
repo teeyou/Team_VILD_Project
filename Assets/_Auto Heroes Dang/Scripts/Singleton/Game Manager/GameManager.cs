@@ -4,26 +4,6 @@ using System.Collections.Generic;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-/*
-
-- 플레이어 생성함
-
-필드 씬 -> 배틀 씬 -> 필드 씬
-
-필드씬의 데이터 저장 필요
-- cart, path 관련 데이터 (Cart의 Position, )
-
-
-
-- 흐름 정리
-
-진행 버튼 클릭
--> UI Manager : MovePlayer()
--> GameManager : MoveNextPoint()
-
-
-*/
-
 public enum EGameStage
 {
     Stage1_1 = 0,
@@ -42,6 +22,8 @@ public class GameManager : Singleton<GameManager>
     private EGameStage _currentStage = EGameStage.Stage1_1;
 
     public EGameStage CurrentStage { get { return _currentStage; } }
+
+    public bool IsFirstPoint { get; set; } = true;
 
     protected override void Awake()
     {

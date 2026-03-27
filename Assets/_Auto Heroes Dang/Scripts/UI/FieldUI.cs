@@ -31,7 +31,8 @@ public class FieldUI : MonoBehaviour
     // 스테이지 정보 팝업. 보스인지 여부에 따라 다른 패널로 출력 (디자인을 바꿔야 해서...)
     public void PopUpFieldInfo()
     {
-        _stagePanel.SetActive(true);  // <- 트랜지션 애니메이션 필요 시 이부분 확장
+        ToggleStagePanel(true);
+        //_stagePanel.SetActive(true);  // <- 트랜지션 애니메이션 필요 시 이부분 확장
         SetStagePanel(); // <----------------------------------------만들어야 해ㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐ
 
         if (_isBoss)
@@ -44,6 +45,11 @@ public class FieldUI : MonoBehaviour
             _enemy.SetActive(true);
             _boss.SetActive(false);
         }
+    }
+
+    public void ToggleStagePanel(bool flag)
+    {
+        _stagePanel.SetActive(true);
     }
 
 }

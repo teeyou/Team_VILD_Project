@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AutoAttack : Unit
 {
@@ -19,6 +20,15 @@ public class AutoAttack : Unit
     private bool _skillEnd;
 
     protected Unit _targetUnit = null;
+
+    protected string _currentSceneName;   // FieldScene이면 데미지 안 받게 처리
+
+    // 반경 내에 다른 캐릭터가 있으면 (겹쳐있으면) 공격마다 안겹치도록 조금씩 이동
+    private LayerMask _playerMask;
+    [SerializeField] private float _playerSearchRadius = 1f;
+
+    private float _checkTargetInterval = 1f;
+    private float _checkTargetTimer = 0f;
 
     public void Init(BaseStatus_SO data)
     {
@@ -57,27 +67,43 @@ public class AutoAttack : Unit
     {
         _animator = GetComponent<Animator>();
         _col = GetComponent<Collider>();
-    }
 
-    private void Start()
-    {
-
+        _playerMask = LayerMask.GetMask("Player");
     }
 
     void Update()
     {
+        _checkTargetTimer += Time.deltaTime;
+
         if (_isDead)
         {
             return;
         }
 
         if (_skillEnd)
+        {
             _currentSkillCool -= Time.deltaTime;
+        }
 
         // 타겟이 NULL 이거나 오브젝트 비활성화면 타겟 탐색
         if (_targetTr == null || !_targetTr.gameObject.activeSelf)
         {
-            CheckTarget();
+            if (GameManager.Instance.IsFirstPoint)
+            {
+                // 시작 지점에서는 타겟 탐색 안함
+                return;
+            }
+
+            // 매 프레임 탐색하면 과부하
+            // 일정 간격마다 탐색
+            if (_checkTargetTimer < _checkTargetInterval)
+            {
+                return;
+            }
+
+            _checkTargetTimer = 0f;
+
+            CheckTarget(_searchRadius, _layerMask);
             _animator.SetBool("Move", false);
         }
 
@@ -137,16 +163,15 @@ public class AutoAttack : Unit
             }
         }
     }
-
-    private void CheckTarget()
+    private Vector3 CheckTarget(float radius, LayerMask mask)
     {
         Debug.Log("CheckTarget");
 
-        Collider[] cols = Physics.OverlapSphere(transform.position, _searchRadius, _layerMask);
+        Collider[] cols = Physics.OverlapSphere(transform.position, radius, mask);
 
         if (cols.Length <= 0)
         {
-            return;
+            return Vector3.zero;
         }
 
         float minDist = float.MaxValue;
@@ -155,6 +180,11 @@ public class AutoAttack : Unit
         // 제일 가까운 타겟 찾기
         for (int i = 0; i < cols.Length; i++)
         {
+            if (transform.gameObject == cols[i].gameObject)
+            {
+                continue;
+            }
+
             float dist = Vector3.Distance(transform.position, cols[i].transform.position);
 
             if (Vector3.Distance(transform.position, cols[i].transform.position) < minDist)
@@ -164,18 +194,36 @@ public class AutoAttack : Unit
             }
         }
 
-        _targetTr = cols[idx].transform;
-        Debug.Log($"제일 가까운 타겟 : {_targetTr.name}");
+        if (mask == _layerMask)
+        {
+            _targetTr = cols[idx].transform;
+            //Debug.Log($"제일 가까운 타겟 : {_targetTr.name}");
+        }
+
+        else if (mask == _playerMask)
+        {
+            Vector3 v = transform.position - cols[idx].transform.position;
+            v.y = 0f;
+            return v.normalized;
+        }
+
+        return Vector3.zero;
+
     }
 
     public override void Attack()
     {
-        Debug.Log("Attack");
+        Vector3 dir = CheckTarget(_playerSearchRadius, _playerMask);
+        // 겹쳐진 캐릭터 반대방향 세팅
+        if (dir != Vector3.zero)
+        {
+            Debug.Log("살짝 이동");
+            transform.position += dir * 0.2f;
+        }
     }
 
     public void AttackEnd()
     {
-        Debug.Log("AttackEnd");
         StartCoroutine(CoAttackDelay(_attackDelay));
     }
 
@@ -197,12 +245,11 @@ public class AutoAttack : Unit
 
     public override void Skill()
     {
-        Debug.Log("Skill");
+
     }
 
     public void SkillEnd()
     {
-        Debug.Log("SkillEnd");
         StartCoroutine(CoSkillDelay(_attackDelay));
     }
 
@@ -210,6 +257,18 @@ public class AutoAttack : Unit
     {
         if (_isDead)
         {
+            return;
+        }
+
+        if (_currentSceneName == null)
+        {
+            _currentSceneName = SceneManager.GetActiveScene().name;
+        }
+
+        // 필드 씬이면 데미지 안 받음
+        if (_currentSceneName == ESceneId.FieldScene.ToString())
+        {
+            Debug.Log("필드씬에서 데미지 안 받음");
             return;
         }
 

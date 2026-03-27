@@ -67,11 +67,11 @@ public class PartyFollow : MonoBehaviour
         transform.position = pos;
         transform.rotation = rot;
 
-        Debug.Log($"cart speed : {_cart.m_Speed}");
+        //Debug.Log($"cart speed : {_cart.m_Speed}");
 
         if (_cart.m_Speed > 0)
         {
-            Debug.Log("Move");
+            //Debug.Log("Move");
             _autoAttack.enabled = false;
             _animator.SetBool("Move", true);
         }

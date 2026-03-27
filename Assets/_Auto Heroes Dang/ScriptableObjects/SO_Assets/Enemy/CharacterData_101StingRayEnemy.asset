@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 101
   _chName: StingRay
-  _defaultMaxHp: 80
-  _defaultAtk: 15
-  _defaultDef: 2
+  _defaultMaxHp: 1000
+  _defaultAtk: 120
+  _defaultDef: 50
   _range: 10
   _moveSpeed: 3
   _skillCool: 0
+  _skillMultiplier: 0
   _attackType: 1
   _prefab: {fileID: 0}
   _level: 0
