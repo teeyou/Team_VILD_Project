@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8961856788022054157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5817184284447145369}
+  - component: {fileID: 4065385396801017439}
+  m_Layer: 0
+  m_Name: FieldEnemySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5817184284447145369
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8961856788022054157}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4065385396801017439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8961856788022054157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf8d79c12954148428c90f9883060fe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  _playerTag: Player
+  _stages:
+  - stageName: 1-1
+    stagePoint: {fileID: 0}
+    triggerRadius: 5
+    stayTimeToActivate: 5
+    enemyPrefabs:
+    - {fileID: 1678274998104434769, guid: 8eac3b1491168d64b93ebef7b1b39a89, type: 3}
+    - {fileID: 3108217223468749528, guid: dbb750b412020c84f814db761a3c80b7, type: 3}
+    maxAliveEnemies: 4
+    spawnInterval: 2
+    spawnCount: 1
+    spawnMinDistance: 5
+    spawnMaxDistance: 7
+    keepSpawning: 0
+    activateOnlyOnce: 0
+    stayTimer: 0
+    spawnTimer: 0
+    isActivated: 0
+    hasActivatedOnce: 0
+    aliveEnemies: []
+  _useUnscaledTime: 0
+  _spawnHeightOffset: 0
+  _debugLog: 1
+  _drawGizmos: 1

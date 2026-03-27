@@ -26,8 +26,8 @@ public class FieldSceneAutoEnemySpawn : MonoBehaviour
         public float spawnMaxDistance = 12f;
 
         [Header("옵션")]
-        public bool keepSpawning = true;
-        public bool activateOnlyOnce = false;
+        public bool keepSpawning = false;
+        public bool activateOnlyOnce = true;
 
         [HideInInspector] public float stayTimer = 0f;
         [HideInInspector] public float spawnTimer = 0f;
@@ -59,6 +59,12 @@ public class FieldSceneAutoEnemySpawn : MonoBehaviour
 
     private void Update()
     {
+        if (FieldManager.Instance == null)
+            return;
+
+        if (!FieldManager.Instance.IsSpawnPossible)
+            return;
+
         float deltaTime = _useUnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
 
         for (int i = 0; i < _stages.Count; i++)
