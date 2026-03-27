@@ -14,6 +14,8 @@ public class ShieldAutoAttack : AutoAttack
     
     public override void Attack()
     {
+        base.Attack();
+
         if (_targetTr == null)
         {
             return;

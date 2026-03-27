@@ -13,6 +13,8 @@ public class SpearAutoAttack : AutoAttack
 
     public override void Attack()
     {
+        base.Attack();
+
         Vector3 pos = transform.position;
         pos.y += 1f;
         //Quaternion rot = Quaternion.AngleAxis(_x, transform.right) * Quaternion.AngleAxis(_y, transform.up) * Quaternion.AngleAxis(_z, transform.forward) * transform.rotation;

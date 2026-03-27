@@ -21,8 +21,6 @@ public class FieldAutoMove : MonoBehaviour
     private bool _isMoving = false;
     private int _currentIdx = 0;    //플레이어의 현재 웨이포인트 인덱스
 
-    private Coroutine _spawnTimerRoutine;
-
     public bool IsMoving { get { return _isMoving; } }
 
     private void Awake()
@@ -129,6 +127,10 @@ public class FieldAutoMove : MonoBehaviour
 
     public void Stop()
     {
+        GameManager.Instance.IsFirstPoint = false;  // Stop이 호출된 지점부터는 스테이지 포인트
+
+        SaveTransform();
+
         _autoAttack.enabled = true;     // 필드에서 일정 시간 지나면 몬스터 스폰되기 때문에 활성화
 
         _isMoving = false;
@@ -136,20 +138,43 @@ public class FieldAutoMove : MonoBehaviour
         DataSource.Instance.CurrentIdx++;
         _animator.SetBool("Move", false);
 
-        _fieldUI.PopUpFieldInfo(); // 스테이지 정보 UI 팝업.
+        UIManager.Instance.ToggleStageButton(true);
+        //_fieldUI.PopUpFieldInfo(); // 스테이지 정보 UI 팝업.
 
-        if (_spawnTimerRoutine == null)
-        {
-            _spawnTimerRoutine = StartCoroutine(CoStartSpawnTimer(3f));
-        }
+        FieldManager.Instance.IsSpawnPossible = true;
     }
 
-    private IEnumerator CoStartSpawnTimer(float sec)
+    private void SaveTransform()
     {
-        yield return new WaitForSeconds(sec);
+        // 메인 캐릭터 저장
+        DataSource.Instance.MainCharacterPosRot = new PosRotData(
+            FieldManager.Instance.MainCharacterTr.position,
+            FieldManager.Instance.MainCharacterTr.rotation);
 
-        FieldManager.Instance.IsSpawnPossible = true;   // Stop 후 sec 지난 후에 몬스터 스폰 가능
-        _spawnTimerRoutine = null;
+        // 서브 캐릭터 저장
+        int count = DataSource.Instance.GetSubPosRotList().Count;    // 필드 씬 위치정보 리스트 길이
+
+        IReadOnlyList<Transform> trList = FieldManager.Instance.GetSubCharacterTrList;  //필드 씬 서브 캐릭터들 트랜스폼
+        int len = trList.Count;
+
+        // 위치정보 없으면 Add
+        if (count == 0)
+        {
+            for (int i = 0; i < len; i++)
+            {
+                DataSource.Instance.AddSubPosRot(trList[i].position, trList[i].rotation);
+            }
+        }
+
+        // 위치정보 있으면 덮어쓰기
+        else
+        {
+            for (int i = 0; i < len; i++)
+            {
+                DataSource.Instance.SetSubPosRot(i, trList[i].position, trList[i].rotation);
+            }
+        }
+
+        DataSource.Instance.CartPosition = _cart.m_Position;
     }
-
 }

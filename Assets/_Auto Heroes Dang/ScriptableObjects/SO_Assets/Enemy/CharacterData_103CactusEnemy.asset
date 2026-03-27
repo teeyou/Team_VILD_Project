@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 103
   _chName: Cactus
-  _defaultMaxHp: 120
-  _defaultAtk: 10
-  _defaultDef: 3
+  _defaultMaxHp: 1000
+  _defaultAtk: 120
+  _defaultDef: 50
   _range: 1.5
   _moveSpeed: 3
   _skillCool: 0
+  _skillMultiplier: 0
   _attackType: 0
   _prefab: {fileID: 0}
   _level: 0
