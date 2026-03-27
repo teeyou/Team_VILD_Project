@@ -17,9 +17,9 @@ public class AnimateUI : MonoBehaviour
     public class AnimationData
     {
         public AnimateType type;
-        public float speed;
-        public float duration;
-        public float timer;
+        public float speed;     // move, fillamount 사용 안함
+        public float duration;  // 핑퐁, 회전, 투명도만 사용.
+        public float timer;     // 각 애니메이션이 진행한 시간. 0으로 두면 됩니다.
     }
 
 
@@ -31,8 +31,11 @@ public class AnimateUI : MonoBehaviour
     private Vector2 _startPosition;
 
     private RectTransform _rect;
+    private Quaternion _startRotation;
+
     private CanvasGroup _canvasGroup; // 오퍼시티용. 자식까지 써야할 수 있어 Graphic가 아니라 Canvas Group으로 합니다.
     private Image _image; // FillAmount용
+
 
     private void Awake()
     {
@@ -42,7 +45,7 @@ public class AnimateUI : MonoBehaviour
             Debug.Log("Rect 없음. 인스펙터 확인");
         }
         _startPosition = _rect.anchoredPosition;
-
+        _startRotation = _rect.localRotation;
 
         if (_animations.Exists(n => n.type == AnimateType.Opacity)) 
         {
@@ -95,7 +98,7 @@ public class AnimateUI : MonoBehaviour
                     break;
 
                 case AnimateType.FillAmount:
-                    FillAmountUI(a.speed, t);
+                    FillAmountUI(a);
                     break;
             }
 
@@ -132,13 +135,50 @@ public class AnimateUI : MonoBehaviour
 
         _canvasGroup.alpha += speed * t;
         _canvasGroup.alpha = Mathf.Clamp01(_canvasGroup.alpha);
+
+        // 필요 시 보정 사용 (0 / 1)
+        // if (speed > 0 && _canvasGroup.alpha >= 0.999f) _canvasGroup.alpha = 1f;
+        // else if (speed < 0 && _canvasGroup.alpha <= 0.001f) _canvasGroup.alpha = 0f;
     }
 
     // 채우기 (스킬쿨타임 등)
-    private void FillAmountUI(float speed, float t)
+    private void FillAmountUI(AnimationData n)
     {
         if (_image == null || _image.type != Image.Type.Filled) return;
-        _image.fillAmount += speed * t;
+
+        float t = n.timer / n.duration;
+        _image.fillAmount = Mathf.Lerp(1f, 0f, t);
+
+        // 틈 보완용
+        if (t >= 0.99f && _image.fillAmount != 0f)
+        {
+            _image.fillAmount = 0f;
+        }
+
+    }
+
+    public void ResetAnimate()
+    {
+        foreach (var a in _animations)
+        {
+            a.timer = 0f;
+        }
+
+        if (_rect != null)
+        {
+            _rect.anchoredPosition = _startPosition;
+            _rect.localRotation = _startRotation;
+        }
+
+        if (_canvasGroup != null)
+        {
+            _canvasGroup.alpha = 1f;
+        }
+
+        if (_image != null && _image.type == Image.Type.Filled)
+        {
+            _image.fillAmount = 0f;
+        }
     }
 
 }
