@@ -18,8 +18,9 @@ public class AnimateUI : MonoBehaviour
     {
         public AnimateType type;
         public float speed;     // move, fillamount 사용 안함
-        public float duration;  // 핑퐁, 회전, 투명도만 사용.
-        public float timer;     // 각 애니메이션이 진행한 시간. 0으로 두면 됩니다.
+        public float duration;  // 재생 시간. bool 이 아닌 9999 사용
+
+        [HideInInspector]  public float timer;     // 0으로 두면 됩니다. (각 애니메이션이 진행한 시간)
     }
 
 
@@ -104,6 +105,12 @@ public class AnimateUI : MonoBehaviour
 
             a.timer += t;
         }
+    }
+
+    // 비활성화 시 수치 초기화
+    private void OnDisable()
+    {
+        ResetAnimate();
     }
 
 
