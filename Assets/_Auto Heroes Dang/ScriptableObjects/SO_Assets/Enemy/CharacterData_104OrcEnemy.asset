@@ -20,6 +20,7 @@ MonoBehaviour:
   _range: 2
   _moveSpeed: 3
   _skillCool: 15
+  _skillMultiplier: 0.6
   _attackType: 0
   _prefab: {fileID: 0}
   _level: 0

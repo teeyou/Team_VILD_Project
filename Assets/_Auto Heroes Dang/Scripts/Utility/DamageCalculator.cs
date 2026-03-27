@@ -4,16 +4,20 @@ public static class DamageCalculator
 {
     public static int CalculateDamage(int yourAtk, int targetDef)
     {
+        float atk = yourAtk;
+        float def = targetDef;
+
         // 공격력 * (공격력 / (공격력 + 방어력))
-        int totalDamage = yourAtk * (yourAtk / (yourAtk + targetDef));
+        float totalDamage = atk * (atk / (atk + def));
 
         if (CalculateCriticalProb())
         {
-            return (int)(totalDamage * 1.5f);   // 치명타 1.5배
+            totalDamage *= 1.5f;
         }
 
-        return totalDamage;
+        return Mathf.Max(1, Mathf.RoundToInt(totalDamage));
     }
+
 
     private static bool CalculateCriticalProb()
     {
@@ -23,7 +27,6 @@ public static class DamageCalculator
         {
             return true;
         }
-
         else
         {
             return false;

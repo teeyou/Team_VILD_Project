@@ -458,7 +458,7 @@ MonoBehaviour:
   _searchInterval: 0.2
   _stopDistanceOffset: 0.5
   _postAttackDelay: 0.2
-  _hitVfxPrefab: {fileID: 0}
+  _hitVfxPrefab: {fileID: 1574516568193800055, guid: e563edd5302ec2340a5bc06e57d1e901, type: 3}
   _hitVfxForwardOffset: 1
   _hitVfxHeightOffset: 1
   _hitVfxLifeTime: 0.2
@@ -473,12 +473,16 @@ MonoBehaviour:
   _drawGizmos: 1
   _attackRange: 1.5
   _skillCool: 0
+  _skillMultiplier: 1
   _skillRange: 3
-  _skillDamage: 50
   _skillLoopCount: 1
+  _firstSkillDelay: 2
   _skillAreaType: 0
   _skillRadius: 3
   _skillAngle: 120
+  _useSkillCritical: 1
+  _skillCriticalPercent: 20
+  _skillCriticalMultiplier: 1.5
   _skillVfxPrefab: {fileID: 5860686416869677186, guid: 558a5ab1a31870d44982cafb42720be3, type: 3}
   _skillVfxSpawnPoint: {fileID: 1254112254558564727}
   _skillVfxPositionOffset: {x: 1, y: 0.2, z: 2.5}
@@ -521,15 +525,15 @@ MonoBehaviour:
   _allyLayer:
     serializedVersion: 2
     m_Bits: 1048576
-  _shieldRange: 6
+  _shieldRange: 8
   _includeSelf: 1
   _targetCount: 2
-  _defBuffAmount: 3
+  _defBuffPercent: 0.3
   _buffDuration: 10
-  _shieldVfxPrefab: {fileID: 8460317685369823947, guid: c22546930cda36a4ebdeadeae298f668, type: 3}
+  _shieldVfxPrefab: {fileID: 4631137236932131032, guid: b8b49dd58483c54419af7794079e1292, type: 3}
   _vfxOffset: {x: 0, y: 0.25, z: 0}
   _debugLog: 1
-  _drawGizmos: 1
+  _drawGizmos: 0
 --- !u!1 &2445628120743762441
 GameObject:
   m_ObjectHideFlags: 0

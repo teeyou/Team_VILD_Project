@@ -559,7 +559,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5862803388312644325
 Transform:
   m_ObjectHideFlags: 0
@@ -635,6 +635,7 @@ MonoBehaviour:
   _drawGizmos: 1
   _attackRange: 1.5
   _skillCool: 0
+  _skillMultiplier: 1
 --- !u!65 &6807130095934301746
 BoxCollider:
   m_ObjectHideFlags: 0

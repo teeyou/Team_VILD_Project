@@ -11,7 +11,6 @@ public class NamedEnemyBattle : NormalEnemyBattle
 {
     [Header("스킬 설정")]
     [SerializeField] protected float _skillRange = 3f;
-    [SerializeField] protected int _skillDamage = 50;
     [SerializeField] protected int _skillLoopCount = 1;
 
     [Header("첫 스킬 대기")]
@@ -22,13 +21,18 @@ public class NamedEnemyBattle : NormalEnemyBattle
     [SerializeField] protected float _skillRadius = 3f;
     [SerializeField] protected float _skillAngle = 120f;
 
+    [Header("스킬 치명타")]
+    [SerializeField] protected bool _useSkillCritical = true;
+    [SerializeField] protected int _skillCriticalPercent = 20;
+    [SerializeField] protected float _skillCriticalMultiplier = 1.5f;
+
     [Header("스킬 VFX")]
     [SerializeField] private GameObject _skillVfxPrefab;
     [SerializeField] private Transform _skillVfxSpawnPoint;
     [SerializeField] private Vector3 _skillVfxPositionOffset;
     [SerializeField] private Vector3 _skillVfxRotationOffset;
     [SerializeField] private float _skillVfxDestroyTime = 3f;
-    [SerializeField] private float _skillVfxPlaySpeed = 0.5f;
+    [SerializeField] private float _skillVfxPlaySpeed = 1f;
 
     protected float _lastSkillTime = -999f;
     protected bool _isUsingSkill;
@@ -68,6 +72,14 @@ public class NamedEnemyBattle : NormalEnemyBattle
         base.HandleCombat();
     }
 
+    public override void Attack()
+    {
+        if (_isUsingSkill)
+            return;
+
+        base.Attack();
+    }
+
     protected virtual bool CanUseSkill()
     {
         if (_target == null)
@@ -76,7 +88,12 @@ public class NamedEnemyBattle : NormalEnemyBattle
         if (_target.IsDead)
             return false;
 
-        // 첫 스킬은 따로 대기시간 체크
+        if (_isUsingSkill)
+            return false;
+
+        if (_isAttacking)
+            return false;
+
         if (!_hasUsedSkillOnce)
         {
             if (Time.time < _spawnTime + _firstSkillDelay)
@@ -84,7 +101,6 @@ public class NamedEnemyBattle : NormalEnemyBattle
         }
         else
         {
-            // 두 번째부터는 기존 스킬 쿨타임 사용
             if (Time.time < _lastSkillTime + _skillCool)
                 return false;
         }
@@ -99,7 +115,6 @@ public class NamedEnemyBattle : NormalEnemyBattle
     protected virtual void StartSkill()
     {
         _isUsingSkill = true;
-        _lastSkillTime = Time.time;
         _currentSkillLoop = 0;
         _hasUsedSkillOnce = true;
 
@@ -109,6 +124,11 @@ public class NamedEnemyBattle : NormalEnemyBattle
         {
             _animator.ResetTrigger("Skill");
             _animator.SetTrigger("Skill");
+        }
+
+        if (_battleLog)
+        {
+            Debug.Log($"{name} 스킬 시작");
         }
     }
 
@@ -137,10 +157,13 @@ public class NamedEnemyBattle : NormalEnemyBattle
 
             if (unit == null)
                 continue;
+
             if (unit == this)
                 continue;
+
             if (unit.IsDead)
                 continue;
+
             if (targets.Contains(unit))
                 continue;
 
@@ -155,26 +178,33 @@ public class NamedEnemyBattle : NormalEnemyBattle
         Collider[] hits = Physics.OverlapSphere(center, radius, _targetLayer);
         List<Unit> targets = new List<Unit>();
 
+        Vector3 flatForward = forward;
+        flatForward.y = 0f;
+        flatForward.Normalize();
+
         for (int i = 0; i < hits.Length; i++)
         {
             Unit unit = hits[i].GetComponent<Unit>();
 
             if (unit == null)
                 continue;
+
             if (unit == this)
                 continue;
+
             if (unit.IsDead)
                 continue;
+
             if (targets.Contains(unit))
                 continue;
 
-            Vector3 dirToTarget = (unit.transform.position - center).normalized;
+            Vector3 dirToTarget = unit.transform.position - center;
             dirToTarget.y = 0f;
 
-            Vector3 flatForward = forward;
-            flatForward.y = 0f;
+            if (dirToTarget == Vector3.zero)
+                continue;
 
-            float targetAngle = Vector3.Angle(flatForward, dirToTarget);
+            float targetAngle = Vector3.Angle(flatForward, dirToTarget.normalized);
 
             if (targetAngle <= angle * 0.5f)
             {
@@ -185,6 +215,42 @@ public class NamedEnemyBattle : NormalEnemyBattle
         return targets;
     }
 
+    protected virtual int CalculateSkillDamage(Unit target)
+    {
+        if (target == null)
+            return 1;
+
+        float atk = _atk * _skillMultiplier;
+        float def = target.Def;
+
+        float totalDamage = atk * (atk / (atk + def));
+
+        if (CalculateSkillCriticalProb())
+        {
+            totalDamage *= _skillCriticalMultiplier;
+        }
+
+        return Mathf.Max(1, Mathf.RoundToInt(totalDamage));
+    }
+
+    public int GetSkillDamage(Unit target)
+    {
+        return CalculateSkillDamage(target);
+    }
+
+    protected virtual bool CalculateSkillCriticalProb()
+    {
+        if (!_useSkillCritical)
+            return false;
+
+        int roll = Random.Range(0, 100);
+        return roll < _skillCriticalPercent;
+    }
+
+    /// <summary>
+    /// 애니메이션 이벤트에서 호출
+    /// 범위 스킬 데미지 적용
+    /// </summary>
     public virtual void ApplyAreaSkill()
     {
         if (_isDead)
@@ -198,18 +264,56 @@ public class NamedEnemyBattle : NormalEnemyBattle
 
             if (unit == null)
                 continue;
+
             if (unit.IsDead)
                 continue;
 
-            unit.TakeDamage(_skillDamage, transform);
+            int finalDamage = CalculateSkillDamage(unit);
+
+            unit.TakeDamage(finalDamage, transform);
+            _totalDamage += finalDamage;
 
             if (_battleLog)
             {
-                Debug.Log($"{name} >> {unit.name} 스킬 공격 / 데미지 : {_skillDamage}");
+                Debug.Log($"{name} >> {unit.name} 스킬 공격 / 최종 데미지 : {finalDamage}");
             }
         }
     }
 
+    /// <summary>
+    /// 애니메이션 이벤트에서 호출
+    /// 단일 타겟 스킬 데미지 적용
+    /// </summary>
+    public virtual void ApplySingleSkill()
+    {
+        if (_isDead)
+            return;
+
+        if (_target == null)
+            return;
+
+        if (_target.IsDead)
+            return;
+
+        float distance = GetDistanceTo(_target);
+        if (distance > _skillRange)
+            return;
+
+        int finalDamage = CalculateSkillDamage(_target);
+
+        _target.TakeDamage(finalDamage, transform);
+        _totalDamage += finalDamage;
+
+        if (_battleLog)
+        {
+            Debug.Log($"{name} >> {_target.name} 단일 스킬 공격 / 최종 데미지 : {finalDamage}");
+        }
+    }
+
+    /// <summary>
+    /// 애니메이션 이벤트에서 호출
+    /// 스킬 루프 종료 처리
+    /// </summary>
     public virtual void EndSkillLoop()
     {
         _currentSkillLoop++;
@@ -217,6 +321,14 @@ public class NamedEnemyBattle : NormalEnemyBattle
         if (_currentSkillLoop >= _skillLoopCount)
         {
             _isUsingSkill = false;
+            _lastSkillTime = Time.time;
+            _nextActionTime = Time.time + _postAttackDelay;
+
+            if (_battleLog)
+            {
+                Debug.Log($"{name} 스킬 종료");
+            }
+
             return;
         }
 
@@ -246,6 +358,10 @@ public class NamedEnemyBattle : NormalEnemyBattle
         return baseRotation * Quaternion.Euler(_skillVfxRotationOffset);
     }
 
+    /// <summary>
+    /// 애니메이션 이벤트에서 호출
+    /// 스킬 VFX 생성
+    /// </summary>
     public virtual void SpawnSkillVfx()
     {
         if (_skillVfxPrefab == null)
@@ -269,6 +385,57 @@ public class NamedEnemyBattle : NormalEnemyBattle
         {
             var main = particleSystems[i].main;
             main.simulationSpeed = speedMultiplier;
+        }
+    }
+
+    protected override void OnDrawGizmosSelected()
+    {
+        base.OnDrawGizmosSelected();
+
+        if (!_drawGizmos)
+            return;
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, _skillRange);
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, _skillRadius);
+
+        if (_skillAreaType == SkillAreaType.Fan)
+        {
+            DrawFanGizmo(transform.position, transform.forward, _skillRadius, _skillAngle, Color.green);
+        }
+    }
+
+    protected virtual void DrawFanGizmo(Vector3 center, Vector3 forward, float radius, float angle, Color color)
+    {
+        Gizmos.color = color;
+
+        Vector3 flatForward = forward;
+        flatForward.y = 0f;
+        flatForward.Normalize();
+
+        Quaternion leftRot = Quaternion.Euler(0f, -angle * 0.5f, 0f);
+        Quaternion rightRot = Quaternion.Euler(0f, angle * 0.5f, 0f);
+
+        Vector3 leftDir = leftRot * flatForward;
+        Vector3 rightDir = rightRot * flatForward;
+
+        Gizmos.DrawLine(center, center + leftDir * radius);
+        Gizmos.DrawLine(center, center + rightDir * radius);
+
+        int segmentCount = 20;
+        Vector3 prevPoint = center + leftDir * radius;
+
+        for (int i = 1; i <= segmentCount; i++)
+        {
+            float t = i / (float)segmentCount;
+            float currentAngle = Mathf.Lerp(-angle * 0.5f, angle * 0.5f, t);
+            Vector3 dir = Quaternion.Euler(0f, currentAngle, 0f) * flatForward;
+            Vector3 point = center + dir * radius;
+
+            Gizmos.DrawLine(prevPoint, point);
+            prevPoint = point;
         }
     }
 }

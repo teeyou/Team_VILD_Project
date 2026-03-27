@@ -15,11 +15,12 @@ MonoBehaviour:
   _id: 105
   _chName: BishopKnight
   _defaultMaxHp: 330
-  _defaultAtk: 15
+  _defaultAtk: 20
   _defaultDef: 5
-  _range: 1.5
+  _range: 2
   _moveSpeed: 3
   _skillCool: 20
+  _skillMultiplier: 1.7
   _attackType: 0
   _prefab: {fileID: 0}
   _level: 0

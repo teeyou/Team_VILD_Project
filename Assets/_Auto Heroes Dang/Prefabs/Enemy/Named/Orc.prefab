@@ -662,12 +662,16 @@ MonoBehaviour:
   _drawGizmos: 1
   _attackRange: 1.5
   _skillCool: 0
+  _skillMultiplier: 1
   _skillRange: 3
-  _skillDamage: 10
   _skillLoopCount: 1
+  _firstSkillDelay: 2
   _skillAreaType: 0
   _skillRadius: 3
   _skillAngle: 120
+  _useSkillCritical: 1
+  _skillCriticalPercent: 20
+  _skillCriticalMultiplier: 1.5
   _skillVfxPrefab: {fileID: 6215659415194574659, guid: 496f4de5701e4114f96e6182a4398892, type: 3}
   _skillVfxSpawnPoint: {fileID: 1792029717008244499}
   _skillVfxPositionOffset: {x: 0, y: 1, z: 0}

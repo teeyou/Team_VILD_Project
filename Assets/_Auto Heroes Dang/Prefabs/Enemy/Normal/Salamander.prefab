@@ -1380,7 +1380,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2363444640431998748
 Transform:
   m_ObjectHideFlags: 0
@@ -1436,7 +1436,7 @@ MonoBehaviour:
   _targetLayer:
     serializedVersion: 2
     m_Bits: 1024
-  _detectRange: 10
+  _detectRange: 30
   _attackCooldown: 1
   _searchInterval: 0.2
   _stopDistanceOffset: 0.5
@@ -1456,6 +1456,7 @@ MonoBehaviour:
   _drawGizmos: 1
   _attackRange: 10
   _skillCool: 0
+  _skillMultiplier: 1
 --- !u!65 &2281514647294233239
 BoxCollider:
   m_ObjectHideFlags: 0
