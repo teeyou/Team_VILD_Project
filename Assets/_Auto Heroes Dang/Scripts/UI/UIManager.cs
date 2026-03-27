@@ -78,6 +78,8 @@ public class UIManager : MonoBehaviour
 
         DataSource.Instance.CartPosition = cart.m_Position;
 
+        FieldManager.Instance.IsSpawnPossible = false; // 스테이지로 씬 전환 전에 스폰 불가능하도록 막음
+
         SceneLoader.Instance.LoadScene(stage);
     }
 }

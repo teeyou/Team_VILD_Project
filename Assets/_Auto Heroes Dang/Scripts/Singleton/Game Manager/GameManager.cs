@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 /*
@@ -58,5 +60,19 @@ public class GameManager : Singleton<GameManager>
     private void Update()
     {
         
+    }
+
+    public void IncreaseCurrentStage()
+    {
+        EGameStage nextStage = (EGameStage)((int)_currentStage + 1);
+
+        // 다음 스테이지가 있으면 증가시킴
+        if (Enum.IsDefined(typeof(EGameStage), nextStage))
+        {
+            _currentStage = nextStage;
+            return;
+        }
+
+        // 다음 스테이지가 없으면 아무것도 안함
     }
 }
