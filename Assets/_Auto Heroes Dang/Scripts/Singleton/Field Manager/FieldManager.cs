@@ -20,6 +20,7 @@ public class FieldManager : Singleton<FieldManager>
 
     private List<Transform> _subCharacterTrList = new List<Transform>();
     public Transform MainCharacterTr { get; private set; } = null;
+    public bool IsSpawnPossible { get; set; } = false;
 
     protected override void Awake()
     {
