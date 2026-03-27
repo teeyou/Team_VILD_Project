@@ -49,7 +49,7 @@ public class FieldUI : MonoBehaviour
 
     public void ToggleStagePanel(bool flag)
     {
-        _stagePanel.SetActive(true);
+        _stagePanel.SetActive(flag);
     }
 
 }
