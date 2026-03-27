@@ -212,7 +212,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1196968488790733746
 Transform:
   m_ObjectHideFlags: 0
@@ -294,11 +294,11 @@ MonoBehaviour:
   _searchInterval: 0.2
   _stopDistanceOffset: 0.5
   _postAttackDelay: 0.2
-  _hitVfxPrefab: {fileID: 0}
-  _hitVfxForwardOffset: 1
-  _hitVfxHeightOffset: 1
+  _hitVfxPrefab: {fileID: 1574516568193800055, guid: e563edd5302ec2340a5bc06e57d1e901, type: 3}
+  _hitVfxForwardOffset: 0
+  _hitVfxHeightOffset: 0.5
   _hitVfxLifeTime: 0.2
-  _meleeHitVfxScale: {x: 1, y: 1, z: 1}
+  _meleeHitVfxScale: {x: 0.5, y: 0.5, z: 0.5}
   _projectilePrefab: {fileID: 0}
   _projectileSpawnPoint: {fileID: 0}
   _projectileSpawnForwardOffset: 0.5
@@ -309,6 +309,7 @@ MonoBehaviour:
   _drawGizmos: 1
   _attackRange: 1.5
   _skillCool: 0
+  _skillMultiplier: 1
 --- !u!1 &3147948992583509268
 GameObject:
   m_ObjectHideFlags: 0

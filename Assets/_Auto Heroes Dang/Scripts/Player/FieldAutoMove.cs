@@ -20,7 +20,9 @@ public class FieldAutoMove : MonoBehaviour
 
     private bool _isMoving = false;
     private int _currentIdx = 0;    //플레이어의 현재 웨이포인트 인덱스
-    
+
+    private Coroutine _spawnTimerRoutine;
+
     public bool IsMoving { get { return _isMoving; } }
 
     private void Awake()
@@ -112,13 +114,17 @@ public class FieldAutoMove : MonoBehaviour
     public void MoveNextPoint()
     {
         if (_currentIdx >= FieldManager.Instance.GetStageLength())
+        {
             return;
+        }
 
         _autoAttack.enabled = false;    // 이동 중에는 전투 발생 안함. 꺼놓음 
 
         _isMoving = true;
         _cart.m_Speed = _moveSpeed;
         _animator.SetBool("Move", true);
+
+        FieldManager.Instance.IsSpawnPossible = false;  // 이동 중에는 몬스터 스폰 불가능
     }
 
     public void Stop()
@@ -131,6 +137,19 @@ public class FieldAutoMove : MonoBehaviour
         _animator.SetBool("Move", false);
 
         _fieldUI.PopUpFieldInfo(); // 스테이지 정보 UI 팝업.
+
+        if (_spawnTimerRoutine == null)
+        {
+            _spawnTimerRoutine = StartCoroutine(CoStartSpawnTimer(3f));
+        }
+    }
+
+    private IEnumerator CoStartSpawnTimer(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+
+        FieldManager.Instance.IsSpawnPossible = true;   // Stop 후 sec 지난 후에 몬스터 스폰 가능
+        _spawnTimerRoutine = null;
     }
 
 }

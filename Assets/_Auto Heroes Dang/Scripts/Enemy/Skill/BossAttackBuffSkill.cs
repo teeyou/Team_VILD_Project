@@ -8,8 +8,8 @@ public class BossAllyAttackBuffSkill : MonoBehaviour
     [SerializeField] private float _buffRange = 6f;
     [SerializeField] private bool _includeSelf = true;
 
-    [Header("버프 수치")]
-    [SerializeField] private int _atkBuffAmount = 3;
+    [Header("버프 수치(기본 공격력 기준 %)")]
+    [SerializeField, Range(0f, 5f)] private float _atkBuffPercent = 0.2f;
     [SerializeField] private float _buffDuration = 10f;
 
     [Header("버프 VFX")]
@@ -30,10 +30,6 @@ public class BossAllyAttackBuffSkill : MonoBehaviour
             _allyLayer = LayerMask.GetMask("Enemy");
     }
 
-    /// <summary>
-    /// 애니메이션 이벤트에서 호출
-    /// 범위 안의 아군 전부에게 공격력 버프 부여
-    /// </summary>
     public void ApplyAttackBuffToAllAllies()
     {
         if (_owner == null)
@@ -76,7 +72,7 @@ public class BossAllyAttackBuffSkill : MonoBehaviour
         {
             NormalEnemyBattle ally = candidates[i];
 
-            ally.ApplyAttackBuff(_atkBuffAmount, _buffDuration);
+            ally.ApplyAttackBuffPercent(_atkBuffPercent, _buffDuration);
 
             if (_buffVfxPrefab != null)
             {
@@ -93,7 +89,7 @@ public class BossAllyAttackBuffSkill : MonoBehaviour
 
             if (_debugLog)
             {
-                Debug.Log($"{name} >> {ally.name} 에게 공격력 +{_atkBuffAmount} 버프 부여 ({_buffDuration}초)");
+                Debug.Log($"{name} >> {ally.name} 에게 공격력 {(int)(_atkBuffPercent * 100f)}% 버프 부여 ({_buffDuration}초)");
             }
         }
     }

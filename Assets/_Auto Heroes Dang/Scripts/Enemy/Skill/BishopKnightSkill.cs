@@ -9,8 +9,8 @@ public class BishopKnightSkill : MonoBehaviour
     [SerializeField] private bool _includeSelf = false;
     [SerializeField] private int _targetCount = 2;
 
-    [Header("버프 수치")]
-    [SerializeField] private int _defBuffAmount = 3;
+    [Header("버프 수치(기본 방어력 기준 %)")]
+    [SerializeField, Range(0f, 5f)] private float _defBuffPercent = 0.3f;
     [SerializeField] private float _buffDuration = 10f;
 
     [Header("쉴드 VFX")]
@@ -31,10 +31,6 @@ public class BishopKnightSkill : MonoBehaviour
             _allyLayer = LayerMask.GetMask("Enemy");
     }
 
-    /// <summary>
-    /// 방어 애니메이션 이벤트에서 호출
-    /// 범위 안의 Enemy 레이어 아군 중 랜덤하게 여러 명에게 쉴드 부여
-    /// </summary>
     public void ApplyRandomShieldToAlly()
     {
         if (_owner == null)
@@ -80,7 +76,7 @@ public class BishopKnightSkill : MonoBehaviour
             int randomIndex = Random.Range(0, candidates.Count);
             NormalEnemyBattle selectedAlly = candidates[randomIndex];
 
-            selectedAlly.ApplyDefenseBuff(_defBuffAmount, _buffDuration);
+            selectedAlly.ApplyDefenseBuffPercent(_defBuffPercent, _buffDuration);
 
             if (_shieldVfxPrefab != null)
             {
@@ -97,10 +93,9 @@ public class BishopKnightSkill : MonoBehaviour
 
             if (_debugLog)
             {
-                Debug.Log($"{name} >> {selectedAlly.name} 에게 방어력 +{_defBuffAmount} 쉴드 부여 ({_buffDuration}초)");
+                Debug.Log($"{name} >> {selectedAlly.name} 에게 방어력 {(int)(_defBuffPercent * 100f)}% 쉴드 부여 ({_buffDuration}초)");
             }
 
-            // 중복 선택 방지
             candidates.RemoveAt(randomIndex);
         }
     }

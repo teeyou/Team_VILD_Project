@@ -6,7 +6,7 @@ public class AutoAttack : Unit
 {
     [SerializeField] protected float _searchRadius;
     [SerializeField] protected LayerMask _layerMask;
-    [SerializeField] protected float _skillMultiplier = 1.5f;
+    [SerializeField] protected float _skillMultiplier;
 
     [SerializeField] private float _attackDelay = 0.5f;
 
@@ -34,6 +34,8 @@ public class AutoAttack : Unit
         _moveSpeed = data.MoveSpeed;
 
         _skillCool = data.SkillCool;
+        _skillMultiplier = data.SkillMultiplier;
+
         _currentSkillCool = _skillCool;
 
         _attackType = data.AttackType;

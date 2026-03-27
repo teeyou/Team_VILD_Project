@@ -10,7 +10,6 @@ public class EvilMageSkill : MonoBehaviour
     [SerializeField] private int _targetCount = 2;
 
     [Header("다단히트 설정")]
-    [SerializeField] private int _damagePerHit = 2;
     [SerializeField] private int _hitCount = 5;
     [SerializeField] private float _hitInterval = 0.3f;
 
@@ -19,12 +18,12 @@ public class EvilMageSkill : MonoBehaviour
     [SerializeField] private float _vfxYOffset = 1f;
     [SerializeField] private float _vfxLifeTime = 1f;
 
-    private NormalEnemyBattle _owner;
+    private NamedEnemyBattle _owner;
     private Coroutine _skillCoroutine;
 
     private void Awake()
     {
-        _owner = GetComponent<NormalEnemyBattle>();
+        _owner = GetComponent<NamedEnemyBattle>();
 
         if (_targetLayer == 0)
             _targetLayer = LayerMask.GetMask("Player");
@@ -32,7 +31,10 @@ public class EvilMageSkill : MonoBehaviour
 
     public void CastMultiHitSkill()
     {
-        if (_owner == null || _owner.IsDead)
+        if (_owner == null)
+            return;
+
+        if (_owner.IsDead)
             return;
 
         List<Transform> targets = FindClosestTargetsInRange(_targetCount);
@@ -101,8 +103,15 @@ public class EvilMageSkill : MonoBehaviour
                 if (targetUnit.IsDead)
                     continue;
 
-                targetUnit.TakeDamage(_damagePerHit, transform);
+                int finalDamage = _owner.GetSkillDamage(targetUnit);
+
+                targetUnit.TakeDamage(finalDamage, transform);
                 SpawnHitVfx(target);
+
+                if (_owner != null)
+                {
+                    Debug.Log($"{name} >> {targetUnit.name} 다단히트 스킬 / 최종 데미지 : {finalDamage} ({hitIndex + 1}/{_hitCount})");
+                }
             }
 
             if (hitIndex < _hitCount - 1)

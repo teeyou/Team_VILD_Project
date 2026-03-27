@@ -6,6 +6,12 @@ public class ShieldAutoAttack : AutoAttack
 {
     [SerializeField] private int _type = 0;
 
+    private int _skillHitCount = 2;
+    private void Start()
+    {
+        //_skillMultiplier = 1.5f;
+    }
+    
     public override void Attack()
     {
         if (_targetTr == null)
@@ -29,7 +35,8 @@ public class ShieldAutoAttack : AutoAttack
 
         if (_targetTr != null && _targetUnit != null)
         {
-            _targetUnit.TakeDamage(_atk, transform);
+            int damage = DamageCalculator.CalculateDamage(_atk, _targetUnit.Def);
+            _targetUnit.TakeDamage(damage, transform);
         }
     }
 
@@ -57,7 +64,10 @@ public class ShieldAutoAttack : AutoAttack
 
         if (_targetTr != null && _targetUnit != null)
         {
-            _targetUnit.TakeDamage((int)(_atk * _skillMultiplier), transform);
+            int damage = DamageCalculator.CalculateDamage(_atk, _targetUnit.Def);
+            damage = (int)(damage * _skillMultiplier / _skillHitCount);
+
+            _targetUnit.TakeDamage(damage, transform);
         }
     }
 }
