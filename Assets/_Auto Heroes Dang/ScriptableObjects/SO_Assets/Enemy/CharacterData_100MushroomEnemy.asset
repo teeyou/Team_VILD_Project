@@ -15,8 +15,8 @@ MonoBehaviour:
   _id: 100
   _chName: Mushroom
   _defaultMaxHp: 1000
-  _defaultAtk: 8
-  _defaultDef: 2
+  _defaultAtk: 120
+  _defaultDef: 50
   _range: 1.5
   _moveSpeed: 3
   _skillCool: 0

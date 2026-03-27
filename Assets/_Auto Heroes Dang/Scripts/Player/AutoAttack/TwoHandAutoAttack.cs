@@ -8,7 +8,7 @@ public class TwoHandAutoAttack : AutoAttack
 
     private void Start()
     {
-        _skillMultiplier = 2f;
+        //_skillMultiplier = 2f;
     }
 
     public override void Attack()
