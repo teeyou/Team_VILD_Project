@@ -26,7 +26,7 @@ public class AnimateUI : MonoBehaviour
     [Header("애니메이션 리스트")]
     [SerializeField] private List<AnimationData> _animations;
 
-    [Header("위치(이동용)")]
+    [Header("이동할 위치")]
     [SerializeField] private Vector2 _targetPosition;   // 최종 위치
     private Vector2 _startPosition;
 
@@ -115,8 +115,8 @@ public class AnimateUI : MonoBehaviour
     // 쓸 지는 모르겠는데 핑퐁
     private void PingPongUI(AnimationData n)
     {
-        float value = Mathf.PingPong(n.timer * n.speed, 1f);
-        _rect.anchoredPosition = Vector2.Lerp(_startPosition, _targetPosition, value);
+        float t = Mathf.PingPong(n.timer * n.speed, 1f);
+        _rect.anchoredPosition = Vector2.Lerp(_startPosition, _targetPosition, t);
     }
 
     // 회전
