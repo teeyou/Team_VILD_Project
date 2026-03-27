@@ -19,7 +19,9 @@ public class HealerAutoAttack : AutoAttack
         GameObject projGo = ParticleManager.Instance.Play("ProjectilePurple", pos, rot);
         Projectile proj = projGo.GetComponent<Projectile>();
         proj.TargetTr = _targetTr;
-        proj.Atk = _atk;
+
+        int damage = DamageCalculator.CalculateDamage(_atk, _targetUnit.Def);
+        proj.Atk = damage;
     }
 
     public override void Skill()

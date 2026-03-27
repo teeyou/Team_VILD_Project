@@ -6,6 +6,11 @@ public class BowAutoAttack : AutoAttack
 {
     [SerializeField] private float _fpOffset = 1f;
 
+    private void Start()
+    {
+        _skillMultiplier = 1.8f;
+    }
+
     public override void Attack()
     {
         Vector3 pos = transform.position;
@@ -18,7 +23,9 @@ public class BowAutoAttack : AutoAttack
         GameObject projGo = ParticleManager.Instance.Play("ArrowGreen", pos, rot);
         Projectile proj = projGo.GetComponent<Projectile>();
         proj.TargetTr = _targetTr;
-        proj.Atk = _atk;
+
+        int damage = DamageCalculator.CalculateDamage(_atk, _targetUnit.Def);
+        proj.Atk = damage;
     }
 
     public override void Skill()
@@ -33,6 +40,8 @@ public class BowAutoAttack : AutoAttack
         GameObject projGo = ParticleManager.Instance.Play("Skill_LongArrowGreen", pos, rot);
         Projectile proj = projGo.GetComponent<Projectile>();
         proj.TargetTr = _targetTr;
-        proj.Atk = (int)(_atk * _skillMultiplier);
+
+        int damage = DamageCalculator.CalculateDamage(_atk, _targetUnit.Def);
+        proj.Atk = (int)(damage * _skillMultiplier);
     }
 }

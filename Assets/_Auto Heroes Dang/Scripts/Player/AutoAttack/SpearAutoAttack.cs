@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class SpearAutoAttack : AutoAttack
 {
+    private int _skillHitCount = 4;
+
+    private void Start()
+    {
+        _skillMultiplier = 2f;
+    }
+
     public override void Attack()
     {
         Vector3 pos = transform.position;
@@ -34,7 +41,10 @@ public class SpearAutoAttack : AutoAttack
 
         if (_targetTr != null && _targetUnit != null)
         {
-            _targetUnit.TakeDamage((int)(_atk * _skillMultiplier), transform);
+            int damage = DamageCalculator.CalculateDamage(_atk, _targetUnit.Def);
+            damage = (int)(damage * _skillMultiplier / _skillHitCount);
+
+            _targetUnit.TakeDamage(damage, transform);
         }
     }
 }

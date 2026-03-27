@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class TwoHandAutoAttack : AutoAttack
 {
+    private int _skillHitCount = 6;
+
+    private void Start()
+    {
+        _skillMultiplier = 2f;
+    }
 
     public override void Attack()
     {
@@ -28,7 +34,10 @@ public class TwoHandAutoAttack : AutoAttack
 
         if (_targetTr != null && _targetUnit != null)
         {
-            _targetUnit.TakeDamage((int)(_atk * _skillMultiplier), transform);
+            int damage = DamageCalculator.CalculateDamage(_atk, _targetUnit.Def);
+            damage = (int)(damage * _skillMultiplier / _skillHitCount);
+
+            _targetUnit.TakeDamage(damage, transform);
         }
 
     }
