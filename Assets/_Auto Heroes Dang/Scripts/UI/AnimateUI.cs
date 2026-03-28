@@ -7,6 +7,7 @@ public class AnimateUI : MonoBehaviour
     public enum AnimateType
     {
         Move,
+        MoveBack,
         PingPong,
         Rotate,
         Opacity,
@@ -17,8 +18,9 @@ public class AnimateUI : MonoBehaviour
     public class AnimationData
     {
         public AnimateType type;
-        public float speed;     // move, fillamount 사용 안함
+        public float speed;     // move(Back), fillamount 사용 안함
         public float duration;  // 재생 시간. bool 이 아닌 9999 사용
+        public bool playAnimate = false;
 
         [HideInInspector]  public float timer;     // 0으로 두면 됩니다. (각 애니메이션이 진행한 시간)
     }
@@ -37,9 +39,13 @@ public class AnimateUI : MonoBehaviour
     private CanvasGroup _canvasGroup; // 오퍼시티용. 자식까지 써야할 수 있어 Graphic가 아니라 Canvas Group으로 합니다.
     private Image _image; // FillAmount용
 
+    private bool _animateOn = false;
+
 
     private void Awake()
     {
+        _animateOn = false;
+
         _rect = GetComponent<RectTransform>();
         if (_rect == null)
         {
@@ -73,17 +79,31 @@ public class AnimateUI : MonoBehaviour
 
     private void Update()
     {
+        if (!_animateOn)
+        {
+            return;
+        }
+
         float t = Time.deltaTime;
+        bool allAnimateEnd = true;
 
         foreach (AnimationData a in _animations)
         {
-            if (a.timer >= a.duration)
+            if (a.timer >= a.duration || !a.playAnimate)
+            {
                 continue;
+            }
+
+            allAnimateEnd = false;
 
             switch (a.type)
             {
                 case AnimateType.Move:
                     MoveUI(a);
+                    break;
+
+                case AnimateType.MoveBack:
+                    MoveBackUI(a);
                     break;
 
                 case AnimateType.PingPong:
@@ -105,6 +125,9 @@ public class AnimateUI : MonoBehaviour
 
             a.timer += t;
         }
+
+        if (allAnimateEnd) _animateOn = false;
+
     }
 
     // 비활성화 시 수치 초기화
@@ -120,6 +143,26 @@ public class AnimateUI : MonoBehaviour
         float t = n.timer / n.duration;
 
         _rect.anchoredPosition = Vector2.Lerp(_startPosition, _targetPosition, t);
+
+        if (t >= 0.99f)
+        {
+            _rect.anchoredPosition = _targetPosition;
+        }
+
+    }
+
+    // 복귀
+    private void MoveBackUI(AnimationData n)
+    {
+        float t = n.timer / n.duration;
+
+        _rect.anchoredPosition = Vector2.Lerp(_targetPosition, _startPosition, t);
+
+        if (t >= 0.99f)
+        {
+            _rect.anchoredPosition = _startPosition;
+        }
+
     }
 
     // 쓸 지는 모르겠는데 핑퐁
@@ -164,11 +207,41 @@ public class AnimateUI : MonoBehaviour
 
     }
 
+    // 호출용 (전체 실행)
+    public void PlayAnimate()
+    {
+        ResetAnimate();
+        _animateOn = true;
+
+        foreach (AnimationData a in _animations)
+        {
+            a.playAnimate = true;
+        }
+    }
+
+    //호출용 일부 실행. enum 기준(AnimateType)
+    public void PlayAnimate(int enumIndex)
+    {
+        ResetAnimate();
+        _animateOn = true;
+
+        foreach (AnimationData a in _animations)
+        {
+            if (a.type == (AnimateType)enumIndex)
+            {
+                a.playAnimate = true;
+            }
+        }
+
+    }
+
+
     public void ResetAnimate()
     {
-        foreach (var a in _animations)
+        foreach (AnimationData a in _animations)
         {
             a.timer = 0f;
+            a.playAnimate = false;
         }
 
         if (_rect != null)

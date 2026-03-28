@@ -98,6 +98,7 @@ public class UIManager : Singleton<UIManager>
     public void CloseStagePanel()
     {
         Debug.Log("CloseStagePanel");
-        _fieldUI.ToggleStagePanel(false);
+        _fieldUI.ToggleStagePanel();
+        ToggleStageButton(true);
     }
 }
