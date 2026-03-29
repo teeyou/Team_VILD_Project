@@ -11,7 +11,8 @@ public class AnimateUI : MonoBehaviour
         PingPong,
         Rotate,
         Opacity,
-        FillAmount
+        FillAmount,
+        // 추후 스케일 추가할 수도 있음
     }
 
     [System.Serializable]
@@ -20,7 +21,7 @@ public class AnimateUI : MonoBehaviour
         public AnimateType type;
         public float speed;     // move(Back), fillamount 사용 안함
         public float duration;  // 재생 시간. bool 이 아닌 9999 사용
-        public bool playAnimate = false;
+        public bool playAnimate = false;  // 체크 시 자동으로 실행
 
         [HideInInspector]  public float timer;     // 0으로 두면 됩니다. (각 애니메이션이 진행한 시간)
     }
@@ -77,6 +78,21 @@ public class AnimateUI : MonoBehaviour
         }
     }
 
+    // active 상태에서 자동 실행
+    private void OnEnable()
+    {
+        foreach (AnimationData a in _animations)
+        {
+            if (a.playAnimate) _animateOn = true;
+        }
+    }
+
+    // 비활성화 시 수치 초기화
+    private void OnDisable()
+    {
+        ResetAnimate();
+    }
+
     private void Update()
     {
         if (!_animateOn)
@@ -89,8 +105,15 @@ public class AnimateUI : MonoBehaviour
 
         foreach (AnimationData a in _animations)
         {
-            if (a.timer >= a.duration || !a.playAnimate)
+            if (!a.playAnimate) continue;
+
+            //보정
+            if (a.timer >= a.duration)
             {
+                if (a.type == AnimateType.Move) _rect.anchoredPosition = _targetPosition;
+                if (a.type == AnimateType.MoveBack) _rect.anchoredPosition = _startPosition;
+                if (a.type == AnimateType.FillAmount) _image.fillAmount = 0f;
+
                 continue;
             }
 
@@ -130,23 +153,19 @@ public class AnimateUI : MonoBehaviour
 
     }
 
-    // 비활성화 시 수치 초기화
-    private void OnDisable()
-    {
-        ResetAnimate();
-    }
-
-
+    
     // 해당 위치로 이동
     private void MoveUI(AnimationData n)
     {
         float t = n.timer / n.duration;
 
-        _rect.anchoredPosition = Vector2.Lerp(_startPosition, _targetPosition, t);
-
         if (t >= 0.99f)
         {
             _rect.anchoredPosition = _targetPosition;
+        }
+        else 
+        {
+            _rect.anchoredPosition = Vector2.Lerp(_startPosition, _targetPosition, t);
         }
 
     }
@@ -156,11 +175,13 @@ public class AnimateUI : MonoBehaviour
     {
         float t = n.timer / n.duration;
 
-        _rect.anchoredPosition = Vector2.Lerp(_targetPosition, _startPosition, t);
-
         if (t >= 0.99f)
         {
             _rect.anchoredPosition = _startPosition;
+        }
+        else 
+        {
+            _rect.anchoredPosition = Vector2.Lerp(_targetPosition, _startPosition, t);
         }
 
     }
@@ -185,13 +206,9 @@ public class AnimateUI : MonoBehaviour
 
         _canvasGroup.alpha += speed * t;
         _canvasGroup.alpha = Mathf.Clamp01(_canvasGroup.alpha);
-
-        // 필요 시 보정 사용 (0 / 1)
-        // if (speed > 0 && _canvasGroup.alpha >= 0.999f) _canvasGroup.alpha = 1f;
-        // else if (speed < 0 && _canvasGroup.alpha <= 0.001f) _canvasGroup.alpha = 0f;
     }
 
-    // 채우기 (스킬쿨타임 등)
+    // 채우기 = 마스크를 0으로 하는 방식 (스킬쿨타임 등)
     private void FillAmountUI(AnimationData n)
     {
         if (_image == null || _image.type != Image.Type.Filled) return;
