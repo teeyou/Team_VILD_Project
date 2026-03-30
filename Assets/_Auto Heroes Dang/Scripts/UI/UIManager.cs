@@ -4,7 +4,8 @@ using UnityEngine.UI;
 public class UIManager : Singleton<UIManager>
 {
     [SerializeField] private Button _autoProgressButton;
-    [SerializeField] private Button _startStageButton;
+    [SerializeField] private Button _startStageButtonEnemy;
+    [SerializeField] private Button _startStageButtonBoss;
     [SerializeField] private Button _stageButton;
     [SerializeField] private Button _enemyPanelBackButton;
     [SerializeField] private Button _bossPanelBackButton;
@@ -15,7 +16,8 @@ public class UIManager : Singleton<UIManager>
         base.Awake();
 
         _autoProgressButton.onClick.AddListener(MovePlayer);
-        _startStageButton.onClick.AddListener(() => LoadBattleScene(GameManager.Instance.CurrentStage));
+        _startStageButtonEnemy.onClick.AddListener(() => LoadBattleScene(GameManager.Instance.CurrentStage));
+        _startStageButtonBoss.onClick.AddListener(() => LoadBattleScene(GameManager.Instance.CurrentStage));
         _stageButton.onClick.AddListener(ShowStagePanel);
         _enemyPanelBackButton.onClick.AddListener(CloseStagePanel);
         _bossPanelBackButton.onClick.AddListener(CloseStagePanel);
