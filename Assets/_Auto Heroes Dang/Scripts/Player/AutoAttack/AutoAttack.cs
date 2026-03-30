@@ -86,7 +86,7 @@ public class AutoAttack : Unit
         }
 
         // 타겟이 NULL 이거나 오브젝트 비활성화면 타겟 탐색
-        if (_targetTr == null || !_targetTr.gameObject.activeSelf)
+        if (_targetTr == null || _targetTr.gameObject.activeSelf == false)
         {
             if (GameManager.Instance.IsFirstPoint)
             {
