@@ -77,6 +77,8 @@ public class SceneLoader : Singleton<SceneLoader>
             yield return null;
         }
 
+        yield return new WaitForSeconds(2f); // 로딩 씬에서 2초 대기 후 씬 전환
+
         op.allowSceneActivation = true;
 
         while (!op.isDone)

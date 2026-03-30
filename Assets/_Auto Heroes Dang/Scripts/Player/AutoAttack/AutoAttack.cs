@@ -29,7 +29,7 @@ public class AutoAttack : Unit
     private float _checkTargetInterval = 1f;
     private float _checkTargetTimer = 0f;
 
-    public void Init(BaseStatus_SO data)
+    public void Init(BaseStatus_SO data, int number)
     {
         _maxHp = data.DefaultMaxHp;
         _curHp = data.DefaultMaxHp;
@@ -60,6 +60,8 @@ public class AutoAttack : Unit
 
         _isAttack = false;
         _skillEnd = true;
+
+        CharacterNumber = number;
     }
 
     private void Awake()
@@ -77,14 +79,22 @@ public class AutoAttack : Unit
 
     void Update()
     {
+        if (_currentSceneName != ESceneId.FieldScene.ToString())
+        { 
+            if (!GameManager.Instance.IsStageStart)
+            {
+                return;
+            }
+        }
+
         if (_isDead)
         {
             return;
         }
 
-        _lifetime += Time.deltaTime;
+        _lifetime += Time.deltaTime;    // 전투 중 살아남은 시간
 
-        _checkTargetTimer += Time.deltaTime;
+        _checkTargetTimer += Time.deltaTime;    // 일정주기로 타겟 탐색
 
         if (_skillEnd)
         {
@@ -160,15 +170,6 @@ public class AutoAttack : Unit
             if (GameManager.Instance.IsFirstPoint)
             {
                 // 필드 씬 시작 지점에서는 타겟 탐색 안함
-                return;
-            }
-        }
-
-        // 스테이지 씬에서 승리 또는 패배 상태면 탐색 안함
-        else
-        {
-            if (BattleManager.Instance.BattleState != EBattleState.Start)
-            {
                 return;
             }
         }

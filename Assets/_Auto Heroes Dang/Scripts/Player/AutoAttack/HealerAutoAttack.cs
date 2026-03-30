@@ -28,6 +28,7 @@ public class HealerAutoAttack : AutoAttack
         {
             int damage = DamageCalculator.CalculateDamage(_atk, _targetUnit.Def);
             proj.Atk = damage;
+            proj.Owner = this;
         }
     }
 

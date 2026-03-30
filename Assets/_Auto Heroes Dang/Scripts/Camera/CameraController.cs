@@ -36,40 +36,4 @@ public class CameraController : MonoBehaviour
             }
         }
     }
-
-
-    private void TestCode()
-    {
-        if (InputManager.Instance.IsPressedNum1)
-        {
-            _currentCam = _brain.ActiveVirtualCamera;
-
-            _currentCam.Priority = Default_Priority;
-            _townCam.Priority = High_Priority;
-        }
-
-        if (InputManager.Instance.IsPressedNum2)
-        {
-            _currentCam = _brain.ActiveVirtualCamera;
-
-            _currentCam.Priority = Default_Priority;
-            _stageOneCam.Priority = High_Priority;
-        }
-
-        if (InputManager.Instance.IsPressedNum3)
-        {
-            _currentCam = _brain.ActiveVirtualCamera;
-
-            _currentCam.Priority = Default_Priority;
-            _stageTwoCam.Priority = High_Priority;
-        }
-
-        if (InputManager.Instance.IsPressedNum4)
-        {
-            _currentCam = _brain.ActiveVirtualCamera;
-
-            _currentCam.Priority = Default_Priority;
-            _stageThreeCam.Priority = High_Priority;
-        }
-    }
 }

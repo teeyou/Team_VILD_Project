@@ -34,12 +34,11 @@ public enum EBattleState
     Start,
     Victory,
     Defeat,
+    Finish,
 }
 
 public class BattleManager : Singleton<BattleManager>
 {
-
-
     private const int ROW = 3;
     private const int COL = 3;
 
@@ -49,14 +48,21 @@ public class BattleManager : Singleton<BattleManager>
     [SerializeField] private GameObject _placementPlanePrefab;
     [SerializeField] private GameObject _placementPlaneEnemyPrefab;
 
+    private GameObject _selectedCharacter;
+    private Vector3 _originPos;
+
+    private Camera _cam;
+
     private Transform _placementRoot;
+    private List<GameObject> _playerPlacementList = new List<GameObject>();
 
     private List<Vector3> _playerStartingPosList = new List<Vector3>();
     private List<Vector3> _enemyStartingPosList = new List<Vector3>();
 
-    private Dictionary<int, GameObject> _numberToGameObject = new Dictionary<int, GameObject>();
+    private List<GameObject> _playerCharacterList = new List<GameObject>();
     private Dictionary<GameObject, Unit> _gameObjectToUnit = new Dictionary<GameObject, Unit>();
 
+    private List<GameObject> _enemyList = new List<GameObject>();
     private Dictionary<GameObject, Unit> _enemyGoToUnit = new Dictionary<GameObject, Unit>();
 
     private EBattleState _battleState = EBattleState.None;
@@ -111,6 +117,8 @@ public class BattleManager : Singleton<BattleManager>
 
     void Start()
     {
+        _cam = Camera.main;
+
         CreatePlacementPlane();
         SpawnPlayerCharacters();
         SpawnEnemies();
@@ -126,18 +134,134 @@ public class BattleManager : Singleton<BattleManager>
 
         if (_battleState == EBattleState.Victory)
         {
-            Debug.Log("승리");
+            _battleState = EBattleState.Finish;
+            BattleUIManager.Instance.ShowResultPanel(true);
+
+            Vector3 pos = new Vector3(4.44f, -3.5f, -80f);
+
+            GameObject go = _playerSpawner.SpawnPlayer(GetMVP(), pos, Quaternion.identity);
+
+            go.transform.localScale = Vector3.one * 4f;
+
+            GameManager.Instance.IsStageStart = false;
+
+            DestroyAll();
         }
 
         if (_battleState == EBattleState.Defeat)
         {
-            Debug.Log("패배");
+            _battleState = EBattleState.Finish;
+            BattleUIManager.Instance.ShowResultPanel(false);
+
+            GameManager.Instance.IsStageStart = false;
+
+            DestroyAll();
         }
+
+        // 드래그 앤 드랍으로 캐릭터 이동
+        if (InputManager.Instance.IsMouseLeftDown)
+        {
+            Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                if (hit.collider.CompareTag("Player"))
+                {
+                    _selectedCharacter = hit.collider.gameObject;
+                    _originPos = _selectedCharacter.transform.position;
+                }
+            }
+        }
+
+        // 캐릭터가 선택되었을 때 마우스 이동에 따라 캐릭터 이동
+        if (InputManager.Instance.IsMouseLeftStay && _selectedCharacter != null)
+        {
+            Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
+            Plane plane = new Plane(Vector3.up, Vector3.zero);
+
+            if (plane.Raycast(ray, out float enter))
+            {
+                Vector3 hitPoint = ray.GetPoint(enter);
+                _selectedCharacter.transform.position = hitPoint;
+            }
+        }
+
+        if (InputManager.Instance.IsMouseLeftUp && _selectedCharacter != null)
+        {
+            Vector3 pos = _originPos;
+            Transform tr = null;
+
+            foreach (GameObject go in _playerPlacementList)
+            {
+                float dist = Vector3.Distance(_selectedCharacter.transform.position, go.transform.position);
+
+                if (dist < 1f)
+                {
+                    tr = go.transform;
+                    pos = tr.position;
+                }
+            }
+
+            if (pos != _originPos)
+            {
+                // 해당 슬롯에 이미 캐릭터가 있으면 자리 교체
+
+                foreach (GameObject go in _playerCharacterList)
+                {
+                    if (_selectedCharacter == go)
+                    {
+                        continue;
+                    }
+
+                    float dist = Vector3.Distance(go.transform.position, pos);
+
+                    if (dist < 1f)
+                    {
+                        go.transform.position = _originPos;
+                        break;
+                    }
+                }
+
+            }
+
+            _selectedCharacter.transform.position = pos;
+            _selectedCharacter = null;
+        }
+    }
+
+    private void DestroyAll()
+    {
+        for (int i = 0; i < _playerCharacterList.Count; i++)
+        {
+            Destroy(_playerCharacterList[i]);
+        }
+
+        for (int i = 0; i < _enemyList.Count; i++)
+        {
+            Destroy(_enemyList[i]);
+        }
+    }
+
+    private int GetMVP()
+    {
+        Unit mvp = null;
+        int maxDamage = 0;
+
+        foreach (Unit unit in _gameObjectToUnit.Values)
+        {
+            Debug.Log($"{unit.name} : {unit.TotalDamage}");
+            if (unit.TotalDamage > maxDamage)
+            {
+                maxDamage = unit.TotalDamage;
+                mvp = unit;
+            }
+        }
+
+        return mvp.CharacterNumber;
     }
 
     private void CheckPlayerStatus()
     {
-        // 한명이라도 살아있으면 끝냄
+        // 모두 죽으면 패배
         foreach (Unit unit in _gameObjectToUnit.Values)
         {
             if (!unit.IsDead)
@@ -151,17 +275,15 @@ public class BattleManager : Singleton<BattleManager>
 
     private void CheckEnemiesStatus()
     {
-        // 한명이라도 살아있으면 끝냄
+        // 모두 죽으면 승리
         foreach (Unit unit in _enemyGoToUnit.Values)
         {
-            Debug.Log($"CheckEnemiesStatus - IsDead : {unit.IsDead}");
             if (!unit.IsDead)
             {
-                Debug.Log($"살아있음");
                 return;
             }
         }
-        Debug.Log("모두 죽음");
+
         _battleState = EBattleState.Victory;
     }
 
@@ -169,12 +291,15 @@ public class BattleManager : Singleton<BattleManager>
     {
         _placementRoot = new GameObject("PlacementRoot").transform;
 
+        // 플레이어 배치 장소
         for (int i = 0; i < _playerStartingPosList.Count; i++)
         {
             GameObject go = Instantiate(_placementPlanePrefab, _playerStartingPosList[i] + (Vector3.up * 0.1f), PlayerStartingRotation);
             go.transform.SetParent(_placementRoot);
+            _playerPlacementList.Add(go);
         }
 
+        // 적 배치 장소
         for (int i = 0; i < _enemyStartingPosList.Count; i++)
         {
             GameObject go = Instantiate(_placementPlaneEnemyPrefab, _enemyStartingPosList[i] + (Vector3.up * 0.1f), EnemyStartingRotation);
@@ -188,10 +313,16 @@ public class BattleManager : Singleton<BattleManager>
         for (int i = 0; i < _enemies.Length; i++)
         {
             GameObject go = Instantiate(_enemies[i]);
-            _enemyGoToUnit[go] = go.GetComponent<Unit>();
+            _enemyList.Add(go);
+
+            Unit unit = go.GetComponent<Unit>();
+            _enemyGoToUnit[go] = unit;
 
             go.transform.position = _enemyStartingPosList[i];
             go.transform.rotation = EnemyStartingRotation;
+
+            //unit.GetComponent<Collider>().enabled = false;    // 콜라이더 끄기
+            //unit.enabled = false;    // 자동공격 끄기
         }
     }
 
@@ -207,11 +338,10 @@ public class BattleManager : Singleton<BattleManager>
 
         // 메인 캐릭터 세팅
         GameObject mainGo = _playerSpawner.SpawnPlayer(mainNumber, _playerStartingPosList[0], PlayerStartingRotation);
-        _numberToGameObject[mainNumber] = mainGo;
+        _playerCharacterList.Add(mainGo);
 
         Unit mainUnit = mainGo.GetComponent<Unit>();
-        mainGo.GetComponent<Collider>().enabled = false;    // 에너지가 탐지 못하도록 콜라이더 꺼놓음
-        mainUnit.enabled = false;                           // 생성 해놓고 자동공격 꺼놓음 (탐지 안함)
+        //mainUnit.enabled = false;
         _gameObjectToUnit[mainGo] = mainUnit;
 
 
@@ -222,11 +352,10 @@ public class BattleManager : Singleton<BattleManager>
         for (int i = 0; i < numberList.Count; i++)
         {
             GameObject go = _playerSpawner.SpawnPlayer(numberList[i], _playerStartingPosList[i + startPositionIdx], PlayerStartingRotation);
-            _numberToGameObject[numberList[i]] = go;
+            _playerCharacterList.Add(go);
 
             Unit unit = go.GetComponent<Unit>();
-            go.GetComponent<Collider>().enabled = false;    // 적 몬스터가 탐지 못하도록 콜라이더 꺼놓음
-            unit.enabled = false;                           // 자동공격 꺼놓음
+            //unit.enabled = false;
             _gameObjectToUnit[go] = unit;
         }
     }
@@ -235,10 +364,18 @@ public class BattleManager : Singleton<BattleManager>
     {
         _battleState = EBattleState.Start;
 
-        foreach (Unit unit in _gameObjectToUnit.Values)
-        {
-            unit.enabled = true;    // 자동공격 켜기
-            unit.GetComponent<Collider>().enabled = true;    // 콜라이더 켜기
-        }
+        GameManager.Instance.IsStageStart = true;
+        //foreach (Unit unit in _gameObjectToUnit.Values)
+        //{
+        //    unit.enabled = true;    // 플레이어 캐릭터 자동공격 켜기
+        //}
+
+        //foreach (Unit unit in _enemyGoToUnit.Values)
+        //{
+        //    unit.enabled = true;    // 적 자동공격 켜기
+        //    unit.GetComponent<Collider>().enabled = true;    // 적 콜라이더 켜기
+        //}
+
+        _placementRoot.gameObject.SetActive(false);    // 배치 플레인 숨김
     }
 }

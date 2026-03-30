@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public enum EnemyState
 {
@@ -83,6 +84,8 @@ public class NormalEnemyBattle : Unit
     public int Atk => _atk;
     public float SkillMultiplier => _skillMultiplier;
 
+    private string _currentSceneName;
+
     protected virtual void Start()
     {
         if (_animator == null)
@@ -92,6 +95,8 @@ public class NormalEnemyBattle : Unit
             _targetLayer = LayerMask.GetMask("Player");
 
         ApplyStatusData();
+
+        _currentSceneName = SceneManager.GetActiveScene().name;
     }
 
     protected virtual void ApplyStatusData()
@@ -120,6 +125,14 @@ public class NormalEnemyBattle : Unit
 
     protected virtual void Update()
     {
+        if (_currentSceneName != ESceneId.FieldScene.ToString())
+        {
+            if (!GameManager.Instance.IsStageStart)
+            {
+                return;
+            }
+        }
+
         if (_isDead)
             return;
 

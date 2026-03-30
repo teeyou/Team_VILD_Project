@@ -14,7 +14,7 @@ public class ArrowAttack : Projectile
             ParticleManager.Instance.Play("Hit_GreenMedium", hitPoint);
 
             other.GetComponent<Unit>().TakeDamage(Atk, transform);
-
+            Owner.TotalDamage += Atk;
             Debug.Log($"{other.name} - 데미지 {Atk} 입음");
             
             Destroy(gameObject);
