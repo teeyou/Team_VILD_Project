@@ -10662,6 +10662,14 @@ PrefabInstance:
       propertyPath: _enemyPanelBackButton
       value: 
       objectReference: {fileID: 2028273258}
+    - target: {fileID: 6350793667211965918, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
+      propertyPath: _startStageButtonBoss
+      value: 
+      objectReference: {fileID: 522876783}
+    - target: {fileID: 6350793667211965918, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
+      propertyPath: _startStageButtonEnemy
+      value: 
+      objectReference: {fileID: 6341323171574256192}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22964,7 +22972,6 @@ MonoBehaviour:
   _stagePanel: {fileID: 1458853965}
   _enemy: {fileID: 184394327}
   _boss: {fileID: 211485552}
-  _nextSceneButton: {fileID: 6341323171574256188}
   _uiAnimate: {fileID: 184394329}
 --- !u!4 &1748358941
 Transform:
