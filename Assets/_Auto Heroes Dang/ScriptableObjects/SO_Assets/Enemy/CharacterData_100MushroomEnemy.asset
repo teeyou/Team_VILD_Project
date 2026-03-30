@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 100
   _chName: Mushroom
-  _defaultMaxHp: 1000
+  _defaultMaxHp: 10
   _defaultAtk: 120
   _defaultDef: 50
   _range: 1.5

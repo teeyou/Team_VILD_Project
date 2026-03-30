@@ -32,6 +32,7 @@ public class BowAutoAttack : AutoAttack
         {
             int damage = DamageCalculator.CalculateDamage(_atk, _targetUnit.Def);
             proj.Atk = damage;
+            proj.Owner = this;
         }
     }
 
@@ -56,6 +57,7 @@ public class BowAutoAttack : AutoAttack
         {
             int damage = DamageCalculator.CalculateDamage(_atk, _targetUnit.Def);
             proj.Atk = (int)(damage * _skillMultiplier);
+            proj.Owner = this;
         }
     }
 }

@@ -9,10 +9,29 @@ public class BattleUIManager : Singleton<BattleUIManager>
     [SerializeField] private Button _startButton;
     [SerializeField] private GameObject _readyPanel;
 
+    [SerializeField] private GameObject _defeatPanel;
+    [SerializeField] private GameObject _victoryPanel;
+
+    [SerializeField] private Button _defeatButton;
+    [SerializeField] private Button _victoryButton;
+
     void Start()
     {
         _backButton.onClick.AddListener(ReturnField);
-        _startButton.onClick.AddListener(StartBattle);
+
+        _startButton.onClick.AddListener(() =>
+        {
+            _readyPanel.SetActive(false);
+            BattleManager.Instance.StartBattle();
+        });
+
+        _defeatButton.onClick.AddListener(ReturnField);
+
+        _victoryButton.onClick.AddListener(() =>
+            {
+                GameManager.Instance.IncreaseCurrentStage();
+                ReturnField();
+            });
     }
 
     private void ReturnField()
@@ -20,9 +39,15 @@ public class BattleUIManager : Singleton<BattleUIManager>
         SceneLoader.Instance.LoadScene(ESceneId.FieldScene);
     }
 
-    private void StartBattle()
+    public void ShowResultPanel(bool isVictory)
     {
-        _readyPanel.SetActive(false);
-        BattleManager.Instance.StartBattle();
+        if (isVictory)
+        {
+            _victoryPanel.SetActive(true);
+        }
+        else
+        {
+            _defeatPanel.SetActive(true);
+        }
     }
 }
