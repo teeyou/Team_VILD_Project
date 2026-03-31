@@ -125,6 +125,8 @@ public class BattleManager : Singleton<BattleManager>
 
         BattleUIManager.Instance.UpdateTotalHp(true, _playerCharacterList, _gameObjectToUnit);
         BattleUIManager.Instance.UpdateTotalHp(false, _enemyList, _enemyGoToUnit);
+
+        BattleUIManager.Instance.SetSKillUI(_playerCharacterList, _gameObjectToUnit);
     }
 
     void Update()
@@ -137,14 +139,12 @@ public class BattleManager : Singleton<BattleManager>
 
         if (_battleState == EBattleState.Victory)
         {
+            ResetTimeScale();
+
             _battleState = EBattleState.Finish;
             BattleUIManager.Instance.ShowResultPanel(true);
 
-            Vector3 pos = new Vector3(4.44f, -3.5f, -80f);
-
-            GameObject go = _playerSpawner.SpawnPlayer(GetMVP(), pos, Quaternion.identity);
-
-            go.transform.localScale = Vector3.one * 4f;
+            CreateMVP();
 
             GameManager.Instance.IsStageStart = false;
 
@@ -153,6 +153,8 @@ public class BattleManager : Singleton<BattleManager>
 
         if (_battleState == EBattleState.Defeat)
         {
+            ResetTimeScale();
+
             _battleState = EBattleState.Finish;
             BattleUIManager.Instance.ShowResultPanel(false);
 
@@ -161,6 +163,35 @@ public class BattleManager : Singleton<BattleManager>
             DestroyAll();
         }
 
+        DragAndDropMove();
+    }
+
+    public void UseSkill(int idx)
+    {
+        if (BattleUIManager.Instance.TrySkill(2)) // 모든 스킬 2칸 소모한다고 가정
+        {
+            _playerCharacterList[idx].GetComponent<Unit>().IsSkillUsed = true;
+        }
+
+        else
+        {
+            // 스킬 게이지 부족
+            Debug.Log("스킬 게이지 부족");
+        }
+        
+    }
+
+    private void CreateMVP()
+    {
+        Vector3 pos = new Vector3(4.44f, -3.5f, -80f);
+
+        GameObject go = _playerSpawner.SpawnPlayer(GetMVP(), pos, Quaternion.identity);
+
+        go.transform.localScale = Vector3.one * 4f;
+    }
+
+    private void DragAndDropMove()
+    {
         // 드래그 앤 드랍으로 캐릭터 이동
         if (InputManager.Instance.IsMouseLeftDown)
         {
@@ -264,6 +295,9 @@ public class BattleManager : Singleton<BattleManager>
 
     private void CheckPlayerStatus()
     {
+        BattleUIManager.Instance.IncreaseSKillGauge();
+        BattleUIManager.Instance.UpdateSkillCool(_playerCharacterList, _gameObjectToUnit);
+
         foreach (Unit unit in _gameObjectToUnit.Values)
         {
             BattleUIManager.Instance.UpdateCurrentHp(unit.gameObject, unit);
@@ -332,8 +366,6 @@ public class BattleManager : Singleton<BattleManager>
             go.transform.position = _enemyStartingPosList[i];
             go.transform.rotation = EnemyStartingRotation;
 
-            //unit.GetComponent<Collider>().enabled = false;    // 콜라이더 끄기
-            //unit.enabled = false;    // 자동공격 끄기
         }
     }
 
@@ -379,17 +411,15 @@ public class BattleManager : Singleton<BattleManager>
         _battleState = EBattleState.Start;
 
         GameManager.Instance.IsStageStart = true;
-        //foreach (Unit unit in _gameObjectToUnit.Values)
-        //{
-        //    unit.enabled = true;    // 플레이어 캐릭터 자동공격 켜기
-        //}
-
-        //foreach (Unit unit in _enemyGoToUnit.Values)
-        //{
-        //    unit.enabled = true;    // 적 자동공격 켜기
-        //    unit.GetComponent<Collider>().enabled = true;    // 적 콜라이더 켜기
-        //}
-
+      
         _placementRoot.gameObject.SetActive(false);    // 배치 플레인 숨김
+    }
+
+    private void ResetTimeScale()
+    {
+        if (Time.timeScale != 1f)
+        {
+            Time.timeScale = 1f;
+        }
     }
 }

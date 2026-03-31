@@ -43,6 +43,9 @@ public enum EGrade
 
 public abstract class Unit : MonoBehaviour, IDamageable
 {
+    protected bool _isSkillUsed;
+    protected float _maxSkillCool;
+    protected float _currentSkillCool;
     protected float _moveSpeed;
     protected int _curHp;
     protected int _maxHp;
@@ -73,6 +76,9 @@ public abstract class Unit : MonoBehaviour, IDamageable
     protected bool _isDead;
     public bool IsDead {get { return _isDead; } set { _isDead = value; } }
 
+    public bool IsSkillUsed { get { return _isSkillUsed; } set { _isSkillUsed = value; } }
+    public float MaxSkillCool { get { return _maxSkillCool; } set { _maxSkillCool = value; } }
+    public float CurrentSkillCool { get { return _currentSkillCool; } set { _currentSkillCool = value; } }
     public float MoveSpeed { get { return _moveSpeed; } set { _moveSpeed = value; } }
     public int CurHp { get { return _curHp; } set { _curHp = value; } }
     public int MaxHp { get { return _maxHp; } set { _maxHp = value; } }

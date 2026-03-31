@@ -28947,6 +28947,15 @@ MonoBehaviour:
   _playerTotalHpTMP: {fileID: 1814009981}
   _enemyTotalHpTMP: {fileID: 459789018}
   _difficulty: {fileID: 1373110373}
+  _skillSlider: {fileID: 1872092061}
+  _skillButtons:
+  - {fileID: 425158502}
+  - {fileID: 1925046461}
+  - {fileID: 2041040569}
+  - {fileID: 1260672325}
+  - {fileID: 308859956}
+  - {fileID: 1745294625}
+  _skillGaugeIncreaseRate: 0.002
 --- !u!1 &1612510017
 GameObject:
   m_ObjectHideFlags: 0
@@ -34515,7 +34524,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.485
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -38349,7 +38358,7 @@ RectTransform:
   m_Father: {fileID: 66280256}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.485, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -39287,7 +39296,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1:12
+  m_text: 10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7137805b022d44869b12d93cb388c588, type: 2}
   m_sharedMaterial: {fileID: 8527393934874279224, guid: 7137805b022d44869b12d93cb388c588, type: 2}

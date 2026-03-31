@@ -149,6 +149,7 @@ public class NormalEnemyBattle : Unit
     {
         if (_currentSceneName != ESceneId.FieldScene.ToString())
         {
+
             if (!GameManager.Instance.IsStageStart)
             {
                 return;

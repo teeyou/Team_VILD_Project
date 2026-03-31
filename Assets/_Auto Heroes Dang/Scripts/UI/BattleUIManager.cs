@@ -1,3 +1,4 @@
+using GAP_LaserSystem;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -18,7 +19,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
     [SerializeField] private Button _defeatButton;
     [SerializeField] private Button _victoryButton;
 
-    [Header("캐릭터 정보 UI 세팅")]
+    [Header("캐릭터 정보 UI")]
     [SerializeField] private Transform _chSlotParent;   //Character Group
     [SerializeField] private GameObject _chSlotPrefab;
 
@@ -30,8 +31,32 @@ public class BattleUIManager : Singleton<BattleUIManager>
     [SerializeField] private TMP_Text _playerTotalHpTMP;
     [SerializeField] private TMP_Text _enemyTotalHpTMP;
     [SerializeField] private Image _difficulty;
+
+    [Header("스킬 UI")]
+    [SerializeField] private Slider _skillSlider;
+    [SerializeField] private Button[] _skillButtons;
+
+    [SerializeField] private float _skillGaugeIncreaseRate = 0.001f;
+
+    private Dictionary<GameObject, Image> _goToSkillIcon = new Dictionary<GameObject, Image>();
+    private Dictionary<GameObject, Image> _goToSkillMask = new Dictionary<GameObject, Image>();
+    private Dictionary<GameObject, TMP_Text> _goToSkillCoolTimeTmp = new Dictionary<GameObject, TMP_Text>();
+
+    
+
     void Start()
     {
+        for (int i = 0; i < _skillButtons.Length; i++)
+        {
+            _skillButtons[i].interactable = false;
+
+            int idx = i;
+            _skillButtons[i].onClick.AddListener(() =>
+            {
+                BattleManager.Instance.UseSkill(idx);
+            });
+        }
+
         _pauseButton.onClick.AddListener(() =>
         {
             if (Time.timeScale == 0f)
@@ -73,9 +98,8 @@ public class BattleUIManager : Singleton<BattleUIManager>
                 GameManager.Instance.IncreaseCurrentStage();
                 ReturnField();
             });
-
-        
     }
+
     public void CreateChSlot(List<GameObject> chList, Dictionary<GameObject,Unit> goToUnit)
     {
         for (int i = 0; i < chList.Count; i++)
@@ -126,6 +150,117 @@ public class BattleUIManager : Singleton<BattleUIManager>
         }
     }
 
+    // 스킬버튼 안에 있는 아이콘, 마스크, 쿨타임 텍스트 세팅
+    public void SetSKillUI(List<GameObject> chList, Dictionary<GameObject, Unit> goToUnit)
+    {
+        for (int i = 0; i < _skillButtons.Length; i++)
+        {
+            Image icon = _skillButtons[i].transform.GetChild(0).GetComponent<Image>();
+            Image mask = _skillButtons[i].transform.GetChild(1).GetComponent<Image>();
+            TMP_Text coolTimeTmp = _skillButtons[i].transform.GetChild(2).GetComponent<TMP_Text>();
+
+            GameObject go = chList[i];
+
+            goToUnit.TryGetValue(go, out Unit unit);
+
+            if (unit != null)
+            {
+                //_goToSkillIcon[go]                            // 아이콘 세팅 필요
+                _goToSkillMask[go] = mask;
+                _goToSkillCoolTimeTmp[go] = coolTimeTmp;
+            }
+        }
+    }
+
+    public void IncreaseSKillGauge()
+    {
+        if (Time.timeScale == 0f)
+        {
+            return;
+        }
+
+        if (_skillSlider.value < 1f)
+        {
+            _skillSlider.value += _skillGaugeIncreaseRate;
+        }
+
+        else
+        {
+            _skillSlider.value = 1f;
+        }
+    }
+
+    public bool TrySkill(int consume)
+    {
+        bool isPossible = CheckSKillPossible(consume);
+
+        if (isPossible)
+        {
+            _skillSlider.value -= _skillSlider.maxValue / 6f * consume;
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool CheckSKillPossible(int consume)
+    {
+        float value = _skillSlider.value;
+        float need = _skillSlider.maxValue / 6f * consume;
+        return value >= need;
+    }
+
+    public void UpdateSkillCool(List<GameObject> chList, Dictionary<GameObject, Unit> goToUnit)
+    {
+        for (int i = 0; i < chList.Count; i++)
+        {
+            GameObject go = chList[i];
+
+            if (goToUnit.TryGetValue(go, out Unit unit))
+            {
+                if (unit.IsDead)
+                {
+                    _skillButtons[i].interactable = false;
+                    _goToSkillCoolTimeTmp[go].text = "Die";
+                    _goToSkillMask[go].fillAmount = 1f;
+                    continue;
+                }
+
+                float currentCool = unit.CurrentSkillCool;
+                float maxCool = unit.MaxSkillCool;
+                if (currentCool > 1000)
+                {
+                    // 스킬 사용 중에 버튼 활성화 막기위한 임시 값
+                    _skillButtons[i].interactable = false;
+                    _goToSkillCoolTimeTmp[go].text = "Used";
+                }
+
+                else if (currentCool > 0)
+                {
+                    _skillButtons[i].interactable = false;
+
+                    _goToSkillCoolTimeTmp[go].text = Mathf.Ceil(currentCool).ToString();
+                    _goToSkillMask[go].fillAmount = currentCool / maxCool;
+                }
+                else
+                {
+                    if (CheckSKillPossible(2))
+                    {
+                        _skillButtons[i].interactable = true;
+                    }
+
+                    else
+                    {
+                        _skillButtons[i].interactable = false;
+                    }
+                        
+                    _goToSkillCoolTimeTmp[go].text = "";
+                    _goToSkillMask[go].fillAmount = 0f;
+                }
+            }
+        }
+    }
+
     public void UpdateCurrentHp(GameObject go, Unit unit)
     {
         _goToCurHpTmp[go].text = unit.CurHp.ToString();
@@ -156,6 +291,11 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
     private void ReturnField()
     {
+        if (Time.timeScale != 1f)
+        {
+            Time.timeScale = 1f;
+        }
+
         SceneLoader.Instance.LoadScene(ESceneId.FieldScene);
     }
 
