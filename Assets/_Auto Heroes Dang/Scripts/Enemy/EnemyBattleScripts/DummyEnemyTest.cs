@@ -2,16 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public enum EnemyState
-{
-    Idle,
-    Rotate,
-    Move,
-    Attack,
-    Die
-}
-
-public class NormalEnemyBattle : Unit
+public class DummyEnemyTest : Unit
 {
     [Header("애니메이터 연결")]
     [SerializeField] protected Animator _animator;
@@ -60,13 +51,6 @@ public class NormalEnemyBattle : Unit
     [SerializeField] protected int _slotCount = 6;
     [SerializeField] protected float _slotRadiusOffset = 0.5f;
     [SerializeField] protected float _slotArriveDistance = 0.2f;
-
-    [Header("몬스터 HP Bar")]
-    [SerializeField] private Transform _hpBarPoint;
-    [SerializeField] private Vector3 _hpBarOffset = new Vector3(0f, 2f, 0f);
-
-    public Transform HpBarPoint => _hpBarPoint;
-    public Vector3 HpBarOffset => _hpBarOffset;
 
     protected float _searchTimer;
     protected float _lastAttackTime = -999f;
@@ -147,13 +131,6 @@ public class NormalEnemyBattle : Unit
 
     protected virtual void Update()
     {
-        if (_currentSceneName != ESceneId.FieldScene.ToString())
-        {
-            if (!GameManager.Instance.IsStageStart)
-            {
-                return;
-            }
-        }
 
         if (_isDead)
             return;
