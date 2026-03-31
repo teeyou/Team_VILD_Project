@@ -79,7 +79,7 @@ public class BossSlashWaveProjectile : MonoBehaviour
 
         if (_owner != null)
         {
-            Debug.Log($"{_owner.name} >> {unit.name} 검기 타격 / 거리={travelDistance:F1} / 데미지={finalDamage}");
+            //Debug.Log($"{_owner.name} >> {unit.name} 검기 타격 / 거리={travelDistance:F1} / 데미지={finalDamage}");
         }
     }
 }

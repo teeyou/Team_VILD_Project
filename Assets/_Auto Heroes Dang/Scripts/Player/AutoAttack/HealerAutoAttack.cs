@@ -53,7 +53,6 @@ public class HealerAutoAttack : AutoAttack
 
             if (unit == null)
             {
-                Debug.Log("unit NULL");
                 return;
             }
 
