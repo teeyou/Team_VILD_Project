@@ -68,8 +68,10 @@ public class AutoAttack : Unit
 
     }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         _animator = GetComponent<Animator>();
         _col = GetComponent<Collider>();
 
