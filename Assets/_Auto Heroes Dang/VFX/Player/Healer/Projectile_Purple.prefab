@@ -9821,9 +9821,9 @@ GameObject:
   - component: {fileID: 1625910593094109082}
   - component: {fileID: 4547182781997141592}
   - component: {fileID: 7213365354255309084}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Projectile_Purple
-  m_TagString: Projectile
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

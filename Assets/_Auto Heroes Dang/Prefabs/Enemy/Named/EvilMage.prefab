@@ -2136,8 +2136,8 @@ MonoBehaviour:
   _projectileSpawnForwardOffset: 1
   _projectileSpeed: 8
   _rotateDuration: 0.2
-  _battleLog: 1
-  _deathLog: 1
+  _battleLog: 0
+  _deathLog: 0
   _drawGizmos: 1
   _attackRange: 1.5
   _skillCool: 0

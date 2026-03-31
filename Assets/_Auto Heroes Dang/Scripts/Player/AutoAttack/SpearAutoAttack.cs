@@ -40,7 +40,9 @@ public class SpearAutoAttack : AutoAttack
         if (_targetTr != null && _targetUnit != null)
         {
             int damage = DamageCalculator.CalculateDamage(_atk, _targetUnit.Def);
+
             damage = (int)(damage * _skillMultiplier / _skillHitCount);
+
             _totalDamage += damage;
             _targetUnit.TakeDamage(damage, transform);
         }

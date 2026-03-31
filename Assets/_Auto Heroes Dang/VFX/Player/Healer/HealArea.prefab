@@ -49062,7 +49062,7 @@ GameObject:
   - component: {fileID: 2062842160461242298}
   - component: {fileID: 1738641533307909175}
   - component: {fileID: 5852275492566097950}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: HealArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
