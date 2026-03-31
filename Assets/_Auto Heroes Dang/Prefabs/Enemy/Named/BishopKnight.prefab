@@ -474,6 +474,10 @@ MonoBehaviour:
   _attackRange: 1.5
   _skillCool: 0
   _skillMultiplier: 1
+  _useCombatSlotMove: 1
+  _slotCount: 8
+  _slotRadiusOffset: 0.2
+  _slotArriveDistance: 0.3
   _skillRange: 3
   _skillLoopCount: 1
   _firstSkillDelay: 2
@@ -527,7 +531,7 @@ MonoBehaviour:
     m_Bits: 1048576
   _shieldRange: 8
   _includeSelf: 1
-  _targetCount: 2
+  _targetCount: 5
   _defBuffPercent: 0.3
   _buffDuration: 10
   _shieldVfxPrefab: {fileID: 4631137236932131032, guid: b8b49dd58483c54419af7794079e1292, type: 3}

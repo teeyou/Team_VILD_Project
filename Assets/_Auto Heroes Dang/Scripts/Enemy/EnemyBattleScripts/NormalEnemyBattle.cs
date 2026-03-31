@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
 public enum EnemyState
 {
@@ -55,6 +54,12 @@ public class NormalEnemyBattle : Unit
     [SerializeField] protected float _skillCool;
     [SerializeField] protected float _skillMultiplier = 1f;
 
+    [Header("전투 슬롯 이동")]
+    [SerializeField] protected bool _useCombatSlotMove = true;
+    [SerializeField] protected int _slotCount = 6;
+    [SerializeField] protected float _slotRadiusOffset = 0.5f;
+    [SerializeField] protected float _slotArriveDistance = 0.2f;
+
     protected float _searchTimer;
     protected float _lastAttackTime = -999f;
     protected float _nextActionTime;
@@ -84,7 +89,10 @@ public class NormalEnemyBattle : Unit
     public int Atk => _atk;
     public float SkillMultiplier => _skillMultiplier;
 
-    private string _currentSceneName;
+    protected override void Awake()
+    {
+        base.Awake();
+    }
 
     private void Awake()
     {
@@ -107,6 +115,7 @@ public class NormalEnemyBattle : Unit
         //ApplyStatusData();
 
         _currentSceneName = SceneManager.GetActiveScene().name;
+         ApplyStatusData();
     }
 
     protected virtual void ApplyStatusData()
@@ -135,14 +144,6 @@ public class NormalEnemyBattle : Unit
 
     protected virtual void Update()
     {
-        if (_currentSceneName != ESceneId.FieldScene.ToString())
-        {
-            if (!GameManager.Instance.IsStageStart)
-            {
-                return;
-            }
-        }
-
         if (_isDead)
             return;
 
@@ -217,28 +218,76 @@ public class NormalEnemyBattle : Unit
         if (Time.time < _nextActionTime)
             return;
 
-        float distance = GetDistanceTo(_target);
-        if (distance <= _attackRange + _stopDistanceOffset)
+        float targetDistance = GetDistanceTo(_target);
+        if (targetDistance <= _attackRange + _stopDistanceOffset)
         {
             SetMoveAnimation(false);
             return;
         }
 
-        Vector3 targetPos = _target.transform.position;
-        Vector3 myPos = transform.position;
+        Vector3 moveTargetPos = GetMoveTargetPosition();
 
-        targetPos.y = myPos.y;
-
-        Vector3 direction = (targetPos - myPos).normalized;
-
-        transform.position += direction * _moveSpeed * Time.deltaTime;
-
-        if (direction != Vector3.zero)
+        // 슬롯을 못 받았으면 잠깐 대기
+        if (moveTargetPos == Vector3.zero)
         {
-            transform.forward = direction;
+            SetMoveAnimation(false);
+            return;
         }
 
+        Vector3 myPos = transform.position;
+        moveTargetPos.y = myPos.y;
+
+        Vector3 direction = moveTargetPos - myPos;
+        float slotDistance = direction.magnitude;
+
+        if (slotDistance <= _slotArriveDistance)
+        {
+            // 슬롯에는 도착했지만 아직 공격 사거리 아니면 조금 더 접근할 수도 있음
+            if (targetDistance <= _attackRange + _stopDistanceOffset)
+            {
+                SetMoveAnimation(false);
+                return;
+            }
+
+            direction = _target.transform.position - myPos;
+            direction.y = 0f;
+        }
+
+        if (direction == Vector3.zero)
+        {
+            SetMoveAnimation(false);
+            return;
+        }
+
+        direction.Normalize();
+
+        transform.position += direction * _moveSpeed * Time.deltaTime;
+        transform.forward = direction;
         SetMoveAnimation(true);
+    }
+
+    protected virtual Vector3 GetMoveTargetPosition()
+    {
+        if (_target == null)
+            return transform.position;
+
+        if (!_useCombatSlotMove)
+            return _target.transform.position;
+
+        float slotRadius = _attackRange + _slotRadiusOffset;
+        return CombatSlotManager.GetSlotPosition(_target.transform, transform, _slotCount, slotRadius);
+    }
+
+    protected virtual void ReleaseCombatSlot()
+    {
+        if (_target != null)
+        {
+            CombatSlotManager.ReleaseSlot(_target.transform, transform);
+        }
+        else
+        {
+            CombatSlotManager.ReleaseAllSlotsForRequester(transform);
+        }
     }
 
     protected virtual void UpdateTarget()
@@ -262,6 +311,7 @@ public class NormalEnemyBattle : Unit
 
             if (distance > _detectRange)
             {
+                ReleaseCombatSlot();
                 _target = null;
                 needNewTarget = true;
             }
@@ -274,7 +324,14 @@ public class NormalEnemyBattle : Unit
             return;
 
         _searchTimer = 0f;
-        _target = FindEnemyInRange();
+
+        Unit newTarget = FindEnemyInRange();
+
+        if (_target != newTarget)
+        {
+            ReleaseCombatSlot();
+            _target = newTarget;
+        }
     }
 
     protected virtual float GetDistanceTo(Unit other)
@@ -341,6 +398,17 @@ public class NormalEnemyBattle : Unit
         if (distance > _attackRange + _stopDistanceOffset)
             return;
 
+        FaceTargetImmediately(_target);
+
+        // 공격 직전에 실제 타겟을 바라보게
+        Vector3 lookDir = _target.transform.position - transform.position;
+        lookDir.y = 0f;
+
+        if (lookDir != Vector3.zero)
+        {
+            transform.forward = lookDir.normalized;
+        }
+
         _lockedAttackTarget = _target;
         _isAttacking = true;
 
@@ -351,6 +419,20 @@ public class NormalEnemyBattle : Unit
             _animator.ResetTrigger("Attack");
             _animator.SetTrigger("Attack");
         }
+    }
+
+    protected virtual void FaceTargetImmediately(Unit target)
+    {
+        if (target == null)
+            return;
+
+        Vector3 lookDir = target.transform.position - transform.position;
+        lookDir.y = 0f;
+
+        if (lookDir == Vector3.zero)
+            return;
+
+        transform.forward = lookDir.normalized;
     }
 
     protected virtual void ApplyDamage()
@@ -413,6 +495,8 @@ public class NormalEnemyBattle : Unit
         _curHp -= finalDamage;
         _totalDamaged += finalDamage;
 
+        ShowDamageText(finalDamage, attacker);
+
         if (_battleLog)
         {
             string attackerName = attacker != null ? attacker.name : "Unknown";
@@ -430,6 +514,8 @@ public class NormalEnemyBattle : Unit
     {
         if (_isDead)
             return;
+
+        ReleaseCombatSlot();
 
         _isDead = true;
         _isAttacking = false;
