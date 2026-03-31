@@ -20,19 +20,20 @@ public class DummyTarget : Unit
     public override void Heal(int value)
     {
     }
-
-    public override void TakeDamage(int damage, Transform target)
+    public override void TakeDamage(int damage, Transform attacker)
     {
-        int finalDamage = Mathf.Max(1, damage - _def);
+        int finalDamage = Mathf.Max(1, damage);
         _curHp -= finalDamage;
 
-        ShowDamageText(finalDamage, target);
+        ShowDamageText(finalDamage, attacker);
+        RefreshHpBar();
 
         Debug.Log($"{name}이 피해 받음 / 남은 HP : {_curHp}");
 
         if (_curHp <= 0)
         {
             _curHp = 0;
+            RefreshHpBar();
             Die();
         }
     }
@@ -53,6 +54,11 @@ public class DummyTarget : Unit
         _maxHp = 2000;
         _curHp = _maxHp;
         _def = 2;
+
+        if (HpBarSpawner.Instance != null)
+        {
+            HpBarSpawner.Instance.SpawnHpBar(this);
+        }
     }
 
     void Update()

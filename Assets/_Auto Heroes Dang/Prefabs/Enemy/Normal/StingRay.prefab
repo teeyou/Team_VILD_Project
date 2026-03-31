@@ -288,6 +288,12 @@ MonoBehaviour:
   _attackRange: 1.5
   _skillCool: 0
   _skillMultiplier: 1
+  _useCombatSlotMove: 0
+  _slotCount: 6
+  _slotRadiusOffset: 0.5
+  _slotArriveDistance: 0.2
+  _hpBarPoint: {fileID: 0}
+  _hpBarOffset: {x: 0, y: 2, z: 0}
 --- !u!65 &8260227199831818821
 BoxCollider:
   m_ObjectHideFlags: 0
