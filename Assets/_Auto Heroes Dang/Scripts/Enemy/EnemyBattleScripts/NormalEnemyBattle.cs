@@ -89,16 +89,21 @@ public class NormalEnemyBattle : Unit
     public int Atk => _atk;
     public float SkillMultiplier => _skillMultiplier;
 
-protected virtual void Start()
-{
-    if (_animator == null)
-        _animator = GetComponent<Animator>();
+    protected override void Awake()
+    {
+        base.Awake();
+    }
 
-    if (_targetLayer == 0)
-        _targetLayer = LayerMask.GetMask("Player");
+    protected virtual void Start()
+    {
+        if (_animator == null)
+            _animator = GetComponent<Animator>();
 
-    ApplyStatusData();
-}
+        if (_targetLayer == 0)
+            _targetLayer = LayerMask.GetMask("Player");
+
+         ApplyStatusData();
+    }
 
     protected virtual void ApplyStatusData()
     {
@@ -476,6 +481,8 @@ protected virtual void Start()
         int finalDamage = Mathf.Max(1, damage);
         _curHp -= finalDamage;
         _totalDamaged += finalDamage;
+
+        ShowDamageText(finalDamage, attacker);
 
         if (_battleLog)
         {

@@ -64,7 +64,10 @@ public abstract class Unit : MonoBehaviour, IDamageable
     protected int _totalDamage;     // 내가 준 피해량
     protected int _totalDamaged;    // 내가 받은 피해량
     protected float _lifetime;      // 전투 중 살아남은 시간
-    
+
+    protected DamageTextReceiver _damageTextReceiver; // 데미지 텍스트
+    protected HpBar _HpBar; // 캐릭터 HP바
+
     protected Transform _targetTr;  // 공격 대상 (몬스터 -> 플레이어, 플레이어 -> 몬스터)
 
     protected bool _isDead;
@@ -91,6 +94,36 @@ public abstract class Unit : MonoBehaviour, IDamageable
     public Transform TargetTr { get { return _targetTr; } set { _targetTr = value; } }
     
     public int CharacterNumber { get; set; }
+
+    // 리시버 연결
+    protected virtual void Awake()
+    {
+        _damageTextReceiver = GetComponent<DamageTextReceiver>();
+    }
+
+    // 데미지 텍스트를 공통으로 띄우는 함수
+    protected void ShowDamageText(int damage, Transform attacker, bool isCritical = false)
+    {
+        if (_damageTextReceiver != null)
+        {
+            _damageTextReceiver.ShowDamage(damage, attacker, isCritical);
+        }
+    }
+
+    // hp바
+    public void SetHpBar(HpBar hpBar)
+    {
+        _HpBar = hpBar;
+        RefreshHpBar();
+    }
+
+    protected void RefreshHpBar()
+    {
+        if (_HpBar != null)
+        {
+            _HpBar.SetHp(_curHp, _maxHp);
+        }
+    }
 
     public abstract void Attack();
 
