@@ -62,6 +62,9 @@ public class AutoAttack : Unit
         _skillEnd = true;
 
         CharacterNumber = number;
+        TotalDamage = 0;
+        TotalDamaged = 0;
+
     }
 
     private void Awake()
@@ -77,10 +80,16 @@ public class AutoAttack : Unit
         _currentSceneName = SceneManager.GetActiveScene().name;
     }
 
+    //private void OnEnable()
+    //{
+    //    _currentSceneName = SceneManager.GetActiveScene().name;
+    //}
+
     void Update()
     {
         if (_currentSceneName != ESceneId.FieldScene.ToString())
-        { 
+        {
+            Debug.Log($"{_currentSceneName} , {ESceneId.FieldScene.ToString()}");
             if (!GameManager.Instance.IsStageStart)
             {
                 return;
@@ -102,7 +111,7 @@ public class AutoAttack : Unit
         }
 
         // 타겟이 NULL 이거나 오브젝트 비활성화면 타겟 탐색
-        if (_targetTr == null || _targetTr.gameObject.activeSelf == false)
+        if (_targetTr == null)
         {
             TryCheckTarget();
         }
@@ -189,7 +198,7 @@ public class AutoAttack : Unit
 
     private Vector3 CheckTarget(float radius, LayerMask mask)
     {
-        //Debug.Log("CheckTarget");
+        Debug.Log("CheckTarget");
 
         Collider[] cols = Physics.OverlapSphere(transform.position, radius, mask);
 
@@ -221,7 +230,7 @@ public class AutoAttack : Unit
         if (mask == _layerMask)
         {
             _targetTr = cols[idx].transform;
-            //Debug.Log($"제일 가까운 타겟 : {_targetTr.name}");
+            Debug.Log($"제일 가까운 타겟 : {_targetTr.name}");
         }
 
         else if (mask == _playerMask)
@@ -327,8 +336,15 @@ public class AutoAttack : Unit
         _animator.SetTrigger("Die");
         _col.enabled = false;
 
-        // 5초 뒤에 파괴
-        Destroy(gameObject, 5f);
+        // 5초 뒤에 비활성화
+        StartCoroutine(CoDie());
+        //Destroy(gameObject, 5f);
+    }
+
+    private IEnumerator CoDie()
+    {
+        yield return new WaitForSeconds(5f);
+        gameObject.SetActive(false);
     }
 
     private void OnDrawGizmosSelected()

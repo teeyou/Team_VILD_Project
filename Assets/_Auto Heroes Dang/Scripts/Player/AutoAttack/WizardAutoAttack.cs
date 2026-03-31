@@ -6,11 +6,6 @@ public class WizardAutoAttack : AutoAttack
 {
     [SerializeField] private float _fpOffset = 1f;
 
-    private void Start()
-    {
-        //_skillMultiplier = 1.8f;
-    }
-
     public override void Attack()
     {
         Vector3 pos = transform.position;

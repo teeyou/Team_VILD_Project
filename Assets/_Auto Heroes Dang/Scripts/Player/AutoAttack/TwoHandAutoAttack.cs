@@ -6,11 +6,6 @@ public class TwoHandAutoAttack : AutoAttack
 {
     private int _skillHitCount = 6;
 
-    private void Start()
-    {
-        //_skillMultiplier = 2f;
-    }
-
     public override void Attack()
     {
         base.Attack();

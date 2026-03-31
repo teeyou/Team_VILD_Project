@@ -312,6 +312,11 @@ public class BattleManager : Singleton<BattleManager>
     {
         for (int i = 0; i < _enemies.Length; i++)
         {
+            if (_enemies[i] == null)
+            {
+                continue;
+            }
+
             GameObject go = Instantiate(_enemies[i]);
             _enemyList.Add(go);
 
