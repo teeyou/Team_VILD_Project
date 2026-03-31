@@ -36,7 +36,8 @@ public class AutoAttack : Unit
 
         _atk = data.DefaultAtk;
         _def = data.DefaultDef;
-        _cp = _curHp + _atk + _def;
+        //_cp = _curHp + _atk + _def;
+        _cp = CPCalculator.CalculateCP(_maxHp, _atk, _def);
 
         _range = data.Range;
 
@@ -198,7 +199,7 @@ public class AutoAttack : Unit
 
     private Vector3 CheckTarget(float radius, LayerMask mask)
     {
-        Debug.Log("CheckTarget");
+        //Debug.Log("CheckTarget");
 
         Collider[] cols = Physics.OverlapSphere(transform.position, radius, mask);
 
@@ -230,7 +231,7 @@ public class AutoAttack : Unit
         if (mask == _layerMask)
         {
             _targetTr = cols[idx].transform;
-            Debug.Log($"제일 가까운 타겟 : {_targetTr.name}");
+            //Debug.Log($"제일 가까운 타겟 : {_targetTr.name}");
         }
 
         else if (mask == _playerMask)
@@ -250,7 +251,7 @@ public class AutoAttack : Unit
         // 겹쳐진 캐릭터 반대방향 세팅
         if (dir != Vector3.zero)
         {
-            Debug.Log("살짝 이동");
+            //Debug.Log("살짝 이동");
             transform.position += dir * 0.2f;
         }
     }
@@ -301,15 +302,15 @@ public class AutoAttack : Unit
         // 필드 씬이면 데미지 안 받음
         if (_currentSceneName == ESceneId.FieldScene.ToString())
         {
-            Debug.Log("필드씬에서 데미지 안 받음");
+            //Debug.Log("필드씬에서 데미지 안 받음");
             return;
         }
 
-        Debug.Log($"{target.name} 로부터 데미지 {damage} 받음");
+        //Debug.Log($"{target.name} 로부터 데미지 {damage} 받음");
 
         _curHp -= damage;
         _totalDamaged += damage;
-        Debug.Log($"현재 HP : {_curHp}");
+        //Debug.Log($"현재 HP : {_curHp}");
         
         //_animator.SetTrigger("Hit");
 

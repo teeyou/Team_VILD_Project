@@ -33,10 +33,12 @@ public class ArrowSkill : Projectile
             
             ParticleManager.Instance.Play("Hit_GreenLarge", hitPoint);
 
-            other.GetComponent<Unit>().TakeDamage(Atk, transform);
-            Owner.TotalDamage += Atk;
-            Debug.Log($" ArrowSkill - {other.name} - 데미지 {Atk} 입음");
-            
+            if (Owner != null)
+            {
+                other.GetComponent<Unit>().TakeDamage(Atk, transform);
+                Owner.TotalDamage += Atk;
+            }
+
             Destroy(gameObject);
         }
     }
