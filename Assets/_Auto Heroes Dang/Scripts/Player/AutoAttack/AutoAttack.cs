@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -30,7 +29,7 @@ public class AutoAttack : Unit
     private float _checkTargetInterval = 1f;
     private float _checkTargetTimer = 0f;
 
-    public void Init(BaseStatus_SO data)
+    public void Init(BaseStatus_SO data, int number)
     {
         _maxHp = data.DefaultMaxHp;
         _curHp = data.DefaultMaxHp;
@@ -61,6 +60,8 @@ public class AutoAttack : Unit
 
         _isAttack = false;
         _skillEnd = true;
+
+        CharacterNumber = number;
     }
 
     private void Awake()
@@ -71,14 +72,29 @@ public class AutoAttack : Unit
         _playerMask = LayerMask.GetMask("Player");
     }
 
+    private void Start()
+    {
+        _currentSceneName = SceneManager.GetActiveScene().name;
+    }
+
     void Update()
     {
-        _checkTargetTimer += Time.deltaTime;
+        if (_currentSceneName != ESceneId.FieldScene.ToString())
+        { 
+            if (!GameManager.Instance.IsStageStart)
+            {
+                return;
+            }
+        }
 
         if (_isDead)
         {
             return;
         }
+
+        _lifetime += Time.deltaTime;    // 전투 중 살아남은 시간
+
+        _checkTargetTimer += Time.deltaTime;    // 일정주기로 타겟 탐색
 
         if (_skillEnd)
         {
@@ -86,25 +102,9 @@ public class AutoAttack : Unit
         }
 
         // 타겟이 NULL 이거나 오브젝트 비활성화면 타겟 탐색
-        if (_targetTr == null || !_targetTr.gameObject.activeSelf)
+        if (_targetTr == null || _targetTr.gameObject.activeSelf == false)
         {
-            if (GameManager.Instance.IsFirstPoint)
-            {
-                // 시작 지점에서는 타겟 탐색 안함
-                return;
-            }
-
-            // 매 프레임 탐색하면 과부하
-            // 일정 간격마다 탐색
-            if (_checkTargetTimer < _checkTargetInterval)
-            {
-                return;
-            }
-
-            _checkTargetTimer = 0f;
-
-            CheckTarget(_searchRadius, _layerMask);
-            _animator.SetBool("Move", false);
+            TryCheckTarget();
         }
 
         if (_targetTr != null)
@@ -112,7 +112,6 @@ public class AutoAttack : Unit
             // _targetUnit 캐싱
             if (_targetUnit == null)
             {
-                Debug.Log("_targetUnit 최초 캐싱");
                 _targetUnit = _targetTr.GetComponent<Unit>();
             }
 
@@ -163,9 +162,34 @@ public class AutoAttack : Unit
             }
         }
     }
+
+    private void TryCheckTarget()
+    {
+        if (_currentSceneName == ESceneId.FieldScene.ToString())
+        {
+            if (GameManager.Instance.IsFirstPoint)
+            {
+                // 필드 씬 시작 지점에서는 타겟 탐색 안함
+                return;
+            }
+        }
+
+        // 매 프레임 탐색하면 과부하
+        // 일정 간격마다 탐색
+        if (_checkTargetTimer < _checkTargetInterval)
+        {
+            return;
+        }
+
+        _checkTargetTimer = 0f;
+
+        CheckTarget(_searchRadius, _layerMask);
+        _animator.SetBool("Move", false);
+    }
+
     private Vector3 CheckTarget(float radius, LayerMask mask)
     {
-        Debug.Log("CheckTarget");
+        //Debug.Log("CheckTarget");
 
         Collider[] cols = Physics.OverlapSphere(transform.position, radius, mask);
 
@@ -275,6 +299,7 @@ public class AutoAttack : Unit
         Debug.Log($"{target.name} 로부터 데미지 {damage} 받음");
 
         _curHp -= damage;
+        _totalDamaged += damage;
         Debug.Log($"현재 HP : {_curHp}");
         
         //_animator.SetTrigger("Hit");
@@ -291,7 +316,6 @@ public class AutoAttack : Unit
     }
     public override void Heal(int value)
     {
-        Debug.Log($"{transform.name} Heal - {value}");
         _curHp += value;
 
         _curHp = Mathf.Clamp(_curHp, 0, _maxHp);

@@ -18,6 +18,7 @@ public class Projectile : MonoBehaviour
     protected Collider _col;
     protected float _timer = 0f;
 
+    public Unit Owner { get; set; }
     public int Atk { get; set; }
     public Transform TargetTr {  get; set; }
 

@@ -8,15 +8,15 @@ public class CameraBattleScene : MonoBehaviour
     //[SerializeField] private CinemachineVirtualCamera _readyCam;
     [SerializeField] private CinemachineVirtualCamera _startCam;
 
-    private CinemachineBrain _brain;
+    //private CinemachineBrain _brain;
 
     private const int Default_Priority = 10;
     private const int High_Priority = 11;
 
-    private ICinemachineCamera _currentCam;
+    //private ICinemachineCamera _currentCam;
     private void Awake()
     {
-        _brain = GetComponent<CinemachineBrain>();
+        //_brain = GetComponent<CinemachineBrain>();
     }
 
     void Start()
@@ -26,9 +26,8 @@ public class CameraBattleScene : MonoBehaviour
 
     void Update()
     {
-        if (!BattleManager.Instance.IsStart)
+        if (BattleManager.Instance.BattleState == EBattleState.Start)
         {
-            BattleManager.Instance.IsStart = true;
             _startCam.Priority = High_Priority;
         }
     }

@@ -14,7 +14,7 @@ public class HealerAttack : Projectile
             ParticleManager.Instance.Play("Hit_HealerAttack", hitPoint);
 
             other.GetComponent<Unit>().TakeDamage(Atk, transform);
-
+            Owner.TotalDamage += Atk;
             Debug.Log($"{other.name} - WizardAttack 데미지 {Atk} 입음");
 
             Destroy(gameObject);

@@ -383,14 +383,13 @@ GameObject:
   - component: {fileID: 627809227}
   - component: {fileID: 627809226}
   - component: {fileID: 627809228}
-  - component: {fileID: 627809229}
   m_Layer: 5
   m_Name: Frame Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &627809225
 RectTransform:
   m_ObjectHideFlags: 0
@@ -459,28 +458,10 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 627809224}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &627809229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 627809224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeffe27743d0be346b0952a0bc59866f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animations:
-  - type: 3
-    speed: 10
-    duration: 2
-    timer: 0
-  _targetPosition: {x: 0, y: 0}
 --- !u!1 &1143786078
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,7 +927,6 @@ GameObject:
   - component: {fileID: 1565023529}
   - component: {fileID: 1565023531}
   - component: {fileID: 1565023530}
-  - component: {fileID: 1565023532}
   - component: {fileID: 1565023533}
   m_Layer: 5
   m_Name: Frame Left
@@ -954,7 +934,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1565023529
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1015,24 +995,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1565023528}
   m_CullTransparentMesh: 1
---- !u!114 &1565023532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1565023528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeffe27743d0be346b0952a0bc59866f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animations:
-  - type: 3
-    speed: 10
-    duration: 0.2
-    timer: 0
-  _targetPosition: {x: 0, y: 0}
 --- !u!225 &1565023533
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1041,7 +1003,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1565023528}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0

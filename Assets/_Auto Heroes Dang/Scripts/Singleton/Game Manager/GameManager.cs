@@ -24,6 +24,8 @@ public class GameManager : Singleton<GameManager>
     public EGameStage CurrentStage { get { return _currentStage; } }
 
     public bool IsFirstPoint { get; set; } = true;
+    
+    public bool IsStageStart { get; set; } = false;
 
     protected override void Awake()
     {

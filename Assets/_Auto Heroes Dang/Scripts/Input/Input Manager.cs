@@ -11,13 +11,11 @@ public class InputManager : Singleton<InputManager>
     public bool IsPressedH { get; private set; } = false;   // 마을 (홈)
     public bool IsPressedESC { get; private set; } = false; // 설정 또는 종료
 
-    // Test Code
-    public bool IsPressedNum1 { get; private set; } = false;
-    public bool IsPressedNum2 { get; private set; } = false;
-    public bool IsPressedNum3 { get; private set; } = false;
-    public bool IsPressedNum4 { get; private set; } = false;
-
     public bool IsPressedSpace { get; private set; } = false;
+
+    public bool IsMouseLeftDown { get; private set; } = false;
+    public bool IsMouseLeftStay { get; private set; } = false;
+    public bool IsMouseLeftUp { get; private set; } = false;
 
     private void Update()
     {
@@ -31,12 +29,10 @@ public class InputManager : Singleton<InputManager>
 
         IsPressedESC = Input.GetKeyDown(KeyCode.Escape);
 
-        // Test Code
-        IsPressedNum1 = Input.GetKeyDown(KeyCode.Alpha1);
-        IsPressedNum2 = Input.GetKeyDown(KeyCode.Alpha2);
-        IsPressedNum3 = Input.GetKeyDown(KeyCode.Alpha3);
-        IsPressedNum4 = Input.GetKeyDown(KeyCode.Alpha4);
-
         IsPressedSpace = Input.GetKeyDown(KeyCode.Space);
+
+        IsMouseLeftDown = Input.GetMouseButtonDown(0);
+        IsMouseLeftStay = Input.GetMouseButton(0);
+        IsMouseLeftUp = Input.GetMouseButtonUp(0);
     }
 }

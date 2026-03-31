@@ -7,8 +7,6 @@ public class FieldUI : MonoBehaviour
     [SerializeField] private GameObject _stagePanel;    // 전체 스테이지 패널 ( Enemy Panel / Boss Panel / 스타트 버튼)
     [SerializeField] private GameObject _enemy;         // Enemy Panel
     [SerializeField] private GameObject _boss;          // Boss Panel
-    [SerializeField] private GameObject _nextSceneButton;          // 다음 씬 이동 버튼
-
 
     [SerializeField] private AnimateUI _uiAnimate;
 
@@ -22,11 +20,6 @@ public class FieldUI : MonoBehaviour
         if (!_stagePanel.activeSelf)     // <----- stagePanel 상시 On 상태로 변경
         { 
             _stagePanel.SetActive(true); 
-        }
-
-        if (_nextSceneButton.activeSelf)
-        {
-            _nextSceneButton.SetActive(false);
         }
 
 
@@ -70,7 +63,6 @@ public class FieldUI : MonoBehaviour
             _enemyAnimate.PlayAnimate(0);
         }
 
-        _nextSceneButton.SetActive(true);
     }
 
     public void ToggleStagePanel()
@@ -84,7 +76,6 @@ public class FieldUI : MonoBehaviour
             if (_enemyAnimate != null) _enemyAnimate.PlayAnimate(1);
         }
 
-        _nextSceneButton.SetActive(false);
 
     }
 

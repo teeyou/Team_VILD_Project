@@ -89,7 +89,8 @@ public abstract class Unit : MonoBehaviour, IDamageable
     public int TotalDamaged { get { return _totalDamaged; } set { _totalDamaged = value; } }
     public float LifeTime { get { return _lifetime; } set { _lifetime = value; } }
     public Transform TargetTr { get { return _targetTr; } set { _targetTr = value; } }
-
+    
+    public int CharacterNumber { get; set; }
 
     public abstract void Attack();
 
