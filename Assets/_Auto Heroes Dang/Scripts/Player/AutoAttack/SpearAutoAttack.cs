@@ -5,12 +5,6 @@ using UnityEngine;
 public class SpearAutoAttack : AutoAttack
 {
     private int _skillHitCount = 4;
-
-    private void Start()
-    {
-        //_skillMultiplier = 2f;
-    }
-
     public override void Attack()
     {
         base.Attack();

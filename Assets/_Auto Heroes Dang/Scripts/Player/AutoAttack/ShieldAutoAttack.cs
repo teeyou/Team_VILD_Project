@@ -7,11 +7,7 @@ public class ShieldAutoAttack : AutoAttack
     [SerializeField] private int _type = 0;
 
     private int _skillHitCount = 2;
-    private void Start()
-    {
-        //_skillMultiplier = 1.5f;
-    }
-    
+
     public override void Attack()
     {
         base.Attack();

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 105
   _chName: BishopKnight
-  _defaultMaxHp: 10
+  _defaultMaxHp: 1000
   _defaultAtk: 120
   _defaultDef: 50
   _range: 2
