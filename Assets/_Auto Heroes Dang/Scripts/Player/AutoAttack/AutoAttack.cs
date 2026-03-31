@@ -13,8 +13,8 @@ public class AutoAttack : Unit
     private Animator _animator;
     private Collider _col;
 
-    private float _skillCool;
-    private float _currentSkillCool;
+    //private float _skillCool;
+    //private float _currentSkillCool;
 
     private bool _skillEnd;
 
@@ -43,10 +43,10 @@ public class AutoAttack : Unit
 
         _moveSpeed = data.MoveSpeed;
 
-        _skillCool = data.SkillCool;
+        _maxSkillCool = data.SkillCool;
         _skillMultiplier = data.SkillMultiplier;
 
-        _currentSkillCool = _skillCool;
+        _currentSkillCool = _maxSkillCool;
 
         _attackType = data.AttackType;
 
@@ -65,7 +65,7 @@ public class AutoAttack : Unit
         CharacterNumber = number;
         TotalDamage = 0;
         TotalDamaged = 0;
-
+        IsSkillUsed = false;
     }
 
     protected override void Awake()
@@ -114,7 +114,7 @@ public class AutoAttack : Unit
         }
 
         // 타겟이 NULL 이거나 오브젝트 비활성화면 타겟 탐색
-        if (_targetTr == null)
+        if (_targetTr == null || _targetTr.gameObject.activeSelf == false)
         {
             TryCheckTarget();
         }
@@ -161,9 +161,28 @@ public class AutoAttack : Unit
                 
                 if (_currentSkillCool < 0f)
                 {
-                    _isAttack = true;
-                    _skillEnd = false;
-                    _animator.SetTrigger("Skill");
+                    if (_currentSceneName == ESceneId.FieldScene.ToString())
+                    {
+                        // 필드 씬에서는 자동으로 스킬 사용
+                        _isAttack = true;
+                        _skillEnd = false;
+                        _animator.SetTrigger("Skill");
+                    }
+
+                    else
+                    {
+                        // 배틀 씬에서는 버튼 누르면 스킬 사용
+                        if (IsSkillUsed)
+                        {
+                            _currentSkillCool = 1234; // 스킬 사용 중에 스킬 버튼 막기. 스킬 끝나면 MaxCool로 세팅됨
+
+                            IsSkillUsed = false;
+
+                            _isAttack = true;
+                            _skillEnd = false;
+                            _animator.SetTrigger("Skill");
+                        }
+                    }
                 }
 
                 else
@@ -275,7 +294,7 @@ public class AutoAttack : Unit
         yield return new WaitForSeconds(sec);
 
         _isAttack = false;
-        _currentSkillCool = _skillCool;
+        _currentSkillCool = _maxSkillCool;
         _skillEnd = true;   //스킬 쿨다운 시작
     }
 
