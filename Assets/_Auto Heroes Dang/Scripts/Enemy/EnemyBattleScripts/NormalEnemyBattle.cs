@@ -94,7 +94,7 @@ public class NormalEnemyBattle : Unit
         base.Awake();
     }
 
-    protected virtual void Start()
+    private void Awake()
     {
         if (_animator == null)
             _animator = GetComponent<Animator>();
@@ -102,6 +102,19 @@ public class NormalEnemyBattle : Unit
         if (_targetLayer == 0)
             _targetLayer = LayerMask.GetMask("Player");
 
+        ApplyStatusData();
+    }
+    protected virtual void Start()
+    {
+        //if (_animator == null)
+        //    _animator = GetComponent<Animator>();
+
+        //if (_targetLayer == 0)
+        //    _targetLayer = LayerMask.GetMask("Player");
+
+        //ApplyStatusData();
+
+        _currentSceneName = SceneManager.GetActiveScene().name;
          ApplyStatusData();
     }
 

@@ -122,6 +122,9 @@ public class BattleManager : Singleton<BattleManager>
         CreatePlacementPlane();
         SpawnPlayerCharacters();
         SpawnEnemies();
+
+        BattleUIManager.Instance.UpdateTotalHp(true, _playerCharacterList, _gameObjectToUnit);
+        BattleUIManager.Instance.UpdateTotalHp(false, _enemyList, _enemyGoToUnit);
     }
 
     void Update()
@@ -261,30 +264,30 @@ public class BattleManager : Singleton<BattleManager>
 
     private void CheckPlayerStatus()
     {
-        // 모두 죽으면 패배
         foreach (Unit unit in _gameObjectToUnit.Values)
         {
-            if (!unit.IsDead)
-            {
-                return;
-            }
+            BattleUIManager.Instance.UpdateCurrentHp(unit.gameObject, unit);
         }
 
-        _battleState = EBattleState.Defeat;
+        int totalHp = BattleUIManager.Instance.UpdateTotalHp(true, _playerCharacterList, _gameObjectToUnit);
+
+        // 모두 죽었으면 패배
+        if (totalHp <= 0)
+        {
+            _battleState = EBattleState.Defeat;
+        }
+
     }
 
     private void CheckEnemiesStatus()
     {
         // 모두 죽으면 승리
-        foreach (Unit unit in _enemyGoToUnit.Values)
-        {
-            if (!unit.IsDead)
-            {
-                return;
-            }
-        }
+        int totalHp = BattleUIManager.Instance.UpdateTotalHp(false, _enemyList, _enemyGoToUnit);
 
-        _battleState = EBattleState.Victory;
+        if (totalHp <= 0)
+        {
+            _battleState = EBattleState.Victory;
+        }
     }
 
     private void CreatePlacementPlane()
@@ -321,6 +324,9 @@ public class BattleManager : Singleton<BattleManager>
             _enemyList.Add(go);
 
             Unit unit = go.GetComponent<Unit>();
+            
+            Debug.Log($"unit : {unit}, Hp : {unit.MaxHp} / {unit.CurHp}");
+
             _enemyGoToUnit[go] = unit;
 
             go.transform.position = _enemyStartingPosList[i];
@@ -353,7 +359,7 @@ public class BattleManager : Singleton<BattleManager>
         // 메인 캐릭터 제외한 나머지 캐릭터 세팅
         List<int> numberList = DataSource.Instance.GetCharacterList();
 
-        int startPositionIdx = 2;    // 0번은 메인 캐릭터
+        int startPositionIdx = 1;    // 0번은 메인 캐릭터
         for (int i = 0; i < numberList.Count; i++)
         {
             GameObject go = _playerSpawner.SpawnPlayer(numberList[i], _playerStartingPosList[i + startPositionIdx], PlayerStartingRotation);
@@ -363,6 +369,9 @@ public class BattleManager : Singleton<BattleManager>
             //unit.enabled = false;
             _gameObjectToUnit[go] = unit;
         }
+
+        // UI에 캐릭터 슬롯 생성
+        BattleUIManager.Instance.CreateChSlot(_playerCharacterList, _gameObjectToUnit);
     }
 
     public void StartBattle()

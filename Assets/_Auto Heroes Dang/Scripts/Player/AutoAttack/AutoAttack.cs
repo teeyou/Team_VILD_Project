@@ -90,7 +90,7 @@ public class AutoAttack : Unit
     {
         if (_currentSceneName != ESceneId.FieldScene.ToString())
         {
-            Debug.Log($"{_currentSceneName} , {ESceneId.FieldScene.ToString()}");
+            //Debug.Log($"{_currentSceneName} , {ESceneId.FieldScene.ToString()}");
             if (!GameManager.Instance.IsStageStart)
             {
                 return;
@@ -321,6 +321,7 @@ public class AutoAttack : Unit
                 return;
             }
 
+            _curHp = 0;
             Die();
         }
     }
