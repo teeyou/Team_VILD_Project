@@ -153,43 +153,44 @@ public class AutoAttack : Unit
             {
                 _animator.SetBool("Move", false);
 
+                // 이미 공격중이면 여기서 종료
                 if (_isAttack)
                 {
                     return;
                 }
 
-                
-                if (_currentSkillCool < 0f)
+                // 필드 씬에서 스킬 자동 사용
+                if (_currentSceneName == ESceneId.FieldScene.ToString())
                 {
-                    if (_currentSceneName == ESceneId.FieldScene.ToString())
+                    if (_currentSkillCool < 0f)
                     {
                         // 필드 씬에서는 자동으로 스킬 사용
                         _isAttack = true;
                         _skillEnd = false;
                         _animator.SetTrigger("Skill");
                     }
-
-                    else
-                    {
-                        // 배틀 씬에서는 버튼 누르면 스킬 사용
-                        if (IsSkillUsed)
-                        {
-                            _currentSkillCool = 1234; // 스킬 사용 중에 스킬 버튼 막기. 스킬 끝나면 MaxCool로 세팅됨
-
-                            IsSkillUsed = false;
-
-                            _isAttack = true;
-                            _skillEnd = false;
-                            _animator.SetTrigger("Skill");
-                        }
-                    }
                 }
 
+                // 배틀 씬에서 스킬 버튼 누르면 사용
                 else
                 {
+                    if (_currentSkillCool < 0f && IsSkillUsed)
+                    {
+                        _currentSkillCool = 1234; // 스킬 사용 중에 스킬 버튼 막기. 스킬 끝나면 MaxCool로 세팅됨
+
+                        IsSkillUsed = false;
+
+                        _isAttack = true;
+                        _skillEnd = false;
+                        _animator.SetTrigger("Skill");
+
+                        return;
+                    }
+
                     _isAttack = true;
                     _animator.SetTrigger("Attack");
                 }
+
             }
         }
     }
