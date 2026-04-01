@@ -58,8 +58,8 @@ public class NormalEnemyBattle : Unit
     [Header("전투 슬롯 이동")]
     [SerializeField] protected bool _useCombatSlotMove = true;
     [SerializeField] protected int _slotCount = 6;
-    [SerializeField] protected float _slotRadiusOffset = 0.5f;
-    [SerializeField] protected float _slotArriveDistance = 0.2f;
+    [SerializeField] protected float _slotRadiusOffset = 0.2f;
+    [SerializeField] protected float _slotArriveDistance = 0.3f;
 
     protected float _searchTimer;
     protected float _lastAttackTime = -999f;
@@ -546,14 +546,24 @@ public class NormalEnemyBattle : Unit
 
         Destroy(gameObject, 3f);
     }
-
     private void DisableBuffVfx(string childName)
     {
-        Transform child = transform.Find(childName);
+        Transform[] children = GetComponentsInChildren<Transform>(true);
 
-        if (child != null)
+        bool found = false;
+
+        for (int i = 0; i < children.Length; i++)
         {
-            child.gameObject.SetActive(false);
+            if (children[i].name.Contains(childName))
+            {
+                children[i].gameObject.SetActive(false);
+                found = true;
+            }
+        }
+
+        if (!found)
+        {
+            // Debug.LogWarning($"{name} : {childName} 못 찾음");
         }
     }
 

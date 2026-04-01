@@ -4,10 +4,7 @@ public class DamageTextManager : MonoBehaviour
 {
     public static DamageTextManager Instance { get; private set; }
 
-    [Header("Canvas")]
     [SerializeField] private Canvas _targetCanvas;
-
-    [Header("데미지 텍스트 프리팹")]
     [SerializeField] private DamageText _damageTextPrefab;
 
     private Camera _mainCamera;
@@ -31,7 +28,10 @@ public class DamageTextManager : MonoBehaviour
             _canvasRectTransform = _targetCanvas.GetComponent<RectTransform>();
     }
 
-    public void ShowDamage(Unit targetUnit, int damage, Transform attacker = null, bool isCritical = false)
+    // 피격당한 유닛 위치에 데미지 텍스트를 생성하는 함수
+    // 플레이어 공격이면 기존 색상 사용
+    // 몬스터 공격이면 몬스터 전용 색상 사용
+    public void ShowDamage(Unit targetUnit, int damage, Transform attacker, bool isCritical)
     {
         if (targetUnit == null)
             return;
@@ -45,9 +45,9 @@ public class DamageTextManager : MonoBehaviour
         if (_canvasRectTransform == null)
             _canvasRectTransform = _targetCanvas.GetComponent<RectTransform>();
 
-        Vector3 worldPos = GetDamageTextWorldPosition(targetUnit, attacker);
-
+        Vector3 worldPos = GetDamageTextWorldPosition(targetUnit);
         Vector3 screenPos = _mainCamera.WorldToScreenPoint(worldPos);
+
         if (screenPos.z <= 0f)
             return;
 
@@ -59,18 +59,24 @@ public class DamageTextManager : MonoBehaviour
         );
 
         DamageText damageText = Instantiate(_damageTextPrefab, _canvasRectTransform);
-        damageText.Setup(damage, localPoint, isCritical);
+
+        int enemyLayer = LayerMask.NameToLayer("Enemy");
+
+        if (attacker != null && attacker.gameObject.layer == enemyLayer)
+        {
+            damageText.SetupEnemyDamage(damage, localPoint, isCritical);
+        }
+        else
+        {
+            damageText.Setup(damage, localPoint, isCritical);
+        }
     }
 
-    private Vector3 GetDamageTextWorldPosition(Unit targetUnit, Transform attacker)
+    private Vector3 GetDamageTextWorldPosition(Unit targetUnit)
     {
-        Vector3 basePos;
-
         if (targetUnit.DamageTextPoint != null)
-            basePos = targetUnit.DamageTextPoint.position;
-        else
-            basePos = targetUnit.transform.position + Vector3.up * targetUnit.DamageTextHeightOffset;
+            return targetUnit.DamageTextPoint.position;
 
-        return basePos;
+        return targetUnit.transform.position + Vector3.up * targetUnit.DamageTextHeightOffset;
     }
 }

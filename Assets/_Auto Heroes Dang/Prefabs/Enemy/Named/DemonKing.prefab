@@ -1506,6 +1506,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee7f4ec53538cac44bda7d0c4b7f2b7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damageTextPoint: {fileID: 0}
+  _damageTextHeightOffset: 1.5
   _animator: {fileID: 6889189582518698407}
   _statusData: {fileID: 11400000, guid: 28fa427646e3a65468967081386526be, type: 2}
   _targetLayer:
@@ -1536,8 +1538,6 @@ MonoBehaviour:
   _slotCount: 8
   _slotRadiusOffset: 0.2
   _slotArriveDistance: 0.3
-  _hpBarPoint: {fileID: 0}
-  _hpBarOffset: {x: 0, y: 4, z: 0}
   _skillRange: 3
   _skillLoopCount: 1
   _firstSkillDelay: 1
@@ -1556,6 +1556,16 @@ MonoBehaviour:
   _attackTrigger1: Attack1
   _attackTrigger2: Attack2
   _attack1MeleeDamage: 20
+  _attack1LineVfxPrefab: {fileID: 66731178666569002, guid: b0d90a6eafcf5444ba0d89bb2b92a616, type: 3}
+  _attack1LineDamage: 5
+  _attack1LineSpeed: 8
+  _attack1LineLifeTime: 2
+  _attack1LineTickInterval: 0.3
+  _attack1SpawnHeight: 0.5
+  _attack1SpawnOffset: {x: 0, y: 0.5, z: 0}
+  _attack1TargetLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   _attack2Damage: 25
   _attack2Angle: 160
   _attack2VfxPrefab: {fileID: 6020776452278906930, guid: aac843ab1549b05489240cb57e3d9191, type: 3}
