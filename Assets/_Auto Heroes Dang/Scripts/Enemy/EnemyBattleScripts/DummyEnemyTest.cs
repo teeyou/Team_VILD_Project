@@ -98,11 +98,6 @@ public class DummyEnemyTest : Unit
     {
         _currentSceneName = SceneManager.GetActiveScene().name;
         ApplyStatusData();
-
-        if (HpBarSpawner.Instance != null)
-        {
-            HpBarSpawner.Instance.SpawnHpBar(this);
-        }
     }
 
     protected virtual void ApplyStatusData()
@@ -422,7 +417,6 @@ public class DummyEnemyTest : Unit
 
         transform.forward = lookDir.normalized;
     }
-
     protected virtual void ApplyDamage()
     {
         if (_isDead)
@@ -438,16 +432,17 @@ public class DummyEnemyTest : Unit
         if (distance > _attackRange + _stopDistanceOffset)
             return;
 
-        int finalDamage = DamageCalculator.CalculateDamage(_atk, _lockedAttackTarget.Def);
+        bool isCritical;
+        int finalDamage = DamageCalculator.CalculateDamage(_atk, _lockedAttackTarget.Def, out isCritical);
 
-        _lockedAttackTarget.TakeDamage(finalDamage, transform);
+        _lockedAttackTarget.TakeDamage(finalDamage, transform, isCritical);
         _totalDamage += finalDamage;
 
         SpawnMeleeHitVfx();
 
         if (_battleLog)
         {
-            Debug.Log($"{name} >> {_lockedAttackTarget.name} 공격 / 최종 데미지 : {finalDamage}");
+            Debug.Log($"{name} >> {_lockedAttackTarget.name} 공격 / 최종 데미지 : {finalDamage} / 크리티컬 : {isCritical}");
         }
     }
 
@@ -473,8 +468,7 @@ public class DummyEnemyTest : Unit
         if (_curHp > _maxHp)
             _curHp = _maxHp;
     }
-
-    public override void TakeDamage(int damage, Transform attacker)
+    public override void TakeDamage(int damage, Transform attacker, bool isCritical = false)
     {
         if (_isDead)
             return;
@@ -483,19 +477,17 @@ public class DummyEnemyTest : Unit
         _curHp -= finalDamage;
         _totalDamaged += finalDamage;
 
-        ShowDamageText(finalDamage, attacker);
-        RefreshHpBar();
+        ShowDamageText(finalDamage, attacker, isCritical);
 
         if (_battleLog)
         {
             string attackerName = attacker != null ? attacker.name : "Unknown";
-            Debug.Log($"{name} 피해 받음 / 공격자 : {attackerName} / 피해량 : {finalDamage} / 남은 HP : {_curHp}");
+            Debug.Log($"{name} 피해 받음 / 공격자 : {attackerName} / 피해량 : {finalDamage} / 크리티컬 : {isCritical} / 남은 HP : {_curHp}");
         }
 
         if (_curHp <= 0)
         {
             _curHp = 0;
-            RefreshHpBar();
             Die();
         }
     }

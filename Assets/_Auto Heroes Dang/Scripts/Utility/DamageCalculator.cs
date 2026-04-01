@@ -2,7 +2,7 @@ using UnityEngine;
 
 public static class DamageCalculator
 {
-    public static int CalculateDamage(int yourAtk, int targetDef)
+    public static int CalculateDamage(int yourAtk, int targetDef, out bool isCritical)
     {
         float atk = yourAtk;
         float def = targetDef;
@@ -10,7 +10,9 @@ public static class DamageCalculator
         // 공격력 * (공격력 / (공격력 + 방어력))
         float totalDamage = atk * (atk / (atk + def));
 
-        if (CalculateCriticalProb())
+        isCritical = CalculateCriticalProb();
+
+        if (isCritical)
         {
             totalDamage *= 1.5f;
         }

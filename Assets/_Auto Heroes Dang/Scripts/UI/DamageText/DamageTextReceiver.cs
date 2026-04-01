@@ -19,11 +19,11 @@ public class DamageTextReceiver : MonoBehaviour
 
     public void ShowDamage(int damage, Transform attacker = null, bool isCritical = false)
     {
-        if (DamageTextSpawner.Instance == null)
-        {
-            Debug.LogWarning("DamageTextReceiver : DamageTextSpawner.Instance 가 없습니다.");
-            return;
-        }
+        //if (DamageTextSpawner.Instance == null)
+        //{
+        //    Debug.LogWarning("DamageTextReceiver : DamageTextSpawner.Instance 가 없습니다.");
+        //    return;
+        //}
 
         Vector3 basePos = _centerPoint != null ? _centerPoint.position : transform.position;
         basePos += Vector3.up * _heightOffset;
@@ -35,6 +35,6 @@ public class DamageTextReceiver : MonoBehaviour
         );
 
         Color color = isCritical ? _criticalDamageColor : _normalDamageColor;
-        DamageTextSpawner.Instance.SpawnDamageText(damage, basePos, color);
+       // DamageTextSpawner.Instance.SpawnDamageText(damage, basePos, color);
     }
 }
