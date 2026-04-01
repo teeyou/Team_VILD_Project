@@ -11,7 +11,8 @@ public static class CPCalculator
 
     public static int CalculateCP(int atk, int def, int hp)
     {
-        float damage = DamageCalculator.CalculateDamage(atk, BASE_DEF);
+        bool isCritical;
+        float damage = DamageCalculator.CalculateDamage(atk, BASE_DEF, out isCritical);
 
         float survivability = hp / (1 + BASE_ATK);
 
@@ -21,6 +22,5 @@ public static class CPCalculator
         // 최종 전투력
         float power = (damage * survivability) + defenseBonus + hpBonus;
         return Mathf.RoundToInt(power);
-
     }
 }

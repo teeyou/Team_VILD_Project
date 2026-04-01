@@ -25,7 +25,8 @@ public class BowAutoAttack : AutoAttack
 
         if (_targetUnit != null)
         {
-            int damage = DamageCalculator.CalculateDamage(_atk, _targetUnit.Def);
+            bool isCritical;
+            int damage = DamageCalculator.CalculateDamage(_atk, _targetUnit.Def, out isCritical);
             proj.Atk = damage;
             proj.Owner = this;
         }
@@ -50,7 +51,8 @@ public class BowAutoAttack : AutoAttack
 
         if (_targetUnit != null)
         {
-            int damage = DamageCalculator.CalculateDamage(_atk, _targetUnit.Def);
+            bool isCritical;
+            int damage = DamageCalculator.CalculateDamage(_atk, _targetUnit.Def, out isCritical);
             proj.Atk = (int)(damage * _skillMultiplier);
             proj.Owner = this;
         }

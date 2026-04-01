@@ -308,7 +308,7 @@ public class AutoAttack : Unit
         StartCoroutine(CoSkillDelay(_attackDelay));
     }
 
-    public override void TakeDamage(int damage, Transform target)
+    public override void TakeDamage(int damage, Transform attacker, bool isCritical = false)
     {
         if (_isDead)
         {
@@ -323,17 +323,13 @@ public class AutoAttack : Unit
         // 필드 씬이면 데미지 안 받음
         if (_currentSceneName == ESceneId.FieldScene.ToString())
         {
-            //Debug.Log("필드씬에서 데미지 안 받음");
             return;
         }
 
-        //Debug.Log($"{target.name} 로부터 데미지 {damage} 받음");
-
         _curHp -= damage;
         _totalDamaged += damage;
-        //Debug.Log($"현재 HP : {_curHp}");
-        
-        //_animator.SetTrigger("Hit");
+
+        ShowDamageText(damage, attacker, isCritical);
 
         if (_curHp <= 0)
         {
@@ -346,6 +342,7 @@ public class AutoAttack : Unit
             Die();
         }
     }
+
     public override void Heal(int value)
     {
         _curHp += value;
