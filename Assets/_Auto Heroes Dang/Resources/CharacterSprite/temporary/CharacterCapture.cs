@@ -1,10 +1,13 @@
 using System.IO;
 using UnityEngine;
+using TMPro;
 
 public class CharacterCapture : MonoBehaviour
 {
     [SerializeField] private Camera _captureCamera; // 캡처용 카메라
     [SerializeField] private RenderTexture _renderTexture; // 렌더 텍스처
+
+    [SerializeField] private TextMeshProUGUI _text;
 
     public void ExportToPNG(string fileName = "")
     {
@@ -43,7 +46,7 @@ public class CharacterCapture : MonoBehaviour
         byte[] bytes = texture.EncodeToPNG();
         File.WriteAllBytes(path, bytes);
 
-        Debug.Log($"저장 성공!!! 경로: {path}");
+        _text.text = $"저장 경로: {path}";
 
         RenderTexture.active = null;
 
