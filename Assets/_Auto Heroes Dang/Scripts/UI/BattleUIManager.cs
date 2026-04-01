@@ -1,9 +1,9 @@
 using GAP_LaserSystem;
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using System.Collections.Generic;
 
 public class BattleUIManager : Singleton<BattleUIManager>
 {
@@ -20,7 +20,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
     [SerializeField] private Button _victoryButton;
 
     [Header("캐릭터 정보 UI")]
-    [SerializeField] private Transform _chSlotParent;   //Character Group
+    [SerializeField] private Transform _chSlotParent;   // Character Group
     [SerializeField] private GameObject _chSlotPrefab;
 
     private Dictionary<GameObject, TMP_Text> _goToCurHpTmp = new Dictionary<GameObject, TMP_Text>();
@@ -31,6 +31,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
     [SerializeField] private TMP_Text _playerTotalHpTMP;
     [SerializeField] private TMP_Text _enemyTotalHpTMP;
     [SerializeField] private Image _difficulty;
+    [SerializeField] private BattleTotalHpBar _battleTotalHpBar;
 
     [Header("스킬 UI")]
     [SerializeField] private Slider _skillSlider;
@@ -41,8 +42,6 @@ public class BattleUIManager : Singleton<BattleUIManager>
     private Dictionary<GameObject, Image> _goToSkillIcon = new Dictionary<GameObject, Image>();
     private Dictionary<GameObject, Image> _goToSkillMask = new Dictionary<GameObject, Image>();
     private Dictionary<GameObject, TMP_Text> _goToSkillCoolTimeTmp = new Dictionary<GameObject, TMP_Text>();
-
-    
 
     void Start()
     {
@@ -85,7 +84,6 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
         _startButton.onClick.AddListener(() =>
         {
-            //_readyPanel.SetActive(false);
             _startButton.gameObject.SetActive(false);
             _gamePanel.SetActive(true);
             BattleManager.Instance.StartBattle();
@@ -94,13 +92,13 @@ public class BattleUIManager : Singleton<BattleUIManager>
         _defeatButton.onClick.AddListener(ReturnField);
 
         _victoryButton.onClick.AddListener(() =>
-            {
-                GameManager.Instance.IncreaseCurrentStage();
-                ReturnField();
-            });
+        {
+            GameManager.Instance.IncreaseCurrentStage();
+            ReturnField();
+        });
     }
 
-    public void CreateChSlot(List<GameObject> chList, Dictionary<GameObject,Unit> goToUnit)
+    public void CreateChSlot(List<GameObject> chList, Dictionary<GameObject, Unit> goToUnit)
     {
         for (int i = 0; i < chList.Count; i++)
         {
@@ -110,8 +108,6 @@ public class BattleUIManager : Singleton<BattleUIManager>
             slot.transform.localPosition = new Vector3(slot.transform.localPosition.x, slot.transform.localPosition.y, 0f);
             slot.transform.localRotation = Quaternion.identity;
 
-
-            //Unit unit = chList[i].GetComponent<Unit>();
             Unit unit = goToUnit[chList[i]];
             GameObject ch = chList[i];
 
@@ -130,7 +126,6 @@ public class BattleUIManager : Singleton<BattleUIManager>
                         _ => Color.white
                     };
                 }
-
                 else if (tmps[j].name == "HP Text")
                 {
                     tmps[j].text = unit.MaxHp.ToString();
@@ -150,7 +145,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
         }
     }
 
-    // 스킬버튼 안에 있는 아이콘, 마스크, 쿨타임 텍스트 세팅
+    // 스킬 버튼 안에 있는 아이콘, 마스크, 쿨타임 텍스트 세팅
     public void SetSKillUI(List<GameObject> chList, Dictionary<GameObject, Unit> goToUnit)
     {
         for (int i = 0; i < _skillButtons.Length; i++)
@@ -165,7 +160,6 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
             if (unit != null)
             {
-                //_goToSkillIcon[go]                            // 아이콘 세팅 필요
                 _goToSkillMask[go] = mask;
                 _goToSkillCoolTimeTmp[go] = coolTimeTmp;
             }
@@ -183,7 +177,6 @@ public class BattleUIManager : Singleton<BattleUIManager>
         {
             _skillSlider.value += _skillGaugeIncreaseRate;
         }
-
         else
         {
             _skillSlider.value = 1f;
@@ -228,17 +221,15 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
                 float currentCool = unit.CurrentSkillCool;
                 float maxCool = unit.MaxSkillCool;
+
                 if (currentCool > 1000)
                 {
-                    // 스킬 사용 중에 버튼 활성화 막기위한 임시 값
                     _skillButtons[i].interactable = false;
                     _goToSkillCoolTimeTmp[go].text = "Used";
                 }
-
                 else if (currentCool > 0)
                 {
                     _skillButtons[i].interactable = false;
-
                     _goToSkillCoolTimeTmp[go].text = Mathf.Ceil(currentCool).ToString();
                     _goToSkillMask[go].fillAmount = currentCool / maxCool;
                 }
@@ -248,12 +239,11 @@ public class BattleUIManager : Singleton<BattleUIManager>
                     {
                         _skillButtons[i].interactable = true;
                     }
-
                     else
                     {
                         _skillButtons[i].interactable = false;
                     }
-                        
+
                     _goToSkillCoolTimeTmp[go].text = "";
                     _goToSkillMask[go].fillAmount = 0f;
                 }
@@ -266,7 +256,9 @@ public class BattleUIManager : Singleton<BattleUIManager>
         _goToCurHpTmp[go].text = unit.CurHp.ToString();
     }
 
-    public int UpdateTotalHp(bool isPlayer, List<GameObject> goList, Dictionary<GameObject,Unit> unitDict)
+    // 플레이어/적 팀 전체 현재 HP를 계산하고
+    // 상단 텍스트를 갱신한 뒤 totalHp를 반환하는 함수
+    public int UpdateTotalHp(bool isPlayer, List<GameObject> goList, Dictionary<GameObject, Unit> unitDict)
     {
         int totalHp = 0;
         for (int i = 0; i < goList.Count; i++)
@@ -287,6 +279,35 @@ public class BattleUIManager : Singleton<BattleUIManager>
         }
 
         return totalHp;
+    }
+
+    // 전투 시작 시 한 번 호출해서
+    // 플레이어/적 팀 전체 HP바의 최대값을 초기화하는 함수
+    public void InitBattleTotalHpBar(List<GameObject> playerList, Dictionary<GameObject, Unit> playerUnitDict,
+                                     List<GameObject> enemyList, Dictionary<GameObject, Unit> enemyUnitDict)
+    {
+        int playerTotalHp = UpdateTotalHp(true, playerList, playerUnitDict);
+        int enemyTotalHp = UpdateTotalHp(false, enemyList, enemyUnitDict);
+
+        if (_battleTotalHpBar != null)
+        {
+            _battleTotalHpBar.Init(playerTotalHp, enemyTotalHp);
+        }
+    }
+
+    // 전투 중 누군가 데미지를 받거나 회복했을 때 호출해서
+    // 플레이어/적 팀 전체 HP바를 현재 값 기준으로 갱신하는 함수
+    public void RefreshBattleTotalHpBar(List<GameObject> playerList, Dictionary<GameObject, Unit> playerUnitDict,
+                                        List<GameObject> enemyList, Dictionary<GameObject, Unit> enemyUnitDict)
+    {
+        int playerTotalHp = UpdateTotalHp(true, playerList, playerUnitDict);
+        int enemyTotalHp = UpdateTotalHp(false, enemyList, enemyUnitDict);
+
+        if (_battleTotalHpBar != null)
+        {
+            _battleTotalHpBar.UpdateBar(true, playerTotalHp);
+            _battleTotalHpBar.UpdateBar(false, enemyTotalHp);
+        }
     }
 
     private void ReturnField()

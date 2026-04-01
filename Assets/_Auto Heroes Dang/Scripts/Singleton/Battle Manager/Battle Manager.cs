@@ -126,6 +126,10 @@ public class BattleManager : Singleton<BattleManager>
         BattleUIManager.Instance.UpdateTotalHp(true, _playerCharacterList, _gameObjectToUnit);
         BattleUIManager.Instance.UpdateTotalHp(false, _enemyList, _enemyGoToUnit);
 
+        // 시작 전 플레이어 / 적의 토탈 hp바 최대값 초기화
+        BattleUIManager.Instance.InitBattleTotalHpBar(_playerCharacterList, _gameObjectToUnit, _enemyList, _enemyGoToUnit);
+
+
         BattleUIManager.Instance.SetSKillUI(_playerCharacterList, _gameObjectToUnit);
     }
 
@@ -305,6 +309,9 @@ public class BattleManager : Singleton<BattleManager>
 
         int totalHp = BattleUIManager.Instance.UpdateTotalHp(true, _playerCharacterList, _gameObjectToUnit);
 
+        // 플레이어 TotalHpBar 갱신 
+        BattleUIManager.Instance.RefreshBattleTotalHpBar(_playerCharacterList, _gameObjectToUnit, _enemyList, _enemyGoToUnit);
+
         // 모두 죽었으면 패배
         if (totalHp <= 0)
         {
@@ -317,6 +324,9 @@ public class BattleManager : Singleton<BattleManager>
     {
         // 모두 죽으면 승리
         int totalHp = BattleUIManager.Instance.UpdateTotalHp(false, _enemyList, _enemyGoToUnit);
+
+        // 몬스터 TotalHpBar 갱신
+        BattleUIManager.Instance.RefreshBattleTotalHpBar(_playerCharacterList, _gameObjectToUnit, _enemyList, _enemyGoToUnit);
 
         if (totalHp <= 0)
         {
