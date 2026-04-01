@@ -31,7 +31,7 @@ public class BattleTotalHpBar : MonoBehaviour
                 return;
 
             float ratio = (float)currentTotalHp / _playerMaxTotalHp;
-            _playerHpFill.fillAmount = Mathf.Clamp01(ratio);
+            _playerHpFill.fillAmount = Mathf.Clamp01(1-ratio);
         }
         else
         {
@@ -39,7 +39,7 @@ public class BattleTotalHpBar : MonoBehaviour
                 return;
 
             float ratio = (float)currentTotalHp / _enemyMaxTotalHp;
-            _enemyHpFill.fillAmount = Mathf.Clamp01(ratio);
+            _enemyHpFill.fillAmount = Mathf.Clamp01(1 - ratio);
         }
     }
 }
