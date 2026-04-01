@@ -113,6 +113,12 @@ public class ItemSlotFactory : MonoBehaviour
 
     }
 
+    private Color Hex(string hex)
+    {
+        ColorUtility.TryParseHtmlString(hex, out Color color);
+        return color;
+    }
+
     public void CreateItemSlot(List<ItemData> itemList)
     {
         _currentItemList = new List<ItemData>(itemList);
@@ -140,12 +146,6 @@ public class ItemSlotFactory : MonoBehaviour
             Instantiate(_emptySlot, _itemSlotParent);
         }
 
-    }
-
-    private Color Hex(string hex)
-    {
-        ColorUtility.TryParseHtmlString(hex, out Color color);
-        return color;
     }
 
     public void ClearAllSlot()
