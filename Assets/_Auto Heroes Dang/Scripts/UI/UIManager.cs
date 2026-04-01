@@ -11,6 +11,13 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private Button _bossPanelBackButton;
     [SerializeField] private FieldUI _fieldUI;
 
+    [Header("왼쪽 하단 스테이터스")]
+    [SerializeField] private GameObject _statusPanel;
+    [SerializeField] private Button _statusButton;
+
+    [SerializeField] private Transform _slotParent;
+    [SerializeField] private GameObject _chSlotPrefab;
+
     protected override void Awake()
     {
         base.Awake();
@@ -22,6 +29,10 @@ public class UIManager : Singleton<UIManager>
         _enemyPanelBackButton.onClick.AddListener(CloseStagePanel);
         _bossPanelBackButton.onClick.AddListener(CloseStagePanel);
 
+        _statusButton.onClick.AddListener(() => {
+            _statusPanel.SetActive(true);
+            
+        });
     }
 
     private void MovePlayer()
