@@ -17,7 +17,8 @@ public class TwoHandAutoAttack : AutoAttack
         
         if (_targetTr != null && _targetUnit != null)
         {
-            int damage = DamageCalculator.CalculateDamage(_atk, _targetUnit.Def);
+            bool isCritical;
+            int damage = DamageCalculator.CalculateDamage(_atk, _targetUnit.Def, out isCritical);
             _totalDamage += damage;
             _targetUnit.TakeDamage(_atk, transform);
         }
@@ -33,7 +34,8 @@ public class TwoHandAutoAttack : AutoAttack
 
         if (_targetTr != null && _targetUnit != null)
         {
-            int damage = DamageCalculator.CalculateDamage(_atk, _targetUnit.Def);
+            bool isCritical;
+            int damage = DamageCalculator.CalculateDamage(_atk, _targetUnit.Def, out isCritical);
 
             damage = (int)(damage * _skillMultiplier / _skillHitCount);
 

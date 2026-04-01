@@ -76,7 +76,7 @@ public class ItemSlotFactory : MonoBehaviour
     {
         _prefabDictionary = new Dictionary<ItemType, GameObject>();
 
-        foreach (var data in _prefabList)
+        foreach (ItemPrefabData data in _prefabList)
         {
             _prefabDictionary[data.type] = data.prefab;
         }
