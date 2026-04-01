@@ -26,7 +26,8 @@ public class HealerAutoAttack : AutoAttack
 
         if (_targetUnit != null)
         {
-            int damage = DamageCalculator.CalculateDamage(_atk, _targetUnit.Def);
+            bool isCritical;
+            int damage = DamageCalculator.CalculateDamage(_atk, _targetUnit.Def, out isCritical);
             proj.Atk = damage;
             proj.Owner = this;
         }

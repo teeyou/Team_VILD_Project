@@ -61,13 +61,6 @@ public class NormalEnemyBattle : Unit
     [SerializeField] protected float _slotRadiusOffset = 0.5f;
     [SerializeField] protected float _slotArriveDistance = 0.2f;
 
-    [Header("몬스터 HP Bar")]
-    [SerializeField] private Transform _hpBarPoint;
-    [SerializeField] private Vector3 _hpBarOffset = new Vector3(0f, 2f, 0f);
-
-    public Transform HpBarPoint => _hpBarPoint;
-    public Vector3 HpBarOffset => _hpBarOffset;
-
     protected float _searchTimer;
     protected float _lastAttackTime = -999f;
     protected float _nextActionTime;
@@ -114,11 +107,6 @@ public class NormalEnemyBattle : Unit
     {
         _currentSceneName = SceneManager.GetActiveScene().name;
         ApplyStatusData();
-
-        if (HpBarSpawner.Instance != null)
-        {
-            HpBarSpawner.Instance.SpawnHpBar(this);
-        }
     }
 
     protected virtual void ApplyStatusData()
@@ -462,9 +450,12 @@ public class NormalEnemyBattle : Unit
         if (distance > _attackRange + _stopDistanceOffset)
             return;
 
-        int finalDamage = DamageCalculator.CalculateDamage(_atk, _lockedAttackTarget.Def);
+        bool isCritical;
 
-        _lockedAttackTarget.TakeDamage(finalDamage, transform);
+        int finalDamage = DamageCalculator.CalculateDamage(_atk, _lockedAttackTarget.Def, out isCritical);
+
+        _lockedAttackTarget.TakeDamage(finalDamage, transform, isCritical);
+
         _totalDamage += finalDamage;
 
         SpawnMeleeHitVfx();
@@ -498,7 +489,7 @@ public class NormalEnemyBattle : Unit
             _curHp = _maxHp;
     }
 
-    public override void TakeDamage(int damage, Transform attacker)
+    public override void TakeDamage(int damage, Transform attacker, bool isCritical = false)
     {
         if (_isDead)
             return;
@@ -507,19 +498,17 @@ public class NormalEnemyBattle : Unit
         _curHp -= finalDamage;
         _totalDamaged += finalDamage;
 
-        ShowDamageText(finalDamage, attacker);
-        RefreshHpBar();
+        ShowDamageText(finalDamage, attacker, isCritical);
 
         if (_battleLog)
         {
             string attackerName = attacker != null ? attacker.name : "Unknown";
-            Debug.Log($"{name} 피해 받음 / 공격자 : {attackerName} / 피해량 : {finalDamage} / 남은 HP : {_curHp}");
+            Debug.Log($"{name} 피해 받음 / 공격자 : {attackerName} / 피해량 : {finalDamage} / 크리티컬 : {isCritical} / 남은 HP : {_curHp}");
         }
 
         if (_curHp <= 0)
         {
             _curHp = 0;
-            RefreshHpBar();
             Die();
         }
     }

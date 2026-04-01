@@ -43,6 +43,10 @@ public enum EGrade
 
 public abstract class Unit : MonoBehaviour, IDamageable
 {
+    [Header("Damage Text")]
+    [SerializeField] protected Transform _damageTextPoint;
+    [SerializeField] protected float _damageTextHeightOffset = 1.5f;
+
     protected bool _isSkillUsed;
     protected float _maxSkillCool;
     protected float _currentSkillCool;
@@ -101,6 +105,9 @@ public abstract class Unit : MonoBehaviour, IDamageable
     
     public int CharacterNumber { get; set; }
 
+    public Transform DamageTextPoint => _damageTextPoint;
+    public float DamageTextHeightOffset => _damageTextHeightOffset;
+
     // 리시버 연결
     protected virtual void Awake()
     {
@@ -110,25 +117,10 @@ public abstract class Unit : MonoBehaviour, IDamageable
     // 데미지 텍스트를 공통으로 띄우는 함수
     protected void ShowDamageText(int damage, Transform attacker, bool isCritical = false)
     {
-        if (_damageTextReceiver != null)
-        {
-            _damageTextReceiver.ShowDamage(damage, attacker, isCritical);
-        }
-    }
+        if (DamageTextManager.Instance == null)
+            return;
 
-    // hp바
-    public void SetHpBar(HpBar hpBar)
-    {
-        _HpBar = hpBar;
-        RefreshHpBar();
-    }
-
-    protected void RefreshHpBar()
-    {
-        if (_HpBar != null)
-        {
-            _HpBar.SetHp(_curHp, _maxHp);
-        }
+        DamageTextManager.Instance.ShowDamage(this, damage, attacker, isCritical);
     }
 
     public abstract void Attack();
@@ -144,7 +136,7 @@ public abstract class Unit : MonoBehaviour, IDamageable
     {
         Destroy(gameObject);
     }
-    public virtual void TakeDamage(int damage, Transform target)
+    public virtual void TakeDamage(int damage, Transform attacker, bool isCritical = false)
     {
         
     }
