@@ -179,6 +179,7 @@ public class BattleManager : Singleton<BattleManager>
 
         else
         {
+            BattleUIManager.Instance.PopUpToastMessage(); // <- 스킬 게이지 부족 메시지 팝업. 0402 추가 진주
             // 스킬 게이지 부족
             Debug.Log("스킬 게이지 부족");
         }

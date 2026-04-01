@@ -39,6 +39,9 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
     [SerializeField] private float _skillGaugeIncreaseRate = 0.001f;
 
+    [SerializeField] private GameObject _toastUI;   // 스킬 게이지 부족 띄우는 거
+    [SerializeField] private GameObject _toastText;   // 필요 시 메시지 수정해서 사용합니다.
+
     private Dictionary<GameObject, Image> _goToSkillIcon = new Dictionary<GameObject, Image>();
     private Dictionary<GameObject, Image> _goToSkillMask = new Dictionary<GameObject, Image>();
     private Dictionary<GameObject, TMP_Text> _goToSkillCoolTimeTmp = new Dictionary<GameObject, TMP_Text>();
@@ -96,6 +99,8 @@ public class BattleUIManager : Singleton<BattleUIManager>
             GameManager.Instance.IncreaseCurrentStage();
             ReturnField();
         });
+
+        if (_toastUI.activeSelf) _toastUI.SetActive(false); // 토스트 애니메이션용 한줄 추가. 0401 진주
     }
 
     public void CreateChSlot(List<GameObject> chList, Dictionary<GameObject, Unit> goToUnit)
@@ -248,6 +253,22 @@ public class BattleUIManager : Singleton<BattleUIManager>
                     _goToSkillMask[go].fillAmount = 0f;
                 }
             }
+        }
+    }
+
+    // 토스트 메시지 팝업 애니메이션 <- 0402 진주
+    public void PopUpToastMessage()
+    {
+        if (_toastUI == null) return;
+
+        _toastUI.SetActive(true);
+
+        AnimateUI animate = _toastUI.GetComponent<AnimateUI>();
+
+        if (animate != null)
+        {
+            animate.ResetAnimate();
+            animate.PlayAnimate(0);
         }
     }
 

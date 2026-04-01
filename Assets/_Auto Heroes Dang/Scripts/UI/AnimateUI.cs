@@ -30,6 +30,9 @@ public class AnimateUI : MonoBehaviour
     [Header("애니메이션 리스트")]
     [SerializeField] private List<AnimationData> _animations;
 
+    [Header("끝나면 꺼짐 여부")]
+    [SerializeField] private bool _endSetActive = false;
+
     [Header("이동할 위치")]
     [SerializeField] private Vector2 _targetPosition;   // 최종 위치
     private Vector2 _startPosition;
@@ -149,7 +152,15 @@ public class AnimateUI : MonoBehaviour
             a.timer += t;
         }
 
-        if (allAnimateEnd) _animateOn = false;
+        if (allAnimateEnd)
+        {
+            _animateOn = false;
+
+            if (_endSetActive)
+            {
+                gameObject.SetActive(false);
+            }
+        }
 
     }
 
