@@ -40,7 +40,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
     [SerializeField] private float _skillGaugeIncreaseRate = 0.001f;
 
     [SerializeField] private GameObject _toastUI;   // 스킬 게이지 부족 띄우는 거
-    [SerializeField] private GameObject _toastText;   // 필요 시 메시지 수정해서 사용합니다.
+    [SerializeField] private TMP_Text _toastText;   // 필요 시 메시지 수정해서 사용합니다.
 
     private Dictionary<GameObject, Image> _goToSkillIcon = new Dictionary<GameObject, Image>();
     private Dictionary<GameObject, Image> _goToSkillMask = new Dictionary<GameObject, Image>();
@@ -50,7 +50,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
     {
         for (int i = 0; i < _skillButtons.Length; i++)
         {
-            _skillButtons[i].interactable = false;
+            //_skillButtons[i].interactable = false;
 
             int idx = i;
             _skillButtons[i].onClick.AddListener(() =>
@@ -180,7 +180,14 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
         if (_skillSlider.value < 1f)
         {
-            _skillSlider.value += _skillGaugeIncreaseRate;
+            if (Time.timeScale == 1f)
+            {
+                _skillSlider.value += _skillGaugeIncreaseRate;
+            }
+            else if (Time.timeScale == 2f)
+            {
+                _skillSlider.value += _skillGaugeIncreaseRate * 2f;
+            }
         }
         else
         {
@@ -229,12 +236,12 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
                 if (currentCool > 1000)
                 {
-                    _skillButtons[i].interactable = false;
+                    //_skillButtons[i].interactable = false;
                     _goToSkillCoolTimeTmp[go].text = "Used";
                 }
                 else if (currentCool > 0)
                 {
-                    _skillButtons[i].interactable = false;
+                    //_skillButtons[i].interactable = false;
                     _goToSkillCoolTimeTmp[go].text = Mathf.Ceil(currentCool).ToString();
                     _goToSkillMask[go].fillAmount = currentCool / maxCool;
                 }
@@ -242,11 +249,11 @@ public class BattleUIManager : Singleton<BattleUIManager>
                 {
                     if (CheckSKillPossible(2))
                     {
-                        _skillButtons[i].interactable = true;
+                        //_skillButtons[i].interactable = true;
                     }
                     else
                     {
-                        _skillButtons[i].interactable = false;
+                        //_skillButtons[i].interactable = false;
                     }
 
                     _goToSkillCoolTimeTmp[go].text = "";

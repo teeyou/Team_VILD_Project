@@ -18,6 +18,8 @@ public class PosRotData
 
 public class DataSource : Singleton<DataSource>
 {
+    [SerializeField] private List<BaseStatus_SO> _baseStatsList;
+
     public int MainCharacterIdx { get; set; } = -1;
     private List<int> _playerCharacterList = new List<int>();
 
@@ -28,6 +30,8 @@ public class DataSource : Singleton<DataSource>
     public int CurrentIdx { get; set; } = 0;    // track 웨이포인트의 idx
 
     public float CartPosition { get; set; } = 6.5f;
+
+    private List<Unit> _unitList = new List<Unit>();
 
     protected override void Awake()
     {
@@ -41,6 +45,12 @@ public class DataSource : Singleton<DataSource>
 
         AddCharacter(ECharacterNumber.Wizard_01);
         AddCharacter(ECharacterNumber.Healer_01);
+    }
+
+    private void SetUnitList()
+    {
+
+
     }
 
     public List<int> GetCharacterList() => _playerCharacterList;
