@@ -168,7 +168,9 @@ public class AutoAttack : Unit
                         _isAttack = true;
                         _skillEnd = false;
                         _animator.SetTrigger("Skill");
+                        return;
                     }
+
                 }
 
                 // 배틀 씬에서 스킬 버튼 누르면 사용
@@ -183,13 +185,12 @@ public class AutoAttack : Unit
                         _isAttack = true;
                         _skillEnd = false;
                         _animator.SetTrigger("Skill");
-
                         return;
                     }
-
-                    _isAttack = true;
-                    _animator.SetTrigger("Attack");
                 }
+
+                _isAttack = true;
+                _animator.SetTrigger("Attack");
 
             }
         }

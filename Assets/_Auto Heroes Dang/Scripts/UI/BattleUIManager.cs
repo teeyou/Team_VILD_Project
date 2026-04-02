@@ -4,9 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using System;
 
 public class BattleUIManager : Singleton<BattleUIManager>
 {
+    public event Action OnUseSkillButton;
+
     [SerializeField] private Button _pauseButton;
     [SerializeField] private Button _speedButton;
     [SerializeField] private Button _backButton;
@@ -50,7 +53,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
     {
         for (int i = 0; i < _skillButtons.Length; i++)
         {
-            //_skillButtons[i].interactable = false;
+            _skillButtons[i].interactable = false;
 
             int idx = i;
             _skillButtons[i].onClick.AddListener(() =>
@@ -195,12 +198,14 @@ public class BattleUIManager : Singleton<BattleUIManager>
         }
     }
 
-    public bool TrySkill(int consume)
+    public bool TrySkill(int consume = 2)
     {
         bool isPossible = CheckSKillPossible(consume);
 
         if (isPossible)
         {
+            OnUseSkillButton?.Invoke();     //AnimateUI에서 FillAmount 애니메이션 재생
+
             _skillSlider.value -= _skillSlider.maxValue / 6f * consume;
             return true;
         }
@@ -208,7 +213,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
         return false;
     }
 
-    public bool CheckSKillPossible(int consume)
+    public bool CheckSKillPossible(int consume = 2)
     {
         float value = _skillSlider.value;
         float need = _skillSlider.maxValue / 6f * consume;
@@ -236,25 +241,26 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
                 if (currentCool > 1000)
                 {
-                    //_skillButtons[i].interactable = false;
+                    _skillButtons[i].interactable = false;
                     _goToSkillCoolTimeTmp[go].text = "Used";
                 }
                 else if (currentCool > 0)
                 {
-                    //_skillButtons[i].interactable = false;
+                    _skillButtons[i].interactable = false;
                     _goToSkillCoolTimeTmp[go].text = Mathf.Ceil(currentCool).ToString();
                     _goToSkillMask[go].fillAmount = currentCool / maxCool;
                 }
                 else
                 {
-                    if (CheckSKillPossible(2))
-                    {
-                        //_skillButtons[i].interactable = true;
-                    }
-                    else
-                    {
-                        //_skillButtons[i].interactable = false;
-                    }
+                    _skillButtons[i].interactable = true;
+                    //if (CheckSKillPossible(2))
+                    //{
+                    //    _skillButtons[i].interactable = true;
+                    //}
+                    //else
+                    //{
+                    //    _skillButtons[i].interactable = false;
+                    //}
 
                     _goToSkillCoolTimeTmp[go].text = "";
                     _goToSkillMask[go].fillAmount = 0f;
