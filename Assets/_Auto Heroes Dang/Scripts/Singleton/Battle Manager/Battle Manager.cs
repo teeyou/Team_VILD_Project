@@ -135,6 +135,11 @@ public class BattleManager : Singleton<BattleManager>
 
     void Update()
     {
+        if (_battleState == EBattleState.None)
+        {
+            DragAndDropMove();
+        }
+
         if (_battleState == EBattleState.Start)
         {
             CheckPlayerStatus();
@@ -167,7 +172,6 @@ public class BattleManager : Singleton<BattleManager>
             DestroyAll();
         }
 
-        DragAndDropMove();
     }
 
     public void UseSkill(int idx)
