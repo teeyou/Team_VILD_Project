@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 109
   _chName: DemonKing
-  _defaultMaxHp: 1000
+  _defaultMaxHp: 10000
   _defaultAtk: 120
-  _defaultDef: 50
-  _range: 2
+  _defaultDef: 200
+  _range: 2.5
   _moveSpeed: 3
   _skillCool: 20
   _skillMultiplier: 0
