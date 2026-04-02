@@ -2561,10 +2561,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Spawner
       objectReference: {fileID: 0}
-    - target: {fileID: 5606656086849698264, guid: bc100e369a4c5c341871e4827cb90a40, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13074,10 +13070,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Particle Manager
       objectReference: {fileID: 0}
-    - target: {fileID: 7670408708129622865, guid: ba3819b754dc6274b836d43063678b9a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17235,10 +17227,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Battle Manager
       objectReference: {fileID: 0}
-    - target: {fileID: 7095266850335107742, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7168411008961131027, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -17283,54 +17271,6 @@ PrefabInstance:
       propertyPath: _playerSpawner
       value: 
       objectReference: {fileID: 25033687}
-    - target: {fileID: 7535353439075410769, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
-      propertyPath: _enemies.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7535353439075410769, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
-      propertyPath: _placementPlanePrefab
-      value: 
-      objectReference: {fileID: 3068162188410949073, guid: 2f0a0e3045ac5054eb198cf6f0deded8, type: 3}
-    - target: {fileID: 7535353439075410769, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
-      propertyPath: _enemies.Array.data[0]
-      value: 
-      objectReference: {fileID: 2834179265098491508, guid: af13398aba43932459aaeca4332301e0, type: 3}
-    - target: {fileID: 7535353439075410769, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
-      propertyPath: _enemies.Array.data[1]
-      value: 
-      objectReference: {fileID: 3108217223468749528, guid: dbb750b412020c84f814db761a3c80b7, type: 3}
-    - target: {fileID: 7535353439075410769, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
-      propertyPath: _enemies.Array.data[2]
-      value: 
-      objectReference: {fileID: 1678274998104434769, guid: 8eac3b1491168d64b93ebef7b1b39a89, type: 3}
-    - target: {fileID: 7535353439075410769, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
-      propertyPath: _enemies.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7535353439075410769, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
-      propertyPath: _enemies.Array.data[4]
-      value: 
-      objectReference: {fileID: 6715194415053190782, guid: 803f3b14f9edc034b881ab9874fe056c, type: 3}
-    - target: {fileID: 7535353439075410769, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
-      propertyPath: _enemies.Array.data[5]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7535353439075410769, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
-      propertyPath: _enemies.Array.data[6]
-      value: 
-      objectReference: {fileID: 2171725931676780728, guid: abb08a9325c3a3b44a5f0ffff2c57843, type: 3}
-    - target: {fileID: 7535353439075410769, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
-      propertyPath: _enemies.Array.data[7]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7535353439075410769, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
-      propertyPath: _enemies.Array.data[8]
-      value: 
-      objectReference: {fileID: 9013842173521962829, guid: cb086859744d4cd4d88e252eb4cea580, type: 3}
-    - target: {fileID: 7535353439075410769, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
-      propertyPath: _placementPlaneEnemyPrefab
-      value: 
-      objectReference: {fileID: 3068162188410949073, guid: f286704c7fb74f4408f332df6d9c9843, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

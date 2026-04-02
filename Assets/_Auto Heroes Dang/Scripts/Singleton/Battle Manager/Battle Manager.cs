@@ -158,6 +158,8 @@ public class BattleManager : Singleton<BattleManager>
             GameManager.Instance.IsStageStart = false;
 
             DestroyAll();
+
+            GameManager.Instance.IsStageClear = true;
         }
 
         if (_battleState == EBattleState.Defeat)
@@ -170,6 +172,8 @@ public class BattleManager : Singleton<BattleManager>
             GameManager.Instance.IsStageStart = false;
 
             DestroyAll();
+
+            GameManager.Instance.IsStageClear = false;
         }
 
     }

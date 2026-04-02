@@ -36,6 +36,32 @@ public class UIManager : Singleton<UIManager>
         });
     }
 
+    private void Start()
+    {
+        if (GameManager.Instance.IsFirstPoint)
+        {
+            Debug.Log("FirstPoint");
+            ToggleProgressButton(true);
+            ToggleStageButton(false);
+
+            return;
+        }
+
+        if (GameManager.Instance.IsStageClear)
+        {
+            Debug.Log("StageClear");
+            ToggleProgressButton(true);
+            ToggleStageButton(false);
+        }
+
+        else
+        {
+            Debug.Log("Defeat");
+            ToggleProgressButton(false);
+            ToggleStageButton(true);
+        }
+    }
+
     private void SetSlot()
     {
         int count = _slotParent.childCount;

@@ -26,6 +26,8 @@ public class GameManager : Singleton<GameManager>
     
     public bool IsStageStart { get; set; } = false;
 
+    public bool IsStageClear { get; set; } = false;
+
     protected override void Awake()
     {
         base.Awake();

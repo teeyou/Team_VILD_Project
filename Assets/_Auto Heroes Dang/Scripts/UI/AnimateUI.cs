@@ -222,6 +222,17 @@ public class AnimateUI : MonoBehaviour
     // 채우기 = 마스크를 0으로 하는 방식 (스킬쿨타임 등)
     private void FillAmountUI(AnimationData n)
     {
+        /*
+        버튼 클릭 할 때마다 호출되게 하지 않고,
+        BattleUIManager에서 TrySkill 함수 내에서 isPossible일 경우 이 애니메이션 호출하도록 변경 필요.
+        */
+
+        // 임시 코드 - 스킬 자원이 2칸 이상없는 경우 애니메이션 금지
+        if (!BattleUIManager.Instance.CheckSKillPossible())
+        {
+            return;
+        }
+
         if (_image == null || _image.type != Image.Type.Filled) return;
 
         float t = n.timer / n.duration;

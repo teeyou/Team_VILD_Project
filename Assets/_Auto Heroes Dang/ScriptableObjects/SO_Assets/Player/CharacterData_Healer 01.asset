@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CharacterData_Healer 01
   m_EditorClassIdentifier: 
   _id: 62
-  _chName: Healer 01
+  _chName: Healer_01
   _defaultMaxHp: 800
   _defaultAtk: 80
   _defaultDef: 50
