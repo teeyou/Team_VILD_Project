@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CharacterData_Bow Man JJ
   m_EditorClassIdentifier: 
   _id: 3
-  _chName: Bow Man 01
+  _chName: BowMan_JJ
   _defaultMaxHp: 1200
   _defaultAtk: 110
   _defaultDef: 70

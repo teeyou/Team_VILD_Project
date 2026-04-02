@@ -44,3 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6f171197a2326b41a5ebafd1aa55395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerSpawner: {fileID: 0}
+  _enemies:
+  - {fileID: 3108217223468749528, guid: dbb750b412020c84f814db761a3c80b7, type: 3}
+  - {fileID: 3108217223468749528, guid: dbb750b412020c84f814db761a3c80b7, type: 3}
+  - {fileID: 3108217223468749528, guid: dbb750b412020c84f814db761a3c80b7, type: 3}
+  - {fileID: 3595316216206217821, guid: 0f9ec28f3c4123c45a84583d41de5854, type: 3}
+  - {fileID: 0}
+  - {fileID: 3595316216206217821, guid: 0f9ec28f3c4123c45a84583d41de5854, type: 3}
+  - {fileID: 0}
+  - {fileID: 1747872091307827592, guid: d3ad2f1639a358e4ca0966138e829f3d, type: 3}
+  - {fileID: 0}
+  _placementPlanePrefab: {fileID: 3068162188410949073, guid: 2f0a0e3045ac5054eb198cf6f0deded8, type: 3}
+  _placementPlaneEnemyPrefab: {fileID: 3068162188410949073, guid: f286704c7fb74f4408f332df6d9c9843, type: 3}

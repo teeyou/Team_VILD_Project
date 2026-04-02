@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CharacterData_Shield 02
   m_EditorClassIdentifier: 
   _id: 22
-  _chName: Shield 02
+  _chName: Shield_02
   _defaultMaxHp: 1500
   _defaultAtk: 100
   _defaultDef: 100

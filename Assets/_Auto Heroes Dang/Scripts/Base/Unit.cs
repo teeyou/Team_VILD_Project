@@ -47,6 +47,7 @@ public abstract class Unit : MonoBehaviour, IDamageable
     [SerializeField] protected Transform _damageTextPoint;
     [SerializeField] protected float _damageTextHeightOffset = 1.5f;
 
+    protected string _chName;
     protected bool _isSkillUsed;
     protected float _maxSkillCool;
     protected float _currentSkillCool;
@@ -80,6 +81,7 @@ public abstract class Unit : MonoBehaviour, IDamageable
     protected bool _isDead;
     public bool IsDead {get { return _isDead; } set { _isDead = value; } }
 
+    public string ChName { get { return _chName; } set { _chName = value; } }
     public bool IsSkillUsed { get { return _isSkillUsed; } set { _isSkillUsed = value; } }
     public float MaxSkillCool { get { return _maxSkillCool; } set { _maxSkillCool = value; } }
     public float CurrentSkillCool { get { return _currentSkillCool; } set { _currentSkillCool = value; } }

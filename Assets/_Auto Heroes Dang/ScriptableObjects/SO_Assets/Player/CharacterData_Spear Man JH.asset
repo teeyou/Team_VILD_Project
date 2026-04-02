@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CharacterData_Spear Man JH
   m_EditorClassIdentifier: 
   _id: 32
-  _chName: Spear Man JH
+  _chName: SpearMan_JH
   _defaultMaxHp: 1200
   _defaultAtk: 120
   _defaultDef: 80

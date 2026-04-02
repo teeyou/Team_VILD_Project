@@ -31,6 +31,7 @@ public class AutoAttack : Unit
 
     public void Init(BaseStatus_SO data, int number)
     {
+        _chName = data.ChName;
         _maxHp = data.DefaultMaxHp;
         _curHp = data.DefaultMaxHp;
 

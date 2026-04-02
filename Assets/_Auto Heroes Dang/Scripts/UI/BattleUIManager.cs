@@ -4,12 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
-using System;
 
 public class BattleUIManager : Singleton<BattleUIManager>
 {
-    public event Action OnUseSkillButton;
-
     [SerializeField] private Button _pauseButton;
     [SerializeField] private Button _speedButton;
     [SerializeField] private Button _backButton;
@@ -45,7 +42,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
     [SerializeField] private GameObject _toastUI;   // 스킬 게이지 부족 띄우는 거
     [SerializeField] private TMP_Text _toastText;   // 필요 시 메시지 수정해서 사용합니다.
 
-    private Dictionary<GameObject, Image> _goToSkillIcon = new Dictionary<GameObject, Image>();
+    //private Dictionary<GameObject, Image> _goToSkillIcon = new Dictionary<GameObject, Image>();
     private Dictionary<GameObject, Image> _goToSkillMask = new Dictionary<GameObject, Image>();
     private Dictionary<GameObject, TMP_Text> _goToSkillCoolTimeTmp = new Dictionary<GameObject, TMP_Text>();
 
@@ -119,6 +116,18 @@ public class BattleUIManager : Singleton<BattleUIManager>
             Unit unit = goToUnit[chList[i]];
             GameObject ch = chList[i];
 
+            // 슬롯 안에 있는 캐릭터 스프라이트 세팅
+            Image[] images = slot.GetComponentsInChildren<Image>();
+
+            for (int j = 0; j < images.Length; j++)
+            {
+                if (images[j].name == "Character Image")
+                {
+                    images[j].sprite = Resources.Load<Sprite>($"CharacterSprite/{unit.ChName}");
+                }
+            }
+
+            // 슬롯 안에 있는 텍스트들 세팅
             TMP_Text[] tmps = slot.GetComponentsInChildren<TMP_Text>();
 
             for (int j = 0; j < tmps.Length; j++)
@@ -204,8 +213,6 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
         if (isPossible)
         {
-            OnUseSkillButton?.Invoke();     //AnimateUI에서 FillAmount 애니메이션 재생
-
             _skillSlider.value -= _skillSlider.maxValue / 6f * consume;
             return true;
         }
@@ -253,14 +260,6 @@ public class BattleUIManager : Singleton<BattleUIManager>
                 else
                 {
                     _skillButtons[i].interactable = true;
-                    //if (CheckSKillPossible(2))
-                    //{
-                    //    _skillButtons[i].interactable = true;
-                    //}
-                    //else
-                    //{
-                    //    _skillButtons[i].interactable = false;
-                    //}
 
                     _goToSkillCoolTimeTmp[go].text = "";
                     _goToSkillMask[go].fillAmount = 0f;

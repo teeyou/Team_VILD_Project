@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CharacterData_Two Hand TU
   m_EditorClassIdentifier: 
   _id: 54
-  _chName: Two Hand TU
+  _chName: TwoHand_TU
   _defaultMaxHp: 1200
   _defaultAtk: 120
   _defaultDef: 80
