@@ -1644,6 +1644,7 @@ MonoBehaviour:
     duration: 1
     playAnimate: 0
     timer: 0
+  _endSetActive: 0
   _targetPosition: {x: 0, y: 0}
 --- !u!114 &183266773
 MonoBehaviour:
@@ -1739,6 +1740,7 @@ MonoBehaviour:
     duration: 999
     playAnimate: 1
     timer: 0
+  _endSetActive: 0
   _targetPosition: {x: 0, y: 0}
 --- !u!114 &193177522
 MonoBehaviour:
@@ -7479,6 +7481,7 @@ MonoBehaviour:
     duration: 0.5
     playAnimate: 1
     timer: 0
+  _endSetActive: 0
   _targetPosition: {x: 0, y: 0}
 --- !u!225 &660546954
 CanvasGroup:
@@ -9233,13 +9236,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25deabb4d8851494fbb24691f4c67c01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pauseButton: {fileID: 0}
+  _speedButton: {fileID: 0}
   _backButton: {fileID: 1199440558}
   _startButton: {fileID: 1997661877}
-  _readyPanel: {fileID: 1332505155}
+  _gamePanel: {fileID: 0}
   _defeatPanel: {fileID: 0}
   _victoryPanel: {fileID: 0}
   _defeatButton: {fileID: 0}
   _victoryButton: {fileID: 0}
+  _chSlotParent: {fileID: 0}
+  _chSlotPrefab: {fileID: 0}
+  _playerTotalHpTMP: {fileID: 0}
+  _enemyTotalHpTMP: {fileID: 0}
+  _difficulty: {fileID: 0}
+  _battleTotalHpBar: {fileID: 0}
+  _skillSlider: {fileID: 0}
+  _skillButtons: []
+  _skillGaugeIncreaseRate: 0.001
+  _toastUI: {fileID: 0}
+  _toastText: {fileID: 0}
 --- !u!4 &807835541
 Transform:
   m_ObjectHideFlags: 0
@@ -10093,6 +10109,7 @@ MonoBehaviour:
     duration: 0.2
     playAnimate: 0
     timer: 0
+  _endSetActive: 0
   _targetPosition: {x: 492.18, y: -0.01}
 --- !u!114 &851504108
 MonoBehaviour:
@@ -10472,6 +10489,7 @@ MonoBehaviour:
     duration: 1
     playAnimate: 0
     timer: 0
+  _endSetActive: 0
   _targetPosition: {x: 0, y: 0}
 --- !u!114 &891657223
 MonoBehaviour:
@@ -12296,6 +12314,7 @@ MonoBehaviour:
     duration: 1
     playAnimate: 0
     timer: 0
+  _endSetActive: 0
   _targetPosition: {x: 0, y: 0}
 --- !u!114 &996625406
 MonoBehaviour:
@@ -17245,6 +17264,7 @@ MonoBehaviour:
     duration: 1
     playAnimate: 0
     timer: 0
+  _endSetActive: 0
   _targetPosition: {x: 0, y: 0}
 --- !u!114 &1314887761
 MonoBehaviour:
@@ -18405,6 +18425,7 @@ MonoBehaviour:
     duration: 1
     playAnimate: 0
     timer: 0
+  _endSetActive: 0
   _targetPosition: {x: 0, y: 0}
 --- !u!114 &1411692995
 MonoBehaviour:
@@ -18692,6 +18713,7 @@ MonoBehaviour:
     duration: 1
     playAnimate: 0
     timer: 0
+  _endSetActive: 0
   _targetPosition: {x: 0, y: 0}
 --- !u!114 &1454504502
 MonoBehaviour:
@@ -20641,6 +20663,7 @@ MonoBehaviour:
     duration: 0.3
     playAnimate: 0
     timer: 0
+  _endSetActive: 0
   _targetPosition: {x: 9, y: 458}
 --- !u!114 &1654668606
 MonoBehaviour:
@@ -24688,6 +24711,7 @@ MonoBehaviour:
     duration: 0.5
     playAnimate: 1
     timer: 0
+  _endSetActive: 0
   _targetPosition: {x: 0, y: 0}
 --- !u!1 &1989615985
 GameObject:

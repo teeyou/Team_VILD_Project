@@ -253,6 +253,7 @@ MonoBehaviour:
     duration: 1
     playAnimate: 0
     timer: 0
+  _endSetActive: 0
   _targetPosition: {x: 0, y: 0}
 --- !u!114 &10460301
 MonoBehaviour:
@@ -1852,6 +1853,7 @@ MonoBehaviour:
     duration: 0.2
     playAnimate: 0
     timer: 0
+  _endSetActive: 0
   _targetPosition: {x: 492.18, y: -0.01}
 --- !u!114 &90975900
 MonoBehaviour:
@@ -3082,6 +3084,7 @@ MonoBehaviour:
     duration: 1
     playAnimate: 0
     timer: 0
+  _endSetActive: 0
   _targetPosition: {x: 0, y: 0}
 --- !u!114 &216537175
 MonoBehaviour:
@@ -6091,6 +6094,7 @@ MonoBehaviour:
     duration: 1
     playAnimate: 0
     timer: 0
+  _endSetActive: 0
   _targetPosition: {x: 0, y: 0}
 --- !u!114 &460412865
 MonoBehaviour:
@@ -6467,6 +6471,7 @@ MonoBehaviour:
     duration: 1
     playAnimate: 0
     timer: 0
+  _endSetActive: 0
   _targetPosition: {x: 0, y: 0}
 --- !u!114 &497193086
 MonoBehaviour:
@@ -7332,6 +7337,7 @@ MonoBehaviour:
     duration: 0.5
     playAnimate: 1
     timer: 0
+  _endSetActive: 0
   _targetPosition: {x: 0, y: 0}
 --- !u!225 &562614825
 CanvasGroup:
@@ -7683,6 +7689,7 @@ MonoBehaviour:
     duration: 1
     playAnimate: 0
     timer: 0
+  _endSetActive: 0
   _targetPosition: {x: 0, y: 0}
 --- !u!114 &585574496
 MonoBehaviour:
@@ -10660,6 +10667,7 @@ MonoBehaviour:
     duration: 999
     playAnimate: 1
     timer: 0
+  _endSetActive: 0
   _targetPosition: {x: 0, y: 0}
 --- !u!114 &839293135
 MonoBehaviour:
@@ -20622,6 +20630,7 @@ MonoBehaviour:
     duration: 0.3
     playAnimate: 0
     timer: 0
+  _endSetActive: 0
   _targetPosition: {x: 9, y: 458}
 --- !u!114 &1616408983
 MonoBehaviour:
@@ -22316,6 +22325,7 @@ MonoBehaviour:
     duration: 1
     playAnimate: 0
     timer: 0
+  _endSetActive: 0
   _targetPosition: {x: 0, y: 0}
 --- !u!114 &1763383093
 MonoBehaviour:
@@ -23557,13 +23567,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25deabb4d8851494fbb24691f4c67c01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pauseButton: {fileID: 0}
+  _speedButton: {fileID: 0}
   _backButton: {fileID: 1669425627}
   _startButton: {fileID: 1004948509}
-  _readyPanel: {fileID: 462520739}
+  _gamePanel: {fileID: 0}
   _defeatPanel: {fileID: 0}
   _victoryPanel: {fileID: 0}
   _defeatButton: {fileID: 0}
   _victoryButton: {fileID: 0}
+  _chSlotParent: {fileID: 0}
+  _chSlotPrefab: {fileID: 0}
+  _playerTotalHpTMP: {fileID: 0}
+  _enemyTotalHpTMP: {fileID: 0}
+  _difficulty: {fileID: 0}
+  _battleTotalHpBar: {fileID: 0}
+  _skillSlider: {fileID: 0}
+  _skillButtons: []
+  _skillGaugeIncreaseRate: 0.001
+  _toastUI: {fileID: 0}
+  _toastText: {fileID: 0}
 --- !u!4 &1854533167
 Transform:
   m_ObjectHideFlags: 0
@@ -24011,6 +24034,7 @@ MonoBehaviour:
     duration: 0.5
     playAnimate: 1
     timer: 0
+  _endSetActive: 0
   _targetPosition: {x: 0, y: 0}
 --- !u!1 &1924482072
 GameObject:
