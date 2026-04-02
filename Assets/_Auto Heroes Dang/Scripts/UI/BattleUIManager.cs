@@ -180,7 +180,14 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
         if (_skillSlider.value < 1f)
         {
-            _skillSlider.value += _skillGaugeIncreaseRate;
+            if (Time.timeScale == 1f)
+            {
+                _skillSlider.value += _skillGaugeIncreaseRate;
+            }
+            else if (Time.timeScale == 2f)
+            {
+                _skillSlider.value += _skillGaugeIncreaseRate * 2f;
+            }
         }
         else
         {

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +17,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private Button _statusButton;
 
     [SerializeField] private Transform _slotParent;
-    [SerializeField] private GameObject _chSlotPrefab;
+    //[SerializeField] private GameObject _chSlotPrefab;
 
     protected override void Awake()
     {
@@ -30,9 +31,24 @@ public class UIManager : Singleton<UIManager>
         _bossPanelBackButton.onClick.AddListener(CloseStagePanel);
 
         _statusButton.onClick.AddListener(() => {
+            SetSlot();
             _statusPanel.SetActive(true);
-            
         });
+    }
+
+    private void SetSlot()
+    {
+        int count = _slotParent.childCount;
+
+        for (int i = 0; i < count; i++)
+        {
+            TMP_Text[] tmps = _slotParent.GetChild(i).GetComponentsInChildren<TMP_Text>();
+            
+            for (int j = 0; j < tmps.Length; j++)
+            {
+                Debug.Log($"{tmps[j].name} - {tmps[j].text}");
+            }
+        }
     }
 
     private void MovePlayer()
