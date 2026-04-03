@@ -1,31 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 
 /*
-        버튼 클릭 할 때마다 호출되게 하지 않고,
-        BattleUIManager에서 TrySkill 함수 내에서 isPossible일 경우 이 애니메이션 호출하도록 변경 필요.
+빼놓기는 했는데, 배틀 UI 매니저에서 해당 애니메이션 실행되고 있음
 
 */
 
 
 public class BattleSkillIcon : MonoBehaviour
 {
+    [SerializeField] private Button _button;
+    [SerializeField] private TMP_Text _coolTimeText;
+
     private Image _mask;
     private bool _isAnimating = false;
     private float _timer = 0f;
     private float _duration = 1f;
 
+    public bool IsAnimating => _isAnimating;
+
     private void Awake()
     {
         _mask = GetComponent<Image>();
+        _button = GetComponentInParent<Button>();
     }
 
     private void OnEnable()
     {
         ResetAnimate();
+        Play(3f); // 처음 시작하고 쿨다운 돎.
     }
 
     private void Update()
@@ -43,6 +50,10 @@ public class BattleSkillIcon : MonoBehaviour
 
         _mask.fillAmount = Mathf.Lerp(1f, 0f, progress);
 
+        // 쿨타임용 애니메이션
+        float cool = Mathf.Max(0f, _duration - _timer);
+
+
         if (progress >= 1.0f)
         {
             StopAnimate();
@@ -56,12 +67,15 @@ public class BattleSkillIcon : MonoBehaviour
         _timer = 0f;
         _isAnimating = true;
         _mask.fillAmount = 1f;
+        _button.interactable = false;
     }
 
     public void StopAnimate()
     {
         _isAnimating = false;
         _mask.fillAmount = 0f;
+        _coolTimeText.text = "";
+        _button.interactable = true;
     }
 
     public void ResetAnimate()
@@ -69,6 +83,8 @@ public class BattleSkillIcon : MonoBehaviour
         _isAnimating = false;
         _timer = 0f;
         if (_mask != null) _mask.fillAmount = 0f;
+        if (_coolTimeText != null) _coolTimeText.text = "";
+        if (_button != null) _button.interactable = true;
     }
 
 }
