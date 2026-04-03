@@ -847,6 +847,7 @@ GameObject:
   - component: {fileID: 101728950}
   - component: {fileID: 101728949}
   - component: {fileID: 101728948}
+  - component: {fileID: 101728951}
   m_Layer: 5
   m_Name: UI Canvas
   m_TagString: Untagged
@@ -944,6 +945,19 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &101728951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101728946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01d8c46c92c8448408fed543c6899424, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _defaultClickSfxName: UIClick
 --- !u!1 &126895501
 GameObject:
   m_ObjectHideFlags: 0
@@ -22233,7 +22247,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pauseButton: {fileID: 288252379}
+  _pauseButtonPause: {fileID: 0}
+  _pauseButtonPlay: {fileID: 0}
   _speedButton: {fileID: 1271488956}
+  _speedButtonAccel: {fileID: 0}
+  _speedButtonConstant: {fileID: 0}
   _backButton: {fileID: 1626958753}
   _startButton: {fileID: 862478880}
   _gamePanel: {fileID: 292161271}
