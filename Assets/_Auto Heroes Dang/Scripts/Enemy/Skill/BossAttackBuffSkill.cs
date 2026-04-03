@@ -58,6 +58,8 @@ public class BossAllyAttackBuffSkill : MonoBehaviour
                 continue;
 
             candidates.Add(ally);
+
+            AudioManager.Instance.PlaySFX("BossSkill");
         }
 
         if (candidates.Count == 0)

@@ -13,6 +13,7 @@ public class AudioManager : Singleton<AudioManager>
     {
         public string name;
         public AudioClip clip;
+        [Range(0f, 1f)] public float volume = 1f;
     }
 
     [System.Serializable]
@@ -43,7 +44,9 @@ public class AudioManager : Singleton<AudioManager>
     [Header("로딩씬 이름")]
     [SerializeField] private string _loadingSceneName = "LoadingScene";
 
-    public Dictionary<string, AudioClip> ClipDict { get; private set; } = new Dictionary<string, AudioClip>();
+    //public Dictionary<string, AudioClip> ClipDict { get; private set; } = new Dictionary<string, AudioClip>();
+
+    private Dictionary<string, Clip> _clipDict = new Dictionary<string, Clip>();
 
     private Dictionary<string, string> _sceneToBgmDict = new Dictionary<string, string>();
 
@@ -76,7 +79,7 @@ public class AudioManager : Singleton<AudioManager>
 
     private void Init()
     {
-        ClipDict.Clear();
+        _clipDict.Clear();
         _sceneToBgmDict.Clear();
 
         for (int i = 0; i < _clipList.Count; i++)
@@ -84,7 +87,7 @@ public class AudioManager : Singleton<AudioManager>
             if (_clipList[i] == null || _clipList[i].clip == null || string.IsNullOrEmpty(_clipList[i].name))
                 continue;
 
-            ClipDict[_clipList[i].name] = _clipList[i].clip;
+            _clipDict[_clipList[i].name] = _clipList[i];
         }
 
         for (int i = 0; i < _sceneBgmList.Count; i++)
@@ -124,14 +127,15 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlayBGM(string clipName)
     {
-        if (ClipDict.TryGetValue(clipName, out AudioClip clip))
+        if (_clipDict.TryGetValue(clipName, out Clip clipData))
         {
-            if (_bgmSource.clip == clip && _bgmSource.isPlaying)
+            if (_bgmSource.clip == clipData.clip && _bgmSource.isPlaying)
             {
                 return;
             }
 
-            _bgmSource.clip = clip;
+            _bgmSource.clip = clipData.clip;
+            _bgmSource.volume = clipData.volume;
             _bgmSource.loop = true;
             _bgmSource.Play();
         }
@@ -151,9 +155,9 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlaySFX(string clipName)
     {
-        if (ClipDict.TryGetValue(clipName, out AudioClip clip))
+        if (_clipDict.TryGetValue(clipName, out Clip clipData))
         {
-            _sfxSource.PlayOneShot(clip);
+            _sfxSource.PlayOneShot(clipData.clip, clipData.volume);
         }
         else
         {

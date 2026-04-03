@@ -61,6 +61,8 @@ public class NormalEnemyBattle : Unit
     [SerializeField] protected float _slotRadiusOffset = 0.2f;
     [SerializeField] protected float _slotArriveDistance = 0.3f;
 
+    [SerializeField] private string[] _attackSfxNames = { "MonsterAttack1", "MonsterAttack2", "MonsterAttack3" };
+
     protected float _searchTimer;
     protected float _lastAttackTime = -999f;
     protected float _nextActionTime;
@@ -421,6 +423,16 @@ public class NormalEnemyBattle : Unit
         }
     }
 
+    // 공격 사운드 3개 중 하나를 랜덤으로 재생하는 함수
+    private void PlayRandomAttackSfx()
+    {
+        if (_attackSfxNames == null || _attackSfxNames.Length == 0)
+            return;
+
+        int randomIndex = Random.Range(0, _attackSfxNames.Length);
+        AudioManager.Instance.PlaySFX(_attackSfxNames[randomIndex]);
+    }
+
     protected virtual void FaceTargetImmediately(Unit target)
     {
         if (target == null)
@@ -458,6 +470,7 @@ public class NormalEnemyBattle : Unit
 
         _totalDamage += finalDamage;
 
+        PlayRandomAttackSfx();
         SpawnMeleeHitVfx();
 
         if (_battleLog)

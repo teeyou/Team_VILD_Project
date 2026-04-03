@@ -91,6 +91,8 @@ public class SelectManager : MonoBehaviour
     {
         _back01.SetActive(flag);
         _back02.SetActive(!flag);
+
+        AudioManager.Instance.PlaySFX("SelectChar");
     }
 
     private void StartGame()

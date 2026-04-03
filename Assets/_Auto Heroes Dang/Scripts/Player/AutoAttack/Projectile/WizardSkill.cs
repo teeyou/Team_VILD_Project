@@ -13,6 +13,7 @@ public class WizardSkill : Projectile
 
             ParticleManager.Instance.Play("Hit_WizardSkill", hitPoint);
 
+            AudioManager.Instance.PlaySFX("MagicSkill");
             if (Owner != null)
             {
                 other.GetComponent<Unit>().TakeDamage(Atk, transform);

@@ -107,6 +107,7 @@ public class EvilMageSkill : MonoBehaviour
 
                 targetUnit.TakeDamage(finalDamage, transform);
                 SpawnHitVfx(target);
+                AudioManager.Instance.PlaySFX("EvilMageSkill");
 
                 if (_owner != null)
                 {

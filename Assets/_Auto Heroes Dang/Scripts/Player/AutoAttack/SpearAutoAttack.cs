@@ -15,6 +15,8 @@ public class SpearAutoAttack : AutoAttack
         Quaternion rot = Quaternion.AngleAxis(270f, transform.up) * transform.rotation;
         ParticleManager.Instance.Play("SlashWaterBlue", pos, rot);
 
+        AudioManager.Instance.PlaySFX("SpearAttack");
+
         if (_targetTr != null && _targetUnit != null)
         {
             bool isCritical;
@@ -37,6 +39,7 @@ public class SpearAutoAttack : AutoAttack
         pos.z += Random.Range(-0.3f, 0.3f);
 
         ParticleManager.Instance.Play("Skill_HitFrost", pos);
+        AudioManager.Instance.PlaySFX("SwordSkill");
 
         if (_targetTr != null && _targetUnit != null)
         {
