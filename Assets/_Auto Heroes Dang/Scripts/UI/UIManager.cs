@@ -15,9 +15,12 @@ public class UIManager : Singleton<UIManager>
     [Header("왼쪽 하단 스테이터스")]
     [SerializeField] private GameObject _statusPanel;
     [SerializeField] private Button _statusButton;
-
     [SerializeField] private Transform _slotParent;
     //[SerializeField] private GameObject _chSlotPrefab;
+
+    [Header("오른쪽 상단 재화")]
+    [SerializeField] private TMP_Text _gemText;
+    [SerializeField] private TMP_Text _goldText;
 
     protected override void Awake()
     {
@@ -34,6 +37,9 @@ public class UIManager : Singleton<UIManager>
             SetSlot();
             _statusPanel.SetActive(true);
         });
+
+        _gemText.text = DataSource.Instance.Gem.ToString();
+        _goldText.text = DataSource.Instance.Gold.ToString();
     }
 
     private void Start()
@@ -68,11 +74,68 @@ public class UIManager : Singleton<UIManager>
 
         for (int i = 0; i < count; i++)
         {
+            Image[] images = _slotParent.GetChild(i).GetComponentsInChildren<Image>();
+            
+            for (int j = 0; j < images.Length; j++)
+            {
+                if (images[j].name == "Character Sprite")
+                {
+                    if (i == 0)
+                    {
+                        images[j].sprite = Resources.Load<Sprite>($"CharacterSprite/{DataSource.Instance.GetPlayerRuntimeData(DataSource.Instance.MainCharacterIdx).ChName}");
+                    }
+
+                    else
+                    {
+                        images[j].sprite = Resources.Load<Sprite>($"CharacterSprite/{DataSource.Instance.GetPlayerRuntimeData(DataSource.Instance.GetCharacterList()[i-1]).ChName}");
+                    }
+                }
+
+                if (images[j].name == "Icon")
+                {
+                    if (i == 0)
+                    {
+                        images[j].sprite = Resources.Load<Sprite>($"AttackTypeIcon/{DataSource.Instance.GetPlayerRuntimeData(DataSource.Instance.MainCharacterIdx).AttackType.ToString()}");
+                    }
+                    else
+                    {
+                        images[j].sprite = Resources.Load<Sprite>($"AttackTypeIcon/{DataSource.Instance.GetPlayerRuntimeData(DataSource.Instance.GetCharacterList()[i - 1]).AttackType.ToString()}");
+                    }
+                }
+            }
+
             TMP_Text[] tmps = _slotParent.GetChild(i).GetComponentsInChildren<TMP_Text>();
             
             for (int j = 0; j < tmps.Length; j++)
             {
-                Debug.Log($"{tmps[j].name} - {tmps[j].text}");
+                PlayerRuntimeData data;
+
+                if (i == 0)
+                {
+                    data = DataSource.Instance.GetPlayerRuntimeData(DataSource.Instance.MainCharacterIdx);
+                }
+                else
+                {
+                    data = DataSource.Instance.GetPlayerRuntimeData(DataSource.Instance.GetCharacterList()[i - 1]);
+                }
+
+                if (tmps[j].name == "Rank")
+                {
+
+                    tmps[j].text = data.Grade.ToString();
+                    tmps[j].color = data.Grade switch
+                    {
+                        EGrade.S => Color.yellow,
+                        EGrade.A => Color.red,
+                        EGrade.B => Color.blue,
+                        _ => Color.white
+                    };
+                }
+
+                else if (tmps[j].name == "Level")
+                {
+                    tmps[j].text = $"Lv. {data.Level.ToString()}";
+                }
             }
         }
     }

@@ -18,10 +18,10 @@ public class PosRotData
 
 public class DataSource : Singleton<DataSource>
 {
-    [SerializeField] private List<BaseStatus_SO> _baseStatsList;
+    [SerializeField] private List<BaseStatus_SO> _baseStatusList;
 
     public int MainCharacterIdx { get; set; } = -1;
-    private List<int> _playerCharacterList = new List<int>();
+    private List<int> _playerCharacterList = new List<int>();   // 메인 캐릭터 제외한 나머지 캐릭터 idx 저장
 
     public PosRotData MainCharacterPosRot { get; set; }
 
@@ -31,7 +31,11 @@ public class DataSource : Singleton<DataSource>
 
     public float CartPosition { get; set; } = 6.5f;
 
-    private List<Unit> _unitList = new List<Unit>();
+    public int Gem { get; set; } = 10;
+    public int Gold { get; set; } = 1000;
+
+    //private List<BaseStatus_SO> _copyStatusList = new List<BaseStatus_SO>();
+    private List<PlayerRuntimeData> _playerRuntimeDataList = new List<PlayerRuntimeData>();
 
     protected override void Awake()
     {
@@ -45,12 +49,31 @@ public class DataSource : Singleton<DataSource>
 
         AddCharacter(ECharacterNumber.Wizard_01);
         AddCharacter(ECharacterNumber.Healer_01);
+
+        // SO 데이터 -> 런타임 데이터로 변환
+        for (int i = 0; i < _baseStatusList.Count; i++)
+        {
+            _playerRuntimeDataList.Add(new PlayerRuntimeData(_baseStatusList[i]));
+        }
     }
 
-    private void SetUnitList()
+    public PlayerRuntimeData GetPlayerRuntimeData(int idx)
     {
+        if (_playerRuntimeDataList.Count <= idx)
+        {
+            return null;
+        }
+        return _playerRuntimeDataList[idx];
+    }
 
+    public BaseStatus_SO GetBaseStatusSO(int idx)
+    {
+        if (_baseStatusList.Count <= idx)
+        {
+            return null;
+        }
 
+        return _baseStatusList[idx];
     }
 
     public List<int> GetCharacterList() => _playerCharacterList;

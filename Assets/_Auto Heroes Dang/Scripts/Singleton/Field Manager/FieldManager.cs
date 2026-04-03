@@ -37,7 +37,7 @@ public class FieldManager : Singleton<FieldManager>
         {
             DataSource.Instance.MainCharacterIdx = (int)ECharacterNumber.Shield_01;
 
-            MainCharacterTr = _playerSpawner.SpawnPlayer((int)ECharacterNumber.Shield_01, _startPosition, Quaternion.identity).transform;
+            MainCharacterTr = _playerSpawner.SpawnPlayer(DataSource.Instance.MainCharacterIdx, _startPosition, Quaternion.identity).transform;
 
             // 메인 제외 다른 캐릭터들 생성
             List<int> subNumberList = DataSource.Instance.GetCharacterList();

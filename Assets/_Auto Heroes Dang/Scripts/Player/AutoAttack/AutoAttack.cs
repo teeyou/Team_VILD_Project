@@ -29,6 +29,46 @@ public class AutoAttack : Unit
     private float _checkTargetInterval = 1f;
     private float _checkTargetTimer = 0f;
 
+    public void Init(PlayerRuntimeData data, int number)
+    {
+        _chName = data.ChName;
+        _maxHp = data.DefaultMaxHp;
+        _curHp = data.DefaultMaxHp;
+
+        _atk = data.DefaultAtk;
+        _def = data.DefaultDef;
+        //_cp = _curHp + _atk + _def;
+        _cp = CPCalculator.CalculateCP(_maxHp, _atk, _def);
+
+        _range = data.Range;
+
+        _moveSpeed = data.MoveSpeed;
+
+        _maxSkillCool = data.SkillCool;
+        _skillMultiplier = data.SkillMultiplier;
+
+        _currentSkillCool = _maxSkillCool;
+
+        _attackType = data.AttackType;
+
+        _level = data.Level;
+        _grade = data.Grade;
+
+        _line = EPositionLine.None;
+        _map = ECombatMap.Field;
+
+        _targetTr = null;
+        _searchRadius = 20f;
+
+        _isAttack = false;
+        _skillEnd = true;
+
+        CharacterNumber = number;
+        TotalDamage = 0;
+        TotalDamaged = 0;
+        IsSkillUsed = false;
+    }
+
     public void Init(BaseStatus_SO data, int number)
     {
         _chName = data.ChName;

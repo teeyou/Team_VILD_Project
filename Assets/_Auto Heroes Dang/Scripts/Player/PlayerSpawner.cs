@@ -55,10 +55,15 @@ public class PlayerSpawner : MonoBehaviour
     public GameObject SpawnPlayer(int idx, Vector3 pos, Quaternion rot)
     {
         GameObject go = Instantiate(_baseStatsList[idx].Prefab);
+        //GameObject go = Instantiate(DataSource.Instance.GetBaseStatusSO(idx).Prefab);
+        //GameObject go = Instantiate(DataSource.Instance.GetPlayerRuntimeData(idx).Prefab);
+
         go.transform.position = pos;
         go.transform.rotation = rot;
         AutoAttack autoAttack = go.GetComponent<AutoAttack>();
-        autoAttack.Init(_baseStatsList[idx], idx);
+
+        //autoAttack.Init(_baseStatsList[idx], idx);
+        autoAttack.Init(DataSource.Instance.GetPlayerRuntimeData(idx), idx);
 
         return go;
     }
