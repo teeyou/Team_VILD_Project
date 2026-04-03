@@ -8,7 +8,13 @@ using System.Collections.Generic;
 public class BattleUIManager : Singleton<BattleUIManager>
 {
     [SerializeField] private Button _pauseButton;
+    [SerializeField] private GameObject _pauseButtonPause;
+    [SerializeField] private GameObject _pauseButtonPlay;
+
     [SerializeField] private Button _speedButton;
+    [SerializeField] private GameObject _speedButtonAccel;
+    [SerializeField] private GameObject _speedButtonConstant;
+
     [SerializeField] private Button _backButton;
     [SerializeField] private Button _startButton;
 
@@ -64,10 +70,17 @@ public class BattleUIManager : Singleton<BattleUIManager>
             if (Time.timeScale == 0f)
             {
                 Time.timeScale = 1f;
+
+                _pauseButtonPause.SetActive(true);
+                _pauseButtonPlay.SetActive(false); // 0403 조교님 피드백으로 추가 - 진주 (이하 주석 생략)
+                
             }
             else
             {
                 Time.timeScale = 0f;
+
+                _pauseButtonPause.SetActive(false);
+                _pauseButtonPlay.SetActive(true); // 0403 조교님 피드백으로 추가 - 진주 (이하 주석 생략)
             }
         });
 
@@ -76,10 +89,17 @@ public class BattleUIManager : Singleton<BattleUIManager>
             if (Time.timeScale == 1f)
             {
                 Time.timeScale = 2f;
+
+                _speedButtonAccel.SetActive(false);
+                _speedButtonConstant.SetActive(true);
+
             }
             else
             {
                 Time.timeScale = 1f;
+
+                _speedButtonAccel.SetActive(true);
+                _speedButtonConstant.SetActive(false);
             }
         });
 
@@ -123,7 +143,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
             {
                 if (images[j].name == "Character Image")
                 {
-                    images[j].sprite = Resources.Load<Sprite>($"CharacterSprite/{unit.ChName}");
+                    images[j].sprite = Resources.Load<Sprite>($"CharacterSprite/{unit.ChName}_Battle");
                 }
             }
 
@@ -169,7 +189,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
         {
             Image icon = _skillButtons[i].transform.GetChild(0).GetComponent<Image>();
             Image mask = _skillButtons[i].transform.GetChild(1).GetComponent<Image>();
-            TMP_Text coolTimeTmp = _skillButtons[i].transform.GetChild(2).GetComponent<TMP_Text>();
+            TMP_Text coolTimeTmp = _skillButtons[i].transform.GetChild(3).GetComponent<TMP_Text>(); //0403 계층구조 변경으로 수정.
 
             GameObject go = chList[i];
 
