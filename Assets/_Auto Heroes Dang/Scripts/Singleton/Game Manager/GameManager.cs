@@ -60,4 +60,17 @@ public class GameManager : Singleton<GameManager>
 
         // 다음 스테이지가 없으면 아무것도 안함
     }
+
+    public string GetCurrentStageDisplayName()
+    {
+        string stageName = _currentStage.ToString();   // Stage1_1
+        stageName = stageName.Replace("Stage", "Stage ");
+        stageName = stageName.Replace("_", "-");
+        return stageName;                              // Stage 1-1
+    }
+
+    public int GetCurrentStageGoldReward()
+    {
+        return ((int)_currentStage + 1) * 1000;
+    }
 }

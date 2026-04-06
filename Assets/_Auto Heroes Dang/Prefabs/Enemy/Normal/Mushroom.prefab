@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 1328710631425329667}
   - component: {fileID: 8712390038757057688}
   - component: {fileID: 7681134324485567994}
+  - component: {fileID: 4876899134483465701}
   m_Layer: 20
   m_Name: Mushroom
   m_TagString: Enemy
@@ -284,6 +285,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94289d80e14781b4d96a0c23da7b8833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damageTextPoint: {fileID: 0}
+  _damageTextHeightOffset: 1.5
   _animator: {fileID: 1328710631425329667}
   _statusData: {fileID: 11400000, guid: e7313c000d76e8143ba98dae63f45351, type: 2}
   _targetLayer:
@@ -314,8 +317,24 @@ MonoBehaviour:
   _slotCount: 8
   _slotRadiusOffset: 0.2
   _slotArriveDistance: 0.3
-  _hpBarPoint: {fileID: 0}
-  _hpBarOffset: {x: 0, y: 2, z: 0}
+  _attackSfxNames:
+  - MonsterAttack1
+  - MonsterAttack2
+  - MonsterAttack3
+--- !u!114 &4876899134483465701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3108217223468749528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da68281ebd76d9c42902af676ab3f0ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _goldReward: 10
+  _gemReward: 0
 --- !u!1 &3147948992583509268
 GameObject:
   m_ObjectHideFlags: 0

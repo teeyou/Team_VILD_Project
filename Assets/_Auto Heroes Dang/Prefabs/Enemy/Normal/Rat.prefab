@@ -921,6 +921,7 @@ GameObject:
   - component: {fileID: 1337495235019049316}
   - component: {fileID: 6925602099266777666}
   - component: {fileID: 8103791840515733907}
+  - component: {fileID: 2581900302301596658}
   m_Layer: 20
   m_Name: Rat
   m_TagString: Enemy
@@ -978,6 +979,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94289d80e14781b4d96a0c23da7b8833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damageTextPoint: {fileID: 0}
+  _damageTextHeightOffset: 1.5
   _animator: {fileID: 1337495235019049316}
   _statusData: {fileID: 11400000, guid: ef667c37bf0706a4d9da8b3384f89a05, type: 2}
   _targetLayer:
@@ -1008,8 +1011,10 @@ MonoBehaviour:
   _slotCount: 8
   _slotRadiusOffset: 0.2
   _slotArriveDistance: 0.3
-  _hpBarPoint: {fileID: 0}
-  _hpBarOffset: {x: 0, y: 2, z: 0}
+  _attackSfxNames:
+  - MonsterAttack1
+  - MonsterAttack2
+  - MonsterAttack3
 --- !u!65 &8103791840515733907
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1031,6 +1036,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.27, y: 1.31, z: 1.12}
   m_Center: {x: 0, y: 0.6, z: 0.27}
+--- !u!114 &2581900302301596658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2945876983524528313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da68281ebd76d9c42902af676ab3f0ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _goldReward: 10
+  _gemReward: 0
 --- !u!1 &3074595820834296527
 GameObject:
   m_ObjectHideFlags: 0

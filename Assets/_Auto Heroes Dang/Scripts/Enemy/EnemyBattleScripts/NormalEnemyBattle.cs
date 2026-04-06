@@ -557,6 +557,10 @@ public class NormalEnemyBattle : Unit
             Debug.Log($"{name} 죽음");
         }
 
+        EnemyReward reward = GetComponent<EnemyReward>();
+        if (reward != null)
+            reward.GiveReward();
+
         Destroy(gameObject, 3f);
     }
     private void DisableBuffVfx(string childName)

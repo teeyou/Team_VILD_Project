@@ -11,6 +11,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private Button _enemyPanelBackButton;
     [SerializeField] private Button _bossPanelBackButton;
     [SerializeField] private FieldUI _fieldUI;
+    [SerializeField] private StagePanelUI _stagePanelUI; // 스테이지 패널 연결
 
     [Header("왼쪽 하단 스테이터스")]
     [SerializeField] private GameObject _statusPanel;
@@ -44,6 +45,8 @@ public class UIManager : Singleton<UIManager>
 
     private void Start()
     {
+        RefreshCurrencyUI();
+
         if (GameManager.Instance.IsFirstPoint)
         {
             Debug.Log("FirstPoint");
@@ -66,6 +69,22 @@ public class UIManager : Singleton<UIManager>
             ToggleProgressButton(false);
             ToggleStageButton(true);
         }
+    }
+
+    private void RefreshCurrencyUI()
+    {
+        _goldText.text = CurrencyManager.Instance.Gold.ToString();
+        _gemText.text = CurrencyManager.Instance.Gem.ToString();
+    }
+
+    private void OnEnable()
+    {
+        CurrencyManager.Instance.OnCurrencyChanged += RefreshCurrencyUI;
+    }
+
+    private void OnDisable()
+    {
+        CurrencyManager.Instance.OnCurrencyChanged -= RefreshCurrencyUI;
     }
 
     private void SetSlot()
@@ -167,6 +186,7 @@ public class UIManager : Singleton<UIManager>
     {
         ToggleStageButton(false);
         _fieldUI.PopUpFieldInfo();
+        _stagePanelUI.RefreshUI();
     }
 
     public void CloseStagePanel()

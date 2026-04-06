@@ -110,6 +110,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
             _startButton.gameObject.SetActive(false);
             _gamePanel.SetActive(true);
             BattleManager.Instance.StartBattle();
+            AudioManager.Instance.PlayBattleBGMForCurrentStage();
         });
 
         _defeatButton.onClick.AddListener(ReturnField);
