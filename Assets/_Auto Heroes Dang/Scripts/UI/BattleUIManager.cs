@@ -26,6 +26,11 @@ public class BattleUIManager : Singleton<BattleUIManager>
     [SerializeField] private Button _defeatButton;
     [SerializeField] private Button _victoryButton;
 
+    [Header("결과창 골드 및 젬")]
+    [SerializeField] private GameObject _resultPanel;
+    [SerializeField] private TMP_Text _goldText;
+    [SerializeField] private TMP_Text _gemText;
+
     [Header("캐릭터 정보 UI")]
     [SerializeField] private Transform _chSlotParent;   // Character Group
     [SerializeField] private GameObject _chSlotPrefab;
@@ -288,6 +293,16 @@ public class BattleUIManager : Singleton<BattleUIManager>
                 }
             }
         }
+    }
+
+    // 배틀 승리시에 결과창에서 보여줄 젬과 골드의 양
+    public void SetStageReward(int gold, int gem)
+    {
+        if (_goldText != null)
+            _goldText.text = gold.ToString("N0");
+
+        if (_gemText != null)
+            _gemText.text = gem.ToString("N0");
     }
 
     // 토스트 메시지 팝업 애니메이션 <- 0402 진주

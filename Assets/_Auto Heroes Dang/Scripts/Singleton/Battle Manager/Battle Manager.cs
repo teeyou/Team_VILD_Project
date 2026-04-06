@@ -451,12 +451,18 @@ public class BattleManager : Singleton<BattleManager>
 
     private IEnumerator VictoryResult()
     {
-
         BattleUIManager.Instance._resultBlockPanel.SetActive(true);
 
-        yield return new WaitForSeconds(2.0f); // 일회성이라 굳이 캐싱 않았지만 필요 시 사용
-        
+        yield return new WaitForSeconds(2.0f);
+
+        int rewardGold = GameManager.Instance.GetCurrentStageGoldReward();
+        int rewardGem = GameManager.Instance.GetCurrentStageGemReward();
+
+        BattleUIManager.Instance.SetStageReward(rewardGold, rewardGem);
         BattleUIManager.Instance.ShowResultPanel(true);
+
+        DataSource.Instance.AddGold(rewardGold);
+        DataSource.Instance.AddGem(rewardGem);
 
         CreateMVP();
 

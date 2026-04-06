@@ -33,7 +33,7 @@ public class EnemyReward : MonoBehaviour
 
         _rewardGiven = true;
 
-        if (CurrencyManager.Instance != null)
+        if (DataSource.Instance != null)
         {
             if (_goldReward > 0)
             {
@@ -41,12 +41,12 @@ public class EnemyReward : MonoBehaviour
                 int finalGold = Mathf.RoundToInt(_goldReward * randomMultiplier);
                 finalGold = Mathf.Max(0, finalGold);
 
-                CurrencyManager.Instance.AddGold(finalGold);
+                DataSource.Instance.AddGold(finalGold);
                 AudioManager.Instance.PlaySFX("CoinDrop");
             }
 
             if (_gemReward > 0)
-                CurrencyManager.Instance.AddGem(_gemReward);
+                DataSource.Instance.AddGem(_gemReward);
         }
     }
 }

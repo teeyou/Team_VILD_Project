@@ -73,4 +73,9 @@ public class GameManager : Singleton<GameManager>
     {
         return ((int)_currentStage + 1) * 1000;
     }
+
+    public int GetCurrentStageGemReward()
+    {
+        return 10 + ((int)_currentStage * 5);
+    }
 }

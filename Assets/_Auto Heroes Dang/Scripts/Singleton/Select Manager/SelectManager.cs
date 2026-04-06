@@ -19,6 +19,7 @@ public class SelectManager : MonoBehaviour
     private int _selectedCharacterNumber = -1;
 
     private bool _isPressedStartButton = false;
+
     void Start()
     {
         _cam = Camera.main;
@@ -39,52 +40,44 @@ public class SelectManager : MonoBehaviour
             {
                 if (hit.collider.gameObject == _shield01)
                 {
-                    _selectedCharacterNumber = (int)ECharacterNumber.Shield_01;
-
-                    ToggleBG(true);
-                    
-                    if (_playAnimType == 0)
-                    {
-                        unit.PlayVictoryAnimation();
-                    }
-
-                    else if (_playAnimType == 1)
-                    {
-                        unit.PlayAttackAnimation();
-                    }
-
-                    else if (_playAnimType == 2)
-                    {
-                        unit.PlaySkillAnimation();
-                    }
+                    SelectCharacter((int)ECharacterNumber.Shield_01, true, unit);
                 }
-
-                else
+                else if (hit.collider.gameObject == _shield02)
                 {
-                    _selectedCharacterNumber = (int)ECharacterNumber.Shield_02;
-
-                    ToggleBG(false);
-
-                    if (_playAnimType == 0)
-                    {
-                        unit2.PlayVictoryAnimation();
-                    }
-
-                    else if (_playAnimType == 1)
-                    {
-                        unit2.PlayAttackAnimation();
-                    }
-
-                    else if (_playAnimType == 2)
-                    {
-                        unit2.PlaySkillAnimation();
-                    }
+                    SelectCharacter((int)ECharacterNumber.Shield_02, false, unit2);
                 }
             }
-
-
         }
+    }
 
+    private void SelectCharacter(int characterNumber, bool isShield01, SelectScenePlayer selectedUnit)
+    {
+        if (_selectedCharacterNumber == characterNumber)
+            return;
+
+        _selectedCharacterNumber = characterNumber;
+
+        ToggleBG(isShield01);
+        PlaySelectAnimation(selectedUnit);
+    }
+
+    private void PlaySelectAnimation(SelectScenePlayer selectedUnit)
+    {
+        if (selectedUnit == null)
+            return;
+
+        if (_playAnimType == 0)
+        {
+            selectedUnit.PlayVictoryAnimation();
+        }
+        else if (_playAnimType == 1)
+        {
+            selectedUnit.PlayAttackAnimation();
+        }
+        else if (_playAnimType == 2)
+        {
+            selectedUnit.PlaySkillAnimation();
+        }
     }
 
     private void ToggleBG(bool flag)

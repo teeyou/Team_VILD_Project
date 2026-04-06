@@ -71,20 +71,25 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-    private void RefreshCurrencyUI()
+    public void RefreshCurrencyUI()
     {
-        _goldText.text = CurrencyManager.Instance.Gold.ToString();
-        _gemText.text = CurrencyManager.Instance.Gem.ToString();
+        if (_gemText != null)
+            _gemText.text = DataSource.Instance.Gem.ToString();
+
+        if (_goldText != null)
+            _goldText.text = DataSource.Instance.Gold.ToString();
     }
 
     private void OnEnable()
     {
-        CurrencyManager.Instance.OnCurrencyChanged += RefreshCurrencyUI;
+        if (DataSource.Instance != null)
+            DataSource.Instance.OnCurrencyChanged += RefreshCurrencyUI;
     }
 
     private void OnDisable()
     {
-        CurrencyManager.Instance.OnCurrencyChanged -= RefreshCurrencyUI;
+        if (DataSource.Instance != null)
+            DataSource.Instance.OnCurrencyChanged -= RefreshCurrencyUI;
     }
 
     private void SetSlot()

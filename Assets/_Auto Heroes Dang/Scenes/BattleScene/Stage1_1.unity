@@ -31495,6 +31495,9 @@ MonoBehaviour:
   _resultBlockPanel: {fileID: 1316441967}
   _defeatButton: {fileID: 1943258674}
   _victoryButton: {fileID: 1746190359}
+  _resultPanel: {fileID: 0}
+  _goldText: {fileID: 2021128972}
+  _gemText: {fileID: 1075570447}
   _chSlotParent: {fileID: 551159688}
   _chSlotPrefab: {fileID: 7805014551364995970, guid: 10107d05aca5f2b41b448c5ed80f3b21, type: 3}
   _playerTotalHpTMP: {fileID: 1814009981}
