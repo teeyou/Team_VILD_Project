@@ -20,26 +20,6 @@ public class ItemSlotFactory : MonoBehaviour
     private Dictionary<Grade, Color> _gradeColor;       // 타입별 컬러
 
 
-    private void Awake()
-    {
-        _prefabDictionary = new Dictionary<ItemType, GameObject>();
-
-        foreach (ItemPrefabData data in _prefabList)
-        {
-            _prefabDictionary[data.type] = data.prefab;
-        }
-
-        _gradeColor = new Dictionary<Grade, Color>()
-    {
-        { Grade.Common, Hex("#B1B2B5") },
-        { Grade.Uncommon, Hex("#00A2FF") },
-        { Grade.Rare, Hex("#9A41F6") },
-        { Grade.Elite, Hex("#F83BF9") },
-        { Grade.Epic, Hex("#FFC508") }
-    };
-
-    }
-
     private Color Hex(string hex)
     {
         ColorUtility.TryParseHtmlString(hex, out Color color);
@@ -48,6 +28,7 @@ public class ItemSlotFactory : MonoBehaviour
 
     public void RefreshUI(IItemManage iItem, int verticalSlot, Action<ItemData> onClick)
     {
+        SetupPrefab();
         ClearAllSlot();
 
         var items = iItem.GetItems();
@@ -75,6 +56,29 @@ public class ItemSlotFactory : MonoBehaviour
             Instantiate(_emptySlot, _itemSlotParent);
         }
     }
+
+    private void SetupPrefab()
+    {
+        if (_gradeColor != null) return;
+
+        _prefabDictionary = new Dictionary<ItemType, GameObject>();
+
+        foreach (ItemPrefabData data in _prefabList)
+        {
+            _prefabDictionary[data.type] = data.prefab;
+        }
+
+        _gradeColor = new Dictionary<Grade, Color>()
+    {
+        { Grade.Common, Hex("#B1B2B5") },
+        { Grade.Uncommon, Hex("#00A2FF") },
+        { Grade.Rare, Hex("#9A41F6") },
+        { Grade.Elite, Hex("#F83BF9") },
+        { Grade.Epic, Hex("#FFC508") }
+    };
+    }
+
+
 
     public void ClearAllSlot()
     {
