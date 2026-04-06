@@ -553,6 +553,7 @@ GameObject:
   - component: {fileID: 4659941355503938077}
   - component: {fileID: 574623131836721513}
   - component: {fileID: 6807130095934301746}
+  - component: {fileID: 3058051280545578525}
   m_Layer: 20
   m_Name: Werewolf
   m_TagString: Enemy
@@ -610,6 +611,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94289d80e14781b4d96a0c23da7b8833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damageTextPoint: {fileID: 0}
+  _damageTextHeightOffset: 1.5
   _animator: {fileID: 4659941355503938077}
   _statusData: {fileID: 11400000, guid: 4e75a8714e817aa43b25be8d164917b0, type: 2}
   _targetLayer:
@@ -640,8 +643,10 @@ MonoBehaviour:
   _slotCount: 8
   _slotRadiusOffset: 0.2
   _slotArriveDistance: 0.3
-  _hpBarPoint: {fileID: 0}
-  _hpBarOffset: {x: 0, y: 2, z: 0}
+  _attackSfxNames:
+  - MonsterAttack1
+  - MonsterAttack2
+  - MonsterAttack3
 --- !u!65 &6807130095934301746
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -663,6 +668,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.66, y: 2, z: 1.33}
   m_Center: {x: 0, y: 0.69, z: 0.55}
+--- !u!114 &3058051280545578525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1678274998104434769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da68281ebd76d9c42902af676ab3f0ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _goldReward: 15
+  _gemReward: 0
 --- !u!1 &1872710794457315404
 GameObject:
   m_ObjectHideFlags: 0

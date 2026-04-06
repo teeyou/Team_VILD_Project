@@ -306,6 +306,7 @@ GameObject:
   - component: {fileID: 5302265253999633394}
   - component: {fileID: 1899420479465804201}
   - component: {fileID: 8071837195857788802}
+  - component: {fileID: 342978786508195001}
   m_Layer: 20
   m_Name: Cactus
   m_TagString: Enemy
@@ -363,6 +364,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94289d80e14781b4d96a0c23da7b8833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damageTextPoint: {fileID: 0}
+  _damageTextHeightOffset: 1.5
   _animator: {fileID: 5302265253999633394}
   _statusData: {fileID: 11400000, guid: 2836a7e4fb691b34392f00dd79a6c2cc, type: 2}
   _targetLayer:
@@ -393,8 +396,10 @@ MonoBehaviour:
   _slotCount: 8
   _slotRadiusOffset: 0.2
   _slotArriveDistance: 0.3
-  _hpBarPoint: {fileID: 0}
-  _hpBarOffset: {x: 0, y: 2, z: 0}
+  _attackSfxNames:
+  - MonsterAttack1
+  - MonsterAttack2
+  - MonsterAttack3
 --- !u!65 &8071837195857788802
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -416,6 +421,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.48, z: 1}
   m_Center: {x: 0, y: 0.69, z: 0}
+--- !u!114 &342978786508195001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3595316216206217821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da68281ebd76d9c42902af676ab3f0ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _goldReward: 10
+  _gemReward: 0
 --- !u!1 &4203402984819239889
 GameObject:
   m_ObjectHideFlags: 0

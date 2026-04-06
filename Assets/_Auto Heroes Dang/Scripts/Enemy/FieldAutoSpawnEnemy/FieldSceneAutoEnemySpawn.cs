@@ -187,10 +187,16 @@ public class FieldSceneAutoEnemySpawn : MonoBehaviour
 
         Vector3 spawnPos = GetRandomSpawnPosition(stage);
         GameObject spawnedEnemy = Instantiate(prefab, spawnPos, Quaternion.identity);
-        
+
         if (spawnedEnemy.activeSelf == false)
         {
             spawnedEnemy.SetActive(true);
+        }
+
+        EnemyReward reward = spawnedEnemy.GetComponent<EnemyReward>();
+        if (reward != null)
+        {
+            reward.EnableReward();
         }
 
         stage.aliveEnemies.Add(spawnedEnemy);
