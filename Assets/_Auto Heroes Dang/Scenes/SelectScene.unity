@@ -122,6 +122,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &94009216 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5680634149326623043, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
+  m_PrefabInstance: {fileID: 1550257644}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fdbf393505c7984ea1666db61031a11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &153333367
 GameObject:
   m_ObjectHideFlags: 0
@@ -916,6 +927,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1426865087}
   m_CullTransparentMesh: 1
+--- !u!1001 &1550257644
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7620602447510639647, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -55.857372
+      objectReference: {fileID: 0}
+    - target: {fileID: 7620602447510639647, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 684.4445
+      objectReference: {fileID: 0}
+    - target: {fileID: 7620602447510639647, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8.279854
+      objectReference: {fileID: 0}
+    - target: {fileID: 7620602447510639647, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7620602447510639647, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7620602447510639647, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7620602447510639647, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7620602447510639647, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7620602447510639647, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7620602447510639647, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9203795777717889489, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
+      propertyPath: m_Name
+      value: Audio Manager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
 --- !u!1 &1565023528
 GameObject:
   m_ObjectHideFlags: 0
@@ -29683,7 +29751,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6121055012500312438}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 94009216}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlaySFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: UIClick
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &6121055012850474292
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -41464,6 +41544,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676b6fd558b84994d803e26eaa79d612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damageTextPoint: {fileID: 0}
+  _damageTextHeightOffset: 1.5
 --- !u!4 &8476405413645136369
 Transform:
   m_ObjectHideFlags: 0
@@ -42015,6 +42097,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676b6fd558b84994d803e26eaa79d612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damageTextPoint: {fileID: 0}
+  _damageTextHeightOffset: 1.5
 --- !u!1 &8601842987107575806
 GameObject:
   m_ObjectHideFlags: 0
@@ -45222,3 +45306,4 @@ SceneRoots:
   - {fileID: 8398600587086758654}
   - {fileID: 7651985597761000205}
   - {fileID: 8634238680604385400}
+  - {fileID: 1550257644}

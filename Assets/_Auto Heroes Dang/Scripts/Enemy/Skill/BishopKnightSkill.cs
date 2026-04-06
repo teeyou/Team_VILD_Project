@@ -59,6 +59,8 @@ public class BishopKnightSkill : MonoBehaviour
                 continue;
 
             candidates.Add(ally);
+
+            AudioManager.Instance.PlaySFX("BishapSkill");
         }
 
         if (candidates.Count == 0)

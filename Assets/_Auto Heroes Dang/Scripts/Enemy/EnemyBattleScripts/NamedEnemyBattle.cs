@@ -268,6 +268,8 @@ public class NamedEnemyBattle : NormalEnemyBattle
             if (unit.IsDead)
                 continue;
 
+            AudioManager.Instance.PlaySFX("OrcSkill");
+
             int finalDamage = CalculateSkillDamage(unit);
 
             unit.TakeDamage(finalDamage, transform);

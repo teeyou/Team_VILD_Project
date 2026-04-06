@@ -18,6 +18,8 @@ public class WizardAutoAttack : AutoAttack
         GameObject projGo = ParticleManager.Instance.Play("EnergyBallBlue", pos, rot);
         Projectile proj = projGo.GetComponent<Projectile>();
 
+        AudioManager.Instance.PlaySFX("MagicAttack");
+
         if (_targetTr != null)
         {
             proj.TargetTr = _targetTr;

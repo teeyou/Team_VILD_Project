@@ -14,7 +14,9 @@ public class TwoHandAutoAttack : AutoAttack
         pos.y += 1f;
         Quaternion rot = Quaternion.AngleAxis(90f, transform.up) * transform.rotation;
         ParticleManager.Instance.Play("SlashRed", pos, rot);
-        
+
+        AudioManager.Instance.PlaySFX("SwordAttack2");
+
         if (_targetTr != null && _targetUnit != null)
         {
             bool isCritical;
@@ -31,6 +33,7 @@ public class TwoHandAutoAttack : AutoAttack
 
         Quaternion rot = Quaternion.AngleAxis(270f, transform.right) * Quaternion.AngleAxis(0f, transform.up) * Quaternion.AngleAxis(270f, transform.forward) * transform.rotation;
         ParticleManager.Instance.Play("Skill_CartoonRedSlash", pos, rot);
+        AudioManager.Instance.PlaySFX("TwoHandSwordSkill");
 
         if (_targetTr != null && _targetUnit != null)
         {

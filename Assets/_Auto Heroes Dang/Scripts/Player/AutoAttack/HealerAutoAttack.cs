@@ -19,6 +19,8 @@ public class HealerAutoAttack : AutoAttack
         GameObject projGo = ParticleManager.Instance.Play("ProjectilePurple", pos, rot);
         Projectile proj = projGo.GetComponent<Projectile>();
 
+        AudioManager.Instance.PlaySFX("HealerAttack");
+
         if (_targetTr != null)
         {
             proj.TargetTr = _targetTr;

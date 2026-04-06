@@ -21,6 +21,8 @@ public class ShieldAutoAttack : AutoAttack
         pos.y += 1f;
         Quaternion rot = Quaternion.AngleAxis(270f, transform.up) * transform.rotation;
 
+        AudioManager.Instance.PlaySFX("SwordAttack1");
+
         if (_type == 1)
         {
             ParticleManager.Instance.Play("SlashBlue", pos, rot);
@@ -55,11 +57,13 @@ public class ShieldAutoAttack : AutoAttack
         if (_type == 1)
         {
             ParticleManager.Instance.Play("Skill_HitBlue", pos);
+            AudioManager.Instance.PlaySFX("SwordSkill");
         }
 
         else if (_type == 2)
         {
             ParticleManager.Instance.Play("Skill_HitPink", pos);
+            AudioManager.Instance.PlaySFX("SwordSkill");
         }
 
         if (_targetTr != null && _targetUnit != null)

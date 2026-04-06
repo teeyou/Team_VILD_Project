@@ -44,7 +44,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -172,7 +172,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -311,5 +311,94 @@ MonoBehaviour:
   _clipList:
   - name: FieldBGM
     clip: {fileID: 8300000, guid: 8699394d4d33376439dfdae7bf34a728, type: 3}
+    volume: 1
   - name: hit_01
     clip: {fileID: 8300000, guid: 96e8c3806f1b8194db4f7e567654e9d6, type: 3}
+    volume: 1
+  - name: TitleBGM
+    clip: {fileID: 8300000, guid: 6fff0778861043742a287565226baec4, type: 3}
+    volume: 0.05
+  - name: FieldBGM
+    clip: {fileID: 8300000, guid: 9b348d510f1519d488cfee1afde63d2c, type: 3}
+    volume: 0.05
+  - name: Battle1BGM
+    clip: {fileID: 8300000, guid: 2bc285d54b0908349b2415d04d5cbaf5, type: 3}
+    volume: 0.05
+  - name: SwordAttack1
+    clip: {fileID: 8300000, guid: 77c61f0860bff644bae25c71086fbb0a, type: 3}
+    volume: 1
+  - name: SwordAttack2
+    clip: {fileID: 8300000, guid: afff66b67a294674fb73d1f1b28b9407, type: 3}
+    volume: 1
+  - name: TwoHandSwordSkill
+    clip: {fileID: 8300000, guid: 681c0964144135347a47af5e76b86989, type: 3}
+    volume: 1
+  - name: SwordSkill
+    clip: {fileID: 8300000, guid: 8138a40c69c5c184d85927252522a983, type: 3}
+    volume: 1
+  - name: BowAttack
+    clip: {fileID: 8300000, guid: 4b4dd94a512c3ea4ea0aaf477fb89bff, type: 3}
+    volume: 1
+  - name: SpearAttack
+    clip: {fileID: 8300000, guid: 44b75b85b511cad48b89fe905ba98f5f, type: 3}
+    volume: 1
+  - name: MagicAttack
+    clip: {fileID: 8300000, guid: 0d159194c3a36a5428aa67272af2087b, type: 3}
+    volume: 0.08
+  - name: MagicSKill
+    clip: {fileID: 8300000, guid: 0d159194c3a36a5428aa67272af2087b, type: 3}
+    volume: 0.08
+  - name: HealerAttack
+    clip: {fileID: 8300000, guid: cf8ceed8755c9504bbf6834b87df3e2e, type: 3}
+    volume: 0.05
+  - name: MonsterAttack1
+    clip: {fileID: 8300000, guid: 649f7e0f9a6bcc241a7932904750f2b2, type: 3}
+    volume: 0.4
+  - name: MonsterAttack2
+    clip: {fileID: 8300000, guid: 2970f4265c9f9974fad7ba384b4f31eb, type: 3}
+    volume: 0.4
+  - name: MonsterAttack3
+    clip: {fileID: 8300000, guid: 805545b0386d3a84bb2236fa2be885f9, type: 3}
+    volume: 0.4
+  - name: OrcSkill
+    clip: {fileID: 8300000, guid: 98f1cff853dee6f4684d5ae1ef0dd00c, type: 3}
+    volume: 0.4
+  - name: BishapSkill
+    clip: {fileID: 8300000, guid: cc0774fa71a531547bfe903d9092945a, type: 3}
+    volume: 0.4
+  - name: BossSkill
+    clip: {fileID: 8300000, guid: 803d88c902f618c448e60b0790b873f4, type: 3}
+    volume: 0.4
+  - name: EvilMageSkill
+    clip: {fileID: 8300000, guid: cda33a757890abd4e8fb2248ac8e01b5, type: 3}
+    volume: 0.15
+  - name: UIClick
+    clip: {fileID: 8300000, guid: d43affe1b94514a40864ced21f25e64b, type: 3}
+    volume: 1
+  - name: SelectChar
+    clip: {fileID: 8300000, guid: 3073a9a2df3dd474994bd7f4714be3fc, type: 3}
+    volume: 1
+  _sceneBgmList:
+  - sceneName: SelectScene
+    bgmClipName: TitleBGM
+  - sceneName: FieldScene
+    bgmClipName: FieldBGM
+  - sceneName: Stage1_1
+    bgmClipName: Battle1BGM
+  - sceneName: Stage1_2
+    bgmClipName: Battle1BGM
+  - sceneName: Stage1_3
+    bgmClipName: Battle1BGM
+  - sceneName: Stage2_1
+    bgmClipName: Battle1BGM
+  - sceneName: Stage2_2
+    bgmClipName: Battle1BGM
+  - sceneName: Stage2_3
+    bgmClipName: Battle1BGM
+  - sceneName: Stage3_1
+    bgmClipName: Battle1BGM
+  - sceneName: Stage3_2
+    bgmClipName: Battle1BGM
+  - sceneName: Stage3_3
+    bgmClipName: Battle1BGM
+  _loadingSceneName: LoadingScene

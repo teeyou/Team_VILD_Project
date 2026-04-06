@@ -18,6 +18,8 @@ public class BowAutoAttack : AutoAttack
         GameObject projGo = ParticleManager.Instance.Play("ArrowGreen", pos, rot);
         Projectile proj = projGo.GetComponent<Projectile>();
 
+        AudioManager.Instance.PlaySFX("BowAttack");
+
         if (_targetTr != null)
         {
             proj.TargetTr = _targetTr;
