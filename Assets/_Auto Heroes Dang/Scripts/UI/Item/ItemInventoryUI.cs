@@ -1,0 +1,36 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ItemInventoryUI : MonoBehaviour
+{
+    [SerializeField] private ItemSlotFactory _factory;
+    [SerializeField] private int _verticalSlot = 5;
+
+    private void OnEnable()
+    {
+        InventoryManager.Instance.OnChanged += Refresh;
+        Refresh();
+    }
+
+    private void OnDisable()
+    {
+        InventoryManager.Instance.OnChanged -= Refresh;
+    }
+
+    private void Start()
+    {
+        Refresh();
+    }
+
+    private void Refresh()
+    {
+        _factory.RefreshUI(InventoryManager.Instance, _verticalSlot, OnItemClicked);
+    }
+
+    private void OnItemClicked(ItemData item)
+    {
+        Debug.Log($"인벤토리 클릭: {item.name}");
+
+    }
+}
