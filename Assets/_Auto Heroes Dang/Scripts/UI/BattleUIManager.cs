@@ -21,6 +21,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
     [SerializeField] private GameObject _gamePanel;
     [SerializeField] private GameObject _defeatPanel;
     [SerializeField] private GameObject _victoryPanel;
+    [SerializeField] public GameObject _resultBlockPanel; // 빅토리 3초 대기용. 0406 진주
 
     [SerializeField] private Button _defeatButton;
     [SerializeField] private Button _victoryButton;
@@ -384,4 +385,5 @@ public class BattleUIManager : Singleton<BattleUIManager>
             _defeatPanel.SetActive(true);
         }
     }
+
 }

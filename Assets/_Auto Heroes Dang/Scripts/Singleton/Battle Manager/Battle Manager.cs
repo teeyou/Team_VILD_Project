@@ -151,6 +151,11 @@ public class BattleManager : Singleton<BattleManager>
             ResetTimeScale();
 
             _battleState = EBattleState.Finish;
+            // 애니메이션을 위해 코루틴 처리
+            StartCoroutine(VictoryResult());
+            /*
+            BattleUIManager.Instance._resultBlockPanel.SetActive(true);
+
             BattleUIManager.Instance.ShowResultPanel(true);
 
             CreateMVP();
@@ -160,6 +165,8 @@ public class BattleManager : Singleton<BattleManager>
             DestroyAll();
 
             GameManager.Instance.IsStageClear = true;
+
+            */
         }
 
         if (_battleState == EBattleState.Defeat)
@@ -441,4 +448,23 @@ public class BattleManager : Singleton<BattleManager>
             Time.timeScale = 1f;
         }
     }
+
+    private IEnumerator VictoryResult()
+    {
+
+        BattleUIManager.Instance._resultBlockPanel.SetActive(true);
+
+        yield return new WaitForSeconds(2.0f); // 일회성이라 굳이 캐싱 않았지만 필요 시 사용
+        
+        BattleUIManager.Instance.ShowResultPanel(true);
+
+        CreateMVP();
+
+        GameManager.Instance.IsStageStart = false;
+
+        DestroyAll();
+
+        GameManager.Instance.IsStageClear = true;
+    }
+
 }
