@@ -1,29 +1,14 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-
-/*
-외부에서 호출 시 
-
-1. [SerializeField] private ItemSlotFactory 팩토리;
-
-2. List<ItemSlotFactory.ItemData> 리스트이름 = new List<ItemSlotFactory.ItemData>()
-        {
-            new ItemSlotFactory.ItemData(이름, 등급, 레벨),
-            new ItemSlotFactory.ItemData(ItemSlotFactory.ItemType.Sword, ItemSlotFactory.Grade.Rare, 10),
-            new ItemSlotFactory.ItemData(ItemSlotFactory.ItemType.Hat, ItemSlotFactory.Grade.Common, 2),
-        };
-3. 팩토리.CreateItemSlot(리스트이름); <- 생성용
-   팩토리.ClearAllSlot(리스트이름); <- 클리어용
-
- */
 
 public class ItemSlotFactory : MonoBehaviour
 {
     [SerializeField] private Transform _itemSlotParent;
     [SerializeField] private List<ItemPrefabData> _prefabList;
+
     [System.Serializable]
     private class ItemPrefabData
     {
@@ -32,44 +17,13 @@ public class ItemSlotFactory : MonoBehaviour
     }
 
     [SerializeField] private GameObject _emptySlot;
-    [SerializeField] private int _count;
+    [SerializeField] private int _verticalSlot; // 가로에 들어가는 아이템 갯수
+    private int _slotAmount;
 
     private List<ItemData> _currentItemList = new List<ItemData>();
 
     private Dictionary<ItemType, GameObject> _prefabDictionary;
     private Dictionary<Grade, Color> _gradeColor;       // 타입별 컬러
-
-    public enum ItemType
-    {
-        Sword,
-        Hat,
-        Armor,
-        Shoes,
-        Ring,
-    }
-
-    public enum Grade
-    {
-        Common,
-        Uncommon,
-        Rare,
-        Elite,
-        Epic,
-    }
-
-    public struct ItemData
-    {
-        public ItemType type;
-        public Grade grade;
-        public int level;
-
-        public ItemData(ItemType type, Grade grade, int level)
-        {
-            this.type = type;
-            this.grade = grade;
-            this.level = level;
-        }
-    }
 
 
     private void Awake()
@@ -92,25 +46,25 @@ public class ItemSlotFactory : MonoBehaviour
 
     }
 
+    private void OnEnable()
+    {
+        InventoryManager.Instance.OnInventoryChanged += RefreshUI;
+    }
+
+    private void OnDisable()
+    {
+        InventoryManager.Instance.OnInventoryChanged -= RefreshUI;
+    }
+
     private void Start()
     {
+        RefreshUI();
+    }
 
+    private void RefreshUI()
+    {
         ClearAllSlot();
-
-        // ------------------------ 테스트용 추후 삭제 -----------------------
-        List<ItemData> testItems = new List<ItemData>()
-        {
-            new ItemData(ItemType.Sword, Grade.Common, 3),
-            new ItemData(ItemType.Hat, Grade.Rare, 5),
-            new ItemData(ItemType.Armor, Grade.Uncommon, 6),
-            new ItemData(ItemType.Shoes, Grade.Elite, 7),
-            new ItemData(ItemType.Ring, Grade.Epic, 12),
-        };
-
-        CreateItemSlot(testItems);
-
-        // -------------------------------------------------------------------
-
+        CreateItemSlot(new List<ItemData>(InventoryManager.Instance.Items));
     }
 
     private Color Hex(string hex)
@@ -119,8 +73,11 @@ public class ItemSlotFactory : MonoBehaviour
         return color;
     }
 
+    // 아이템 슬롯 채우기 (데이터, 가로에 들어가는 슬롯 개수(3~5))
     public void CreateItemSlot(List<ItemData> itemList)
     {
+        _slotAmount = Math.Max((itemList.Count + _verticalSlot - 1) / _verticalSlot, 3) * _verticalSlot;
+
         _currentItemList = new List<ItemData>(itemList);
 
         for (int i = 0; i < itemList.Count; i++)
@@ -141,7 +98,7 @@ public class ItemSlotFactory : MonoBehaviour
         }
 
         // 남은 슬롯 채우기
-        for (int i = 0; i < (_count-itemList.Count); i++)
+        for (int i = 0; i < (_slotAmount - itemList.Count); i++)
         {
             Instantiate(_emptySlot, _itemSlotParent);
         }
@@ -157,7 +114,6 @@ public class ItemSlotFactory : MonoBehaviour
 
         _currentItemList.Clear();
     }
-
 
 }
 
