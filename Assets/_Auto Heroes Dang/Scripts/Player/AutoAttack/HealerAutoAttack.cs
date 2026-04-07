@@ -45,6 +45,7 @@ public class HealerAutoAttack : AutoAttack
         //Quaternion rot = transform.rotation;
 
         GameObject go = ParticleManager.Instance.Play("Skill_HealArea", pos);
+        AudioManager.Instance.PlaySFX("HealerSkill");
         go.transform.SetParent(transform);
 
         // 아군 전부 회복
@@ -61,7 +62,6 @@ public class HealerAutoAttack : AutoAttack
 
             GameObject heal = ParticleManager.Instance.Play("Heal", unit.transform.position);
             heal.transform.SetParent(unit.transform);
-            AudioManager.Instance.PlaySFX("HealerSkill");
 
             unit.Heal((int)(_maxHp * _skillMultiplier));
         }
