@@ -35,7 +35,7 @@ public class DataSource : Singleton<DataSource>
     public float CartPosition { get; set; } = 6.5f;
 
     private int _gem = 10;
-    private int _gold = 1000;
+    private int _gold = 100000;
 
     public event Action OnCurrencyChanged;
 
@@ -50,7 +50,7 @@ public class DataSource : Singleton<DataSource>
                 return;
 
             _gem = newValue;
-            SaveCurrency();
+            //SaveCurrency();
             OnCurrencyChanged?.Invoke();
         }
     }
@@ -66,7 +66,7 @@ public class DataSource : Singleton<DataSource>
                 return;
 
             _gold = newValue;
-            SaveCurrency();
+            //SaveCurrency();
             OnCurrencyChanged?.Invoke();
         }
     }
@@ -82,7 +82,7 @@ public class DataSource : Singleton<DataSource>
 
         DontDestroyOnLoad(gameObject);
 
-        LoadCurrency();
+        //LoadCurrency();
 
         AddCharacter(ECharacterNumber.TwoHand_TU);
         AddCharacter(ECharacterNumber.SpearMan_JH);
@@ -188,11 +188,6 @@ public class DataSource : Singleton<DataSource>
         _playerRuntimeDataList[idx].DefaultDef += bonus;
 
         _playerRuntimeDataList[idx].Level++;
-
-        Debug.Log($"{_playerRuntimeDataList[idx].ChName}" +
-            $"\n{_playerRuntimeDataList[idx].DefaultMaxHp}" +
-            $"\n{_playerRuntimeDataList[idx].DefaultAtk}" +
-            $"\n{_playerRuntimeDataList[idx].DefaultDef}");
 
         Debug.Log("레벨업 완료");
     }
