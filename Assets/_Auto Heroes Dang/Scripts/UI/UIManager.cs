@@ -26,14 +26,6 @@ public class UIManager : Singleton<UIManager>
     [Header("캐릭터 스테이터스 팝업 패널")]
     [SerializeField] private GameObject _detailStatusPanel;
 
-    [Header("상자 보상 아이콘 도착 위치")]
-    [SerializeField] private RectTransform _goldTargetUI;
-    [SerializeField] private RectTransform _gemTargetUI;
-
-    public Vector3 GoldTargetUIPosition => _goldTargetUI.position;
-    public Vector3 GemTargetUIPosition => _gemTargetUI.position;
-
-
     protected override void Awake()
     {
         base.Awake();

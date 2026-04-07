@@ -563,7 +563,6 @@ public class NormalEnemyBattle : Unit
 
         Destroy(gameObject, 3f);
     }
-
     private void DisableBuffVfx(string childName)
     {
         Transform[] children = GetComponentsInChildren<Transform>(true);
