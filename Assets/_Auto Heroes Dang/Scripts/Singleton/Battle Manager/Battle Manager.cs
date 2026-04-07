@@ -75,6 +75,8 @@ public class BattleManager : Singleton<BattleManager>
     public Quaternion PlayerStartingRotation => Quaternion.Euler(0, 45f, 0);
     public Quaternion EnemyStartingRotation => Quaternion.Euler(0, 225f, 0);
 
+    public bool IsPause { get; set; } = false;
+
     protected override void Awake()
     {
         base.Awake();
@@ -187,6 +189,12 @@ public class BattleManager : Singleton<BattleManager>
 
     public void UseSkill(int idx)
     {
+        if (IsPause)
+        {
+            Debug.Log("일시정지상태");
+            return;
+        }
+
         if (BattleUIManager.Instance.TrySkill(2)) // 모든 스킬 2칸 소모한다고 가정
         {
             _playerCharacterList[idx].GetComponent<Unit>().IsSkillUsed = true;

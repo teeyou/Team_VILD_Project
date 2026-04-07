@@ -75,6 +75,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
         {
             if (Time.timeScale == 0f)
             {
+                BattleManager.Instance.IsPause = false;
                 Time.timeScale = 1f;
 
                 _pauseButtonPause.SetActive(true);
@@ -83,6 +84,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
             }
             else
             {
+                BattleManager.Instance.IsPause = true;
                 Time.timeScale = 0f;
 
                 _pauseButtonPause.SetActive(false);
@@ -236,6 +238,11 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
     public bool TrySkill(int consume = 2)
     {
+        if (BattleManager.Instance.IsPause)
+        {
+            return false;
+        }
+
         bool isPossible = CheckSKillPossible(consume);
 
         if (isPossible)
