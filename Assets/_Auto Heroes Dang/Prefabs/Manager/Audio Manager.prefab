@@ -345,7 +345,7 @@ MonoBehaviour:
   - name: MagicAttack
     clip: {fileID: 8300000, guid: 0d159194c3a36a5428aa67272af2087b, type: 3}
     volume: 0.08
-  - name: MagicSKill
+  - name: MagicSkill
     clip: {fileID: 8300000, guid: 0d159194c3a36a5428aa67272af2087b, type: 3}
     volume: 0.08
   - name: HealerAttack
@@ -378,27 +378,51 @@ MonoBehaviour:
   - name: SelectChar
     clip: {fileID: 8300000, guid: 3073a9a2df3dd474994bd7f4714be3fc, type: 3}
     volume: 1
+  - name: CoinDrop
+    clip: {fileID: 8300000, guid: 91854d4ab95bc7547a548460dc008e7f, type: 3}
+    volume: 0.5
   _sceneBgmList:
   - sceneName: SelectScene
+    keepCurrentBgm: 0
     bgmClipName: TitleBGM
   - sceneName: FieldScene
+    keepCurrentBgm: 0
     bgmClipName: FieldBGM
   - sceneName: Stage1_1
+    keepCurrentBgm: 1
     bgmClipName: Battle1BGM
   - sceneName: Stage1_2
+    keepCurrentBgm: 1
     bgmClipName: Battle1BGM
   - sceneName: Stage1_3
+    keepCurrentBgm: 1
     bgmClipName: Battle1BGM
   - sceneName: Stage2_1
+    keepCurrentBgm: 1
     bgmClipName: Battle1BGM
   - sceneName: Stage2_2
+    keepCurrentBgm: 1
     bgmClipName: Battle1BGM
   - sceneName: Stage2_3
+    keepCurrentBgm: 1
     bgmClipName: Battle1BGM
   - sceneName: Stage3_1
+    keepCurrentBgm: 1
     bgmClipName: Battle1BGM
   - sceneName: Stage3_2
+    keepCurrentBgm: 1
     bgmClipName: Battle1BGM
   - sceneName: Stage3_3
+    keepCurrentBgm: 1
     bgmClipName: Battle1BGM
+  _stageBattleBgmList:
+  - stagePrefix: Stage1_
+    battleBgmName: Battle1BGM
+  - stagePrefix: Stage2_
+    battleBgmName: Battle1BGM
+  - stagePrefix: Stage3_
+    battleBgmName: Battle1BGM
   _loadingSceneName: LoadingScene
+  _defaultFieldBgmName: FieldBGM
+  _defaultBattleBgmName: Battle1BGM
+  _victoryBgmName: VictoryBGM
