@@ -61,6 +61,7 @@ public class HealerAutoAttack : AutoAttack
 
             GameObject heal = ParticleManager.Instance.Play("Heal", unit.transform.position);
             heal.transform.SetParent(unit.transform);
+            AudioManager.Instance.PlaySFX("HealerSkill");
 
             unit.Heal((int)(_maxHp * _skillMultiplier));
         }
