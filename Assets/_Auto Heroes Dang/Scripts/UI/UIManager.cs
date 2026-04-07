@@ -31,9 +31,19 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private RectTransform _goldTargetUI;
     [SerializeField] private RectTransform _gemTargetUI;
 
+    [Header("왼쪽 상단 메인 캐릭터 UI")]
+    [SerializeField] private Image _mainCharacterImage;
+    [SerializeField] private TMP_Text _totalCpTMP;
     public Vector3 GoldTargetUIPosition => _goldTargetUI.position;
     public Vector3 GemTargetUIPosition => _gemTargetUI.position;
 
+    private TMP_Text _detailLevelTMP;
+    private TMP_Text _detailCpTMP;
+    private TMP_Text _detailAtkTMP;
+    private TMP_Text _detailDefTMP;
+    private TMP_Text _detailRequiredGoldTMP;
+
+    private TMP_Text[] _slotLevelTMPs = new TMP_Text[6];
 
     protected override void Awake()
     {
@@ -141,7 +151,7 @@ public class UIManager : Singleton<UIManager>
                     {
                         if (idx == 0)
                         {
-                            images[i].sprite = Resources.Load<Sprite>($"SkillIcon/{DataSource.Instance.GetPlayerRuntimeData(DataSource.Instance.MainCharacterIdx).ChName}_Attack");
+                            images[i].sprite = Resources.Load<Sprite>($"SkillIcon/Shield_01_Attack");
                         }
                         else
                         {
@@ -154,7 +164,7 @@ public class UIManager : Singleton<UIManager>
                     {
                         if (idx == 0)
                         {
-                            images[i].sprite = Resources.Load<Sprite>($"SkillIcon/{DataSource.Instance.GetPlayerRuntimeData(DataSource.Instance.MainCharacterIdx).ChName}_Skill");
+                            images[i].sprite = Resources.Load<Sprite>($"SkillIcon/Shield_01_Skill");
                         }
                         else
                         {
@@ -191,27 +201,32 @@ public class UIManager : Singleton<UIManager>
                     
                     else if (tmps[i].name == "Level")
                     {
+                        _detailLevelTMP = tmps[i];
                         tmps[i].text = data.Level.ToString();
                     }
                     
                     else if (tmps[i].name == "CP")
                     {
+                        _detailCpTMP = tmps[i];
                         string cp = CPCalculator.CalculateCP(data.DefaultAtk, data.DefaultDef, data.DefaultMaxHp).ToString();
                         tmps[i].text = cp;
                     }
                     
                     else if (tmps[i].name == "ATK")
                     {
+                        _detailAtkTMP = tmps[i];
                         tmps[i].text = data.DefaultAtk.ToString();
                     }
                     
                     else if (tmps[i].name == "DEF")
                     {
+                        _detailDefTMP = tmps[i];
                         tmps[i].text = data.DefaultDef.ToString();
                     }
 
                     else if (tmps[i].name == "Required Gold")
                     {
+                        _detailRequiredGoldTMP = tmps[i];
                         requiredGold = DataSource.Instance.GetLevelUpRequiredGold(data.Level, data.Grade);
                         tmps[i].text = requiredGold.ToString();
                     }
@@ -253,8 +268,7 @@ public class UIManager : Singleton<UIManager>
                                 data = DataSource.Instance.GetPlayerRuntimeData(chIdx);
                                 DataSource.Instance.LevelUp(chIdx, data.Grade);
 
-                                // 업데이트된 데이터로 UI 새로고침 구현 필요
-                                RefreshUI();
+                                RefreshUI(idx, data, _detailLevelTMP,_detailCpTMP,_detailAtkTMP,_detailDefTMP,_detailRequiredGoldTMP);
                             }
                         });
                     }
@@ -333,15 +347,27 @@ public class UIManager : Singleton<UIManager>
 
                 else if (tmps[j].name == "Level")
                 {
+                    _slotLevelTMPs[i] = tmps[j];
                     tmps[j].text = $"Lv. {data.Level.ToString()}";
                 }
             }
         }
     }
 
-    private void RefreshUI(int idx = 0)
+    private void RefreshUI(int idx, PlayerRuntimeData data, TMP_Text levelTMP, TMP_Text CpTMP, TMP_Text atkTMP, TMP_Text defTMP, TMP_Text requiredGoldTMP)
     {
-        SetSlot();
+        levelTMP.text = data.Level.ToString();
+        CpTMP.text = CPCalculator.CalculateCP(data.DefaultAtk, data.DefaultDef, data.DefaultMaxHp).ToString();
+        atkTMP.text = data.DefaultAtk.ToString();
+        defTMP.text = data.DefaultDef.ToString();
+        requiredGoldTMP.text = DataSource.Instance.GetLevelUpRequiredGold(data.Level, data.Grade).ToString();
+
+        if (_slotLevelTMPs[idx] != null)
+        {
+            _slotLevelTMPs[idx].text = $"Lv. {data.Level.ToString()}";
+        }
+
+        //SetSlot();
     }
 
     private void MovePlayer()
