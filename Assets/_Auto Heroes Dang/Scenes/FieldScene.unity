@@ -1362,19 +1362,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1427959423}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &153161671
 GameObject:
   m_ObjectHideFlags: 0
@@ -3165,7 +3153,7 @@ GameObject:
   - component: {fileID: 254361398}
   - component: {fileID: 254361397}
   m_Layer: 0
-  m_Name: Stat DEF
+  m_Name: DEF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4032,19 +4020,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1427959423}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &313853969
 GameObject:
   m_ObjectHideFlags: 0
@@ -5769,9 +5745,9 @@ RectTransform:
   m_Father: {fileID: 883927355}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -24.2, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &420021963
 MonoBehaviour:
@@ -6138,7 +6114,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &437632867
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10653,7 +10629,7 @@ RectTransform:
   m_Father: {fileID: 1203296082}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -12780,6 +12756,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6341323171574256192}
     - target: {fileID: 6350793667211965918, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
+      propertyPath: _detailStatusPanel
+      value: 
+      objectReference: {fileID: 1427959423}
+    - target: {fileID: 6350793667211965918, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
       propertyPath: _autoProgressButton
       value: 
       objectReference: {fileID: 1813845082}
@@ -12889,19 +12869,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1427959423}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &819979446
 GameObject:
   m_ObjectHideFlags: 0
@@ -15358,7 +15326,41 @@ MonoBehaviour:
     roll: 0
   - position: {x: 32.024094, y: 0.11572051, z: -13.735582}
     roll: 0
-  - position: {x: 35.942673, y: 0.23144102, z: -17.373787}
+  - position: {x: 35.942673, y: 0.045455694, z: -17.373787}
+    roll: 0
+  - position: {x: 39.21817, y: 0.079754114, z: -15.255571}
+    roll: 0
+  - position: {x: 41.17128, y: 0.13725471, z: -1.3496647}
+    roll: 0
+  - position: {x: 54.232994, y: 0.095468044, z: 4.7870293}
+    roll: 0
+  - position: {x: 58.335915, y: 0.14748287, z: -4.6070366}
+    roll: 0
+  - position: {x: 38.65709, y: 0.025115728, z: -37.46281}
+    roll: 0
+  - position: {x: 34.987373, y: 0.08936858, z: -58.423874}
+    roll: 0
+  - position: {x: 32.424973, y: 0.07241559, z: -64.45808}
+    roll: 0
+  - position: {x: 30.063278, y: 0.06829977, z: -74.40285}
+    roll: 0
+  - position: {x: 38.466064, y: 0.051983356, z: -77.33481}
+    roll: 0
+  - position: {x: 46.11895, y: 0.04759264, z: -72.99748}
+    roll: 0
+  - position: {x: 49.73857, y: 0.05230856, z: -62.59666}
+    roll: 0
+  - position: {x: 60.457413, y: 0.10462451, z: -58.449768}
+    roll: 0
+  - position: {x: 67.44282, y: 0.11499405, z: -49.680466}
+    roll: 0
+  - position: {x: 80.9617, y: 0.07722616, z: -56.551003}
+    roll: 0
+  - position: {x: 86.66565, y: 0.07617879, z: -67.66496}
+    roll: 0
+  - position: {x: 92.3696, y: 0.169106, z: -77.332146}
+    roll: 0
+  - position: {x: 115.484055, y: 0.07408404, z: -75.78777}
     roll: 0
 --- !u!4 &946973896
 Transform:
@@ -17132,19 +17134,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1427959423}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1047937284
 GameObject:
   m_ObjectHideFlags: 0
@@ -20039,7 +20029,7 @@ GameObject:
   - component: {fileID: 1264689577}
   - component: {fileID: 1264689576}
   m_Layer: 0
-  m_Name: Character Sprite (1)
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32475,19 +32465,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1427959423}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &2071843538
 GameObject:
   m_ObjectHideFlags: 0
@@ -37742,19 +37720,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1427959423}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!222 &2923892781630735029
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -38346,7 +38312,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 8.5, y: 375.06}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 1005, y: 16}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &3390765308350371727
 GameObject:
@@ -48689,7 +48655,7 @@ GameObject:
   - component: {fileID: 8552346666485760377}
   - component: {fileID: 8552346666485760358}
   m_Layer: 0
-  m_Name: Stat ATK
+  m_Name: ATK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

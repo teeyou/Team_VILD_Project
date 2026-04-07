@@ -28,6 +28,15 @@ public class FieldManager : Singleton<FieldManager>
 
         _stagePosList.Add(_path.m_Waypoints[6].position);   // 1 - 1
         _stagePosList.Add(_path.m_Waypoints[9].position);   // 1 - 2
+        _stagePosList.Add(_path.m_Waypoints[12].position);  // 1 - 3
+
+        _stagePosList.Add(_path.m_Waypoints[14].position);  // 2 - 1
+        _stagePosList.Add(_path.m_Waypoints[16].position);  // 2 - 2
+        _stagePosList.Add(_path.m_Waypoints[19].position);  // 2 - 3
+
+        _stagePosList.Add(_path.m_Waypoints[21].position);  // 3 - 1
+        _stagePosList.Add(_path.m_Waypoints[24].position);  // 3 - 2
+        _stagePosList.Add(_path.m_Waypoints[26].position);  // 3 - 3
 
     }
     void Start()

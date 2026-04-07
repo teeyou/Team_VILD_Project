@@ -75,7 +75,8 @@ public class BattleUIManager : Singleton<BattleUIManager>
         {
             if (Time.timeScale == 0f)
             {
-                Time.timeScale = 1f;
+                BattleManager.Instance.IsPause = false;
+                Time.timeScale = BattleManager.Instance.CurrentTimeScale;
 
                 _pauseButtonPause.SetActive(true);
                 _pauseButtonPlay.SetActive(false); // 0403 조교님 피드백으로 추가 - 진주 (이하 주석 생략)
@@ -83,6 +84,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
             }
             else
             {
+                BattleManager.Instance.IsPause = true;
                 Time.timeScale = 0f;
 
                 _pauseButtonPause.SetActive(false);
@@ -92,8 +94,14 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
         _speedButton.onClick.AddListener(() =>
         {
+            if (BattleManager.Instance.IsPause)
+            {
+                return;
+            }
+
             if (Time.timeScale == 1f)
             {
+                BattleManager.Instance.CurrentTimeScale = 2f;
                 Time.timeScale = 2f;
 
                 _speedButtonAccel.SetActive(false);
@@ -102,6 +110,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
             }
             else
             {
+                BattleManager.Instance.CurrentTimeScale = 1f;
                 Time.timeScale = 1f;
 
                 _speedButtonAccel.SetActive(true);
