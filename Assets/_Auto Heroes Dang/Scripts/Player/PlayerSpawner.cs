@@ -63,7 +63,10 @@ public class PlayerSpawner : MonoBehaviour
         AutoAttack autoAttack = go.GetComponent<AutoAttack>();
 
         //autoAttack.Init(_baseStatsList[idx], idx);
-        autoAttack.Init(DataSource.Instance.GetPlayerRuntimeData(idx), idx);
+
+        PlayerRuntimeData data = DataSource.Instance.GetPlayerRuntimeData(idx);
+
+        autoAttack.Init(data, idx);
 
         return go;
     }
