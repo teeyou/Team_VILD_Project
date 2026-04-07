@@ -27,7 +27,7 @@ public class InventoryManager : Singleton<InventoryManager>, IItemManage
 
     private void Start()
     {
-        // 테스트용. 추후 삭제.
+        // 테스트용.
         AddItem(new ItemData("흔한 모자", ItemType.Hat, Grade.Common, 1, 100, "평범한 모자"));
         AddItem(new ItemData("짱 센 갑옷", ItemType.Armor, Grade.Epic, 50, 9999, "짱짱 센 갑옷"));
     }

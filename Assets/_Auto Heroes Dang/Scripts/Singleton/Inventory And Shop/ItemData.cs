@@ -8,6 +8,9 @@ public enum ItemType
     Armor,
     Shoes,
     Ring,
+
+    AtkBuff,
+    DefBuff
 }
 
 [Serializable]
@@ -18,6 +21,15 @@ public enum Grade
     Rare,
     Elite,
     Epic,
+
+    AtkBuff,
+    DefBuff
+}
+
+public enum ItemState // 4월 7일 추가내용
+{
+    Available,
+    SoldOut
 }
 
 [Serializable]
@@ -30,7 +42,9 @@ public struct ItemData
     public int price;
     public string description;
 
-    public ItemData(string name, ItemType type, Grade grade, int level,int price, string description)
+    public ItemState state;
+
+    public ItemData(string name, ItemType type, Grade grade, int level,int price, string description, ItemState state = 0)
     {
         this.name = name;
         this.type = type;
@@ -39,5 +53,7 @@ public struct ItemData
         this.price = price;
 
         this.description = description;
+
+        this.state = state;
     }
 }

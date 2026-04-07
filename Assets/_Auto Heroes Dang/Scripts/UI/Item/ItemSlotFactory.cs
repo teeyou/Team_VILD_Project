@@ -48,6 +48,13 @@ public class ItemSlotFactory : MonoBehaviour
             ItemPrefab slot = obj.GetComponent<ItemPrefab>();
 
             slot.Init(items[i], _gradeColor[items[i].grade], onClick);
+
+            // 상태 체크
+            if (items[i].state == ItemState.SoldOut)
+            {
+                slot.SoldOut(true);
+            }
+
         }
 
         // 빈 슬롯 채우기
@@ -74,10 +81,12 @@ public class ItemSlotFactory : MonoBehaviour
         { Grade.Uncommon, Hex("#00A2FF") },
         { Grade.Rare, Hex("#9A41F6") },
         { Grade.Elite, Hex("#F83BF9") },
-        { Grade.Epic, Hex("#FFC508") }
+        { Grade.Epic, Hex("#FFC508") },
+
+        { Grade.AtkBuff, Hex("#EC0037") },
+        { Grade.DefBuff, Hex("#00C468") }
     };
     }
-
 
 
     public void ClearAllSlot()
@@ -88,5 +97,54 @@ public class ItemSlotFactory : MonoBehaviour
         }
 
     }
+
+    // 아이콘 생성용 프리팹 정보 전송 (주로 상점등에서)
+    public GameObject CreateIcon(ItemType type, Transform parent)
+    {
+        if (!_prefabDictionary.TryGetValue(type, out GameObject prefab))
+        {
+            Debug.LogWarning($"프리팹 없음: {type}");
+            return null;
+        }
+
+        return Instantiate(prefab, parent);
+    }
+
+    // 컬러 정보 전송
+    public Color GetGradeColor(Grade grade)
+    {
+        // SetupPrefab(); 필요 시 초기화
+
+        if (_gradeColor.TryGetValue(grade, out Color color))
+        {
+            return color;
+        }
+
+        return Color.white;
+    }
+
+    /*
+      GameObject icon = _factory.CreateIcon(item.type, _iconTransform.transform);
+
+        if (icon != null)
+        {
+            RectTransform rt = icon.GetComponent<RectTransform>();
+            if (rt != null)
+            {
+                rt.anchoredPosition = _popupIconPosition.pos;
+                rt.sizeDelta = _popupIconPosition.size;
+            }
+
+            ItemPrefab slot = icon.GetComponent<ItemPrefab>();
+            if (slot != null)
+            {
+                Color gradeColor = _factory.GetGradeColor(item.grade);
+
+                slot.Init(item, gradeColor, null);
+                slot.SetButtonInteractable(false);
+            }
+        }
+     */
+
 }
 

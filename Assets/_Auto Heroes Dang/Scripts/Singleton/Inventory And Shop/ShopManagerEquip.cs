@@ -18,10 +18,10 @@ public class ShopManagerEquip : Singleton<ShopManagerEquip>, IItemManage
     private void Start()
     {
         // 테스트용
-        AddItem(new ItemData("상점 검", ItemType.Sword, Grade.Uncommon, 5, 500, "상점 검"));
-        AddItem(new ItemData("상점 검", ItemType.Armor, Grade.Uncommon, 5, 500, "상점 검"));
-        AddItem(new ItemData("상점 검", ItemType.Shoes, Grade.Uncommon, 5, 500, "상점 검"));
-        AddItem(new ItemData("상점 검", ItemType.Hat, Grade.Uncommon, 5, 500, "상점 검"));
+        AddItem(new ItemData("상점 검", ItemType.Sword, Grade.Uncommon, 5, 0, "상점 검"));
+        AddItem(new ItemData("상점 검", ItemType.Armor, Grade.Uncommon, 5, 0, "상점 검"));
+        AddItem(new ItemData("상점 검", ItemType.Shoes, Grade.Uncommon, 5, 0, "상점 검"));
+        AddItem(new ItemData("상점 검", ItemType.Hat, Grade.Uncommon, 5, 5000, "상점 검"));
         AddItem(new ItemData("상점 반지", ItemType.Ring, Grade.Uncommon, 1, 2000, "상점 반지"));
         AddItem(new ItemData("상점 반지", ItemType.Ring, Grade.Epic, 1, 2000, "상점 반지"));
     }
@@ -38,7 +38,7 @@ public class ShopManagerEquip : Singleton<ShopManagerEquip>, IItemManage
 
     public void RemoveItem(ItemData item)
     {
-        _items.Remove(item);
+        _items.Remove(item); // 이 부분 삭제 시, 아이템이 없어지지 않고 솔드아웃 체크만 되어 있습니다.
         OnChanged?.Invoke();
     }
 }
