@@ -18,8 +18,8 @@ public class ShopManagerPotion : Singleton<ShopManagerPotion>, IItemManage
     private void Start()
     {
         // 테스트용
-        AddItem(new ItemData("고기", ItemType.AtkBuff, Grade.AtkBuff, 5, 11, 0, "힘이 세지는 고기"));
-        AddItem(new ItemData("풀", ItemType.DefBuff, Grade.DefBuff, 1, 11, 999, "방어가 강해지는 풀"));
+        AddItem(new ItemData("고기", ItemType.AtkBuff, Grade.AtkBuff, 5, 0, "힘이 세지는 고기"));
+        AddItem(new ItemData("풀", ItemType.DefBuff, Grade.DefBuff, 1, 999, "방어가 강해지는 풀"));
     }
 
 

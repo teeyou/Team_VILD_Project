@@ -39,19 +39,17 @@ public struct ItemData
     public ItemType type;
     public Grade grade;
     public int level;
-    public int value;       // 공격력 / 방어력 값
     public int price;
     public string description;
 
     public ItemState state;
 
-    public ItemData(string name, ItemType type, Grade grade, int level, int value, int price, string description, ItemState state = 0)
+    public ItemData(string name, ItemType type, Grade grade, int level,int price, string description, ItemState state = 0)
     {
         this.name = name;
         this.type = type;
         this.grade = grade;
         this.level = level;
-        this.value = value;
         this.price = price;
 
         this.description = description;
