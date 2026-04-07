@@ -1,7 +1,6 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR;
+using System;
 
 public class PosRotData
 {
@@ -21,8 +20,6 @@ public class PosRotData
 public class DataSource : Singleton<DataSource>
 {
     [SerializeField] private List<BaseStatus_SO> _baseStatusList;
-
-    [SerializeField] private GradeStatusTable_SO _gradeStatusTable;
 
     public int MainCharacterIdx { get; set; } = -1;
     private List<int> _playerCharacterList = new List<int>();
@@ -72,9 +69,6 @@ public class DataSource : Singleton<DataSource>
     }
 
     private List<PlayerRuntimeData> _playerRuntimeDataList = new List<PlayerRuntimeData>();
-
-    public GradeStatusTable_SO GradeStatusTable { get { return _gradeStatusTable; } }
-
 
     protected override void Awake()
     {
@@ -151,55 +145,9 @@ public class DataSource : Singleton<DataSource>
     public PlayerRuntimeData GetPlayerRuntimeData(int idx)
     {
         if (_playerRuntimeDataList.Count <= idx)
-        {
             return null;
-        }
 
         return _playerRuntimeDataList[idx];
-    }
-
-    public void LevelUp(int idx, EGrade grade)
-    {
-        if (_playerRuntimeDataList.Count <= idx)
-        {
-            return;
-        }
-
-        int bonus = 0;
-
-        if (grade == EGrade.S)
-        {
-            bonus = _gradeStatusTable.SLevelUpBonus;
-        }
-
-        else if (grade == EGrade.A)
-        {
-            bonus = _gradeStatusTable.ALevelUpBonus;
-        }
-
-        else if (grade == EGrade.B)
-        {
-            bonus = _gradeStatusTable.BLevelUpBonus;
-        }
-
-        // 체력은 10배, 공격력, 방어력은 그대로 증가
-        _playerRuntimeDataList[idx].DefaultMaxHp += bonus * 10;
-        _playerRuntimeDataList[idx].DefaultAtk += bonus;
-        _playerRuntimeDataList[idx].DefaultDef += bonus;
-
-        _playerRuntimeDataList[idx].Level++;
-
-        Debug.Log($"{_playerRuntimeDataList[idx].ChName}" +
-            $"\n{_playerRuntimeDataList[idx].DefaultMaxHp}" +
-            $"\n{_playerRuntimeDataList[idx].DefaultAtk}" +
-            $"\n{_playerRuntimeDataList[idx].DefaultDef}");
-
-        Debug.Log("레벨업 완료");
-    }
-
-    public int GetLevelUpRequiredGold(int level, EGrade grade)
-    {
-        return _gradeStatusTable.GetLevelUpRequiredGold(level, grade);
     }
 
     public BaseStatus_SO GetBaseStatusSO(int idx)

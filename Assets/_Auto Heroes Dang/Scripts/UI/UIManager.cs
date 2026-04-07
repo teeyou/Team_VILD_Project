@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -112,166 +111,17 @@ public class UIManager : Singleton<UIManager>
         {
             int idx = i;
 
-            // Slot 버튼 리스너 추가 및 디테일 패널 이미지, 텍스트 세팅
             _slotParent.GetChild(i).GetComponent<Button>().onClick.AddListener(() => {
 
-                int requiredGold = 0;
-
-                Image[] images = _detailStatusPanel.GetComponentsInChildren<Image>();
-                TMP_Text[] tmps = _detailStatusPanel.GetComponentsInChildren<TMP_Text>();
-
-                // 각 캐릭터 별 스프라이트 세팅
-                for (int i = 0; i < images.Length; i++)
-                {
-                    // 캐릭터 이미지
-                    if (images[i].name == "Sprite")
-                    {
-                        if (idx == 0)
-                        {
-                            images[i].sprite = Resources.Load<Sprite>($"CharacterSprite/{DataSource.Instance.GetPlayerRuntimeData(DataSource.Instance.MainCharacterIdx).ChName}");
-                        }
-                        else
-                        {
-                            images[i].sprite = Resources.Load<Sprite>($"CharacterSprite/{DataSource.Instance.GetPlayerRuntimeData(DataSource.Instance.GetCharacterList()[idx - 1]).ChName}");
-                        }
-                    }
-
-                    // 공격 아이콘
-                    else if(images[i].name == "AttackIcon")
-                    {
-                        if (idx == 0)
-                        {
-                            images[i].sprite = Resources.Load<Sprite>($"SkillIcon/{DataSource.Instance.GetPlayerRuntimeData(DataSource.Instance.MainCharacterIdx).ChName}_Attack");
-                        }
-                        else
-                        {
-                            images[i].sprite = Resources.Load<Sprite>($"SkillIcon/{DataSource.Instance.GetPlayerRuntimeData(DataSource.Instance.GetCharacterList()[idx - 1]).ChName}_Attack");
-                        }
-                    }
-
-                    // 스킬 아이콘
-                    else if (images[i].name == "SkillIcon")
-                    {
-                        if (idx == 0)
-                        {
-                            images[i].sprite = Resources.Load<Sprite>($"SkillIcon/{DataSource.Instance.GetPlayerRuntimeData(DataSource.Instance.MainCharacterIdx).ChName}_Skill");
-                        }
-                        else
-                        {
-                            images[i].sprite = Resources.Load<Sprite>($"SkillIcon/{DataSource.Instance.GetPlayerRuntimeData(DataSource.Instance.GetCharacterList()[idx - 1]).ChName}_Skill");
-                        }
-                    }
-                }
-
-                // 각 캐릭터별 텍스트 세팅
-                for (int i = 0; i < tmps.Length; i++)
-                {
-                    PlayerRuntimeData data;
-                    if (idx == 0)
-                    {
-                        data = DataSource.Instance.GetPlayerRuntimeData(DataSource.Instance.MainCharacterIdx);
-                    }
-                    else
-                    {
-                        data = DataSource.Instance.GetPlayerRuntimeData(DataSource.Instance.GetCharacterList()[idx - 1]);
-                    }
-
-                    if (tmps[i].name == "Rank")
-                    {
-                        tmps[i].color = data.Grade switch
-                        {
-                            EGrade.S => Color.yellow,
-                            EGrade.A => Color.red,
-                            EGrade.B => Color.blue,
-                            _ => Color.white
-                        };
-
-                        tmps[i].text = data.Grade.ToString();
-                    }
-                    
-                    else if (tmps[i].name == "Level")
-                    {
-                        tmps[i].text = data.Level.ToString();
-                    }
-                    
-                    else if (tmps[i].name == "CP")
-                    {
-                        string cp = CPCalculator.CalculateCP(data.DefaultAtk, data.DefaultDef, data.DefaultMaxHp).ToString();
-                        tmps[i].text = cp;
-                    }
-                    
-                    else if (tmps[i].name == "ATK")
-                    {
-                        tmps[i].text = data.DefaultAtk.ToString();
-                    }
-                    
-                    else if (tmps[i].name == "DEF")
-                    {
-                        tmps[i].text = data.DefaultDef.ToString();
-                    }
-
-                    else if (tmps[i].name == "Required Gold")
-                    {
-                        requiredGold = DataSource.Instance.GetLevelUpRequiredGold(data.Level, data.Grade);
-                        tmps[i].text = requiredGold.ToString();
-                    }
-                }
-
-
-                Button[] buttons = _detailStatusPanel.GetComponentsInChildren<Button>();
-
-                for (int i = 0; i < buttons.Length; i++)
-                {
-                    if (buttons[i].name == "Level Up Button")
-                    {
-                        int btnIdx = i;
-
-                        // 기존 리스너 제거
-                        buttons[btnIdx].onClick.RemoveAllListeners();
-
-                        buttons[btnIdx].onClick.AddListener(() =>
-                        {
-                            //Debug.Log($"idx : {idx}");
-
-                            if (DataSource.Instance.Gold >= requiredGold)
-                            {
-                                // 레벨업 로직
-                                DataSource.Instance.Gold -= requiredGold;
-
-                                int chIdx = -1;
-                                PlayerRuntimeData data;
-                                if (idx == 0)
-                                {
-                                    chIdx = DataSource.Instance.MainCharacterIdx;
-                                }
-
-                                else
-                                {
-                                    chIdx = DataSource.Instance.GetCharacterList()[idx - 1];
-                                }
-
-                                data = DataSource.Instance.GetPlayerRuntimeData(chIdx);
-                                DataSource.Instance.LevelUp(chIdx, data.Grade);
-
-                                // 업데이트된 데이터로 UI 새로고침 구현 필요
-                                RefreshUI();
-                            }
-                        });
-                    }
-                }
+                //Debug.Log($"idx : {idx}");
 
                 _detailStatusPanel.SetActive(true);
 
-            } // Slot 버튼 리스너 끝
-            
-            ); // _slotParent 반복문 끝
+            });
         }
 
-
-        // Slot의 이미지, 텍스트 세팅
         for (int i = 0; i < count; i++)
         {
-            // Slot 이미지 세팅
             Image[] images = _slotParent.GetChild(i).GetComponentsInChildren<Image>();
             
             for (int j = 0; j < images.Length; j++)
@@ -302,7 +152,6 @@ public class UIManager : Singleton<UIManager>
                 }
             }
 
-            // Slot 텍스트 세팅
             TMP_Text[] tmps = _slotParent.GetChild(i).GetComponentsInChildren<TMP_Text>();
             
             for (int j = 0; j < tmps.Length; j++)
@@ -337,11 +186,6 @@ public class UIManager : Singleton<UIManager>
                 }
             }
         }
-    }
-
-    private void RefreshUI(int idx = 0)
-    {
-        SetSlot();
     }
 
     private void MovePlayer()
