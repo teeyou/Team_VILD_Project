@@ -381,9 +381,6 @@ MonoBehaviour:
   - name: CoinDrop
     clip: {fileID: 8300000, guid: 91854d4ab95bc7547a548460dc008e7f, type: 3}
     volume: 0.5
-  - name: HealerSkill
-    clip: {fileID: 8300000, guid: cff8d4d2bb3594345b13cb71e4cb181a, type: 3}
-    volume: 0.1
   _sceneBgmList:
   - sceneName: SelectScene
     keepCurrentBgm: 0
