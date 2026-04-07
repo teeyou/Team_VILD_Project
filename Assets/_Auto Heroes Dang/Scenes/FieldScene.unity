@@ -420,7 +420,7 @@ GameObject:
   m_Component:
   - component: {fileID: 56096626}
   m_Layer: 0
-  m_Name: CP Panel
+  m_Name: CP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1316,7 +1316,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1286.085, y: -287.29}
+  m_AnchoredPosition: {x: 137.565, y: -287.29}
   m_SizeDelta: {x: 275.13, y: 574.58}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &151581777
@@ -1615,7 +1615,7 @@ GameObject:
   - component: {fileID: 171507198}
   - component: {fileID: 171507197}
   m_Layer: 0
-  m_Name: SkillIcon
+  m_Name: ItemIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3153,7 +3153,7 @@ GameObject:
   - component: {fileID: 254361398}
   - component: {fileID: 254361397}
   m_Layer: 0
-  m_Name: DEF Panel
+  m_Name: DEF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3841,7 +3841,7 @@ GameObject:
   - component: {fileID: 303770126}
   - component: {fileID: 303770125}
   m_Layer: 0
-  m_Name: Gold Icon
+  m_Name: Money Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3974,7 +3974,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 424.695, y: -287.29}
+  m_AnchoredPosition: {x: 137.565, y: -287.29}
   m_SizeDelta: {x: 275.13, y: 574.58}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &307266344
@@ -11045,7 +11045,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC2A4\uD0AC"
+  m_text: "\uC5C4\uCCAD \uBA4B\uC9C4 \uC2A4\uD0AC \uC774\uB984"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: da5a54363ae41814b9a77e311994bfba, type: 2}
   m_sharedMaterial: {fileID: -3184265701432577507, guid: da5a54363ae41814b9a77e311994bfba, type: 2}
@@ -11205,10 +11205,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1071697772343008286, guid: fee2126232e12a34c8eb31b8e6bf9152, type: 3}
-      propertyPath: _gradeStatusTable
-      value: 
-      objectReference: {fileID: 11400000, guid: e1a46af696daaa248a27c89773aec5f3, type: 2}
     - target: {fileID: 1808671720993632781, guid: fee2126232e12a34c8eb31b8e6bf9152, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -12444,7 +12440,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 711.825, y: -287.29}
+  m_AnchoredPosition: {x: 137.565, y: -287.29}
   m_SizeDelta: {x: 275.13, y: 574.58}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &819526662
@@ -16547,7 +16543,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1573.2151, y: -287.29}
+  m_AnchoredPosition: {x: 137.565, y: -287.29}
   m_SizeDelta: {x: 275.13, y: 574.58}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1045211734
@@ -18123,7 +18119,7 @@ GameObject:
   - component: {fileID: 1166433139}
   - component: {fileID: 1166433138}
   m_Layer: 0
-  m_Name: CP
+  m_Name: CP Num
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19510,8 +19506,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 960, y: 540}
+  m_AnchoredPosition: {x: 82, y: -49.82}
+  m_SizeDelta: {x: 495.67, y: 486.83}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1264689576
 MonoBehaviour:
@@ -24524,7 +24520,7 @@ GameObject:
   - component: {fileID: 1653814867}
   - component: {fileID: 1653814866}
   m_Layer: 0
-  m_Name: DEF
+  m_Name: Text (TMP) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26867,7 +26863,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _factory: {fileID: 1786918416}
   _contentRect: {fileID: 1786918414}
-<<<<<<< HEAD
   _panel: {fileID: 5975225338363778349}
   _iconTransform: {fileID: 666314044}
   _nameText: {fileID: 1130370106}
@@ -26875,8 +26870,6 @@ MonoBehaviour:
   _money: {fileID: 1750995672}
   _buyButton: {fileID: 1748086085185832642}
   _cancelButton: {fileID: 585912597746080557}
-=======
->>>>>>> taeung
 --- !u!222 &1786918418
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -31816,7 +31809,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 998.955, y: -287.29}
+  m_AnchoredPosition: {x: 137.565, y: -287.29}
   m_SizeDelta: {x: 275.13, y: 574.58}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2057440938
@@ -34331,7 +34324,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1684022457204381509}
   m_Layer: 0
-  m_Name: Level Panel
+  m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34488,7 +34481,7 @@ GameObject:
   - component: {fileID: 1684022457556628442}
   - component: {fileID: 1684022457556628441}
   m_Layer: 0
-  m_Name: Level
+  m_Name: Lv Num
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35605,7 +35598,7 @@ GameObject:
   - component: {fileID: 1781111664614652392}
   - component: {fileID: 1781111664614652391}
   m_Layer: 0
-  m_Name: AttackIcon
+  m_Name: ItemIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48052,7 +48045,7 @@ GameObject:
   - component: {fileID: 8552346666485760377}
   - component: {fileID: 8552346666485760358}
   m_Layer: 0
-  m_Name: ATK Panel
+  m_Name: ATK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48471,7 +48464,7 @@ GameObject:
   - component: {fileID: 8552346667940684392}
   - component: {fileID: 8552346667940684393}
   m_Layer: 0
-  m_Name: ATK
+  m_Name: Text (TMP) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48952,7 +48945,7 @@ GameObject:
   - component: {fileID: 8737820414717188081}
   - component: {fileID: 8737820414717188080}
   m_Layer: 0
-  m_Name: Required Gold
+  m_Name: Money Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
