@@ -18,7 +18,11 @@ public class ShopManagerEquip : Singleton<ShopManagerEquip>, IItemManage
     private void Start()
     {
         // 테스트용
-        AddItem(new ItemData("상점 검", ItemType.Sword, Grade.Rare, 5, 500, "상점 검"));
+        AddItem(new ItemData("상점 검", ItemType.Sword, Grade.Uncommon, 5, 500, "상점 검"));
+        AddItem(new ItemData("상점 검", ItemType.Armor, Grade.Uncommon, 5, 500, "상점 검"));
+        AddItem(new ItemData("상점 검", ItemType.Shoes, Grade.Uncommon, 5, 500, "상점 검"));
+        AddItem(new ItemData("상점 검", ItemType.Hat, Grade.Uncommon, 5, 500, "상점 검"));
+        AddItem(new ItemData("상점 반지", ItemType.Ring, Grade.Uncommon, 1, 2000, "상점 반지"));
         AddItem(new ItemData("상점 반지", ItemType.Ring, Grade.Epic, 1, 2000, "상점 반지"));
     }
 

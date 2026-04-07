@@ -6,11 +6,11 @@ public class ItemShopUI : MonoBehaviour
 {
     [SerializeField] private ItemSlotFactory _factory;
     [SerializeField] private RectTransform _contentRect;
-    [SerializeField] private int _verticalSlot = 3;
+    private int _verticalSlot = 3; // 세로 라인 수
 
     private IItemManage _currentTab;
 
-    // 픽스된 값이라 하드코딩
+    // 픽스된 값(이라 하드코딩)
     private LayoutData _equipLayout = new LayoutData(new Vector2(-474.02f, -113.44f), new Vector2(735.96f, 739.14f));
     private LayoutData _potionLayout = new LayoutData(new Vector2(-474.02f, 5.7225f), new Vector2(735.96f, 500.82f));
 
@@ -39,12 +39,14 @@ public class ItemShopUI : MonoBehaviour
 
     public void SetEquipShop()
     {
+        _verticalSlot = 3;
         ApplyLayout(_equipLayout);
         ChangeTab(ShopManagerEquip.Instance);
     }
 
     public void SetPotionShop()
     {
+        _verticalSlot = 2;
         ApplyLayout(_potionLayout);
         ChangeTab(ShopManagerPotion.Instance);
     }
