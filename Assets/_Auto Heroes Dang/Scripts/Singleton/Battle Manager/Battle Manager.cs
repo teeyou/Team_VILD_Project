@@ -460,7 +460,7 @@ public class BattleManager : Singleton<BattleManager>
     {
         BattleUIManager.Instance._resultBlockPanel.SetActive(true);
 
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.0f);
 
         int rewardGold = GameManager.Instance.GetCurrentStageGoldReward();
         int rewardGem = GameManager.Instance.GetCurrentStageGemReward();

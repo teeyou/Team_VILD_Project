@@ -8528,7 +8528,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &606081092
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12353,6 +12353,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 996123720}
     - target: {fileID: 6350793667211965918, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
+      propertyPath: _totalCpTMP
+      value: 
+      objectReference: {fileID: 868356976}
+    - target: {fileID: 6350793667211965918, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
       propertyPath: _stageButton
       value: 
       objectReference: {fileID: 1408073692}
@@ -12384,6 +12388,10 @@ PrefabInstance:
       propertyPath: _autoProgressButton
       value: 
       objectReference: {fileID: 1813845082}
+    - target: {fileID: 6350793667211965918, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
+      propertyPath: _mainCharacterImage
+      value: 
+      objectReference: {fileID: 1610800687}
     - target: {fileID: 6350793667211965918, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
       propertyPath: _bossPanelBackButton
       value: 
