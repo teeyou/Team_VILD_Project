@@ -23,6 +23,9 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private TMP_Text _gemText;
     [SerializeField] private TMP_Text _goldText;
 
+    [Header("캐릭터 스테이터스 팝업 패널")]
+    [SerializeField] private GameObject _detailStatusPanel;
+
     protected override void Awake()
     {
         base.Awake();
@@ -95,6 +98,19 @@ public class UIManager : Singleton<UIManager>
     private void SetSlot()
     {
         int count = _slotParent.childCount;
+
+        for (int i = 0; i < count; i++)
+        {
+            int idx = i;
+
+            _slotParent.GetChild(i).GetComponent<Button>().onClick.AddListener(() => {
+
+                //Debug.Log($"idx : {idx}");
+
+                _detailStatusPanel.SetActive(true);
+
+            });
+        }
 
         for (int i = 0; i < count; i++)
         {
