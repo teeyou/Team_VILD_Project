@@ -199,12 +199,13 @@ public class FieldSceneAutoEnemySpawn : MonoBehaviour
             reward.EnableReward();
         }
 
-        stage.aliveEnemies.Add(spawnedEnemy);
-
-        if (_debugLog)
+        EnemyChestReward chestReward = spawnedEnemy.GetComponent<EnemyChestReward>();
+        if (chestReward != null)
         {
-            Debug.Log($"[FieldSceneAutoEnemySpawn] {stage.stageName} 에서 {spawnedEnemy.name} 스폰");
+            chestReward.EnableChestDrop();
         }
+
+        stage.aliveEnemies.Add(spawnedEnemy);
     }
 
     private GameObject GetRandomEnemyPrefab(StageSpawnData stage)
