@@ -36,19 +36,19 @@ public class PlayerRuntimeData
         _grade = baseStatus.Grade;
     }
 
-    public string Id { get { return _id; } set { _id = value; } }
-    public string ChName { get { return _chName; } set { _chName = value; } }
-    public int DefaultMaxHp { get { return _defaultMaxHp; } set { _defaultMaxHp = value; } }
-    public int DefaultAtk { get { return _defaultAtk; } set { _defaultAtk = value; } }
-    public int DefaultDef { get { return _defaultDef; } set { _defaultDef = value; } }
-    public float Range { get { return _range; } set { _range = value; } }
-    public float MoveSpeed { get { return _moveSpeed; } set { _moveSpeed = value; } }
-    public float SkillCool { get { return _skillCool; } set { _skillCool = value; } }
-    public float SkillMultiplier { get { return _skillMultiplier; } set { _skillMultiplier = value; } }
-    public EAttackType AttackType { get { return _attackType; } set { _attackType = value; } }
-    public GameObject Prefab { get { return _prefab; } set { _prefab = value; } }
+    public string Id { get { return _id; } }
+    public string ChName { get { return _chName; } }
+    public int DefaultMaxHp { get { return _defaultMaxHp; } }
+    public int DefaultAtk { get { return _defaultAtk; } }
+    public int DefaultDef { get { return _defaultDef; } }
+    public float Range { get { return _range; } }
+    public float MoveSpeed { get { return _moveSpeed; } }
+    public float SkillCool { get { return _skillCool; } }
+    public float SkillMultiplier { get { return _skillMultiplier; } }
+    public EAttackType AttackType { get { return _attackType; } }
+    public GameObject Prefab { get { return _prefab; } }
 
-    public int Level { get { return _level; } set { _level = value; } }
-    public EGrade Grade { get { return _grade; } set { _grade = value; } }
+    public int Level { get { return _level; } }
+    public EGrade Grade { get { return _grade; } }
 
 }
