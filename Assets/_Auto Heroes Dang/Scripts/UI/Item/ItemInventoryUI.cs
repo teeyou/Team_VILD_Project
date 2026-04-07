@@ -31,6 +31,7 @@ public class ItemInventoryUI : MonoBehaviour
     private void OnItemClicked(ItemData item)
     {
         Debug.Log($"인벤토리 클릭: {item.name}");
+        // if else로 상점이면 아이템 정보 표기, 인벤토리면 장착
 
     }
 }

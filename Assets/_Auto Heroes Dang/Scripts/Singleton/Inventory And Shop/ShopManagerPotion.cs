@@ -18,8 +18,8 @@ public class ShopManagerPotion : Singleton<ShopManagerPotion>, IItemManage
     private void Start()
     {
         // 테스트용
-        AddItem(new ItemData("고기", ItemType.Sword, Grade.Rare, 5, 500, "힘이 세지는 고기"));
-        AddItem(new ItemData("풀", ItemType.Ring, Grade.Epic, 1, 2000, "방어가 강해지는 풀"));
+        AddItem(new ItemData("고기", ItemType.AtkBuff, Grade.AtkBuff, 5, 0, "힘이 세지는 고기"));
+        AddItem(new ItemData("풀", ItemType.DefBuff, Grade.DefBuff, 1, 999, "방어가 강해지는 풀"));
     }
 
 
@@ -32,9 +32,21 @@ public class ShopManagerPotion : Singleton<ShopManagerPotion>, IItemManage
         OnChanged?.Invoke();
     }
 
+    // 추후 버프 내용이 들어가야 함 -------------------- ItemType.AtkBuff 시 스테이터스 어쩌구
     public void RemoveItem(ItemData item)
     {
-        _items.Remove(item);
-        OnChanged?.Invoke();
+        for (int i = 0; i < _items.Count; i++)
+        {
+            if (_items[i].name == item.name)
+            {
+                ItemData temp = _items[i];
+                temp.state = ItemState.SoldOut;
+                _items[i] = temp;
+
+                OnChanged?.Invoke();
+                return;
+            }
+        }
     }
+
 }
