@@ -374,6 +374,8 @@ public class AutoAttack : Unit
 
         ShowDamageText(damage, attacker, isCritical);
 
+        AudioManager.Instance.PlaySFX("HitSound2");
+
         if (_curHp <= 0)
         {
             if (_isDead)

@@ -3,24 +3,34 @@ using UnityEngine;
 
 public class ChestDropMotion : MonoBehaviour
 {
-    [Header("상승/하강 높이")]
+    [Header("점프 높이")]
     [SerializeField] private float _jumpHeight = 1.5f;
 
     [Header("연출 시간")]
     [SerializeField] private float _duration = 0.5f;
 
+    [Header("회전 대상")]
+    [SerializeField] private Transform _visualRoot;
+
+    [Header("회전 각도")]
+    [SerializeField] private float _rotationX = 360f;
+
     private Vector3 _startPos;
     private Vector3 _targetPos;
+    private Vector3 _visualStartEuler;
 
     private void Start()
     {
         _startPos = transform.position;
         _targetPos = _startPos;
 
-        StartCoroutine(Co_DropMotion());
+        if (_visualRoot != null)
+            _visualStartEuler = _visualRoot.localEulerAngles;
+
+        StartCoroutine(Co_PlayDropMotion());
     }
 
-    private IEnumerator Co_DropMotion()
+    private IEnumerator Co_PlayDropMotion()
     {
         float time = 0f;
 
@@ -35,13 +45,28 @@ public class ChestDropMotion : MonoBehaviour
             pos.y += height;
             transform.position = pos;
 
-            float rotX = 360f * t;
-            transform.rotation = Quaternion.Euler(rotX, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+            if (_visualRoot != null)
+            {
+                float rotX = Mathf.Lerp(0f, _rotationX, t);
+                _visualRoot.localRotation = Quaternion.Euler(
+                    _visualStartEuler.x + rotX,
+                    _visualStartEuler.y,
+                    _visualStartEuler.z
+                );
+            }
 
             yield return null;
         }
 
         transform.position = _targetPos;
-        transform.rotation = Quaternion.Euler(360f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+
+        if (_visualRoot != null)
+        {
+            _visualRoot.localRotation = Quaternion.Euler(
+                _visualStartEuler.x,
+                _visualStartEuler.y,
+                _visualStartEuler.z
+            );
+        }
     }
 }

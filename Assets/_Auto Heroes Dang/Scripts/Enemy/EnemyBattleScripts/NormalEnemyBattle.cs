@@ -512,6 +512,7 @@ public class NormalEnemyBattle : Unit
         _totalDamaged += finalDamage;
 
         ShowDamageText(finalDamage, attacker, isCritical);
+        AudioManager.Instance.PlaySFX("HitSound1");
 
         if (_battleLog)
         {
@@ -560,6 +561,10 @@ public class NormalEnemyBattle : Unit
         EnemyReward reward = GetComponent<EnemyReward>();
         if (reward != null)
             reward.GiveReward();
+
+        EnemyChestReward chestReward = GetComponent<EnemyChestReward>();
+        if (chestReward != null)
+            chestReward.TryDropChest();
 
         Destroy(gameObject, 3f);
     }

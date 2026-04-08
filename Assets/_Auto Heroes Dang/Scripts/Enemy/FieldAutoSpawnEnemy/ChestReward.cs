@@ -19,11 +19,22 @@ public class ChestReward : MonoBehaviour
     [SerializeField] private float _openDuration = 0.25f;
     [SerializeField] private float _openTargetX = -90f;
 
-    [Header("골드 범위")]
+    [Header("스테이지 보상 비율 사용")]
+    [SerializeField] private bool _useStageRewardRate = true;
+
+    [Header("스테이지 클리어 보상의 평균 비율")]
+    [SerializeField] private float _goldAverageRate = 0.1f;
+    [SerializeField] private float _gemAverageRate = 0.1f;
+
+    [Header("평균 대비 랜덤 배율")]
+    [SerializeField] private float _goldMinMultiplier = 0.8f;
+    [SerializeField] private float _goldMaxMultiplier = 1.2f;
+    [SerializeField] private float _gemMinMultiplier = 0.8f;
+    [SerializeField] private float _gemMaxMultiplier = 1.2f;
+
+    [Header("직접 입력 범위(비율 미사용 시)")]
     [SerializeField] private int _goldMin;
     [SerializeField] private int _goldMax;
-
-    [Header("젬 범위")]
     [SerializeField] private int _gemMin;
     [SerializeField] private int _gemMax;
 
@@ -72,8 +83,30 @@ public class ChestReward : MonoBehaviour
     {
         yield return StartCoroutine(Co_OpenCover());
 
-        int rewardGold = GetRandomValue(_goldMin, _goldMax);
-        int rewardGem = GetRandomValue(_gemMin, _gemMax);
+        int rewardGold;
+        int rewardGem;
+
+        if (_useStageRewardRate && GameManager.Instance != null)
+        {
+            rewardGold = GetStageBasedReward(
+                GameManager.Instance.GetCurrentStageGoldReward(),
+                _goldAverageRate,
+                _goldMinMultiplier,
+                _goldMaxMultiplier
+            );
+
+            rewardGem = GetStageBasedReward(
+                GameManager.Instance.GetCurrentStageGemReward(),
+                _gemAverageRate,
+                _gemMinMultiplier,
+                _gemMaxMultiplier
+            );
+        }
+        else
+        {
+            rewardGold = GetRandomValue(_goldMin, _goldMax);
+            rewardGem = GetRandomValue(_gemMin, _gemMax);
+        }
 
         if (rewardGold > 0)
             SpawnWorldRewards(RewardType.Gold, rewardGold, _worldGoldPrefab);
@@ -87,6 +120,22 @@ public class ChestReward : MonoBehaviour
         }
 
         Destroy(gameObject, _destroyDelayAfterOpen);
+    }
+
+    private int GetStageBasedReward(int stageReward, float averageRate, float minMultiplier, float maxMultiplier)
+    {
+        int averageReward = Mathf.RoundToInt(stageReward * averageRate);
+
+        if (averageReward <= 0)
+            return 0;
+
+        float min = Mathf.Min(minMultiplier, maxMultiplier);
+        float max = Mathf.Max(minMultiplier, maxMultiplier);
+
+        float randomMultiplier = Random.Range(min, max);
+        int finalReward = Mathf.RoundToInt(averageReward * randomMultiplier);
+
+        return Mathf.Max(0, finalReward);
     }
 
     private IEnumerator Co_OpenCover()

@@ -12357,6 +12357,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 868356976}
     - target: {fileID: 6350793667211965918, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
+      propertyPath: _gemTargetUI
+      value: 
+      objectReference: {fileID: 6460504900161170857}
+    - target: {fileID: 6350793667211965918, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
       propertyPath: _stageButton
       value: 
       objectReference: {fileID: 1408073692}
@@ -12369,6 +12373,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8874346488533133064, guid: 3dbcb2087231bc744937ff5245f9544b, type: 3}
     - target: {fileID: 6350793667211965918, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
+      propertyPath: _goldTargetUI
+      value: 
+      objectReference: {fileID: 6460504900661616906}
+    - target: {fileID: 6350793667211965918, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
       propertyPath: _stagePanelUI
       value: 
       objectReference: {fileID: 1458853967}
@@ -12377,6 +12385,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 661102007}
     - target: {fileID: 6350793667211965918, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
+<<<<<<< Updated upstream
+=======
+      propertyPath: _toastMessage
+      value: 
+      objectReference: {fileID: 5165100946255382760}
+    - target: {fileID: 6350793667211965918, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
+      propertyPath: _toastMessageGo
+      value: 
+      objectReference: {fileID: 7791776226277736153}
+    - target: {fileID: 6350793667211965918, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
+      propertyPath: _skillDescriptor
+      value: 
+      objectReference: {fileID: 815824432}
+    - target: {fileID: 6350793667211965918, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
+      propertyPath: _rewardCanvasRoot
+      value: 
+      objectReference: {fileID: 1865037900}
+    - target: {fileID: 6350793667211965918, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
+>>>>>>> Stashed changes
       propertyPath: _startStageButton
       value: 
       objectReference: {fileID: 6341323171574256192}
@@ -15276,6 +15303,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _factory: {fileID: 987811137}
   _verticalSlot: 5
+  _shopPanel: {fileID: 0}
+  _inventoryPanel: {fileID: 0}
+  _enhancementPanel: {fileID: 0}
 --- !u!1 &990702607
 GameObject:
   m_ObjectHideFlags: 0
@@ -37775,6 +37805,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _factory: {fileID: 3390765308350371728}
   _verticalSlot: 5
+  _shopPanel: {fileID: 0}
+  _inventoryPanel: {fileID: 0}
+  _enhancementPanel: {fileID: 0}
 --- !u!114 &3605346965389840611
 MonoBehaviour:
   m_ObjectHideFlags: 0
