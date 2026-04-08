@@ -12357,6 +12357,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 868356976}
     - target: {fileID: 6350793667211965918, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
+      propertyPath: _gemTargetUI
+      value: 
+      objectReference: {fileID: 6460504899192600520}
+    - target: {fileID: 6350793667211965918, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
       propertyPath: _stageButton
       value: 
       objectReference: {fileID: 1408073692}
@@ -12368,6 +12372,10 @@ PrefabInstance:
       propertyPath: _chSlotPrefab
       value: 
       objectReference: {fileID: 8874346488533133064, guid: 3dbcb2087231bc744937ff5245f9544b, type: 3}
+    - target: {fileID: 6350793667211965918, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
+      propertyPath: _goldTargetUI
+      value: 
+      objectReference: {fileID: 6460504899851084781}
     - target: {fileID: 6350793667211965918, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
       propertyPath: _stagePanelUI
       value: 
@@ -12388,6 +12396,10 @@ PrefabInstance:
       propertyPath: _skillDescriptor
       value: 
       objectReference: {fileID: 815824432}
+    - target: {fileID: 6350793667211965918, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
+      propertyPath: _rewardCanvasRoot
+      value: 
+      objectReference: {fileID: 1865037900}
     - target: {fileID: 6350793667211965918, guid: d0bbce760b9cab74287d8fa42ee19e2b, type: 3}
       propertyPath: _startStageButton
       value: 
@@ -15324,6 +15336,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _factory: {fileID: 987811137}
   _verticalSlot: 5
+  _shopPanel: {fileID: 0}
+  _inventoryPanel: {fileID: 0}
+  _enhancementPanel: {fileID: 0}
 --- !u!1 &990702607
 GameObject:
   m_ObjectHideFlags: 0
@@ -37949,6 +37964,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _factory: {fileID: 3390765308350371728}
   _verticalSlot: 5
+  _shopPanel: {fileID: 0}
+  _inventoryPanel: {fileID: 0}
+  _enhancementPanel: {fileID: 0}
 --- !u!114 &3605346965389840611
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -554,6 +554,7 @@ GameObject:
   - component: {fileID: 574623131836721513}
   - component: {fileID: 6807130095934301746}
   - component: {fileID: 3058051280545578525}
+  - component: {fileID: 248789005196704114}
   m_Layer: 20
   m_Name: Werewolf
   m_TagString: Enemy
@@ -682,6 +683,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _goldReward: 15
   _gemReward: 0
+  _goldMinMultiplier: 0.8
+  _goldMaxMultiplier: 1.2
+--- !u!114 &248789005196704114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1678274998104434769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43489928d33ca15498af95c30662d5b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _chestDropChance: 100
+  _chestAPrefab: {fileID: 5529581820132032600, guid: f367292eba1f3fd419912463af2c06c7, type: 3}
+  _chestBPrefab: {fileID: 4824177800512880972, guid: 7b8dfc94b9b871745860fa25b33e6dd3, type: 3}
+  _chestCPrefab: {fileID: 8336993170897038811, guid: cca954991bc489843ae87b877fdc55a6, type: 3}
+  _chestDPrefab: {fileID: 4638154148823197230, guid: d446ce605d7758440aad81c83912b8cc, type: 3}
+  _spawnOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1872710794457315404
 GameObject:
   m_ObjectHideFlags: 0

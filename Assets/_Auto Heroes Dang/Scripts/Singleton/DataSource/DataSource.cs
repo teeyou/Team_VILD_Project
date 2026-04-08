@@ -67,6 +67,7 @@ public class DataSource : Singleton<DataSource>
 
             _gold = newValue;
             //SaveCurrency();
+            AudioManager.Instance.PlaySFX("CoinDrop");
             OnCurrencyChanged?.Invoke();
         }
     }

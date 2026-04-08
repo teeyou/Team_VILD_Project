@@ -205,6 +205,8 @@ GameObject:
   - component: {fileID: 5306342619391686242}
   - component: {fileID: 3715392279177513748}
   - component: {fileID: 8260227199831818821}
+  - component: {fileID: 3850163131212594161}
+  - component: {fileID: -3548386798606332245}
   m_Layer: 20
   m_Name: StingRay
   m_TagString: Enemy
@@ -262,6 +264,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94289d80e14781b4d96a0c23da7b8833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damageTextPoint: {fileID: 0}
+  _damageTextHeightOffset: 1.5
   _animator: {fileID: 5306342619391686242}
   _statusData: {fileID: 11400000, guid: 08134016381d4414dae5408d864a0408, type: 2}
   _targetLayer:
@@ -292,8 +296,10 @@ MonoBehaviour:
   _slotCount: 6
   _slotRadiusOffset: 0.5
   _slotArriveDistance: 0.2
-  _hpBarPoint: {fileID: 0}
-  _hpBarOffset: {x: 0, y: 2, z: 0}
+  _attackSfxNames:
+  - MonsterAttack1
+  - MonsterAttack2
+  - MonsterAttack3
 --- !u!65 &8260227199831818821
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -315,6 +321,40 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.91, y: 2.5, z: 2.22}
   m_Center: {x: 0, y: 0.87, z: -0.36}
+--- !u!114 &3850163131212594161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1747872091307827592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da68281ebd76d9c42902af676ab3f0ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _goldReward: 10
+  _gemReward: 0
+  _goldMinMultiplier: 0.8
+  _goldMaxMultiplier: 1.2
+--- !u!114 &-3548386798606332245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1747872091307827592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43489928d33ca15498af95c30662d5b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _chestDropChance: 100
+  _chestAPrefab: {fileID: 5529581820132032600, guid: f367292eba1f3fd419912463af2c06c7, type: 3}
+  _chestBPrefab: {fileID: 4824177800512880972, guid: 7b8dfc94b9b871745860fa25b33e6dd3, type: 3}
+  _chestCPrefab: {fileID: 8336993170897038811, guid: cca954991bc489843ae87b877fdc55a6, type: 3}
+  _chestDPrefab: {fileID: 4638154148823197230, guid: d446ce605d7758440aad81c83912b8cc, type: 3}
+  _spawnOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1870831769964882572
 GameObject:
   m_ObjectHideFlags: 0

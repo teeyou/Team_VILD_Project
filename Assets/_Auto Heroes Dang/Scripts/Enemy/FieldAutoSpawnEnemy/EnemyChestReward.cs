@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class EnemyChestReward : MonoBehaviour
 {
+    [Header("상자 드랍 가능 여부")]
+    [SerializeField] private bool _canDropChest = false;
+
     [Header("상자 드랍 확률")]
     [SerializeField] private float _chestDropChance = 15f;
 
@@ -14,7 +17,9 @@ public class EnemyChestReward : MonoBehaviour
     [Header("생성 위치 보정")]
     [SerializeField] private Vector3 _spawnOffset = Vector3.zero;
 
-    private bool _canDropChest = false;
+    [Header("상자 랜덤 드랍 반경")]
+    [SerializeField] private float _dropRadius = 2f;
+
     private bool _isDropped = false;
 
     public void EnableChestDrop()
@@ -47,23 +52,35 @@ public class EnemyChestReward : MonoBehaviour
         if (chestPrefab == null)
             return;
 
-        Vector3 spawnPos = transform.position + _spawnOffset;
-        Instantiate(chestPrefab, spawnPos, Quaternion.identity);
+        Vector3 randomOffset = GetRandomOffsetInCircle(_dropRadius);
+        Vector3 spawnPos = transform.position + _spawnOffset + randomOffset;
+
+        float randomY = Random.Range(0f, 360f);
+        Quaternion spawnRot = Quaternion.Euler(0f, randomY, 0f);
+
+        Instantiate(chestPrefab, spawnPos, spawnRot);
     }
 
     private GameObject GetRandomChestPrefab()
     {
         float roll = Random.Range(0f, 100f);
 
-        if (roll < 60f)
-            return _chestAPrefab;
+        // A = 최고 등급, D = 최하 등급
+        if (roll < 5f)
+            return _chestAPrefab;   // 5%
 
-        if (roll < 85f)
-            return _chestBPrefab;
+        if (roll < 15f)
+            return _chestBPrefab;   // 10%
 
-        if (roll < 95f)
-            return _chestCPrefab;
+        if (roll < 40f)
+            return _chestCPrefab;   // 25%
 
-        return _chestDPrefab;
+        return _chestDPrefab;       // 60%
+    }
+
+    private Vector3 GetRandomOffsetInCircle(float radius)
+    {
+        Vector2 randomCircle = Random.insideUnitCircle * radius;
+        return new Vector3(randomCircle.x, 0f, randomCircle.y);
     }
 }
