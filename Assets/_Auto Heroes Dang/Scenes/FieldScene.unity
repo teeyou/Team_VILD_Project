@@ -22810,6 +22810,134 @@ MonoBehaviour:
   _stagePanelUI: {fileID: 1458853967}
   _enemySlotPrefab: {fileID: 1932602169858409415, guid: 2c177e3cfdd31eb43859a5f2b8911964, type: 3}
   _enemySlotParent: {fileID: 4230149662687053475}
+  _bossName: {fileID: 4926319122497613814}
+  _bossImage: {fileID: 4926319123975868139}
+  _bossType: {fileID: 4926319123395580454}
+  enemyDB:
+  - enemyName: 0
+    attackType: 1
+    enemySprite: {fileID: 21300000, guid: fee82c322cb025c44b10e8844ba9fa16, type: 3}
+  - enemyName: 1
+    attackType: 0
+    enemySprite: {fileID: 21300000, guid: 6a7d071d6a84f9945b53fb20b9bf7d96, type: 3}
+  - enemyName: 2
+    attackType: 1
+    enemySprite: {fileID: 21300000, guid: b3bf62768fee94146b2a2ed181e69f3d, type: 3}
+  - enemyName: 3
+    attackType: 0
+    enemySprite: {fileID: 21300000, guid: 4f3e77e00e1910d449f70f6ba8d759fa, type: 3}
+  - enemyName: 4
+    attackType: 0
+    enemySprite: {fileID: 21300000, guid: 1285a2008798ded4b93b04ead21ca827, type: 3}
+  - enemyName: 5
+    attackType: 0
+    enemySprite: {fileID: 21300000, guid: d032727e56a2df547aead52ce9e00032, type: 3}
+  - enemyName: 6
+    attackType: 0
+    enemySprite: {fileID: 21300000, guid: 07050d904018c704a915b6acc0edb825, type: 3}
+  - enemyName: 7
+    attackType: 1
+    enemySprite: {fileID: 21300000, guid: 7eec0a631b965fe439749317098e8db5, type: 3}
+  - enemyName: 8
+    attackType: 0
+    enemySprite: {fileID: 21300000, guid: 247f05f55213e904a9ce45db643959a2, type: 3}
+  - enemyName: 9
+    attackType: 1
+    enemySprite: {fileID: 21300000, guid: b0b8e76fee5b15744a9e66d8a09eda44, type: 3}
+  - enemyName: 10
+    attackType: 0
+    enemySprite: {fileID: 21300000, guid: 8050248fca050164090304565c030d7e, type: 3}
+  - enemyName: 11
+    attackType: 0
+    enemySprite: {fileID: 21300000, guid: 360b2f250d89b4a4c80913d2f6672eff, type: 3}
+  stageSettings:
+  - stage: 0
+    enemy:
+    - enemyName: 5
+      amount: 3
+    - enemyName: 6
+      amount: 2
+    - enemyName: 2
+      amount: 1
+  - stage: 1
+    enemy:
+    - enemyName: 5
+      amount: 3
+    - enemyName: 6
+      amount: 2
+    - enemyName: 2
+      amount: 2
+  - stage: 2
+    enemy:
+    - enemyName: 9
+      amount: 
+  - stage: 3
+    enemy:
+    - enemyName: 4
+      amount: 2
+    - enemyName: 1
+      amount: 2
+    - enemyName: 3
+      amount: 1
+  - stage: 4
+    enemy:
+    - enemyName: 4
+      amount: 2
+    - enemyName: 1
+      amount: 2
+    - enemyName: 3
+      amount: 2
+  - stage: 5
+    enemy:
+    - enemyName: 10
+      amount: 
+  - stage: 6
+    enemy:
+    - enemyName: 1
+      amount: 3
+    - enemyName: 8
+      amount: 1
+    - enemyName: 2
+      amount: 1
+    - enemyName: 7
+      amount: 1
+  - stage: 7
+    enemy:
+    - enemyName: 1
+      amount: 3
+    - enemyName: 8
+      amount: 1
+    - enemyName: 2
+      amount: 1
+    - enemyName: 7
+      amount: 1
+    - enemyName: 0
+      amount: 1
+  - stage: 8
+    enemy:
+    - enemyName: 11
+      amount: 
+  _meleeSprite: {fileID: 21300000, guid: 82d7c5cb0c58f2e49b85ccfa1b8b2910, type: 3}
+  _rangeSprite: {fileID: 21300000, guid: b31e3812ffdec754195f30e99f2df302, type: 3}
+  _tankSprite: {fileID: 21300000, guid: 5819c70016de2304db403448b7761ffe, type: 3}
+  _bossAttackIcon: {fileID: 125638432}
+  _bossAttackName: {fileID: 681512530}
+  _bossSkillIcon: {fileID: 1917290707}
+  _bossSkillName: {fileID: 1688625591}
+  _bossSkillIcons:
+  - {fileID: 21300000, guid: 823f6834948ee43938566a8aeae598e1, type: 3}
+  - {fileID: 21300000, guid: 9c3baa723048042e0a0218d6d8d5ea5a, type: 3}
+  - {fileID: 21300000, guid: 823f6834948ee43938566a8aeae598e1, type: 3}
+  - {fileID: 21300000, guid: f188e9f1c5c8449cf86dbb68ccc622e2, type: 3}
+  - {fileID: 21300000, guid: 8af8700e64b714e4da249bd0f983f178, type: 3}
+  - {fileID: 21300000, guid: 8af8700e64b714e4da249bd0f983f178, type: 3}
+  _bossSkillTextList:
+  - "\uAE30\uBCF8 \uACF5\uACA9"
+  - "\uCCAB\uBC88\uC9F8 \uBCF4\uC2A4 \uC2A4\uD0AC\uBA85"
+  - "\uAE30\uBCF8 \uACF5\uACA9"
+  - "\uB450\uBC88\uC9F8 \uBCF4\uC2A4 \uC2A4\uD0AC\uBA85"
+  - "\uAE30\uBCF8 \uACF5\uACA9"
+  - "\uC138\uBC88\uC9F8 \uBCF4\uC2A4 \uC2A4\uD0AC\uBA85"
 --- !u!4 &1748358941
 Transform:
   m_ObjectHideFlags: 0
@@ -35438,7 +35566,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 103501f2587024027bc7212ff181c60f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 360b2f250d89b4a4c80913d2f6672eff, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -35455,17 +35583,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4926319123975868141}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4926319123475996709}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 158.76, y: -56}
-  m_SizeDelta: {x: 543.52, y: 863.11}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 705, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4926319123975868141
 GameObject:
