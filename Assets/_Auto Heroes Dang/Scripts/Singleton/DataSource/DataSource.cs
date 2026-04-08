@@ -35,7 +35,7 @@ public class DataSource : Singleton<DataSource>
     public float CartPosition { get; set; } = 6.5f;
 
     private int _gem = 10;
-    private int _gold = 100000;
+    private int _gold = 1000;
 
     public event Action OnCurrencyChanged;
 
