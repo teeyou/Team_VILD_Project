@@ -48,6 +48,7 @@ public class BattleManager : Singleton<BattleManager>
     [SerializeField] private GameObject _placementPlanePrefab;
     [SerializeField] private GameObject _placementPlaneEnemyPrefab;
 
+    [SerializeField] private CameraBattleScene _cameraBattleScene;
     private GameObject _selectedCharacter;
     private Vector3 _originPos;
 
@@ -76,6 +77,9 @@ public class BattleManager : Singleton<BattleManager>
     public Quaternion EnemyStartingRotation => Quaternion.Euler(0, 225f, 0);
     public bool IsPause { get; set; } = false;
     public float CurrentTimeScale { get; set; } = 1f;
+
+
+    private List<AutoAttack> _autoAttackList = new List<AutoAttack>();  // 스킬 연출에서 이벤트 구독 취소를 위한 리스트
 
     protected override void Awake()
     {
@@ -122,7 +126,7 @@ public class BattleManager : Singleton<BattleManager>
         _cam = Camera.main;
 
         CreatePlacementPlane();
-        SpawnPlayerCharacters();
+        SpawnPlayerCharacters();    // 스킬 연출을 위한 이벤트 구독을 여기서 수행
         SpawnEnemies();
 
         BattleUIManager.Instance.UpdateTotalHp(true, _playerCharacterList, _gameObjectToUnit);
@@ -133,6 +137,15 @@ public class BattleManager : Singleton<BattleManager>
 
 
         BattleUIManager.Instance.SetSKillUI(_playerCharacterList, _gameObjectToUnit);
+    }
+
+    // 이벤트 구독 해제
+    private void OnDisable()
+    {
+        for (int i = 0; i < _autoAttackList.Count; i++)
+        {
+            _autoAttackList[i].OnSkillUsed -= StartSkillCam;
+        }
     }
 
     void Update()
@@ -187,6 +200,12 @@ public class BattleManager : Singleton<BattleManager>
 
     }
 
+    public void StartSkillCam(Unit unit)
+    {
+        _cameraBattleScene.SetSkillCam(unit);
+        _cameraBattleScene.StartSkillCam();
+    }
+
     public void UseSkill(int idx)
     {
         if (IsPause)
@@ -196,7 +215,8 @@ public class BattleManager : Singleton<BattleManager>
 
         if (BattleUIManager.Instance.TrySkill(2)) // 모든 스킬 2칸 소모한다고 가정
         {
-            _playerCharacterList[idx].GetComponent<Unit>().IsSkillUsed = true;
+            Unit unit = _playerCharacterList[idx].GetComponent<Unit>();
+            unit.IsSkillUsed = true;
         }
 
         else
@@ -417,8 +437,11 @@ public class BattleManager : Singleton<BattleManager>
         _playerCharacterList.Add(mainGo);
 
         Unit mainUnit = mainGo.GetComponent<Unit>();
-        //mainUnit.enabled = false;
         _gameObjectToUnit[mainGo] = mainUnit;
+
+        AutoAttack mainAuto = mainUnit as AutoAttack;
+        mainAuto.OnSkillUsed += StartSkillCam;
+        _autoAttackList.Add(mainAuto);
 
 
         // 메인 캐릭터 제외한 나머지 캐릭터 세팅
@@ -431,8 +454,11 @@ public class BattleManager : Singleton<BattleManager>
             _playerCharacterList.Add(go);
 
             Unit unit = go.GetComponent<Unit>();
-            //unit.enabled = false;
             _gameObjectToUnit[go] = unit;
+
+            AutoAttack auto = unit as AutoAttack;
+            auto.OnSkillUsed += StartSkillCam;
+            _autoAttackList.Add(auto);
         }
 
         // UI에 캐릭터 슬롯 생성
@@ -446,6 +472,8 @@ public class BattleManager : Singleton<BattleManager>
         GameManager.Instance.IsStageStart = true;
       
         _placementRoot.gameObject.SetActive(false);    // 배치 플레인 숨김
+
+        _cameraBattleScene.SetStartCam();              // 플레이 시점 카메라로 변경
     }
 
     private void ResetTimeScale()
