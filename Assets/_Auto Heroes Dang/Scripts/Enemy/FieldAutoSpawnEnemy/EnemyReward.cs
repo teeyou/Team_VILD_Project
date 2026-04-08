@@ -37,16 +37,21 @@ public class EnemyReward : MonoBehaviour
         {
             if (_goldReward > 0)
             {
-                float randomMultiplier = Random.Range(_goldMinMultiplier, _goldMaxMultiplier);
+                float min = Mathf.Min(_goldMinMultiplier, _goldMaxMultiplier);
+                float max = Mathf.Max(_goldMinMultiplier, _goldMaxMultiplier);
+
+                float randomMultiplier = Random.Range(min, max);
                 int finalGold = Mathf.RoundToInt(_goldReward * randomMultiplier);
                 finalGold = Mathf.Max(0, finalGold);
 
                 DataSource.Instance.AddGold(finalGold);
-                AudioManager.Instance.PlaySFX("CoinDrop");
             }
 
             if (_gemReward > 0)
                 DataSource.Instance.AddGem(_gemReward);
         }
+
+        if (UIManager.Instance != null)
+            UIManager.Instance.RefreshCurrencyUI();
     }
 }

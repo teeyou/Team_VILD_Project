@@ -19,15 +19,26 @@ public class ChestReward : MonoBehaviour
     [SerializeField] private float _openDuration = 0.25f;
     [SerializeField] private float _openTargetX = -90f;
 
-    [Header("골드 범위")]
+    [Header("스테이지 보상 비율 사용")]
+    [SerializeField] private bool _useStageRewardRate = true;
+
+    [Header("스테이지 클리어 보상의 평균 비율")]
+    [SerializeField] private float _goldAverageRate = 0.1f;
+    [SerializeField] private float _gemAverageRate = 0.1f;
+
+    [Header("평균 대비 랜덤 배율")]
+    [SerializeField] private float _goldMinMultiplier = 0.8f;
+    [SerializeField] private float _goldMaxMultiplier = 1.2f;
+    [SerializeField] private float _gemMinMultiplier = 0.8f;
+    [SerializeField] private float _gemMaxMultiplier = 1.2f;
+
+    [Header("직접 입력 범위(비율 미사용 시)")]
     [SerializeField] private int _goldMin;
     [SerializeField] private int _goldMax;
-
-    [Header("젬 범위")]
     [SerializeField] private int _gemMin;
     [SerializeField] private int _gemMax;
 
-    [Header("A 상자용 아이템 보상 예정")]
+    [Header("아이템 보상 예정")]
     [SerializeField] private bool _useItemReward = false;
 
     [Header("자동 오픈 시간")]
@@ -72,21 +83,74 @@ public class ChestReward : MonoBehaviour
     {
         yield return StartCoroutine(Co_OpenCover());
 
-        int rewardGold = GetRandomValue(_goldMin, _goldMax);
-        int rewardGem = GetRandomValue(_gemMin, _gemMax);
+        int rewardGold;
+        int rewardGem;
+
+        if (_useStageRewardRate && GameManager.Instance != null)
+        {
+            rewardGold = GetStageBasedReward(
+                GameManager.Instance.GetCurrentStageGoldReward(),
+                _goldAverageRate,
+                _goldMinMultiplier,
+                _goldMaxMultiplier
+            );
+
+            rewardGem = GetStageBasedReward(
+                GameManager.Instance.GetCurrentStageGemReward(),
+                _gemAverageRate,
+                _gemMinMultiplier,
+                _gemMaxMultiplier
+            );
+        }
+        else
+        {
+            rewardGold = GetRandomValue(_goldMin, _goldMax);
+            rewardGem = GetRandomValue(_gemMin, _gemMax);
+        }
+
+        // A, B 상자만 젬 가능
+        if (_chestGrade == ChestGrade.C || _chestGrade == ChestGrade.D)
+        {
+            rewardGem = 0;
+        }
 
         if (rewardGold > 0)
-            SpawnWorldRewards(RewardType.Gold, rewardGold, _worldGoldPrefab);
+        {
+            DataSource.Instance.AddGold(rewardGold);
+            SpawnWorldRewards(rewardGold, _worldGoldPrefab);
+        }
 
         if (rewardGem > 0)
-            SpawnWorldRewards(RewardType.Gem, rewardGem, _worldGemPrefab);
+        {
+            DataSource.Instance.AddGem(rewardGem);
+            SpawnWorldRewards(rewardGem, _worldGemPrefab);
+        }
 
         if (_useItemReward)
         {
             Debug.Log($"{_chestGrade} 상자 : 아이템 보상은 이후 구현 예정");
         }
 
+        if (UIManager.Instance != null)
+            UIManager.Instance.RefreshCurrencyUI();
+
         Destroy(gameObject, _destroyDelayAfterOpen);
+    }
+
+    private int GetStageBasedReward(int stageReward, float averageRate, float minMultiplier, float maxMultiplier)
+    {
+        int averageReward = Mathf.RoundToInt(stageReward * averageRate);
+
+        if (averageReward <= 0)
+            return 0;
+
+        float min = Mathf.Min(minMultiplier, maxMultiplier);
+        float max = Mathf.Max(minMultiplier, maxMultiplier);
+
+        float randomMultiplier = Random.Range(min, max);
+        int finalReward = Mathf.RoundToInt(averageReward * randomMultiplier);
+
+        return Mathf.Max(0, finalReward);
     }
 
     private IEnumerator Co_OpenCover()
@@ -114,28 +178,15 @@ public class ChestReward : MonoBehaviour
         _cover.localRotation = Quaternion.Euler(targetX, startEuler.y, startEuler.z);
     }
 
-    private void SpawnWorldRewards(RewardType rewardType, int totalAmount, GameObject prefab)
+    private void SpawnWorldRewards(int totalAmount, GameObject prefab)
     {
         if (prefab == null)
             return;
 
         int spawnCount = GetRewardObjectCount(totalAmount);
-        int remainAmount = totalAmount;
 
         for (int i = 0; i < spawnCount; i++)
         {
-            int amountPerObject;
-
-            if (i == spawnCount - 1)
-            {
-                amountPerObject = remainAmount;
-            }
-            else
-            {
-                amountPerObject = Mathf.Max(1, totalAmount / spawnCount);
-                remainAmount -= amountPerObject;
-            }
-
             Vector3 spawnPos = transform.position + Vector3.up * _spawnYOffset;
             Vector3 targetWorldPos = spawnPos + GetRandomOffsetInCircle(_dropRadius);
 
@@ -144,7 +195,7 @@ public class ChestReward : MonoBehaviour
 
             if (pickup != null)
             {
-                pickup.Init(rewardType, amountPerObject, targetWorldPos);
+                pickup.Init(targetWorldPos);
             }
         }
     }

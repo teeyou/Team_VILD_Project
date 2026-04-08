@@ -561,6 +561,10 @@ public class NormalEnemyBattle : Unit
         if (reward != null)
             reward.GiveReward();
 
+        EnemyChestReward chestReward = GetComponent<EnemyChestReward>();
+        if (chestReward != null)
+            chestReward.TryDropChest();
+
         Destroy(gameObject, 3f);
     }
 
