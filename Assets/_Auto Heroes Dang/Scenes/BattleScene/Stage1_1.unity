@@ -9701,7 +9701,7 @@ PrefabInstance:
     - target: {fileID: 7535353439075410769, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
       propertyPath: _cameraBattleScene
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1695537836}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16236,7 +16236,7 @@ MonoBehaviour:
   _resultBlockPanel: {fileID: 1316441967}
   _defeatButton: {fileID: 1943258674}
   _victoryButton: {fileID: 1746190359}
-  _resultPanel: {fileID: 0}
+  _resultPanel: {fileID: 170966780}
   _goldText: {fileID: 2021128972}
   _gemText: {fileID: 1075570447}
   _chSlotParent: {fileID: 551159688}
@@ -25046,18 +25046,18 @@ SceneRoots:
   - {fileID: 1418982213}
   - {fileID: 678144904}
   - {fileID: 1752976452}
-  - {fileID: 98186731}
-  - {fileID: 670981288}
-  - {fileID: 934528386}
   - {fileID: 1537749366}
   - {fileID: 62145375}
   - {fileID: 1549370716}
-  - {fileID: 1607003190}
   - {fileID: 1746687769}
   - {fileID: 2032811114}
   - {fileID: 1491953840}
   - {fileID: 1386199402}
   - {fileID: 8867415}
+  - {fileID: 1306523834}
+  - {fileID: 98186731}
+  - {fileID: 670981288}
+  - {fileID: 934528386}
   - {fileID: 1177955064}
   - {fileID: 294073304}
-  - {fileID: 1306523834}
+  - {fileID: 1607003190}
