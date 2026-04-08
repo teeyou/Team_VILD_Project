@@ -513,6 +513,8 @@ public class NormalEnemyBattle : Unit
 
         ShowDamageText(finalDamage, attacker, isCritical);
 
+        AudioManager.Instance.PlaySFX("MonsterHit");
+
         if (_battleLog)
         {
             string attackerName = attacker != null ? attacker.name : "Unknown";
