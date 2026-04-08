@@ -5,30 +5,61 @@ using Cinemachine;
 
 public class CameraBattleScene : MonoBehaviour
 {
-    //[SerializeField] private CinemachineVirtualCamera _readyCam;
     [SerializeField] private CinemachineVirtualCamera _startCam;
+    [SerializeField] private CinemachineVirtualCamera _skillCam;
 
-    //private CinemachineBrain _brain;
+    [Header("스킬 연출 거리")]
+    [SerializeField] private float _distance = 3f;
+    [SerializeField] private float _height = 1f;
+
+    [Header("카메라 오프셋")]
+    [SerializeField] private Vector3 _offset;
+
+    [Header("키면 정면, 끄면 측면")]
+    [SerializeField] private bool _isFront;
 
     private const int Default_Priority = 10;
     private const int High_Priority = 11;
 
-    //private ICinemachineCamera _currentCam;
-    private void Awake()
+    private Coroutine _coroutine = null;
+    
+    public void SetStartCam()
     {
-        //_brain = GetComponent<CinemachineBrain>();
+        _skillCam.Priority = Default_Priority;
+        _startCam.Priority = High_Priority;
     }
 
-    void Start()
+    public void SetSkillCam(Unit unit)
     {
+        if (_isFront)
+            _skillCam.transform.position = unit.transform.position + (unit.transform.forward * _distance) + (unit.transform.up * _height);
+
+        else
+            _skillCam.transform.position = unit.transform.position + (unit.transform.right * _distance) + (unit.transform.up * _height);
         
+        _skillCam.transform.position += _offset;
+
+        _skillCam.LookAt = unit.transform;
     }
 
-    void Update()
+    public void StartSkillCam()
     {
-        if (BattleManager.Instance.BattleState == EBattleState.Start)
+        if (_coroutine != null)
         {
-            _startCam.Priority = High_Priority;
+            StopCoroutine(_coroutine);
         }
+        
+        _coroutine = StartCoroutine(CoStartSkillCam(2f));
+    }
+
+    private IEnumerator CoStartSkillCam(float time)
+    {
+        //BattleUIManager.Instance.ToggleSkillPanel(true);
+        _startCam.Priority = Default_Priority;
+        _skillCam.Priority = High_Priority;
+
+        yield return new WaitForSeconds(time);
+        //BattleUIManager.Instance.ToggleSkillPanel(false);
+        SetStartCam();
     }
 }
