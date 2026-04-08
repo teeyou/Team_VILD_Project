@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class AutoAttack : Unit
 {
+    public event Action<Unit> OnSkillUsed;
+
     [SerializeField] protected float _searchRadius;
     [SerializeField] protected LayerMask _layerMask;
     [SerializeField] protected float _skillMultiplier;
@@ -226,6 +229,7 @@ public class AutoAttack : Unit
                         _isAttack = true;
                         _skillEnd = false;
                         _animator.SetTrigger("Skill");
+                        OnSkillUsed?.Invoke(this);
                         return;
                     }
                 }

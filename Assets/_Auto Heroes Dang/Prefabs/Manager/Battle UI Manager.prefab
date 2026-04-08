@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8067712441192654861
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9168881573247868377}
+  - component: {fileID: 1447356178554016137}
+  m_Layer: 0
+  m_Name: Battle UI Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9168881573247868377
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8067712441192654861}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1447356178554016137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8067712441192654861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25deabb4d8851494fbb24691f4c67c01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pauseButton: {fileID: 0}
+  _pauseButtonPause: {fileID: 0}
+  _pauseButtonPlay: {fileID: 0}
+  _speedButton: {fileID: 0}
+  _speedButtonAccel: {fileID: 0}
+  _speedButtonConstant: {fileID: 0}
+  _backButton: {fileID: 0}
+  _startButton: {fileID: 0}
+  _gamePanel: {fileID: 0}
+  _defeatPanel: {fileID: 0}
+  _victoryPanel: {fileID: 0}
+  _resultBlockPanel: {fileID: 0}
+  _defeatButton: {fileID: 0}
+  _victoryButton: {fileID: 0}
+  _resultPanel: {fileID: 0}
+  _goldText: {fileID: 0}
+  _gemText: {fileID: 0}
+  _chSlotParent: {fileID: 0}
+  _chSlotPrefab: {fileID: 7805014551364995970, guid: 10107d05aca5f2b41b448c5ed80f3b21, type: 3}
+  _playerTotalHpTMP: {fileID: 0}
+  _enemyTotalHpTMP: {fileID: 0}
+  _difficulty: {fileID: 0}
+  _battleTotalHpBar: {fileID: 0}
+  _skillSlider: {fileID: 0}
+  _skillButtons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _skillGaugeIncreaseRate: 0.002
+  _toastUI: {fileID: 0}
+  _toastText: {fileID: 0}
+  _skillPanel: {fileID: 0}
+  _stageNumberText: STAGE 2-2
+  _worldSpaceStageNumberTMP: {fileID: 0}
+  _configButton: {fileID: 0}
+  _statusButton: {fileID: 0}

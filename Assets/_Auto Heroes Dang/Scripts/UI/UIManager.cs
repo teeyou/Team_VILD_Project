@@ -37,6 +37,10 @@ public class UIManager : Singleton<UIManager>
     [Header("왼쪽 상단 메인 캐릭터 UI")]
     [SerializeField] private Image _mainCharacterImage;
     [SerializeField] private TMP_Text _totalCpTMP;
+
+    [Header("토스트 메세지")]
+    [SerializeField] private GameObject _toastMessageGo;
+    [SerializeField] private TMP_Text _toastMessage;
     public Vector3 GoldTargetUIPosition => _goldTargetUI.position;
     public Vector3 GemTargetUIPosition => _gemTargetUI.position;
 
@@ -48,6 +52,7 @@ public class UIManager : Singleton<UIManager>
 
     private TMP_Text[] _slotLevelTMPs = new TMP_Text[6];
 
+    [SerializeField] private SkillDescriptor _skillDescriptor;
     protected override void Awake()
     {
         base.Awake();
@@ -94,6 +99,39 @@ public class UIManager : Singleton<UIManager>
             ToggleProgressButton(false);
             ToggleStageButton(true);
         }
+    }
+
+    private void Update()
+    {
+        if (_mainCharacterImage.sprite == null)
+        {
+            SetProfile();
+        }
+    }
+
+    private void SetProfile()
+    {
+        _mainCharacterImage.sprite = Resources.Load<Sprite>($"CharacterSprite/{DataSource.Instance.GetPlayerRuntimeData(DataSource.Instance.MainCharacterIdx).ChName}");
+
+        UpdateTotalCp();
+    }
+
+    private void UpdateTotalCp()
+    {
+        int totalCp = 0;
+
+        // 메인 캐릭터
+        PlayerRuntimeData mainData = DataSource.Instance.GetPlayerRuntimeData((DataSource.Instance.MainCharacterIdx));
+        totalCp += CPCalculator.CalculateCP(mainData.DefaultAtk, mainData.DefaultDef, mainData.DefaultMaxHp);
+
+        // 서브 캐릭터
+        for (int i = 0; i < DataSource.Instance.GetCharacterList().Count; i++)
+        {
+            PlayerRuntimeData data = DataSource.Instance.GetPlayerRuntimeData((DataSource.Instance.GetCharacterList()[i]));
+            totalCp += CPCalculator.CalculateCP(data.DefaultAtk, data.DefaultDef, data.DefaultMaxHp);
+        }
+
+        _totalCpTMP.text = totalCp.ToString();
     }
 
     public void RefreshCurrencyUI()
@@ -233,6 +271,16 @@ public class UIManager : Singleton<UIManager>
                         requiredGold = DataSource.Instance.GetLevelUpRequiredGold(data.Level, data.Grade);
                         tmps[i].text = requiredGold.ToString();
                     }
+
+                    else if (tmps[i].name == "Attack Description")
+                    {
+                        tmps[i].text = _skillDescriptor.GetAttackDescription(idx);
+                    }
+
+                    else if (tmps[i].name == "Skill Description")
+                    {
+                        tmps[i].text = _skillDescriptor.GetSkillDescription(idx);
+                    }
                 }
 
 
@@ -249,11 +297,9 @@ public class UIManager : Singleton<UIManager>
 
                         buttons[btnIdx].onClick.AddListener(() =>
                         {
-                            //Debug.Log($"idx : {idx}");
-
+                            // 레벨업 로직
                             if (DataSource.Instance.Gold >= requiredGold)
                             {
-                                // 레벨업 로직
                                 DataSource.Instance.Gold -= requiredGold;
 
                                 int chIdx = -1;
@@ -273,6 +319,13 @@ public class UIManager : Singleton<UIManager>
 
                                 RefreshUI(idx, data, _detailLevelTMP,_detailCpTMP,_detailAtkTMP,_detailDefTMP,_detailRequiredGoldTMP);
                             }
+
+                            else
+                            {
+                                _toastMessage.text = "골드가 부족합니다.";
+                                PopUpToastMessage();
+                            }
+
                         });
                     }
                 }
@@ -359,18 +412,21 @@ public class UIManager : Singleton<UIManager>
 
     private void RefreshUI(int idx, PlayerRuntimeData data, TMP_Text levelTMP, TMP_Text CpTMP, TMP_Text atkTMP, TMP_Text defTMP, TMP_Text requiredGoldTMP)
     {
+        // 캐릭터 디테일 화면 텍스트 업데이트
         levelTMP.text = data.Level.ToString();
         CpTMP.text = CPCalculator.CalculateCP(data.DefaultAtk, data.DefaultDef, data.DefaultMaxHp).ToString();
         atkTMP.text = data.DefaultAtk.ToString();
         defTMP.text = data.DefaultDef.ToString();
         requiredGoldTMP.text = DataSource.Instance.GetLevelUpRequiredGold(data.Level, data.Grade).ToString();
 
+        // 슬롯 레벨 텍스트 업데이트
         if (_slotLevelTMPs[idx] != null)
         {
             _slotLevelTMPs[idx].text = $"Lv. {data.Level.ToString()}";
         }
 
-        //SetSlot();
+        // 필드씬 왼쪽상단 토탈 CP 업데이트
+        UpdateTotalCp();
     }
 
     private void MovePlayer()
@@ -412,5 +468,21 @@ public class UIManager : Singleton<UIManager>
     public RectTransform GetRewardCanvasRoot()
     {
         return _rewardCanvasRoot;
+    }
+
+    public void PopUpToastMessage()
+    {
+        if (_toastMessageGo == null) 
+            return;
+
+        _toastMessageGo.SetActive(true);
+
+        AnimateUI animate = _toastMessageGo.GetComponent<AnimateUI>();
+
+        if (animate != null)
+        {
+            animate.ResetAnimate();
+            animate.PlayAnimate(0);
+        }
     }
 }

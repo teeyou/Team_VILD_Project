@@ -51,8 +51,20 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
     [SerializeField] private float _skillGaugeIncreaseRate = 0.001f;
 
+    [Header("토스트 UI")]
     [SerializeField] private GameObject _toastUI;   // 스킬 게이지 부족 띄우는 거
     [SerializeField] private TMP_Text _toastText;   // 필요 시 메시지 수정해서 사용합니다.
+
+    [Header("스킬 사용시 활성화 패널")]
+    [SerializeField] private GameObject _skillPanel;
+
+    [Header("월드 스페이스 스테이지 넘버")]
+    [SerializeField] private string _stageNumberText;
+    [SerializeField] private TMP_Text _worldSpaceStageNumberTMP;
+
+    [Header("설정버튼, 캐릭터 상태 버튼")]
+    [SerializeField] private Button _configButton;
+    [SerializeField] private Button _statusButton;
 
     //private Dictionary<GameObject, Image> _goToSkillIcon = new Dictionary<GameObject, Image>();
     private Dictionary<GameObject, Image> _goToSkillMask = new Dictionary<GameObject, Image>();
@@ -123,9 +135,9 @@ public class BattleUIManager : Singleton<BattleUIManager>
         _startButton.onClick.AddListener(() =>
         {
             _startButton.gameObject.SetActive(false);
-            _gamePanel.SetActive(true);
-            BattleManager.Instance.StartBattle();
-            AudioManager.Instance.PlayBattleBGMForCurrentStage();
+            
+            ShowStageNumber();                          // 코루틴 내부에서 GameUI 활성화 및 BattleStart 관련 호출
+            
         });
 
         _defeatButton.onClick.AddListener(ReturnField);
@@ -411,4 +423,39 @@ public class BattleUIManager : Singleton<BattleUIManager>
         }
     }
 
+    public void ToggleSkillPanel(bool flag)
+    {
+        _skillPanel.SetActive(flag);
+    }
+
+    private void ShowStageNumber()
+    {
+        StartCoroutine(CoOneWordAnimation());
+    }
+
+    private IEnumerator CoOneWordAnimation()
+    {
+        _configButton.gameObject.SetActive(false);
+        _statusButton.gameObject.SetActive(false);
+        _worldSpaceStageNumberTMP.gameObject.SetActive(true);
+        int length = _stageNumberText.Length;
+        int n = 0;
+        while (n < length)
+        {
+            _worldSpaceStageNumberTMP.text = _stageNumberText.Substring(0, n + 1);
+            n++;
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        _configButton.gameObject.SetActive(true);
+        _statusButton.gameObject.SetActive(true);
+        _worldSpaceStageNumberTMP.gameObject.SetActive(false);
+
+        _gamePanel.SetActive(true);
+
+        BattleManager.Instance.StartBattle();
+        AudioManager.Instance.PlayBattleBGMForCurrentStage();
+    }
 }
