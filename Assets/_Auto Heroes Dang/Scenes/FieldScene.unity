@@ -10769,7 +10769,7 @@ GameObject:
   - component: {fileID: 716121952}
   - component: {fileID: 716121951}
   m_Layer: 0
-  m_Name: Description
+  m_Name: Attack Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29181,7 +29181,7 @@ GameObject:
   - component: {fileID: 1897088651}
   - component: {fileID: 1897088650}
   m_Layer: 0
-  m_Name: Description
+  m_Name: Skill Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29229,7 +29229,7 @@ MonoBehaviour:
   m_text: "\uC9F1\uC9F1\uC9F1\uC9F1\uC9F1 \uC13C \uC2A4\uD0AC\uC774\uB2E4.\n\uD574\uBCD1\uB300
     \uD3F0\uD2B8\n\uC138\uC904\uC774\uBA74 \uC774\uB807\uAC8C \uB41C\uB2E4."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: da5a54363ae41814b9a77e311994bfba, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 170ec9073ad2b4f4a9bec2f96d1aa688, type: 2}
   m_sharedMaterial: {fileID: -3184265701432577507, guid: da5a54363ae41814b9a77e311994bfba, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -29293,7 +29293,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1897088651
