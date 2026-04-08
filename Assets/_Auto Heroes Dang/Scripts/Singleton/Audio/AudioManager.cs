@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -34,6 +33,7 @@ public class AudioManager : Singleton<AudioManager>
     [Header("오디오 소스")]
     [SerializeField] private AudioSource _bgmSource;
     [SerializeField] private AudioSource _sfxSource;
+    [SerializeField] private AudioSource _loopSfxSource;
 
     [Header("오디오 믹서")]
     [SerializeField] private AudioMixer _audioMixer;
@@ -60,6 +60,15 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField] private string _defaultBattleBgmName = "Battle1BGM";
     [SerializeField] private string _victoryBgmName = "VictoryBGM";
 
+    [Header("볼륨 파라미터")]
+    [SerializeField] private string _masterVolumeParameter = "MasterVolume";
+    [SerializeField] private string _bgmVolumeParameter = "BGMVolume";
+    [SerializeField] private string _sfxVolumeParameter = "SFXVolume";
+
+    private const string MASTER_VOLUME_KEY = "Audio_Master";
+    private const string BGM_VOLUME_KEY = "Audio_BGM";
+    private const string SFX_VOLUME_KEY = "Audio_SFX";
+
     private Dictionary<string, Clip> _clipDict = new Dictionary<string, Clip>();
     private Dictionary<string, SceneBGM> _sceneBgmDict = new Dictionary<string, SceneBGM>();
 
@@ -80,6 +89,9 @@ public class AudioManager : Singleton<AudioManager>
 
     private void Start()
     {
+        LoadVolumeSettings();
+        BindVolumeSliders();
+
         Scene currentScene = SceneManager.GetActiveScene();
         OnSceneLoaded(currentScene, LoadSceneMode.Single);
     }
@@ -92,6 +104,7 @@ public class AudioManager : Singleton<AudioManager>
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        UnbindVolumeSliders();
     }
 
     private void Init()
@@ -216,5 +229,114 @@ public class AudioManager : Singleton<AudioManager>
         }
 
         return _defaultBattleBgmName;
+    }
+
+    public void PlayLoopSFX(string clipName)
+    {
+        if (string.IsNullOrEmpty(clipName))
+            return;
+
+        if (_clipDict.TryGetValue(clipName, out Clip clipData))
+        {
+            if (_loopSfxSource.clip == clipData.clip && _loopSfxSource.isPlaying)
+                return;
+
+            _loopSfxSource.clip = clipData.clip;
+            _loopSfxSource.volume = clipData.volume;
+            _loopSfxSource.loop = true;
+            _loopSfxSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning($"AudioManager : Loop SFX 클립 없음 - {clipName}");
+        }
+    }
+
+    public void StopLoopSFX()
+    {
+        if (_loopSfxSource == null)
+            return;
+
+        if (!_loopSfxSource.isPlaying)
+            return;
+
+        _loopSfxSource.Stop();
+        _loopSfxSource.clip = null;
+    }
+
+    private void BindVolumeSliders()
+    {
+        if (_sliderMaster != null)
+            _sliderMaster.onValueChanged.AddListener(SetMasterVolume);
+
+        if (_sliderBGM != null)
+            _sliderBGM.onValueChanged.AddListener(SetBGMVolume);
+
+        if (_sliderSFX != null)
+            _sliderSFX.onValueChanged.AddListener(SetSFXVolume);
+    }
+
+    private void UnbindVolumeSliders()
+    {
+        if (_sliderMaster != null)
+            _sliderMaster.onValueChanged.RemoveListener(SetMasterVolume);
+
+        if (_sliderBGM != null)
+            _sliderBGM.onValueChanged.RemoveListener(SetBGMVolume);
+
+        if (_sliderSFX != null)
+            _sliderSFX.onValueChanged.RemoveListener(SetSFXVolume);
+    }
+
+    private void LoadVolumeSettings()
+    {
+        float master = PlayerPrefs.GetFloat(MASTER_VOLUME_KEY, 1f);
+        float bgm = PlayerPrefs.GetFloat(BGM_VOLUME_KEY, 1f);
+        float sfx = PlayerPrefs.GetFloat(SFX_VOLUME_KEY, 1f);
+
+        ApplyVolume(_masterVolumeParameter, master);
+        ApplyVolume(_bgmVolumeParameter, bgm);
+        ApplyVolume(_sfxVolumeParameter, sfx);
+
+        if (_sliderMaster != null)
+            _sliderMaster.value = master;
+
+        if (_sliderBGM != null)
+            _sliderBGM.value = bgm;
+
+        if (_sliderSFX != null)
+            _sliderSFX.value = sfx;
+    }
+
+    public void SetMasterVolume(float value)
+    {
+        ApplyVolume(_masterVolumeParameter, value);
+        PlayerPrefs.SetFloat(MASTER_VOLUME_KEY, value);
+        PlayerPrefs.Save();
+    }
+
+    public void SetBGMVolume(float value)
+    {
+        ApplyVolume(_bgmVolumeParameter, value);
+        PlayerPrefs.SetFloat(BGM_VOLUME_KEY, value);
+        PlayerPrefs.Save();
+    }
+
+    public void SetSFXVolume(float value)
+    {
+        ApplyVolume(_sfxVolumeParameter, value);
+        PlayerPrefs.SetFloat(SFX_VOLUME_KEY, value);
+        PlayerPrefs.Save();
+    }
+
+    private void ApplyVolume(string parameterName, float sliderValue)
+    {
+        if (_audioMixer == null)
+            return;
+
+        float clampedValue = Mathf.Clamp(sliderValue, 0.0001f, 1f);
+        float mixerValue = Mathf.Log10(clampedValue) * 20f;
+
+        _audioMixer.SetFloat(parameterName, mixerValue);
     }
 }
