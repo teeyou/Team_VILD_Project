@@ -55,7 +55,7 @@ public class HealerAutoAttack : AutoAttack
         {
             Unit unit = cols[i].GetComponent<Unit>();
 
-            if (unit == null)
+            if (unit == null || unit.IsDead)
             {
                 return;
             }

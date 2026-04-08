@@ -266,6 +266,16 @@ public class UIManager : Singleton<UIManager>
                         requiredGold = DataSource.Instance.GetLevelUpRequiredGold(data.Level, data.Grade);
                         tmps[i].text = requiredGold.ToString();
                     }
+
+                    else if (tmps[i].name == "Attack Description")
+                    {
+                        tmps[i].text = AttackDescription.GetAttackDescription(idx);
+                    }
+
+                    else if (tmps[i].name == "Skill Description")
+                    {
+                        tmps[i].text = AttackDescription.GetSkillDescription(idx);
+                    }
                 }
 
 
