@@ -41,6 +41,10 @@ public class FieldUI : MonoBehaviour
     // 스테이지 정보 팝업. 보스인지 여부에 따라 다른 패널로 출력
     public void PopUpFieldInfo()
     {
+        int currentStage = (int)GameManager.Instance.CurrentStage;
+
+        _isBoss = (currentStage % 3 == 2); // 스테이지 번호가 2, 5, 8인 경우 보스 스테이지
+
         /*
          
         if(현재 스테이지!= 다음 스테이지)
@@ -49,6 +53,7 @@ public class FieldUI : MonoBehaviour
         }
          
          */
+
 
         if (_isBoss)
         {

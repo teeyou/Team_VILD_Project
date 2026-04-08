@@ -37,6 +37,10 @@ public class UIManager : Singleton<UIManager>
     [Header("왼쪽 상단 메인 캐릭터 UI")]
     [SerializeField] private Image _mainCharacterImage;
     [SerializeField] private TMP_Text _totalCpTMP;
+
+    [Header("토스트 메세지")]
+    [SerializeField] private GameObject _toastMessageGo;
+    [SerializeField] private TMP_Text _toastMessage;
     public Vector3 GoldTargetUIPosition => _goldTargetUI.position;
     public Vector3 GemTargetUIPosition => _gemTargetUI.position;
 
@@ -48,6 +52,7 @@ public class UIManager : Singleton<UIManager>
 
     private TMP_Text[] _slotLevelTMPs = new TMP_Text[6];
 
+    [SerializeField] private SkillDescriptor _skillDescriptor;
     protected override void Awake()
     {
         base.Awake();
@@ -269,12 +274,12 @@ public class UIManager : Singleton<UIManager>
 
                     else if (tmps[i].name == "Attack Description")
                     {
-                        tmps[i].text = AttackDescription.GetAttackDescription(idx);
+                        tmps[i].text = _skillDescriptor.GetAttackDescription(idx);
                     }
 
                     else if (tmps[i].name == "Skill Description")
                     {
-                        tmps[i].text = AttackDescription.GetSkillDescription(idx);
+                        tmps[i].text = _skillDescriptor.GetSkillDescription(idx);
                     }
                 }
 
@@ -292,11 +297,9 @@ public class UIManager : Singleton<UIManager>
 
                         buttons[btnIdx].onClick.AddListener(() =>
                         {
-                            //Debug.Log($"idx : {idx}");
-
+                            // 레벨업 로직
                             if (DataSource.Instance.Gold >= requiredGold)
                             {
-                                // 레벨업 로직
                                 DataSource.Instance.Gold -= requiredGold;
 
                                 int chIdx = -1;
@@ -316,6 +319,13 @@ public class UIManager : Singleton<UIManager>
 
                                 RefreshUI(idx, data, _detailLevelTMP,_detailCpTMP,_detailAtkTMP,_detailDefTMP,_detailRequiredGoldTMP);
                             }
+
+                            else
+                            {
+                                _toastMessage.text = "골드가 부족합니다.";
+                                PopUpToastMessage();
+                            }
+
                         });
                     }
                 }
@@ -458,5 +468,21 @@ public class UIManager : Singleton<UIManager>
     public RectTransform GetRewardCanvasRoot()
     {
         return _rewardCanvasRoot;
+    }
+
+    public void PopUpToastMessage()
+    {
+        if (_toastMessageGo == null) 
+            return;
+
+        _toastMessageGo.SetActive(true);
+
+        AnimateUI animate = _toastMessageGo.GetComponent<AnimateUI>();
+
+        if (animate != null)
+        {
+            animate.ResetAnimate();
+            animate.PlayAnimate(0);
+        }
     }
 }
