@@ -12,7 +12,6 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private Button _enemyPanelBackButton;
     [SerializeField] private Button _bossPanelBackButton;
     [SerializeField] private FieldUI _fieldUI;
-    [SerializeField] private StagePanelUI _stagePanelUI; // 스테이지 패널 연결
 
     [Header("왼쪽 하단 스테이터스")]
     [SerializeField] private GameObject _statusPanel;
@@ -41,6 +40,13 @@ public class UIManager : Singleton<UIManager>
     [Header("토스트 메세지")]
     [SerializeField] private GameObject _toastMessageGo;
     [SerializeField] private TMP_Text _toastMessage;
+
+    [Header("왼쪽 하단 인벤토리, 상점 UI")]
+    [SerializeField] private GameObject _inventoryPanel;
+    [SerializeField] private GameObject _shopPanel;
+    [SerializeField] private Button _inventoryButton;
+    [SerializeField] private Button _shopButton;
+
     public Vector3 GoldTargetUIPosition => _goldTargetUI.position;
     public Vector3 GemTargetUIPosition => _gemTargetUI.position;
 
@@ -125,11 +131,29 @@ public class UIManager : Singleton<UIManager>
         if (InputManager.Instance.IsPressedI)
         {
             // 인벤토리 열기
+            if (_inventoryPanel.activeSelf)
+            {
+                _inventoryPanel.SetActive(false);
+            }
+
+            else
+            {
+                _inventoryPanel.SetActive(true);
+            }
         }
 
         if (InputManager.Instance.IsPressedH)
         {
             // 아이템 상점 열기
+            if (_shopPanel.activeSelf)
+            {
+                _shopPanel.SetActive(false);
+            }
+
+            else
+            {
+                _shopPanel.SetActive(true);
+            }
         }
     }
 
@@ -480,7 +504,6 @@ public class UIManager : Singleton<UIManager>
     {
         ToggleStageButton(false);
         _fieldUI.PopUpFieldInfo();
-        _stagePanelUI.RefreshUI();
     }
 
     public void CloseStagePanel()

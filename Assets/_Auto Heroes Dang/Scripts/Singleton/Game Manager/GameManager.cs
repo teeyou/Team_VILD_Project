@@ -18,7 +18,7 @@ public enum EGameStage
 
 public class GameManager : Singleton<GameManager>
 {
-    private EGameStage _currentStage = EGameStage.Stage1_1;
+    private EGameStage _currentStage = EGameStage.Stage1_3;
 
     public EGameStage CurrentStage { get { return _currentStage; } }
 
