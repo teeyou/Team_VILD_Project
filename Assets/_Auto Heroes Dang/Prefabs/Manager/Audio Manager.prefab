@@ -41,7 +41,7 @@ AudioSource:
   m_GameObject: {fileID: 1680790650340843753}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 3244189672916022627, guid: 57b3e737a374f6447a08709005f3a451, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -169,7 +169,7 @@ AudioSource:
   m_GameObject: {fileID: 3978126956706071217}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 3244189672916022627, guid: 57b3e737a374f6447a08709005f3a451, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.3
@@ -297,7 +297,7 @@ AudioSource:
   m_GameObject: {fileID: 4484431070701413752}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 9043346138251779533, guid: 57b3e737a374f6447a08709005f3a451, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.1
@@ -434,7 +434,7 @@ MonoBehaviour:
   _bgmSource: {fileID: 5701578115012748719}
   _sfxSource: {fileID: 2301333547929090413}
   _loopSfxSource: {fileID: 8211658424475293547}
-  _audioMixer: {fileID: 0}
+  _audioMixer: {fileID: 24100000, guid: 57b3e737a374f6447a08709005f3a451, type: 2}
   _sliderMaster: {fileID: 0}
   _sliderBGM: {fileID: 0}
   _sliderSFX: {fileID: 0}
@@ -517,6 +517,12 @@ MonoBehaviour:
   - name: FootSFX
     clip: {fileID: 8300000, guid: 8a2da7273ef05ce40af50fec62f633db, type: 3}
     volume: 0.2
+  - name: MonsterHit
+    clip: {fileID: 8300000, guid: 66d822ee8afdd8e47ab3f42991579a74, type: 3}
+    volume: 0.3
+  - name: PlayerHit
+    clip: {fileID: 8300000, guid: f63981b4c0fddaa459e9c6116006612d, type: 3}
+    volume: 0.3
   _sceneBgmList:
   - sceneName: SelectScene
     keepCurrentBgm: 0
@@ -562,3 +568,6 @@ MonoBehaviour:
   _defaultFieldBgmName: FieldBGM
   _defaultBattleBgmName: Battle1BGM
   _victoryBgmName: VictoryBGM
+  _masterVolumeParameter: MasterVolume
+  _bgmVolumeParameter: BGMVolume
+  _sfxVolumeParameter: SFXVolume
