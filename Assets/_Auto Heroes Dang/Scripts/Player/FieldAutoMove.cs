@@ -75,6 +75,7 @@ public class FieldAutoMove : MonoBehaviour
 
         if (!_isMoving && InputManager.Instance.IsPressedSpace)
         {
+            UIManager.Instance.ToggleProgressButton(false);
             MoveNextPoint();
         }
         

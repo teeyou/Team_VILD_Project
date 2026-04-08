@@ -107,6 +107,30 @@ public class UIManager : Singleton<UIManager>
         {
             SetProfile();
         }
+
+        if (InputManager.Instance.IsPressedS)
+        {
+            if (_statusPanel.activeSelf)
+            {
+                _statusPanel.SetActive(false);
+            }
+
+            else
+            {
+                SetSlot();
+                _statusPanel.SetActive(true);
+            }
+        }
+
+        if (InputManager.Instance.IsPressedI)
+        {
+            // 인벤토리 열기
+        }
+
+        if (InputManager.Instance.IsPressedH)
+        {
+            // 아이템 상점 열기
+        }
     }
 
     private void SetProfile()

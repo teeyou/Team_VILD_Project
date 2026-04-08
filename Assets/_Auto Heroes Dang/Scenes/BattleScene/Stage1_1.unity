@@ -8728,6 +8728,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 763333126}
   m_CullTransparentMesh: 1
+--- !u!1001 &793429159
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7095266850335107742, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
+      propertyPath: m_Name
+      value: Battle Manager (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168411008961131027, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168411008961131027, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168411008961131027, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168411008961131027, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168411008961131027, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168411008961131027, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168411008961131027, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168411008961131027, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168411008961131027, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168411008961131027, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7535353439075410769, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
+      propertyPath: _playerSpawner
+      value: 
+      objectReference: {fileID: 25033687}
+    - target: {fileID: 7535353439075410769, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
+      propertyPath: _cameraBattleScene
+      value: 
+      objectReference: {fileID: 1695537836}
+    - target: {fileID: 7535353439075410769, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
+      propertyPath: _enemies.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
 --- !u!1 &799668132
 GameObject:
   m_ObjectHideFlags: 0
@@ -9653,6 +9722,10 @@ PrefabInstance:
     - target: {fileID: 7095266850335107742, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
       propertyPath: m_Name
       value: Battle Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7095266850335107742, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7168411008961131027, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17069,6 +17142,7 @@ GameObject:
   - component: {fileID: 1695537835}
   - component: {fileID: 1695537834}
   - component: {fileID: 1695537833}
+  - component: {fileID: 1695537838}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -17127,8 +17201,8 @@ Camera:
   m_GameObject: {fileID: 1695537832}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.029649556, g: 0.029649556, b: 0.029649556, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -17183,7 +17257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startCam: {fileID: 678144903}
   _skillCam: {fileID: 1752976451}
-  _distance: 4
+  _distance: 3.5
   _height: 3
   _offset: {x: 0, y: 0, z: 0}
   _isFront: 0
@@ -17202,6 +17276,15 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: -5}
+--- !u!45 &1695537838
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695537832}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: 25eacc11f01571e44bf4f41e67fcd435, type: 2}
 --- !u!1 &1703093814
 GameObject:
   m_ObjectHideFlags: 0
@@ -25058,6 +25141,7 @@ SceneRoots:
   - {fileID: 98186731}
   - {fileID: 670981288}
   - {fileID: 934528386}
+  - {fileID: 793429159}
   - {fileID: 1177955064}
   - {fileID: 294073304}
   - {fileID: 1607003190}
