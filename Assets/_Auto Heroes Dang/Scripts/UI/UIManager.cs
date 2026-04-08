@@ -96,6 +96,39 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
+    private void Update()
+    {
+        if (_mainCharacterImage.sprite == null)
+        {
+            SetProfile();
+        }
+    }
+
+    private void SetProfile()
+    {
+        _mainCharacterImage.sprite = Resources.Load<Sprite>($"CharacterSprite/{DataSource.Instance.GetPlayerRuntimeData(DataSource.Instance.MainCharacterIdx).ChName}");
+
+        UpdateTotalCp();
+    }
+
+    private void UpdateTotalCp()
+    {
+        int totalCp = 0;
+
+        // 메인 캐릭터
+        PlayerRuntimeData mainData = DataSource.Instance.GetPlayerRuntimeData((DataSource.Instance.MainCharacterIdx));
+        totalCp += CPCalculator.CalculateCP(mainData.DefaultAtk, mainData.DefaultDef, mainData.DefaultMaxHp);
+
+        // 서브 캐릭터
+        for (int i = 0; i < DataSource.Instance.GetCharacterList().Count; i++)
+        {
+            PlayerRuntimeData data = DataSource.Instance.GetPlayerRuntimeData((DataSource.Instance.GetCharacterList()[i]));
+            totalCp += CPCalculator.CalculateCP(data.DefaultAtk, data.DefaultDef, data.DefaultMaxHp);
+        }
+
+        _totalCpTMP.text = totalCp.ToString();
+    }
+
     public void RefreshCurrencyUI()
     {
         if (_gemText != null)
@@ -359,18 +392,21 @@ public class UIManager : Singleton<UIManager>
 
     private void RefreshUI(int idx, PlayerRuntimeData data, TMP_Text levelTMP, TMP_Text CpTMP, TMP_Text atkTMP, TMP_Text defTMP, TMP_Text requiredGoldTMP)
     {
+        // 캐릭터 디테일 화면 텍스트 업데이트
         levelTMP.text = data.Level.ToString();
         CpTMP.text = CPCalculator.CalculateCP(data.DefaultAtk, data.DefaultDef, data.DefaultMaxHp).ToString();
         atkTMP.text = data.DefaultAtk.ToString();
         defTMP.text = data.DefaultDef.ToString();
         requiredGoldTMP.text = DataSource.Instance.GetLevelUpRequiredGold(data.Level, data.Grade).ToString();
 
+        // 슬롯 레벨 텍스트 업데이트
         if (_slotLevelTMPs[idx] != null)
         {
             _slotLevelTMPs[idx].text = $"Lv. {data.Level.ToString()}";
         }
 
-        //SetSlot();
+        // 필드씬 왼쪽상단 토탈 CP 업데이트
+        UpdateTotalCp();
     }
 
     private void MovePlayer()
