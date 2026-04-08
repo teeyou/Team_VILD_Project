@@ -120,6 +120,8 @@ public class FieldAutoMove : MonoBehaviour
         _cart.m_Speed = _moveSpeed;
         _animator.SetBool("Move", true);
 
+        AudioManager.Instance.PlayLoopSFX("FootSFX");
+
         FieldManager.Instance.IsSpawnPossible = false;  // 이동 중에는 몬스터 스폰 불가능
     }
 
@@ -135,6 +137,8 @@ public class FieldAutoMove : MonoBehaviour
         _cart.m_Speed = 0f;
         DataSource.Instance.CurrentIdx++;
         _animator.SetBool("Move", false);
+
+        AudioManager.Instance.StopLoopSFX();
 
         UIManager.Instance.ToggleStageButton(true);
         //_fieldUI.PopUpFieldInfo(); // 스테이지 정보 UI 팝업.

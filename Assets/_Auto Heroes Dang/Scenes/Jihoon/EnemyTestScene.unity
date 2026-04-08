@@ -5518,7 +5518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _chestGrade: 3
-  _cover: {fileID: 0}
+  _cover: {fileID: 760742390}
   _openDuration: 0.25
   _openTargetX: -90
   _goldMin: 0
@@ -5532,6 +5532,11 @@ MonoBehaviour:
   _dropRadius: 1
   _spawnYOffset: 0.5
   _destroyDelayAfterOpen: 1.5
+--- !u!4 &760742390 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 762013091885839173, guid: f8de9058f3d4d7045ae01bc0f2d0715e, type: 3}
+  m_PrefabInstance: {fileID: 760742387}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &863524980
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6472,7 +6477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _chestGrade: 2
-  _cover: {fileID: 0}
+  _cover: {fileID: 968123872}
   _openDuration: 0.25
   _openTargetX: -90
   _goldMin: 0
@@ -6486,6 +6491,11 @@ MonoBehaviour:
   _dropRadius: 1
   _spawnYOffset: 0.5
   _destroyDelayAfterOpen: 1.5
+--- !u!4 &968123872 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 322230936615820963, guid: 62b9e955af0867044b04bad8e62480a9, type: 3}
+  m_PrefabInstance: {fileID: 968123869}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &996232546
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8967,7 +8977,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _chestGrade: 1
-  _cover: {fileID: 0}
+  _cover: {fileID: 1574886933}
   _openDuration: 0.25
   _openTargetX: -90
   _goldMin: 0
@@ -8981,6 +8991,11 @@ MonoBehaviour:
   _dropRadius: 1
   _spawnYOffset: 0.5
   _destroyDelayAfterOpen: 1.5
+--- !u!4 &1574886933 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7312843469673413648, guid: 52d3a38962b55b148b8bd7d344b04418, type: 3}
+  m_PrefabInstance: {fileID: 1574886930}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1723477036
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10597,7 +10612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _chestGrade: 0
-  _cover: {fileID: 0}
+  _cover: {fileID: 2139070974}
   _openDuration: 0.25
   _openTargetX: -90
   _goldMin: 0
@@ -10611,6 +10626,11 @@ MonoBehaviour:
   _dropRadius: 1
   _spawnYOffset: 0.5
   _destroyDelayAfterOpen: 1.5
+--- !u!4 &2139070974 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3890664832120825337, guid: 9a57af27b2363c248935dd37a013e51d, type: 3}
+  m_PrefabInstance: {fileID: 2139070971}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4518486815305546063
 PrefabInstance:
   m_ObjectHideFlags: 0

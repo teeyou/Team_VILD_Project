@@ -27,7 +27,7 @@ public class ChestReward : MonoBehaviour
     [SerializeField] private int _gemMin;
     [SerializeField] private int _gemMax;
 
-    [Header("D상자용 아이템 보상 예정")]
+    [Header("A 상자용 아이템 보상 예정")]
     [SerializeField] private bool _useItemReward = false;
 
     [Header("자동 오픈 시간")]
