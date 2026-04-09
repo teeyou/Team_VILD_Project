@@ -354,7 +354,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 379}
+  m_AnchoredPosition: {x: 0, y: 250}
   m_SizeDelta: {x: 1628.48, y: 240.44}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &202444471
@@ -377,7 +377,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: congratulations !!
+  m_text: CONGRATULATIONS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 917b6f8b47e4249e2ae318d8182bd8d9, type: 2}
   m_sharedMaterial: {fileID: 7512481295523713106, guid: 917b6f8b47e4249e2ae318d8182bd8d9, type: 2}

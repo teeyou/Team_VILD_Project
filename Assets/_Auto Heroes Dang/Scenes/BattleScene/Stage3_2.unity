@@ -13521,6 +13521,7 @@ MonoBehaviour:
   _height: 3
   _offset: {x: 0, y: 0, z: 0}
   _isFront: 0
+  _terrain: {fileID: 1259244999}
 --- !u!20 &1117073016
 Camera:
   m_ObjectHideFlags: 0
