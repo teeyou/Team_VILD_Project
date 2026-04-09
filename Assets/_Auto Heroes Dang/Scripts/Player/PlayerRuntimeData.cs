@@ -1,23 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class PlayerRuntimeData
 {
-    private string _id;
-    private string _chName;
-    private int _defaultMaxHp;
-    private int _defaultAtk;
-    private int _defaultDef;
-    private float _range;
-    private float _moveSpeed;
-    private float _skillCool;
-    private float _skillMultiplier;
-    private EAttackType _attackType;
-    private GameObject _prefab;
-
-    private int _level;
-    private EGrade _grade;
+    [SerializeField] private string _id;
+    [SerializeField] private string _chName;
+    [SerializeField] private int _defaultMaxHp;
+    [SerializeField] private int _defaultAtk;
+    [SerializeField] private int _defaultDef;
+    [SerializeField] private float _range;
+    [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _skillCool;
+    [SerializeField] private float _skillMultiplier;
+    [SerializeField] private EAttackType _attackType;
+    [SerializeField] private GameObject _prefab;
+    [SerializeField] private int _level;
+    [SerializeField] private EGrade _grade;
 
     public PlayerRuntimeData(BaseStatus_SO baseStatus)
     {

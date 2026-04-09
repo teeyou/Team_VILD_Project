@@ -4,6 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/*
+ 
+플레이어가 체크포인트까지 가서 정지하면 
+
+JSON 데이터 저장 
+ 
+ 
+*/
+
+
 public class FieldAutoMove : MonoBehaviour
 {
     [SerializeField] private CinemachineDollyCart _cart;
@@ -129,14 +139,13 @@ public class FieldAutoMove : MonoBehaviour
     public void Stop()
     {
         GameManager.Instance.IsFirstPoint = false;  // Stop이 호출된 지점부터는 스테이지 포인트
-
-        SaveTransform();
-
+        GameManager.Instance.IsStageClear = false;
         _autoAttack.enabled = true;     // 필드에서 일정 시간 지나면 몬스터 스폰되기 때문에 활성화
 
         _isMoving = false;
         _cart.m_Speed = 0f;
         DataSource.Instance.CurrentIdx++;
+
         _animator.SetBool("Move", false);
 
         AudioManager.Instance.StopLoopSFX();
@@ -145,9 +154,11 @@ public class FieldAutoMove : MonoBehaviour
         //_fieldUI.PopUpFieldInfo(); // 스테이지 정보 UI 팝업.
 
         FieldManager.Instance.IsSpawnPossible = true;
+
+        Save();
     }
 
-    private void SaveTransform()
+    private void Save()
     {
         // 메인 캐릭터 저장
         DataSource.Instance.MainCharacterPosRot = new PosRotData(
@@ -155,29 +166,18 @@ public class FieldAutoMove : MonoBehaviour
             FieldManager.Instance.MainCharacterTr.rotation);
 
         // 서브 캐릭터 저장
-        int count = DataSource.Instance.GetSubPosRotList().Count;    // 필드 씬 위치정보 리스트 길이
+        //int count = DataSource.Instance.GetSubPosRotList().Count;    // 필드 씬 위치정보 리스트 길이
 
         IReadOnlyList<Transform> trList = FieldManager.Instance.GetSubCharacterTrList;  //필드 씬 서브 캐릭터들 트랜스폼
         int len = trList.Count;
 
-        // 위치정보 없으면 Add
-        if (count == 0)
+        for (int i = 0; i < len; i++)
         {
-            for (int i = 0; i < len; i++)
-            {
-                DataSource.Instance.AddSubPosRot(trList[i].position, trList[i].rotation);
-            }
-        }
-
-        // 위치정보 있으면 덮어쓰기
-        else
-        {
-            for (int i = 0; i < len; i++)
-            {
-                DataSource.Instance.SetSubPosRot(i, trList[i].position, trList[i].rotation);
-            }
+            DataSource.Instance.UpdatePosRotList(i, trList[i].position, trList[i].rotation);
         }
 
         DataSource.Instance.CartPosition = _cart.m_Position;
+
+        DataSource.Instance.Save(); //  JSON에 저장
     }
 }

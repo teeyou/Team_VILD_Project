@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR;
 
+[Serializable]
 public class PosRotData
 {
-    private Vector3 _pos;
-    private Quaternion _rot;
+    [SerializeField] private Vector3 _pos;
+    [SerializeField] private Quaternion _rot;
 
     public Vector3 Pos { get { return _pos; } set { _pos = value; } }
     public Quaternion Rot { get { return _rot; } set { _rot = value; } }
@@ -31,7 +31,7 @@ public class DataSource : Singleton<DataSource>
 
     private List<PosRotData> _subCharacterPosRotList = new List<PosRotData>();
 
-    public int CurrentIdx { get; set; } = 0;
+    public int CurrentIdx { get; set; } = 0;    // 트랙 웨이포인트 인덱스
     public float CartPosition { get; set; } = 6.5f;
 
     private int _gem = 10;
@@ -39,6 +39,7 @@ public class DataSource : Singleton<DataSource>
 
     public event Action OnCurrencyChanged;
 
+    private SaveData _saveData = null;
     public int Gem
     {
         get { return _gem; }
@@ -79,6 +80,8 @@ public class DataSource : Singleton<DataSource>
     public int AtkBuff { get; set; } = 0;
     public int DefBuff { get; set; } = 0;
 
+    SaveSystem _saveSystem = new SaveSystem();
+
     protected override void Awake()
     {
         base.Awake();
@@ -98,6 +101,39 @@ public class DataSource : Singleton<DataSource>
             _playerRuntimeDataList.Add(new PlayerRuntimeData(_baseStatusList[i]));
         }
     }
+
+    private void Start()
+    {
+        _saveData = Load();
+
+        if (_saveData == null)
+        {
+            GameManager.Instance.IsSave = false;
+        }
+
+        else
+        {
+            GameManager.Instance.IsSave = true;
+        }
+    }
+
+    public void SetSaveData()
+    {
+        // 스타트씬에서 Continue 버튼 눌렀을 때 호출
+        MainCharacterIdx = _saveData.mainCharacterIdx;
+        _playerCharacterList = _saveData.playerCharacterList;
+        MainCharacterPosRot = _saveData.mainTransform;
+        _subCharacterPosRotList = _saveData.subTransformList;
+        CartPosition = _saveData.cartPosition;
+        CurrentIdx = _saveData.currentWayPointIdx;
+        GameManager.Instance.CurrentStage = (EGameStage)_saveData.currentStage;
+        _playerRuntimeDataList = _saveData.playerRuntimeDataList;
+        GameManager.Instance.IsFirstPoint = _saveData.isFirstPoint;
+        GameManager.Instance.IsStageClear = _saveData.isStageClear;
+        // isSpawnPossible은 필드매니저에서 세팅
+    }
+
+    public SaveData GetSaveData => _saveData;
 
     private void LoadCurrency()
     {
@@ -149,6 +185,11 @@ public class DataSource : Singleton<DataSource>
 
         Gem -= amount;
         return true;
+    }
+
+    public List<PlayerRuntimeData> GetPlayerRuntimeDataList()
+    {
+        return _playerRuntimeDataList;
     }
 
     public PlayerRuntimeData GetPlayerRuntimeData(int idx)
@@ -233,6 +274,7 @@ public class DataSource : Singleton<DataSource>
 
         _playerRuntimeDataList[idx].Level++;
 
+        Save();
         Debug.Log("레벨업 완료");
     }
 
@@ -267,6 +309,21 @@ public class DataSource : Singleton<DataSource>
         _subCharacterPosRotList[idx].Rot = rot;
     }
 
+    public void UpdatePosRotList(int idx, Vector3 pos, Quaternion rot)
+    {
+        if (idx < _subCharacterPosRotList.Count)
+        {
+            // 이미 존재하면 덮어쓰기
+            _subCharacterPosRotList[idx].Pos = pos;
+            _subCharacterPosRotList[idx].Rot = rot;
+        }
+        else
+        {
+            // 없으면 추가
+            _subCharacterPosRotList.Add(new PosRotData(pos, rot));
+        }
+    }
+
     public PosRotData GetSubPosRot(int idx)
     {
         if (_subCharacterPosRotList.Count <= idx)
@@ -278,5 +335,23 @@ public class DataSource : Singleton<DataSource>
     public IReadOnlyList<PosRotData> GetSubPosRotList()
     {
         return _subCharacterPosRotList;
+    }
+
+    public List<PosRotData> GetSubTransformList()
+    {
+        return _subCharacterPosRotList;
+    }
+
+    public void Save()
+    {
+        // FieldManager Start에서 Save
+        // FieldAutoMove Stop에서 Save
+        // 레벨업 할 때 Save
+        _saveSystem.Save();
+    }
+
+    public SaveData Load()
+    {
+        return _saveSystem.Load();
     }
 }

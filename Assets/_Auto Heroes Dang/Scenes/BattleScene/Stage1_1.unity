@@ -24936,6 +24936,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Config Button
       objectReference: {fileID: 0}
+    - target: {fileID: 6143636909903994974, guid: f8d97296c13a14345a8595bc49f11ed2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6723215702495558906, guid: f8d97296c13a14345a8595bc49f11ed2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

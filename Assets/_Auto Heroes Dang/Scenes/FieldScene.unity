@@ -11116,10 +11116,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1071697772343008286, guid: fee2126232e12a34c8eb31b8e6bf9152, type: 3}
-      propertyPath: _gradeStatusTable
-      value: 
-      objectReference: {fileID: 11400000, guid: e1a46af696daaa248a27c89773aec5f3, type: 2}
     - target: {fileID: 1808671720993632781, guid: fee2126232e12a34c8eb31b8e6bf9152, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

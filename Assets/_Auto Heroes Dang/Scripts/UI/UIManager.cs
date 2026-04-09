@@ -105,6 +105,7 @@ public class UIManager : Singleton<UIManager>
             ToggleProgressButton(false);
             ToggleStageButton(true);
         }
+
     }
 
     private void Update()
