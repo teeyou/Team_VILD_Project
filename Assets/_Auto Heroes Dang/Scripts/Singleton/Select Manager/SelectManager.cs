@@ -38,8 +38,8 @@ public class SelectManager : MonoBehaviour
             if (AudioManager.Instance != null && AudioManager.Instance.IsConfigOpen)
                 return;
 
-            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
-                return;
+            //if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+            //    return;
 
             Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
 
