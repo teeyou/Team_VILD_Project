@@ -68,6 +68,7 @@ public class AudioManager : Singleton<AudioManager>
     [Header("설정 UI")]
     [SerializeField] private GameObject _configCanvas;
     [SerializeField] private GameObject _configPanel;
+    [SerializeField] private GameObject _settingButtonObject;
 
     private const string MASTER_VOLUME_KEY = "Audio_Master";
     private const string BGM_VOLUME_KEY = "Audio_BGM";
@@ -141,7 +142,15 @@ public class AudioManager : Singleton<AudioManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == _loadingSceneName)
+        bool isLoadingScene = scene.name == _loadingSceneName;
+
+        if (_settingButtonObject != null)
+            _settingButtonObject.SetActive(!isLoadingScene);
+
+        if (_configCanvas != null && isLoadingScene)
+            _configCanvas.SetActive(false);
+
+        if (isLoadingScene)
             return;
 
         if (_sceneBgmDict.TryGetValue(scene.name, out SceneBGM sceneBgmData))

@@ -650,9 +650,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5680634149326623043, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
+      propertyPath: _configPanel
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680634149326623043, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
       propertyPath: _configCanvas
       value: 
       objectReference: {fileID: 1448438967}
+    - target: {fileID: 5680634149326623043, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
+      propertyPath: _settingButtonObject
+      value: 
+      objectReference: {fileID: 1058046044}
     - target: {fileID: 5821166596922743053, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
