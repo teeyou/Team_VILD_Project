@@ -524,7 +524,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: f63981b4c0fddaa459e9c6116006612d, type: 3}
     volume: 0.3
   _sceneBgmList:
-  - sceneName: SelectScene
+  - sceneName: StartScene
     keepCurrentBgm: 0
     bgmClipName: TitleBGM
   - sceneName: FieldScene
