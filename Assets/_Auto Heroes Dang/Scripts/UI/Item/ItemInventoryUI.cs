@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemInventoryUI : MonoBehaviour
@@ -10,6 +8,10 @@ public class ItemInventoryUI : MonoBehaviour
     [SerializeField] private GameObject _shopPanel;
     [SerializeField] private GameObject _inventoryPanel;
     [SerializeField] private GameObject _enhancementPanel;
+    [SerializeField] private GameObject _CombinationPanel;
+
+    [SerializeField] private ItemEnhancementUI _enhancementUI;
+    [SerializeField] private ItemCombinationUI _CombinationUI;
 
     private void OnEnable()
     {
@@ -34,18 +36,24 @@ public class ItemInventoryUI : MonoBehaviour
 
     private void OnItemClicked(ItemData item)
     {
-        Debug.Log($"인벤토리 클릭: {item.name}");
-        // if else로 상점이면 아이템 정보 표기, 인벤토리면 장착
-        if (_shopPanel.activeSelf)
-        {
-        }
-        else if (_inventoryPanel.activeSelf)
-        {
-        }
-        else if (_enhancementPanel.activeSelf)
-        {
-        }
+        Debug.Log($"enhancement active: {_enhancementPanel != null && _enhancementPanel.activeInHierarchy}");
+        Debug.Log($"fusion active: {_CombinationPanel != null && _CombinationPanel.activeInHierarchy}");
 
-
+        if (_shopPanel != null && _shopPanel.activeInHierarchy)
+        {
+        }
+        else if (_inventoryPanel != null && _inventoryPanel.activeInHierarchy)
+        {
+        }
+        else if (_enhancementPanel != null && _enhancementPanel.activeInHierarchy)
+        {
+            Debug.Log("강화 패널로 아이템 전달");
+            _enhancementUI.SetItem(item);
+        }
+        else if (_CombinationUI != null)
+        {
+            Debug.Log("합성 패널로 아이템 전달");
+            _CombinationUI.TryAddItem(item);
+        }
     }
 }
