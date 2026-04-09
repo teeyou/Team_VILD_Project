@@ -8740,6 +8740,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Battle Manager (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7095266850335107742, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7168411008961131027, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -9725,7 +9729,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7095266850335107742, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7168411008961131027, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17261,6 +17265,7 @@ MonoBehaviour:
   _height: 3
   _offset: {x: 0, y: 0, z: 0}
   _isFront: 0
+  _terrain: {fileID: 2032811111}
 --- !u!4 &1695537837
 Transform:
   m_ObjectHideFlags: 0

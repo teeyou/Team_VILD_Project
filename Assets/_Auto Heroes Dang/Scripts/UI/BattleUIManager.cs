@@ -144,8 +144,16 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
         _victoryButton.onClick.AddListener(() =>
         {
+            if (GameManager.Instance.CurrentStage == EGameStage.Stage3_3)
+            {
+                // 최종 스테이지 클리어 시, 엔딩씬
+                SceneLoader.Instance.LoadScene(ESceneId.CharacterCapture);
+                return;
+            }
+
             GameManager.Instance.IncreaseCurrentStage();
             ReturnField();
+
         });
 
         if (_toastUI.activeSelf) _toastUI.SetActive(false); // 토스트 애니메이션용 한줄 추가. 0401 진주
