@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class SelectManager : MonoBehaviour
 {
@@ -34,6 +35,12 @@ public class SelectManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            if (AudioManager.Instance != null && AudioManager.Instance.IsConfigOpen)
+                return;
+
+            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+                return;
+
             Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out RaycastHit hit))

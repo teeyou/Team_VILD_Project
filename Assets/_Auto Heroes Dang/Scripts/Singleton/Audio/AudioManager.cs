@@ -65,6 +65,10 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField] private string _bgmVolumeParameter = "BGMVolume";
     [SerializeField] private string _sfxVolumeParameter = "SFXVolume";
 
+    [Header("설정 UI")]
+    [SerializeField] private GameObject _configCanvas;
+    [SerializeField] private GameObject _configPanel;
+
     private const string MASTER_VOLUME_KEY = "Audio_Master";
     private const string BGM_VOLUME_KEY = "Audio_BGM";
     private const string SFX_VOLUME_KEY = "Audio_SFX";
@@ -76,6 +80,8 @@ public class AudioManager : Singleton<AudioManager>
 
     public string CurrentBgmName => _currentBgmName;
 
+    public bool IsConfigOpen => _configPanel != null && _configPanel.activeSelf;
+
     protected override void Awake()
     {
         base.Awake();
@@ -84,7 +90,7 @@ public class AudioManager : Singleton<AudioManager>
             return;
 
         Init();
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject.transform.root.gameObject);
     }
 
     private void Start()
@@ -338,5 +344,20 @@ public class AudioManager : Singleton<AudioManager>
         float mixerValue = Mathf.Log10(clampedValue) * 20f;
 
         _audioMixer.SetFloat(parameterName, mixerValue);
+    }
+
+    public void OpenConfig()
+    {
+        if (_configCanvas != null)
+            _configCanvas.SetActive(true);
+
+        if (_configPanel != null)
+            _configPanel.SetActive(true);
+    }
+
+    public void CloseConfig()
+    {
+        if (_configCanvas != null)
+            _configCanvas.SetActive(false);
     }
 }
