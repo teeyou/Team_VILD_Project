@@ -16495,7 +16495,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 739757614}
   m_HandleRect: {fileID: 739757613}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -28867,9 +28867,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3527c3a44f85a7d44ac11a900ec4ef29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftSlotParent: {fileID: 4444513}
-  _rightSlotParent: {fileID: 2114642104}
-  _resultSlotParent: {fileID: 422557256}
+  _leftSlotParent: {fileID: 658550395}
+  _rightSlotParent: {fileID: 1091868198}
+  _resultSlotParent: {fileID: 103833022}
   _percentText: {fileID: 710695970}
   _costText: {fileID: 34653977}
   _okButton: {fileID: 1310771239}
@@ -28887,7 +28887,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _panel: {fileID: 1425012816}
-  _slotParent: {fileID: 6919433950216818451}
+  _slotParent: {fileID: 1269874916}
   _percentText: {fileID: 4121755045846431315}
   _gemCostText: {fileID: 1131259428}
   _goldCostText: {fileID: 1286729295}
