@@ -122,17 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &94009216 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5680634149326623043, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
-  m_PrefabInstance: {fileID: 1550257644}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fdbf393505c7984ea1666db61031a11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &131859292
 GameObject:
   m_ObjectHideFlags: 0
@@ -1906,75 +1895,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1474826355}
   m_CullTransparentMesh: 1
---- !u!1001 &1550257644
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5680634149326623043, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
-      propertyPath: _sliderBGM
-      value: 
-      objectReference: {fileID: 1119898165}
-    - target: {fileID: 5680634149326623043, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
-      propertyPath: _sliderSFX
-      value: 
-      objectReference: {fileID: 1233986778}
-    - target: {fileID: 5680634149326623043, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
-      propertyPath: _sliderMaster
-      value: 
-      objectReference: {fileID: 1006483609}
-    - target: {fileID: 7620602447510639647, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7620602447510639647, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7620602447510639647, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7620602447510639647, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7620602447510639647, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7620602447510639647, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7620602447510639647, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7620602447510639647, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7620602447510639647, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7620602447510639647, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9203795777717889489, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
-      propertyPath: m_Name
-      value: Audio Manager
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
 --- !u!1 &1560302445
 GameObject:
   m_ObjectHideFlags: 0
@@ -31004,7 +30924,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 94009216}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: PlaySFX
         m_Mode: 5
@@ -46558,4 +46478,3 @@ SceneRoots:
   - {fileID: 8398600587086758654}
   - {fileID: 7651985597761000205}
   - {fileID: 8634238680604385400}
-  - {fileID: 1550257644}
