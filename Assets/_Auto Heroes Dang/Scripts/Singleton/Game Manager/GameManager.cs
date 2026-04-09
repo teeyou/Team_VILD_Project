@@ -20,13 +20,15 @@ public class GameManager : Singleton<GameManager>
 {
     private EGameStage _currentStage = EGameStage.Stage1_1;
 
-    public EGameStage CurrentStage { get { return _currentStage; } }
+    public EGameStage CurrentStage { get { return _currentStage; } set { _currentStage = value; } }
 
     public bool IsFirstPoint { get; set; } = true;
     
     public bool IsStageStart { get; set; } = false;
 
     public bool IsStageClear { get; set; } = false;
+    public bool IsSave { get; set; } = false;
+
 
     protected override void Awake()
     {
@@ -37,9 +39,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-
-    
-
+ 
     }
 
     private void Update()

@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /*
@@ -41,6 +42,17 @@ public class FieldManager : Singleton<FieldManager>
     }
     void Start()
     {
+        SpawnPlayerCharacter();
+        Save();
+
+        if (DataSource.Instance.GetSaveData != null)
+        {
+            IsSpawnPossible = DataSource.Instance.GetSaveData.isSpawnPossible;
+        }
+    }
+
+    private void SpawnPlayerCharacter()
+    {
         // 필드씬에서 바로 게임시작 시 여기로 진입
         if (DataSource.Instance.MainCharacterIdx == -1)
         {
@@ -50,9 +62,9 @@ public class FieldManager : Singleton<FieldManager>
 
             // 메인 제외 다른 캐릭터들 생성
             List<int> subNumberList = DataSource.Instance.GetCharacterList();
-            
+
             int len = 3; //필드에 보여질 서브 캐릭터 수
-            
+
             // 서브 캐릭터 생성
             for (int i = 0; i < len; i++)
             {
@@ -66,7 +78,7 @@ public class FieldManager : Singleton<FieldManager>
         else
         {
             // 캐릭터 선택 씬 또는 스테이지에서 복귀 할 때 여기로 진입
-   
+
             PosRotData mainData = DataSource.Instance.MainCharacterPosRot;
             if (mainData == null)
             {
@@ -107,6 +119,21 @@ public class FieldManager : Singleton<FieldManager>
         }
     }
 
+    private void Save()
+    {
+        // 메인 캐릭터 저장
+        DataSource.Instance.MainCharacterPosRot = new PosRotData(MainCharacterTr.position, MainCharacterTr.rotation);
+
+        IReadOnlyList<Transform> trList = GetSubCharacterTrList;  //필드 씬 서브 캐릭터들 트랜스폼
+
+        for (int i = 0; i < trList.Count; i++)
+        {
+            DataSource.Instance.UpdatePosRotList(i, trList[i].position, trList[i].rotation);
+        }
+
+        DataSource.Instance.Save(); //  JSON에 저장
+    }
+
     void Update()
     {
         
@@ -126,6 +153,7 @@ public class FieldManager : Singleton<FieldManager>
         // 이미 이동중이면 종료
         if (_autoMove.IsMoving)
         {
+            Debug.Log("이미 이동중");
             return;
         }
 
