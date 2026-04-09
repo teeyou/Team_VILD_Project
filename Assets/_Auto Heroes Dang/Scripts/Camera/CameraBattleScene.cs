@@ -18,11 +18,21 @@ public class CameraBattleScene : MonoBehaviour
     [Header("키면 정면, 끄면 측면")]
     [SerializeField] private bool _isFront;
 
+    [Header("스킬 연출 시 터레인 끔")]
+    [SerializeField] private GameObject _terrain;
+
     private const int Default_Priority = 10;
     private const int High_Priority = 11;
 
     private Coroutine _coroutine = null;
-    
+
+    private Camera _cam;
+
+    private void Start()
+    {
+        _cam = Camera.main;
+    }
+
     public void SetStartCam()
     {
         _skillCam.Priority = Default_Priority;
@@ -54,12 +64,15 @@ public class CameraBattleScene : MonoBehaviour
 
     private IEnumerator CoStartSkillCam(float time)
     {
-        //BattleUIManager.Instance.ToggleSkillPanel(true);
+        _terrain.SetActive(false);
+        _cam.clearFlags = CameraClearFlags.SolidColor;
         _startCam.Priority = Default_Priority;
         _skillCam.Priority = High_Priority;
 
         yield return new WaitForSeconds(time);
-        //BattleUIManager.Instance.ToggleSkillPanel(false);
+
+        _terrain.SetActive(true);
+        _cam.clearFlags = CameraClearFlags.Skybox;
         SetStartCam();
     }
 }

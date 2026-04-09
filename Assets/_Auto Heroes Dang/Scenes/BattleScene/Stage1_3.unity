@@ -15653,6 +15653,7 @@ MonoBehaviour:
   _height: 3
   _offset: {x: 0, y: 0, z: 0}
   _isFront: 0
+  _terrain: {fileID: 971190214}
 --- !u!4 &1341697582
 Transform:
   m_ObjectHideFlags: 0

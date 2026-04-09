@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Auto Heroes Dang/Scenes/StartScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
@@ -15,14 +15,11 @@ EditorBuildSettings:
     path: Assets/_Auto Heroes Dang/Scenes/FieldScene.unity
     guid: 7c8f4264d565d5645ad1d5d7314c5386
   - enabled: 1
-    path: Assets/_Auto Heroes Dang/Scenes/BattleScene.unity
-    guid: a94b305dfd6f3dd42bb02b74a1ae8417
-  - enabled: 1
     path: Assets/_Auto Heroes Dang/Scenes/LoadingScene.unity
     guid: 49bc1e1a9995675468b7cce06eeeba76
   - enabled: 1
-    path: Assets/_Auto Heroes Dang/Scenes/ZFieldTest.unity
-    guid: 8a592e290a5d35446835204e457b8e33
+    path: Assets/_Auto Heroes Dang/Scenes/CharacterCapture.unity
+    guid: d87e89ca075f80840840e4e47d8442c6
   - enabled: 1
     path: Assets/_Auto Heroes Dang/Scenes/BattleScene/Stage1_1.unity
     guid: 5c63d6da43e97b54587eb2fbf0514006
