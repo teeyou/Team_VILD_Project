@@ -76,6 +76,8 @@ public class DataSource : Singleton<DataSource>
 
     public GradeStatusTable_SO GradeStatusTable { get { return _gradeStatusTable; } }
 
+    public int AtkBuff { get; set; } = 0;
+    public int DefBuff { get; set; } = 0;
 
     protected override void Awake()
     {
@@ -157,6 +159,47 @@ public class DataSource : Singleton<DataSource>
         }
 
         return _playerRuntimeDataList[idx];
+    }
+
+    public void InitializeBuffValue()
+    {
+        AtkBuff = 0;
+        DefBuff = 0;
+    }
+
+    // 장비 착용, 아이템 사용 시 양수, 해제 시 음수
+    public void IncreaseAtk(int value, bool usePotion = false)
+    {
+        if (usePotion)
+        {
+            AtkBuff = value;
+        }
+
+        for (int i = 0; i < _playerRuntimeDataList.Count; i++)
+        {
+            _playerRuntimeDataList[i].DefaultAtk += value;
+        }
+    }
+
+    public void IncreaseDef(int value, bool usePotion = false)
+    {
+        if (usePotion)
+        {
+            DefBuff = value;
+        }
+
+        for (int i = 0; i < _playerRuntimeDataList.Count; i++)
+        {
+            _playerRuntimeDataList[i].DefaultDef += value;
+        }
+    }
+
+    public void IncreaseHp(int value)
+    {
+        for (int i = 0; i < _playerRuntimeDataList.Count; i++)
+        {
+            _playerRuntimeDataList[i].DefaultMaxHp += value;
+        }
     }
 
     public void LevelUp(int idx, EGrade grade)
