@@ -8263,7 +8263,7 @@ MonoBehaviour:
   - {fileID: 1793747517}
   - {fileID: 1781340009}
   - {fileID: 1157219669}
-  _skillGaugeIncreaseRate: 0.002
+  _skillGaugeIncreaseRate: 0.001
   _toastUI: {fileID: 625875402}
   _toastText: {fileID: 625875401}
   _skillPanel: {fileID: 547949309}

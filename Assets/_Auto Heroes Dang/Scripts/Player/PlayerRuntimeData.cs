@@ -6,6 +6,7 @@ using UnityEngine;
 [Serializable]
 public class PlayerRuntimeData
 {
+    [SerializeField] private string _displayName;
     [SerializeField] private string _id;
     [SerializeField] private string _chName;
     [SerializeField] private int _defaultMaxHp;
@@ -22,6 +23,7 @@ public class PlayerRuntimeData
 
     public PlayerRuntimeData(BaseStatus_SO baseStatus)
     {
+        _displayName = baseStatus.DisplayName;
         _id = baseStatus.Id;
         _chName = baseStatus.ChName;
         _defaultMaxHp = baseStatus.DefaultMaxHp;
@@ -36,7 +38,7 @@ public class PlayerRuntimeData
         _level = baseStatus.Level;
         _grade = baseStatus.Grade;
     }
-
+    public string DisplayName { get { return _displayName; } set { _displayName = value; } }
     public string Id { get { return _id; } set { _id = value; } }
     public string ChName { get { return _chName; } set { _chName = value; } }
     public int DefaultMaxHp { get { return _defaultMaxHp; } set { _defaultMaxHp = value; } }

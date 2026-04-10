@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfac172417e50d841ae426d75949a43d, type: 3}
   m_Name: CharacterData_Two Hand TU
   m_EditorClassIdentifier: 
+  _displayName: "\uD328\uC2DC\uBE0C"
   _id: 54
   _chName: TwoHand_TU
   _defaultMaxHp: 1200

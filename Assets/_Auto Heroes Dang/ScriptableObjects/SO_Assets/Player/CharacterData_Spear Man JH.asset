@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfac172417e50d841ae426d75949a43d, type: 3}
   m_Name: CharacterData_Spear Man JH
   m_EditorClassIdentifier: 
+  _displayName: "\uB370\uD504"
   _id: 32
   _chName: SpearMan_JH
   _defaultMaxHp: 1200

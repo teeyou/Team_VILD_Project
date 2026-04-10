@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfac172417e50d841ae426d75949a43d, type: 3}
   m_Name: CharacterData_Wizard 01
   m_EditorClassIdentifier: 
+  _displayName: "\uB9AC\uD3EC"
   _id: 61
   _chName: Wizard_01
   _defaultMaxHp: 800

@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SO/Data/Character Status Data", fileName = "CharacterData_")]
 public class BaseStatus_SO : ScriptableObject
 {
+    [SerializeField] private string _displayName;
     [SerializeField] private string _id;
     [SerializeField] private string _chName;
     [SerializeField] private int _defaultMaxHp;
@@ -20,6 +21,7 @@ public class BaseStatus_SO : ScriptableObject
     [SerializeField] private int _level;
     [SerializeField] private EGrade _grade;
 
+    public string DisplayName { get { return _displayName; } }
     public string Id { get { return _id; } }
     public string ChName { get { return _chName; } }
     public int DefaultMaxHp { get { return _defaultMaxHp; } }

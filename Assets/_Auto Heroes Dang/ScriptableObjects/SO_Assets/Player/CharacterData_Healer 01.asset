@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfac172417e50d841ae426d75949a43d, type: 3}
   m_Name: CharacterData_Healer 01
   m_EditorClassIdentifier: 
+  _displayName: "\uC5D4\uB3C4\uB974"
   _id: 62
   _chName: Healer_01
   _defaultMaxHp: 800

@@ -16190,7 +16190,7 @@ MonoBehaviour:
   - {fileID: 1260672325}
   - {fileID: 308859956}
   - {fileID: 1745294625}
-  _skillGaugeIncreaseRate: 0.002
+  _skillGaugeIncreaseRate: 0.001
   _toastUI: {fileID: 6162915873094603401}
   _toastText: {fileID: 6162915874435561359}
   _skillPanel: {fileID: 203550243}

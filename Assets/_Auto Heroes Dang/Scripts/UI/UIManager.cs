@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -59,6 +60,8 @@ public class UIManager : Singleton<UIManager>
     private TMP_Text[] _slotLevelTMPs = new TMP_Text[6];
 
     [SerializeField] private SkillDescriptor _skillDescriptor;
+
+    private Coroutine _levelUpButtonRoutine = null;
     protected override void Awake()
     {
         base.Awake();
@@ -330,6 +333,11 @@ public class UIManager : Singleton<UIManager>
                     {
                         tmps[i].text = _skillDescriptor.GetSkillDescription(idx);
                     }
+
+                    else if (tmps[i].name == "Character Name")
+                    {
+                        tmps[i].text = data.DisplayName;
+                    }
                 }
 
 
@@ -349,24 +357,37 @@ public class UIManager : Singleton<UIManager>
                             // 레벨업 로직
                             if (DataSource.Instance.Gold >= requiredGold)
                             {
-                                DataSource.Instance.Gold -= requiredGold;
-
-                                int chIdx = -1;
-                                PlayerRuntimeData data;
-                                if (idx == 0)
+                                if (_levelUpButtonRoutine == null)
                                 {
-                                    chIdx = DataSource.Instance.MainCharacterIdx;
+                                    DataSource.Instance.Gold -= requiredGold;
+
+                                    int chIdx = -1;
+                                    PlayerRuntimeData data;
+                                    if (idx == 0)
+                                    {
+                                        chIdx = DataSource.Instance.MainCharacterIdx;
+                                    }
+
+                                    else
+                                    {
+                                        chIdx = DataSource.Instance.GetCharacterList()[idx - 1];
+                                    }
+
+                                    data = DataSource.Instance.GetPlayerRuntimeData(chIdx);
+                                    DataSource.Instance.LevelUp(chIdx, data.Grade);
+
+                                    RefreshUI(idx, data, _detailLevelTMP, _detailCpTMP, _detailAtkTMP, _detailDefTMP, _detailRequiredGoldTMP);
+
+                                    _levelUpButtonRoutine = StartCoroutine(DelayLevelUpButton());
                                 }
 
                                 else
                                 {
-                                    chIdx = DataSource.Instance.GetCharacterList()[idx - 1];
+                                    PopUpToastMessage("잠시 후 눌러주세요.", 1f);
                                 }
 
-                                data = DataSource.Instance.GetPlayerRuntimeData(chIdx);
-                                DataSource.Instance.LevelUp(chIdx, data.Grade);
 
-                                RefreshUI(idx, data, _detailLevelTMP,_detailCpTMP,_detailAtkTMP,_detailDefTMP,_detailRequiredGoldTMP);
+                                
                             }
 
                             else
@@ -454,8 +475,20 @@ public class UIManager : Singleton<UIManager>
                     _slotLevelTMPs[i] = tmps[j];
                     tmps[j].text = $"Lv. {data.Level.ToString()}";
                 }
+
+                else if (tmps[j].name == "Character Name")
+                {
+                    tmps[j].text = data.DisplayName;
+                }
             }
         }
+    }
+
+    private IEnumerator DelayLevelUpButton()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        _levelUpButtonRoutine = null;
     }
 
     private void RefreshUI(int idx, PlayerRuntimeData data, TMP_Text levelTMP, TMP_Text CpTMP, TMP_Text atkTMP, TMP_Text defTMP, TMP_Text requiredGoldTMP)
