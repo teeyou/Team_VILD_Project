@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 107
   _chName: Rat
-  _defaultMaxHp: 1000
-  _defaultAtk: 120
-  _defaultDef: 50
+  _defaultMaxHp: 2000
+  _defaultAtk: 150
+  _defaultDef: 150
   _range: 1.5
   _moveSpeed: 3
   _skillCool: 0

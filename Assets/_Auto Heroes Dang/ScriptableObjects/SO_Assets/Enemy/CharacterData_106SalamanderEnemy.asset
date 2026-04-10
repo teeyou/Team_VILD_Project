@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 106
   _chName: Salamander
-  _defaultMaxHp: 1000
-  _defaultAtk: 120
-  _defaultDef: 50
+  _defaultMaxHp: 2000
+  _defaultAtk: 200
+  _defaultDef: 100
   _range: 10
   _moveSpeed: 3
   _skillCool: 0

@@ -71,6 +71,11 @@ public class GameManager : Singleton<GameManager>
 
     public int GetCurrentStageGoldReward()
     {
+        if ((int)_currentStage % 3 == 2)
+        {
+            return ((int)_currentStage + 1) * 1000 * 5; // 보스 스테이지 클리어는 5배
+        }
+
         return ((int)_currentStage + 1) * 1000;
     }
 

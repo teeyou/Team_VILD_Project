@@ -42,6 +42,21 @@ public class FieldManager : Singleton<FieldManager>
     }
     void Start()
     {
+        if (GameManager.Instance.IsStageClear)
+        {
+            IsSpawnPossible = false;
+        }
+
+        else
+        {
+            IsSpawnPossible = true;
+        }
+
+        if (GameManager.Instance.IsFirstPoint)
+        {
+            IsSpawnPossible = false;
+        }
+
         SpawnPlayerCharacter();
         Save();
 

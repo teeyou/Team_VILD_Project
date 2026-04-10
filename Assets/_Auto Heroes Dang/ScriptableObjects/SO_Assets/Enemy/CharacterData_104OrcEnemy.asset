@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 104
   _chName: Orc
-  _defaultMaxHp: 1000
-  _defaultAtk: 120
-  _defaultDef: 50
+  _defaultMaxHp: 4000
+  _defaultAtk: 200
+  _defaultDef: 300
   _range: 2
   _moveSpeed: 3
   _skillCool: 15

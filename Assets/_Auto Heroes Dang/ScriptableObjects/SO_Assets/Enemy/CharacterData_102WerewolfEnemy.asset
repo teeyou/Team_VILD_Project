@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 102
   _chName: Werewolf
-  _defaultMaxHp: 1000
-  _defaultAtk: 120
-  _defaultDef: 50
+  _defaultMaxHp: 2400
+  _defaultAtk: 180
+  _defaultDef: 180
   _range: 1.5
   _moveSpeed: 3
   _skillCool: 0

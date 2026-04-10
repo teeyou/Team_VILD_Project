@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 108
   _chName: EvilMage
-  _defaultMaxHp: 1000
-  _defaultAtk: 120
-  _defaultDef: 50
+  _defaultMaxHp: 3000
+  _defaultAtk: 200
+  _defaultDef: 200
   _range: 10
   _moveSpeed: 3
   _skillCool: 15

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 101
   _chName: StingRay
-  _defaultMaxHp: 1000
-  _defaultAtk: 120
-  _defaultDef: 50
+  _defaultMaxHp: 1200
+  _defaultAtk: 150
+  _defaultDef: 80
   _range: 10
   _moveSpeed: 3
   _skillCool: 0
