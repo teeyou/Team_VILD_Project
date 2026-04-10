@@ -157,6 +157,8 @@ public class BattleUIManager : Singleton<BattleUIManager>
         });
 
         if (_toastUI.activeSelf) _toastUI.SetActive(false); // 토스트 애니메이션용 한줄 추가. 0401 진주
+
+        PopUpToastMessage("마우스로 위치를 변경할 수 있어요.");
     }
 
     public void CreateChSlot(List<GameObject> chList, Dictionary<GameObject, Unit> goToUnit)
@@ -335,10 +337,11 @@ public class BattleUIManager : Singleton<BattleUIManager>
     }
 
     // 토스트 메시지 팝업 애니메이션 <- 0402 진주
-    public void PopUpToastMessage()
+    public void PopUpToastMessage(string msg)
     {
         if (_toastUI == null) return;
 
+        _toastText.text = msg;
         _toastUI.SetActive(true);
 
         AnimateUI animate = _toastUI.GetComponent<AnimateUI>();
@@ -443,6 +446,8 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
     private IEnumerator CoOneWordAnimation()
     {
+        BattleManager.Instance.BattleState = EBattleState.Ready;
+
         _configButton.gameObject.SetActive(false);
         _statusButton.gameObject.SetActive(false);
         _worldSpaceStageNumberTMP.gameObject.SetActive(true);

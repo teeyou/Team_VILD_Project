@@ -290,4 +290,11 @@ public class AnimateUI : MonoBehaviour
         }
     }
 
+    public void SetAnimDuration(float duration)
+    {
+        for (int i = 0; i < _animations.Count; i++)
+        {
+            _animations[i].duration = duration;
+        }
+    }
 }

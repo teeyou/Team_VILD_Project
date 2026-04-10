@@ -371,8 +371,7 @@ public class UIManager : Singleton<UIManager>
 
                             else
                             {
-                                _toastMessage.text = "골드가 부족합니다.";
-                                PopUpToastMessage();
+                                PopUpToastMessage("골드가 부족합니다.", 1f);
                             }
 
                         });
@@ -518,14 +517,17 @@ public class UIManager : Singleton<UIManager>
         return _rewardCanvasRoot;
     }
 
-    public void PopUpToastMessage()
+    public void PopUpToastMessage(string msg, float duration)
     {
         if (_toastMessageGo == null) 
             return;
 
+        AnimateUI animate = _toastMessageGo.GetComponent<AnimateUI>();
+        animate.SetAnimDuration(duration);
+
+        _toastMessage.text = msg;
         _toastMessageGo.SetActive(true);
 
-        AnimateUI animate = _toastMessageGo.GetComponent<AnimateUI>();
 
         if (animate != null)
         {

@@ -2222,8 +2222,8 @@ MonoBehaviour:
   - {fileID: 1747872091307827592, guid: d3ad2f1639a358e4ca0966138e829f3d, type: 3}
   - {fileID: 9013842173521962829, guid: cb086859744d4cd4d88e252eb4cea580, type: 3}
   - {fileID: 0}
-  _placementPlanePrefab: {fileID: 3068162188410949073, guid: 2f0a0e3045ac5054eb198cf6f0deded8, type: 3}
-  _placementPlaneEnemyPrefab: {fileID: 3068162188410949073, guid: f286704c7fb74f4408f332df6d9c9843, type: 3}
+  _placementPlanePrefab: {fileID: 3764191495829761566, guid: 72782b0e768e4c143bf244614455b2bd, type: 3}
+  _placementPlaneEnemyPrefab: {fileID: 4139252399870255875, guid: 550416b519a200242a1b8af073fe57fc, type: 3}
   _cameraBattleScene: {fileID: 1479346580}
 --- !u!4 &142760864
 Transform:
@@ -12084,6 +12084,10 @@ PrefabInstance:
     - target: {fileID: 1487607324765202557, guid: fd45f1844019a3e49a9331efd55182a2, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103076823478005670, guid: fd45f1844019a3e49a9331efd55182a2, type: 3}
+      propertyPath: _animations.Array.data[0].duration
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

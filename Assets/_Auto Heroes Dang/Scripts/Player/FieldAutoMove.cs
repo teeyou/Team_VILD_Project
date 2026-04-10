@@ -156,6 +156,8 @@ public class FieldAutoMove : MonoBehaviour
         FieldManager.Instance.IsSpawnPossible = true;
 
         Save();
+        
+        UIManager.Instance.PopUpToastMessage("잠시 후 스폰되는 몬스터를 잡아서 재화를 모을 수 있어요.", 5f);
     }
 
     private void Save()
