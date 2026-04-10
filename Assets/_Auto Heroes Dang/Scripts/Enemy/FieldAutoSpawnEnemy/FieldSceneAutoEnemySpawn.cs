@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[DisallowMultipleComponent]
 public class FieldSceneAutoEnemySpawn : MonoBehaviour
 {
     [System.Serializable]

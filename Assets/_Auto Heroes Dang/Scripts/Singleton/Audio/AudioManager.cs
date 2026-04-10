@@ -70,6 +70,12 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField] private GameObject _configPanel;
     [SerializeField] private GameObject _settingButtonObject;
 
+    private float _masterVolumeValue = 1f;
+    private float _bgmVolumeValue = 1f;
+    private float _sfxVolumeValue = 1f;
+
+    private bool _muteSfxByScene = false;
+
     private const string MASTER_VOLUME_KEY = "Audio_Master";
     private const string BGM_VOLUME_KEY = "Audio_BGM";
     private const string SFX_VOLUME_KEY = "Audio_SFX";
@@ -143,6 +149,9 @@ public class AudioManager : Singleton<AudioManager>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         bool isLoadingScene = scene.name == _loadingSceneName;
+
+        _muteSfxByScene = isLoadingScene;
+        ApplyAllVolumes();
 
         if (_settingButtonObject != null)
             _settingButtonObject.SetActive(!isLoadingScene);
@@ -309,6 +318,8 @@ public class AudioManager : Singleton<AudioManager>
         float bgm = PlayerPrefs.GetFloat(BGM_VOLUME_KEY, 1f);
         float sfx = PlayerPrefs.GetFloat(SFX_VOLUME_KEY, 1f);
 
+        ApplyAllVolumes();
+
         ApplyVolume(_masterVolumeParameter, master);
         ApplyVolume(_bgmVolumeParameter, bgm);
         ApplyVolume(_sfxVolumeParameter, sfx);
@@ -323,23 +334,38 @@ public class AudioManager : Singleton<AudioManager>
             _sliderSFX.value = sfx;
     }
 
+    private void ApplyAllVolumes()
+    {
+        ApplyVolume(_masterVolumeParameter, _masterVolumeValue);
+        ApplyVolume(_bgmVolumeParameter, _bgmVolumeValue);
+
+        float finalSfx = _muteSfxByScene ? 0f : _sfxVolumeValue;
+        ApplyVolume(_sfxVolumeParameter, finalSfx);
+    }
+
     public void SetMasterVolume(float value)
     {
-        ApplyVolume(_masterVolumeParameter, value);
+        _masterVolumeValue = value;
+        ApplyAllVolumes();
+
         PlayerPrefs.SetFloat(MASTER_VOLUME_KEY, value);
         PlayerPrefs.Save();
     }
 
     public void SetBGMVolume(float value)
     {
-        ApplyVolume(_bgmVolumeParameter, value);
+        _bgmVolumeValue = value;
+        ApplyAllVolumes();
+
         PlayerPrefs.SetFloat(BGM_VOLUME_KEY, value);
         PlayerPrefs.Save();
     }
 
     public void SetSFXVolume(float value)
     {
-        ApplyVolume(_sfxVolumeParameter, value);
+        _sfxVolumeValue = value;
+        ApplyAllVolumes();
+
         PlayerPrefs.SetFloat(SFX_VOLUME_KEY, value);
         PlayerPrefs.Save();
     }
@@ -369,4 +395,6 @@ public class AudioManager : Singleton<AudioManager>
         if (_configCanvas != null)
             _configCanvas.SetActive(false);
     }
+
+
 }

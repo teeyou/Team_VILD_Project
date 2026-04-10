@@ -2,6 +2,14 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ 외부에서 호출 시 
+ ItemData newSword = new ItemData(ItemType.Sword, Grade.Rare, 10, "아이템 설명");
+ InventoryManager.Instance.AddItem(newSword);
+
+ 안에 들어가는 데이터는 ItemData F12
+ */
+
 public class InventoryManager : Singleton<InventoryManager>, IItemManage
 {
     private List<ItemData> _items = new List<ItemData>();
