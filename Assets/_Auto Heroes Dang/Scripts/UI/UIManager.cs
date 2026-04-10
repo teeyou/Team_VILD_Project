@@ -218,7 +218,7 @@ public class UIManager : Singleton<UIManager>
             // Slot 버튼 리스너 추가 및 디테일 패널 이미지, 텍스트 세팅
             _slotParent.GetChild(i).GetComponent<Button>().onClick.AddListener(() => {
 
-                int requiredGold = 0;
+                int requiredGold = 1234567890;
 
                 Image[] images = _detailStatusPanel.GetComponentsInChildren<Image>();
                 TMP_Text[] tmps = _detailStatusPanel.GetComponentsInChildren<TMP_Text>();
@@ -354,15 +354,30 @@ public class UIManager : Singleton<UIManager>
 
                         buttons[btnIdx].onClick.AddListener(() =>
                         {
+                            PlayerRuntimeData data;
+                            if (idx == 0)
+                            {
+                                data = DataSource.Instance.GetPlayerRuntimeData(DataSource.Instance.MainCharacterIdx);
+                            }
+                            else
+                            {
+                                data = DataSource.Instance.GetPlayerRuntimeData(DataSource.Instance.GetCharacterList()[idx - 1]);
+                            }
+                            
+                            requiredGold = DataSource.Instance.GetLevelUpRequiredGold(data.Level, data.Grade);
+                            
                             // 레벨업 로직
                             if (DataSource.Instance.Gold >= requiredGold)
                             {
+                                Debug.Log($"requiredGold : {requiredGold}");
+                                Debug.Log($"DataSource.Instance.Gold : {DataSource.Instance.Gold}");
+
                                 if (_levelUpButtonRoutine == null)
                                 {
                                     DataSource.Instance.Gold -= requiredGold;
-
+                                    Debug.Log($"DataSource.Instance.Gold : {DataSource.Instance.Gold}");
                                     int chIdx = -1;
-                                    PlayerRuntimeData data;
+                                    //PlayerRuntimeData data;
                                     if (idx == 0)
                                     {
                                         chIdx = DataSource.Instance.MainCharacterIdx;

@@ -63,7 +63,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
     [SerializeField] private TMP_Text _worldSpaceStageNumberTMP;
 
     [Header("설정버튼, 캐릭터 상태 버튼")]
-    [SerializeField] private Button _configButton;
+    //[SerializeField] private Button _configButton;
     [SerializeField] private Button _statusButton;
 
     //private Dictionary<GameObject, Image> _goToSkillIcon = new Dictionary<GameObject, Image>();
@@ -448,7 +448,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
     {
         BattleManager.Instance.BattleState = EBattleState.Ready;
 
-        _configButton.gameObject.SetActive(false);
+        //_configButton.gameObject.SetActive(false);
         _statusButton.gameObject.SetActive(false);
         _worldSpaceStageNumberTMP.gameObject.SetActive(true);
         int length = _stageNumberText.Length;
@@ -462,7 +462,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
         yield return new WaitForSeconds(1f);
 
-        _configButton.gameObject.SetActive(true);
+        //_configButton.gameObject.SetActive(true);
         _statusButton.gameObject.SetActive(true);
         _worldSpaceStageNumberTMP.gameObject.SetActive(false);
 
