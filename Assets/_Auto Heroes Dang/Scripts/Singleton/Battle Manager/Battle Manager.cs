@@ -31,6 +31,7 @@ Rotation (0 225 0)
 public enum EBattleState
 {
     None,
+    Ready,
     Start,
     Victory,
     Defeat,
@@ -68,7 +69,7 @@ public class BattleManager : Singleton<BattleManager>
 
     private EBattleState _battleState = EBattleState.None;
 
-    public EBattleState BattleState { get { return _battleState; } }
+    public EBattleState BattleState { get { return _battleState; } set { _battleState = value; } }
 
     public IReadOnlyList<Vector3> PlayerStartingPosList { get { return _playerStartingPosList; } }
     public IReadOnlyList<Vector3> EnemyStartingPosList { get { return _enemyStartingPosList; } }
@@ -221,7 +222,7 @@ public class BattleManager : Singleton<BattleManager>
 
         else
         {
-            BattleUIManager.Instance.PopUpToastMessage(); // <- 스킬 게이지 부족 메시지 팝업. 0402 추가 진주
+            BattleUIManager.Instance.PopUpToastMessage("스킬 게이지가 부족합니다!"); // <- 스킬 게이지 부족 메시지 팝업. 0402 추가 진주
             // 스킬 게이지 부족
             Debug.Log("스킬 게이지 부족");
         }

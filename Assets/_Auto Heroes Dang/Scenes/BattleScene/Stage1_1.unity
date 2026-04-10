@@ -9779,6 +9779,14 @@ PrefabInstance:
       propertyPath: _cameraBattleScene
       value: 
       objectReference: {fileID: 1695537836}
+    - target: {fileID: 7535353439075410769, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
+      propertyPath: _placementPlanePrefab
+      value: 
+      objectReference: {fileID: 3764191495829761566, guid: 72782b0e768e4c143bf244614455b2bd, type: 3}
+    - target: {fileID: 7535353439075410769, guid: 1c8754551173f1c49ae419849bea3dad, type: 3}
+      propertyPath: _placementPlaneEnemyPrefab
+      value: 
+      objectReference: {fileID: 4139252399870255875, guid: 550416b519a200242a1b8af073fe57fc, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24021,6 +24029,19 @@ PrefabInstance:
     - target: {fileID: 1487607324765202557, guid: fd45f1844019a3e49a9331efd55182a2, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4551703513682288204, guid: fd45f1844019a3e49a9331efd55182a2, type: 3}
+      propertyPath: m_text
+      value: "\uB9C8\uC6B0\uC2A4\uB85C \uC704\uCE58\uB97C \uBCC0\uACBD\uD560 \uC218
+        \uC788\uC5B4\uC694. "
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103076823478005670, guid: fd45f1844019a3e49a9331efd55182a2, type: 3}
+      propertyPath: _animations.Array.data[0].duration
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103076823478005670, guid: fd45f1844019a3e49a9331efd55182a2, type: 3}
+      propertyPath: _animations.Array.data[0].playAnimate
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
