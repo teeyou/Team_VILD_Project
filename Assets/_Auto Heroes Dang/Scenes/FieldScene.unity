@@ -7052,6 +7052,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 528245371}
+  - component: {fileID: 528245372}
   m_Layer: 0
   m_Name: Combination
   m_TagString: Untagged
@@ -7085,6 +7086,25 @@ RectTransform:
   m_AnchoredPosition: {x: 124, y: -126}
   m_SizeDelta: {x: 210, y: 210}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &528245372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528245370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3527c3a44f85a7d44ac11a900ec4ef29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _leftSlotParent: {fileID: 658550395}
+  _rightSlotParent: {fileID: 1091868198}
+  _resultSlotParent: {fileID: 103833022}
+  _percentText: {fileID: 710695970}
+  _costText: {fileID: 34653977}
+  _okButton: {fileID: 1310771239}
+  _factory: {fileID: 987811137}
 --- !u!1 &530767357
 GameObject:
   m_ObjectHideFlags: 0
@@ -8283,8 +8303,8 @@ MonoBehaviour:
   _inventoryPanel: {fileID: 437632866}
   _enhancementPanel: {fileID: 1425012816}
   _CombinationPanel: {fileID: 528245370}
-  _enhancementUI: {fileID: 1956601249}
-  _CombinationUI: {fileID: 1956601248}
+  _enhancementUI: {fileID: 1425012818}
+  _CombinationUI: {fileID: 528245372}
 --- !u!114 &580910791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11856,7 +11876,7 @@ RectTransform:
   m_Father: {fileID: 1124283691}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -13065,8 +13085,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ForgeTabUI, Assembly-CSharp
+      - m_Target: {fileID: 1956601248}
+        m_TargetAssemblyTypeName: BlacksmithTabUI, Assembly-CSharp
         m_MethodName: OpenCombination
         m_Mode: 1
         m_Arguments:
@@ -15467,10 +15487,10 @@ MonoBehaviour:
   _verticalSlot: 5
   _shopPanel: {fileID: 1660869918}
   _inventoryPanel: {fileID: 437632866}
-  _enhancementPanel: {fileID: 1076883882}
-  _CombinationPanel: {fileID: 1956601241}
-  _enhancementUI: {fileID: 1956601249}
-  _CombinationUI: {fileID: 1956601248}
+  _enhancementPanel: {fileID: 1425012816}
+  _CombinationPanel: {fileID: 528245370}
+  _enhancementUI: {fileID: 1425012818}
+  _CombinationUI: {fileID: 528245372}
 --- !u!1 &990527552
 GameObject:
   m_ObjectHideFlags: 0
@@ -16953,8 +16973,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ForgeTabUI, Assembly-CSharp
+      - m_Target: {fileID: 1956601248}
+        m_TargetAssemblyTypeName: BlacksmithTabUI, Assembly-CSharp
         m_MethodName: OpenEnhancement
         m_Mode: 1
         m_Arguments:
@@ -17341,7 +17361,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 739757613}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.5
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -21332,6 +21352,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1425012817}
+  - component: {fileID: 1425012818}
   m_Layer: 0
   m_Name: Enhancement
   m_TagString: Untagged
@@ -21363,6 +21384,25 @@ RectTransform:
   m_AnchoredPosition: {x: 124, y: -126}
   m_SizeDelta: {x: 210, y: 210}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1425012818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425012816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef6a62bce6d50a54a96036d1c0bf1cd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _panel: {fileID: 1425012816}
+  _slotParent: {fileID: 1269874916}
+  _percentText: {fileID: 4121755045846431315}
+  _gemCostText: {fileID: 1131259428}
+  _goldCostText: {fileID: 1286729295}
+  _okButton: {fileID: 7081519345701817018}
+  _factory: {fileID: 580910791}
 --- !u!1 &1427959423
 GameObject:
   m_ObjectHideFlags: 0
@@ -30033,7 +30073,6 @@ GameObject:
   - component: {fileID: 1956601246}
   - component: {fileID: 1956601245}
   - component: {fileID: 1956601243}
-  - component: {fileID: 1956601249}
   - component: {fileID: 1956601248}
   m_Layer: 0
   m_Name: Blacksmith Panel
@@ -30163,35 +30202,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1956601241}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3527c3a44f85a7d44ac11a900ec4ef29, type: 3}
+  m_Script: {fileID: 11500000, guid: d6ddf9b2e24566743905818c86211f35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftSlotParent: {fileID: 658550395}
-  _rightSlotParent: {fileID: 1091868198}
-  _resultSlotParent: {fileID: 103833022}
-  _percentText: {fileID: 710695970}
-  _costText: {fileID: 34653977}
-  _okButton: {fileID: 1310771239}
-  _factory: {fileID: 580910791}
---- !u!114 &1956601249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1956601241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef6a62bce6d50a54a96036d1c0bf1cd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _panel: {fileID: 1425012816}
-  _slotParent: {fileID: 1269874916}
-  _percentText: {fileID: 4121755045846431315}
-  _gemCostText: {fileID: 1131259428}
-  _goldCostText: {fileID: 1286729295}
-  _okButton: {fileID: 7081519345701817018}
-  _factory: {fileID: 580910791}
+  _enhancementPanel: {fileID: 1425012816}
+  _combinationPanel: {fileID: 528245370}
+  _enhancementUI: {fileID: 1425012818}
+  _combinationUI: {fileID: 528245372}
+  _inventoryUI: {fileID: 580910790}
 --- !u!1 &1957110254
 GameObject:
   m_ObjectHideFlags: 0

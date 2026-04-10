@@ -26,7 +26,7 @@ public class ItemSlotFactory : MonoBehaviour
         return color;
     }
 
-    public void RefreshUI(IItemManage iItem, int verticalSlot, Action<ItemData> onClick)
+    public void RefreshUI(IItemManage iItem, int verticalSlot, Action<ItemData> onClick, Func<ItemData, bool> isSelected)
     {
         SetupPrefab();
         ClearAllSlot();
@@ -34,6 +34,8 @@ public class ItemSlotFactory : MonoBehaviour
         var items = iItem.GetItems();
 
         int slotAmount = Math.Max((items.Count + verticalSlot - 1) / verticalSlot, 3) * verticalSlot;
+
+
 
         // 아이템 슬롯 생성
         for (int i = 0; i < items.Count; i++)
@@ -48,6 +50,10 @@ public class ItemSlotFactory : MonoBehaviour
             ItemPrefab slot = obj.GetComponent<ItemPrefab>();
 
             slot.Init(items[i], _gradeColor[items[i].grade], onClick);
+
+            // 강화 / 합성에서 선택된 아이템이면 체크 표시 및 클릭 불가
+            bool selected = isSelected != null && isSelected(items[i]);
+            slot.SetSelected(selected);
 
             // 상태 체크
             if (items[i].state == ItemState.SoldOut)
@@ -101,6 +107,8 @@ public class ItemSlotFactory : MonoBehaviour
     // 아이콘 생성용 프리팹 정보 전송 (주로 상점등에서)
     public GameObject CreateIcon(ItemType type, Transform parent)
     {
+        SetupPrefab();
+
         if (!_prefabDictionary.TryGetValue(type, out GameObject prefab))
         {
             Debug.LogWarning($"프리팹 없음: {type}");
@@ -113,7 +121,7 @@ public class ItemSlotFactory : MonoBehaviour
     // 컬러 정보 전송
     public Color GetGradeColor(Grade grade)
     {
-        // SetupPrefab(); 필요 시 초기화
+        SetupPrefab();
 
         if (_gradeColor.TryGetValue(grade, out Color color))
         {
