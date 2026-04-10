@@ -232,8 +232,8 @@ MonoBehaviour:
   _openDuration: 0.25
   _openTargetX: -90
   _useStageRewardRate: 1
-  _goldAverageRate: 0.1
-  _gemAverageRate: 0.1
+  _goldAverageRate: 0.05
+  _gemAverageRate: 0.05
   _goldMinMultiplier: 0.8
   _goldMaxMultiplier: 1.2
   _gemMinMultiplier: 0.8

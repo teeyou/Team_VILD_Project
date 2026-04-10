@@ -23,8 +23,8 @@ public class ChestReward : MonoBehaviour
     [SerializeField] private bool _useStageRewardRate = true;
 
     [Header("스테이지 클리어 보상의 평균 비율")]
-    [SerializeField] private float _goldAverageRate = 0.1f;
-    [SerializeField] private float _gemAverageRate = 0.1f;
+    [SerializeField] private float _goldAverageRate = 0.05f;
+    [SerializeField] private float _gemAverageRate = 0.05f;
 
     [Header("평균 대비 랜덤 배율")]
     [SerializeField] private float _goldMinMultiplier = 0.8f;

@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,10 +23,20 @@ public class ItemCombinationUI : MonoBehaviour
     private GameObject _rightIcon;
     private GameObject _resultIcon;
 
+    // 인벤토리 UI에게 선택 상태 갱신을 알려주기 위한 이벤트
+    public event Action OnSelectionChanged;
+
     private void Start()
     {
         _okButton.onClick.AddListener(FuseItems);
         RefreshUI();
+    }
+
+    // 현재 합성 슬롯에 들어가 있는 아이템인지 체크
+    public bool HasSelectedItem(ItemData item)
+    {
+        return (_leftItem.HasValue && _leftItem.Value.uniqueId == item.uniqueId) ||
+               (_rightItem.HasValue && _rightItem.Value.uniqueId == item.uniqueId);
     }
 
     public void TryAddItem(ItemData item)
@@ -40,6 +51,7 @@ public class ItemCombinationUI : MonoBehaviour
         {
             _leftItem = item;
             RefreshUI();
+            OnSelectionChanged?.Invoke();
             return;
         }
 
@@ -55,6 +67,7 @@ public class ItemCombinationUI : MonoBehaviour
 
             _rightItem = item;
             RefreshUI();
+            OnSelectionChanged?.Invoke();
             return;
         }
 
@@ -66,6 +79,7 @@ public class ItemCombinationUI : MonoBehaviour
         _leftItem = null;
         _rightItem = null;
         RefreshUI();
+        OnSelectionChanged?.Invoke();
     }
 
     private void RefreshUI()
@@ -82,6 +96,7 @@ public class ItemCombinationUI : MonoBehaviour
                 ItemPrefab icon = _leftIcon.GetComponent<ItemPrefab>();
                 if (icon != null)
                 {
+                    // 왼쪽 슬롯에 들어간 아이템은 다시 누르면 빠지도록 처리
                     icon.Init(item, _factory.GetGradeColor(item.grade), OnLeftSlotClicked);
                     icon.SetButtonInteractable(true);
                 }
@@ -98,6 +113,7 @@ public class ItemCombinationUI : MonoBehaviour
                 ItemPrefab icon = _rightIcon.GetComponent<ItemPrefab>();
                 if (icon != null)
                 {
+                    // 오른쪽 슬롯에 들어간 아이템은 다시 누르면 빠지도록 처리
                     icon.Init(item, _factory.GetGradeColor(item.grade), OnRightSlotClicked);
                     icon.SetButtonInteractable(true);
                 }
@@ -145,17 +161,20 @@ public class ItemCombinationUI : MonoBehaviour
     {
         _leftItem = null;
         RefreshUI();
+        OnSelectionChanged?.Invoke();
     }
 
     private void OnRightSlotClicked(ItemData item)
     {
         _rightItem = null;
         RefreshUI();
+        OnSelectionChanged?.Invoke();
     }
 
     private ItemData GetFusionPreviewItem(ItemData baseItem)
     {
         ItemData result = baseItem;
+        result.uniqueId = ItemIdGenerator.GetNextId();   // 새 아이템이므로 새 ID
         result.grade = ItemForgeHelper.GetNextGrade(baseItem.grade);
         result.level = 1;
         result.value = Mathf.CeilToInt(baseItem.value * 1.8f);
@@ -191,7 +210,7 @@ public class ItemCombinationUI : MonoBehaviour
         InventoryManager.Instance.RemoveItem(left);
         InventoryManager.Instance.RemoveItem(right);
 
-        bool isSuccess = Random.Range(0, 100) < successPercent;
+        bool isSuccess = UnityEngine.Random.Range(0, 100) < successPercent;
 
         if (isSuccess)
         {
