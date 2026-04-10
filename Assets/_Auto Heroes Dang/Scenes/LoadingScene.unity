@@ -431,6 +431,7 @@ MonoBehaviour:
     duration: 9999
     playAnimate: 1
     timer: 0
+  _endSetActive: 0
   _targetPosition: {x: 0, y: 0}
 --- !u!114 &367975184
 MonoBehaviour:
@@ -721,7 +722,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1222896044}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1222896046
 Camera:
   m_ObjectHideFlags: 0

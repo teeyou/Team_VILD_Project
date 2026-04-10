@@ -51,7 +51,7 @@ public class DataSource : Singleton<DataSource>
                 return;
 
             _gem = newValue;
-            //SaveCurrency();
+            SaveCurrency();
             OnCurrencyChanged?.Invoke();
         }
     }
@@ -67,7 +67,7 @@ public class DataSource : Singleton<DataSource>
                 return;
 
             _gold = newValue;
-            //SaveCurrency();
+            SaveCurrency();
             AudioManager.Instance.PlaySFX("CoinDrop");
             OnCurrencyChanged?.Invoke();
         }
@@ -88,7 +88,7 @@ public class DataSource : Singleton<DataSource>
 
         DontDestroyOnLoad(gameObject);
 
-        //LoadCurrency();
+        LoadCurrency();
 
         AddCharacter(ECharacterNumber.TwoHand_TU);
         AddCharacter(ECharacterNumber.SpearMan_JH);

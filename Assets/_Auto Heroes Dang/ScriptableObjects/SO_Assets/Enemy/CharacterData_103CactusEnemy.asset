@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 103
   _chName: Cactus
-  _defaultMaxHp: 1000
+  _defaultMaxHp: 1500
   _defaultAtk: 120
-  _defaultDef: 50
+  _defaultDef: 120
   _range: 1.5
   _moveSpeed: 3
   _skillCool: 0
