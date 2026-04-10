@@ -2059,6 +2059,8 @@ GameObject:
   - component: {fileID: 6971089361925768466}
   - component: {fileID: 9176359897110347783}
   - component: {fileID: 769017133700382919}
+  - component: {fileID: 488189121333763575}
+  - component: {fileID: 1492861917073751445}
   m_Layer: 20
   m_Name: EvilMage
   m_TagString: Enemy
@@ -2116,6 +2118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ae949929462014a8913680298601dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damageTextPoint: {fileID: 0}
+  _damageTextHeightOffset: 1.5
   _animator: {fileID: 9084683017072417746}
   _statusData: {fileID: 11400000, guid: 08d6b319431b7524684d04ccdb462b79, type: 2}
   _targetLayer:
@@ -2146,8 +2150,10 @@ MonoBehaviour:
   _slotCount: 6
   _slotRadiusOffset: 0.5
   _slotArriveDistance: 0.2
-  _hpBarPoint: {fileID: 0}
-  _hpBarOffset: {x: 0, y: 2, z: 0}
+  _attackSfxNames:
+  - MonsterAttack1
+  - MonsterAttack2
+  - MonsterAttack3
   _skillRange: 10
   _skillLoopCount: 1
   _firstSkillDelay: 0
@@ -2206,6 +2212,42 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.24, y: 1.39, z: 1.12}
   m_Center: {x: 0, y: 0.75, z: 0}
+--- !u!114 &488189121333763575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9013842173521962829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da68281ebd76d9c42902af676ab3f0ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _goldReward: 700
+  _gemReward: 1
+  _goldMinMultiplier: 0.8
+  _goldMaxMultiplier: 1.2
+--- !u!114 &1492861917073751445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9013842173521962829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43489928d33ca15498af95c30662d5b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canDropChest: 0
+  _chestDropChance: 40
+  _chestAPrefab: {fileID: 5529581820132032600, guid: f367292eba1f3fd419912463af2c06c7, type: 3}
+  _chestBPrefab: {fileID: 4824177800512880972, guid: 7b8dfc94b9b871745860fa25b33e6dd3, type: 3}
+  _chestCPrefab: {fileID: 8336993170897038811, guid: cca954991bc489843ae87b877fdc55a6, type: 3}
+  _chestDPrefab: {fileID: 4638154148823197230, guid: d446ce605d7758440aad81c83912b8cc, type: 3}
+  _spawnOffset: {x: 0, y: 0, z: 0}
+  _dropRadius: 2
 --- !u!1 &9027819640736376968
 GameObject:
   m_ObjectHideFlags: 0

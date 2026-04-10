@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +19,9 @@ public class ItemEnhancementUI : MonoBehaviour
     private ItemData? _selectedItem;
     private GameObject _currentIcon;
 
+    // 인벤토리 UI에게 선택 상태 갱신을 알려주기 위한 이벤트
+    public event Action OnSelectionChanged;
+
     private void Start()
     {
         _okButton.onClick.AddListener(EnhanceSelectedItem);
@@ -27,6 +31,12 @@ public class ItemEnhancementUI : MonoBehaviour
     public bool HasItem()
     {
         return _selectedItem.HasValue;
+    }
+
+    // 현재 강화 슬롯에 들어가 있는 아이템인지 체크
+    public bool HasSelectedItem(ItemData item)
+    {
+        return _selectedItem.HasValue && _selectedItem.Value.uniqueId == item.uniqueId;
     }
 
     public void SetItem(ItemData item)
@@ -41,6 +51,7 @@ public class ItemEnhancementUI : MonoBehaviour
 
         _selectedItem = item;
         RefreshUI();
+        OnSelectionChanged?.Invoke();
     }
 
     public void ClearSlot()
@@ -53,13 +64,20 @@ public class ItemEnhancementUI : MonoBehaviour
         _percentText.text = "- %";
         _gemCostText.text = "0";
         _goldCostText.text = "0";
+
+        OnSelectionChanged?.Invoke();
     }
 
     private void RefreshUI()
     {
         if (!_selectedItem.HasValue)
         {
-            ClearSlot();
+            if (_currentIcon != null)
+                Destroy(_currentIcon);
+
+            _percentText.text = "- %";
+            _gemCostText.text = "0";
+            _goldCostText.text = "0";
             return;
         }
 
@@ -75,6 +93,7 @@ public class ItemEnhancementUI : MonoBehaviour
             ItemPrefab icon = _currentIcon.GetComponent<ItemPrefab>();
             if (icon != null)
             {
+                // 강화 슬롯에 들어간 아이템은 다시 누르면 빠지도록 처리
                 icon.Init(item, _factory.GetGradeColor(item.grade), OnSelectedSlotClicked);
                 icon.SetButtonInteractable(true);
             }
@@ -110,7 +129,7 @@ public class ItemEnhancementUI : MonoBehaviour
 
         DataSource.Instance.UseGold(cost);
 
-        bool isSuccess = Random.Range(0, 100) < successPercent;
+        bool isSuccess = UnityEngine.Random.Range(0, 100) < successPercent;
 
         if (isSuccess)
         {
@@ -129,5 +148,6 @@ public class ItemEnhancementUI : MonoBehaviour
         }
 
         RefreshUI();
+        OnSelectionChanged?.Invoke();
     }
 }

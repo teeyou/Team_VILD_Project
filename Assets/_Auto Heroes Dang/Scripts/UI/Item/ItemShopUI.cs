@@ -103,7 +103,7 @@ public class ItemShopUI : MonoBehaviour
     {
         if (_currentTab == null) return;
 
-        _factory.RefreshUI(_currentTab, _verticalSlot, OnItemClicked);
+        _factory.RefreshUI(_currentTab, _verticalSlot, OnItemClicked, null);
     }
 
     private void OnItemClicked(ItemData item)

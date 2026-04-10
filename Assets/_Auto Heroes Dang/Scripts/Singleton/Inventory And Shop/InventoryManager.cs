@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 /*
  외부에서 호출 시 
@@ -43,23 +44,44 @@ public class InventoryManager : Singleton<InventoryManager>, IItemManage
         OnChanged?.Invoke();
     }
 
+    //public void RemoveItem(ItemData item)
+    //{ 
+    //    _items.Remove(item); 
+    //    OnChanged?.Invoke();
+    //}
+
+    // 
     public void RemoveItem(ItemData item)
-    { 
-        _items.Remove(item); 
+    {
+        int index = _items.FindIndex(x => x.uniqueId == item.uniqueId);
+
+        if (index < 0)
+            return;
+
+        _items.RemoveAt(index);
         OnChanged?.Invoke();
     }
 
     public bool ReplaceItem(ItemData oldItem, ItemData newItem)
     {
-        int index = _items.FindIndex(x =>
-            x.name == oldItem.name &&
-            x.type == oldItem.type &&
-            x.grade == oldItem.grade &&
-            x.level == oldItem.level &&
-            x.value == oldItem.value &&
-            x.price == oldItem.price &&
-            x.description == oldItem.description &&
-            x.state == oldItem.state);
+        //int index = _items.FindIndex(x =>
+        //    x.name == oldItem.name &&
+        //    x.type == oldItem.type &&
+        //    x.grade == oldItem.grade &&
+        //    x.level == oldItem.level &&
+        //    x.value == oldItem.value &&
+        //    x.price == oldItem.price &&
+        //    x.description == oldItem.description &&
+        //    x.state == oldItem.state);
+        //
+        //if (index < 0)
+        //    return false;
+        //
+        //_items[index] = newItem;
+        //OnChanged?.Invoke();
+        //return true;
+
+        int index = _items.FindIndex(x => x.uniqueId == oldItem.uniqueId);
 
         if (index < 0)
             return false;
@@ -71,7 +93,8 @@ public class InventoryManager : Singleton<InventoryManager>, IItemManage
 
     public bool Contains(ItemData item)
     {
-        return _items.Contains(item);
+        //return _items.Contains(item);
+        return _items.Exists(x => x.uniqueId == item.uniqueId);
     }
 
     public void Clear()
