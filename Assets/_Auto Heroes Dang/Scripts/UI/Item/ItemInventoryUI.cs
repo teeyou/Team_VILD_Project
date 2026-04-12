@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemInventoryUI : MonoBehaviour
 {
@@ -12,6 +14,16 @@ public class ItemInventoryUI : MonoBehaviour
 
     [SerializeField] private ItemEnhancementUI _enhancementUI;
     [SerializeField] private ItemCombinationUI _CombinationUI;
+
+    [SerializeField] private GameObject _itemInfoPanel;
+    [SerializeField] private GameObject _iconTransform;
+    [SerializeField] private TMP_Text _nameText;
+    [SerializeField] private TMP_Text _descriptionText;
+    [SerializeField] private Button _equipButton;
+    [SerializeField] private TMP_Text _equipButtonText;
+
+    [SerializeField] private Transform[] _equipSlot; // 인덱스 = 아이템데이터 이넘 순서
+    private ItemData _currentSelected;
 
     private void OnEnable()
     {
@@ -45,6 +57,7 @@ public class ItemInventoryUI : MonoBehaviour
     public void Refresh()
     {
         _factory.RefreshUI(InventoryManager.Instance, _verticalSlot, OnItemClicked, IsSelectedItem);
+        if(_inventoryPanel != null && _inventoryPanel.activeInHierarchy) RefreshEquipSlots();
     }
 
     // 현재 강화 / 합성 슬롯에 들어간 아이템인지 확인
@@ -68,12 +81,9 @@ public class ItemInventoryUI : MonoBehaviour
         Debug.Log($"enhancement active: {_enhancementPanel != null && _enhancementPanel.activeInHierarchy}");
         Debug.Log($"fusion active: {_CombinationPanel != null && _CombinationPanel.activeInHierarchy}");
 
-        if (_shopPanel != null && _shopPanel.activeInHierarchy)
+        if (_shopPanel != null && _shopPanel.activeInHierarchy) 
         {
-            return;
-        }
-        else if (_inventoryPanel != null && _inventoryPanel.activeInHierarchy)
-        {
+            ItemInfoSet(item, false); // 아이콘 클릭 시 정보 표기 (버튼 끔)
             return;
         }
         else if (_enhancementPanel != null && _enhancementPanel.activeSelf)
@@ -88,5 +98,111 @@ public class ItemInventoryUI : MonoBehaviour
             _CombinationUI.TryAddItem(item);
             Refresh();
         }
+        else
+        {
+            ItemInfoSet(item, true);
+            return;
+        }
+
+
     }
+
+    // 상점 / 인벤토리에서 버튼 클릭 시 패널에 정보를 띄움.
+    private void ItemInfoSet(ItemData item, bool needButtonSet) 
+    {
+        _currentSelected = item;
+
+        _itemInfoPanel.SetActive(true);
+        _equipButton.gameObject.SetActive(needButtonSet);
+
+        _nameText.text = item.name;
+        _descriptionText.text = item.description;
+
+        foreach (Transform child in _iconTransform.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        GameObject icon = _factory.CreateIcon(item.type, _iconTransform.transform);
+
+        if (icon != null)
+        {
+            ItemPrefab slot = icon.GetComponent<ItemPrefab>();
+            if (slot != null)
+            {
+                Color gradeColor = _factory.GetGradeColor(item.grade);
+
+                slot.Init(item, gradeColor, null);
+                slot.SetButtonInteractable(false);
+            }
+        }
+
+        SetupEquipButton(item);
+
+    }
+
+    private void SetupEquipButton(ItemData item)
+    {
+        _equipButton.onClick.RemoveAllListeners();
+
+        if (item.type > ItemType.Ring)
+        {
+            _equipButton.gameObject.SetActive(false);
+            return;
+        }
+
+        bool isEquipped = InventoryManager.Instance.IsEquipped(item);
+
+        if (_equipButtonText != null)
+        {
+            _equipButtonText.text = isEquipped ? "해제" : "장착";
+        }
+
+        _equipButton.onClick.AddListener(() =>
+        {
+            if (InventoryManager.Instance.IsEquipped(item))
+            {
+                InventoryManager.Instance.UnequipItem(item);
+            }
+            else
+            {
+                InventoryManager.Instance.EquipItem(item);
+            }
+
+            Refresh();
+
+            _itemInfoPanel.SetActive(false);
+        });
+    }
+
+    // 장착 슬롯 UI 갱신
+    private void RefreshEquipSlots()
+    {
+        ItemData[] equips = InventoryManager.Instance.GetAllEquipData();
+
+        for (int i = 0; i < _equipSlot.Length; i++)
+        {
+            foreach (Transform child in _equipSlot[i])
+            {
+                Destroy(child.gameObject);
+            }
+
+            if (equips[i].uniqueId == 0)
+                continue;
+
+            GameObject icon = _factory.CreateIcon(equips[i].type, _equipSlot[i]);
+
+            if (icon != null)
+            {
+                ItemPrefab slot = icon.GetComponent<ItemPrefab>();
+                if (slot != null)
+                {
+                    Color gradeColor = _factory.GetGradeColor(equips[i].grade);
+                    slot.Init(equips[i], gradeColor, OnItemClicked);
+                }
+            }
+        }
+    }
+
+
 }

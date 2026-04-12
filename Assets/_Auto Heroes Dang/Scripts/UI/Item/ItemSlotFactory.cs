@@ -36,7 +36,6 @@ public class ItemSlotFactory : MonoBehaviour
         int slotAmount = Math.Max((items.Count + verticalSlot - 1) / verticalSlot, 3) * verticalSlot;
 
 
-
         // 아이템 슬롯 생성
         for (int i = 0; i < items.Count; i++)
         {

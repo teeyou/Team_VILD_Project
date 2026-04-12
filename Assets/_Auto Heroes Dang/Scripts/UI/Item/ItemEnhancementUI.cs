@@ -28,6 +28,12 @@ public class ItemEnhancementUI : MonoBehaviour
         ClearSlot();
     }
 
+    private void OnDisable() // 0413 타 패널에 선택 남아있어 추가했습니다.
+    {
+        ClearSlot();
+    }
+
+
     public bool HasItem()
     {
         return _selectedItem.HasValue;

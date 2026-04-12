@@ -15,6 +15,9 @@ public class InventoryManager : Singleton<InventoryManager>, IItemManage
     private List<ItemData> _items = new List<ItemData>();
     public IReadOnlyList<ItemData> Items => _items;
 
+    private ItemData[] _equipments = new ItemData[Enum.GetValues(typeof(ItemType)).Length]; // 장비중 아이템.
+                                                                                            // 무기, 모자, 상의, 신발, 반지, 순서. 
+
     public event Action OnChanged;
 
     protected override void Awake()
@@ -43,13 +46,6 @@ public class InventoryManager : Singleton<InventoryManager>, IItemManage
         OnChanged?.Invoke();
     }
 
-    //public void RemoveItem(ItemData item)
-    //{ 
-    //    _items.Remove(item); 
-    //    OnChanged?.Invoke();
-    //}
-
-    // 
     public void RemoveItem(ItemData item)
     {
         int index = _items.FindIndex(x => x.uniqueId == item.uniqueId);
@@ -101,4 +97,78 @@ public class InventoryManager : Singleton<InventoryManager>, IItemManage
         _items.Clear();
         OnChanged?.Invoke();
     }
+
+
+    // ---------장비용 스크립트 추가 부분 0413 ---------------------
+
+    public void EquipItem(ItemData item)
+    {
+        if (!IsEquipType(item.type)) return;
+        int index = (int)item.type;
+
+        // 기존 장비 해제
+        if (_equipments[index].uniqueId != 0)
+        {
+            UnequipItem(_equipments[index]);
+        }
+
+        _equipments[index] = item;
+        ApplyStat(item, true);
+        RemoveItem(item);
+        OnChanged?.Invoke();
+    }
+
+    public void UnequipItem(ItemData item)
+    {
+        if (!IsEquipType(item.type)) return;
+        int index = (int)item.type;
+
+        if (_equipments[index].uniqueId == 0)
+            return;
+
+        ApplyStat(item, false);
+        _equipments[index] = default;
+        AddItem(item);
+        OnChanged?.Invoke();
+    }
+
+    // 스탯 반영
+    private void ApplyStat(ItemData item, bool isEquip)
+    {
+        int value = isEquip ? item.value : -item.value;
+
+        bool isAtk = item.type == ItemType.Sword || item.type == ItemType.Ring;
+
+        if (isAtk)
+        {
+            DataSource.Instance.IncreaseAtk(value);
+        }
+        else
+        {
+            DataSource.Instance.IncreaseDef(value);
+        }
+    }
+
+    // 버프 걸러내기용
+    public bool IsEquipType(ItemType type)
+    {
+        return !(type == ItemType.AtkBuff || type == ItemType.DefBuff);
+    }
+
+    public bool IsEquipped(ItemData item)
+    {
+        if (!IsEquipType(item.type))
+            return false;
+
+        int index = (int)item.type;
+
+        return _equipments[index].uniqueId == item.uniqueId;
+    }
+
+    // UI 보내는용
+    public ItemData[] GetAllEquipData()
+    {
+        return _equipments;
+    }
+
 }

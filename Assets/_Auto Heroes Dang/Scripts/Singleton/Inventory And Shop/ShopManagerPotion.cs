@@ -6,6 +6,9 @@ public class ShopManagerPotion : Singleton<ShopManagerPotion>, IItemManage
 {
     private List<ItemData> _items = new List<ItemData>();
 
+    [SerializeField] private int _atkBuffAmount = 10; 
+    [SerializeField] private int _defBuffAmount = 10; 
+
     public event Action OnChanged;
 
 
@@ -32,7 +35,6 @@ public class ShopManagerPotion : Singleton<ShopManagerPotion>, IItemManage
         OnChanged?.Invoke();
     }
 
-    // 추후 버프 내용이 들어가야 함 -------------------- ItemType.AtkBuff 시 스테이터스 어쩌구
     public void RemoveItem(ItemData item)
     {
         for (int i = 0; i < _items.Count; i++)
@@ -42,6 +44,15 @@ public class ShopManagerPotion : Singleton<ShopManagerPotion>, IItemManage
                 ItemData temp = _items[i];
                 temp.state = ItemState.SoldOut;
                 _items[i] = temp;
+
+                if (item.type == ItemType.AtkBuff)
+                {
+                    DataSource.Instance.IncreaseAtk(_atkBuffAmount, true);
+                }
+                else if (item.type == ItemType.DefBuff)
+                {
+                    DataSource.Instance.IncreaseDef(_defBuffAmount, true);
+                }
 
                 OnChanged?.Invoke();
                 return;

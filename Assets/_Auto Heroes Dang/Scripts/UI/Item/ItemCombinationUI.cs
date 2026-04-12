@@ -32,6 +32,11 @@ public class ItemCombinationUI : MonoBehaviour
         RefreshUI();
     }
 
+    private void OnDisable() // 0413 타 패널에 선택 남아있어 추가했습니다.
+    {
+        ClearAll();
+    }
+
     // 현재 합성 슬롯에 들어가 있는 아이템인지 체크
     public bool HasSelectedItem(ItemData item)
     {
