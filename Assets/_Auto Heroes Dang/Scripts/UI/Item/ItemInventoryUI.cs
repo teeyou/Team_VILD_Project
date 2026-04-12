@@ -56,6 +56,7 @@ public class ItemInventoryUI : MonoBehaviour
 
     public void Refresh()
     {
+        _verticalSlot = _inventoryPanel.activeSelf ? 5 : 4;
         _factory.RefreshUI(InventoryManager.Instance, _verticalSlot, OnItemClicked, IsSelectedItem);
         if(_inventoryPanel != null && _inventoryPanel.activeInHierarchy) RefreshEquipSlots();
     }
