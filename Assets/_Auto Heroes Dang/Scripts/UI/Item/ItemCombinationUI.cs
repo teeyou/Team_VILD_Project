@@ -133,8 +133,10 @@ public class ItemCombinationUI : MonoBehaviour
             if (ItemForgeHelper.CanFuse(left, right))
             {
                 int percent = ItemForgeHelper.GetFusionSuccessPercent(left.grade);
+                int gemCost = ItemForgeHelper.GetFusionGemCost(left.grade);
+
                 _percentText.text = $"{percent} %";
-                _costText.text = "0";
+                _costText.text = gemCost.ToString("N0");
 
                 ItemData resultItem = GetFusionPreviewItem(left);
 
@@ -182,7 +184,8 @@ public class ItemCombinationUI : MonoBehaviour
         result.uniqueId = ItemIdGenerator.GetNextId();   // 새 아이템이므로 새 ID
         result.grade = ItemForgeHelper.GetNextGrade(baseItem.grade);
         result.level = 1;
-        result.value = Mathf.CeilToInt(baseItem.value * 1.8f);
+        //result.value = Mathf.CeilToInt(baseItem.value * 1.8f);
+        result.value = Mathf.CeilToInt(baseItem.value + 50);
         result.name = $"{result.grade} {baseItem.type}";
         result.price = Mathf.CeilToInt(baseItem.price * 1.5f);
 
@@ -211,6 +214,15 @@ public class ItemCombinationUI : MonoBehaviour
         }
 
         int successPercent = ItemForgeHelper.GetFusionSuccessPercent(left.grade);
+        int gemCost = ItemForgeHelper.GetFusionGemCost(left.grade);
+
+        if (DataSource.Instance.Gem < gemCost)
+        {
+            Debug.Log("젬 부족");
+            return;
+        }
+
+        DataSource.Instance.UseGem(gemCost);
 
         InventoryManager.Instance.RemoveItem(left);
         InventoryManager.Instance.RemoveItem(right);

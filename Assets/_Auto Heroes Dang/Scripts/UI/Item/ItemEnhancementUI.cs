@@ -141,7 +141,8 @@ public class ItemEnhancementUI : MonoBehaviour
         {
             ItemData enhanced = item;
             enhanced.level += 1;
-            enhanced.value = Mathf.CeilToInt(enhanced.value * 1.2f);
+            //enhanced.value = Mathf.CeilToInt(enhanced.value * 1.2f);
+            enhanced.value = Mathf.CeilToInt(enhanced.value + 10);
 
             InventoryManager.Instance.ReplaceItem(item, enhanced);
             _selectedItem = enhanced;

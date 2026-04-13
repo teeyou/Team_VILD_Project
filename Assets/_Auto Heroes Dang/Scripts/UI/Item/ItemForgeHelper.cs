@@ -18,17 +18,33 @@ public static class ItemForgeHelper
 
     public static int GetEnhanceCost(ItemData item)
     {
-        return item.price;
+        int baseCost = 0;             // 0강 장비 강화 시도 비용
+        int increasePerLevel = 200;   // 강화 레벨당 증가 비용
+
+        return baseCost + (item.level * increasePerLevel);
+    }
+
+    public static int GetFusionGemCost(Grade grade)
+    {
+        switch (grade)
+        {
+            case Grade.Common: return 10;
+            case Grade.Uncommon: return 20;
+            case Grade.Rare: return 30;
+            case Grade.Elite: return 40;
+            case Grade.Epic: return 50;
+            default: return 10;
+        }
     }
 
     public static int GetFusionSuccessPercent(Grade grade)
     {
         switch (grade)
         {
-            case Grade.Common: return 90;
-            case Grade.Uncommon: return 80;
-            case Grade.Rare: return 70;
-            case Grade.Elite: return 60;
+            case Grade.Common: return 50;
+            case Grade.Uncommon: return 40;
+            case Grade.Rare: return 30;
+            case Grade.Elite: return 20;
             case Grade.Epic: return 0;
             default: return 0;
         }

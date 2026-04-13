@@ -111,7 +111,7 @@ public class EvilMageSkill : MonoBehaviour
 
                 if (_owner != null)
                 {
-                    Debug.Log($"{name} >> {targetUnit.name} 다단히트 스킬 / 최종 데미지 : {finalDamage} ({hitIndex + 1}/{_hitCount})");
+                    //Debug.Log($"{name} >> {targetUnit.name} 다단히트 스킬 / 최종 데미지 : {finalDamage} ({hitIndex + 1}/{_hitCount})");
                 }
             }
 
