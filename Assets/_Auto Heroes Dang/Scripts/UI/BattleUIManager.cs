@@ -183,6 +183,11 @@ public class BattleUIManager : Singleton<BattleUIManager>
                 {
                     images[j].sprite = Resources.Load<Sprite>($"CharacterSprite/{unit.ChName}_Battle");
                 }
+
+                else if (images[j].name == "Icon")
+                {
+                    images[j].sprite = Resources.Load<Sprite>($"AttackTypeIcon/{unit.AttackType}");
+                }
             }
 
             // 슬롯 안에 있는 텍스트들 세팅

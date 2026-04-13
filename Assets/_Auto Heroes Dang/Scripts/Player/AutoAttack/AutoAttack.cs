@@ -178,6 +178,12 @@ public class AutoAttack : Unit
                 return;
             }
 
+            // 이미 공격중이면 여기서 종료
+            if (_isAttack)
+            {
+                return;
+            }
+
             // 타겟 방향으로 회전
             Vector3 dir = _targetTr.transform.position - transform.position;
             dir.y = 0f;
@@ -198,10 +204,10 @@ public class AutoAttack : Unit
                 _animator.SetBool("Move", false);
 
                 // 이미 공격중이면 여기서 종료
-                if (_isAttack)
-                {
-                    return;
-                }
+                //if (_isAttack)
+                //{
+                //    return;
+                //}
 
                 // 필드 씬에서 스킬 자동 사용
                 if (_currentSceneName == ESceneId.FieldScene.ToString())

@@ -9,6 +9,7 @@ public class InputManager : Singleton<InputManager>
     public bool IsPressedI { get; private set; } = false;   // 인벤토리
     public bool IsPressedM { get; private set; } = false;   // 맵
     public bool IsPressedH { get; private set; } = false;   // 마을 (홈)
+    public bool IsPressedE { get; private set; } = false;   // 대장간
     public bool IsPressedESC { get; private set; } = false; // 설정 또는 종료
 
     public bool IsPressedSpace { get; private set; } = false;
@@ -26,6 +27,8 @@ public class InputManager : Singleton<InputManager>
         IsPressedM = Input.GetKeyDown(KeyCode.M);
 
         IsPressedH = Input.GetKeyDown(KeyCode.H);
+
+        IsPressedE = Input.GetKeyDown(KeyCode.E);
 
         IsPressedESC = Input.GetKeyDown(KeyCode.Escape);
 
