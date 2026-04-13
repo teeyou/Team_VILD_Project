@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class ItemCombinationUI : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class ItemCombinationUI : MonoBehaviour
     [SerializeField] private TMP_Text _percentText;
     [SerializeField] private TMP_Text _costText;
     [SerializeField] private Button _okButton;
+    [SerializeField] private float _clickCooldown = 0.5f;
 
     [Header("Factory")]
     [SerializeField] private ItemSlotFactory _factory;
@@ -22,6 +24,8 @@ public class ItemCombinationUI : MonoBehaviour
     private GameObject _leftIcon;
     private GameObject _rightIcon;
     private GameObject _resultIcon;
+
+    private Coroutine _clickCooldownRoutine;
 
     // 인벤토리 UI에게 선택 상태 갱신을 알려주기 위한 이벤트
     public event Action OnSelectionChanged;
@@ -201,6 +205,14 @@ public class ItemCombinationUI : MonoBehaviour
 
     private void FuseItems()
     {
+        if (_clickCooldownRoutine != null)
+        {
+            if (UIManager.Instance != null)
+                UIManager.Instance.PopUpToastMessage("잠시 후 다시 눌러주세요.", 1f);
+
+            return;
+        }
+
         if (!_leftItem.HasValue || !_rightItem.HasValue)
             return;
 
@@ -209,6 +221,9 @@ public class ItemCombinationUI : MonoBehaviour
 
         if (!ItemForgeHelper.CanFuse(left, right))
         {
+            if (UIManager.Instance != null)
+                UIManager.Instance.PopUpToastMessage("합성 조건이 맞지 않습니다.", 1f);
+
             Debug.Log("합성 조건 불만족");
             return;
         }
@@ -218,9 +233,14 @@ public class ItemCombinationUI : MonoBehaviour
 
         if (DataSource.Instance.Gem < gemCost)
         {
+            if (UIManager.Instance != null)
+                UIManager.Instance.PopUpToastMessage("젬이 부족합니다.", 1f);
+
             Debug.Log("젬 부족");
             return;
         }
+
+        _clickCooldownRoutine = StartCoroutine(Co_ClickCooldown());
 
         AudioManager.Instance.PlaySFX("ForgeTry");
 
@@ -236,7 +256,10 @@ public class ItemCombinationUI : MonoBehaviour
             ItemData result = GetFusionPreviewItem(left);
             InventoryManager.Instance.AddItem(result);
 
-            AudioManager.Instance.PlaySFX("ForgeCombination");
+            AudioManager.Instance.PlaySFX("ForgeSuccess");
+
+            if (UIManager.Instance != null)
+                UIManager.Instance.PopUpToastMessage("합성 성공", 1f);
 
             Debug.Log("합성 성공");
         }
@@ -244,9 +267,19 @@ public class ItemCombinationUI : MonoBehaviour
         {
             AudioManager.Instance.PlaySFX("ForgeFail");
 
+            if (UIManager.Instance != null)
+                UIManager.Instance.PopUpToastMessage("합성 실패", 1f);
+
             Debug.Log("합성 실패");
         }
 
         ClearAll();
     }
+
+    private IEnumerator Co_ClickCooldown()
+    {
+        yield return new WaitForSeconds(_clickCooldown);
+        _clickCooldownRoutine = null;
+    }
+
 }

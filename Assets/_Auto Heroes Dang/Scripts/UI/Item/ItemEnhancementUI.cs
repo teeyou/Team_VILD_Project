@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class ItemEnhancementUI : MonoBehaviour
 {
@@ -12,10 +13,12 @@ public class ItemEnhancementUI : MonoBehaviour
     [SerializeField] private TMP_Text _gemCostText;
     [SerializeField] private TMP_Text _goldCostText;
     [SerializeField] private Button _okButton;
+    [SerializeField] private float _clickCooldown = 0.5f;
 
     [Header("Factory")]
     [SerializeField] private ItemSlotFactory _factory;
 
+    private Coroutine _clickCooldownRoutine;
     private ItemData? _selectedItem;
     private GameObject _currentIcon;
 
@@ -120,6 +123,14 @@ public class ItemEnhancementUI : MonoBehaviour
 
     private void EnhanceSelectedItem()
     {
+        if (_clickCooldownRoutine != null)
+        {
+            if (UIManager.Instance != null)
+                UIManager.Instance.PopUpToastMessage("잠시 후 다시 눌러주세요.", 1f);
+
+            return;
+        }
+
         if (!_selectedItem.HasValue)
             return;
 
@@ -129,13 +140,16 @@ public class ItemEnhancementUI : MonoBehaviour
 
         if (DataSource.Instance.Gold < cost)
         {
-            Debug.Log("골드 부족");
+            if (UIManager.Instance != null)
+                UIManager.Instance.PopUpToastMessage("골드가 부족합니다.", 1f);
+
             return;
         }
 
-        DataSource.Instance.UseGold(cost);
+        _clickCooldownRoutine = StartCoroutine(Co_ClickCooldown());
 
         AudioManager.Instance.PlaySFX("ForgeTry");
+        DataSource.Instance.UseGold(cost);
 
         bool isSuccess = UnityEngine.Random.Range(0, 100) < successPercent;
 
@@ -143,7 +157,6 @@ public class ItemEnhancementUI : MonoBehaviour
         {
             ItemData enhanced = item;
             enhanced.level += 1;
-            //enhanced.value = Mathf.CeilToInt(enhanced.value * 1.2f);
             enhanced.value = Mathf.CeilToInt(enhanced.value + 10);
 
             InventoryManager.Instance.ReplaceItem(item, enhanced);
@@ -151,16 +164,28 @@ public class ItemEnhancementUI : MonoBehaviour
 
             AudioManager.Instance.PlaySFX("ForgeSuccess");
 
+            if (UIManager.Instance != null)
+                UIManager.Instance.PopUpToastMessage("강화 성공", 1f);
+
             Debug.Log("강화 성공");
         }
         else
         {
             AudioManager.Instance.PlaySFX("ForgeFail");
 
+            if (UIManager.Instance != null)
+                UIManager.Instance.PopUpToastMessage("강화 실패", 1f);
+
             Debug.Log("강화 실패");
         }
 
         RefreshUI();
         OnSelectionChanged?.Invoke();
+    }
+
+    private IEnumerator Co_ClickCooldown()
+    {
+        yield return new WaitForSeconds(_clickCooldown);
+        _clickCooldownRoutine = null;
     }
 }

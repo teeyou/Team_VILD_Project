@@ -356,6 +356,9 @@ MonoBehaviour:
   _dropRadius: 2.5
   _spawnYOffset: 0.5
   _destroyDelayAfterOpen: 1.5
+  _waitingVfxPrefab: {fileID: 7851882727209530665, guid: 06b30355d892257459b120460661fc1d, type: 3}
+  _waitingVfxOffset: {x: 0, y: 0, z: 0}
+  _waitingVfxFadeDuration: 0.5
 --- !u!114 &-3005607570928663151
 MonoBehaviour:
   m_ObjectHideFlags: 0

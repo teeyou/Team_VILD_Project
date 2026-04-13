@@ -57,10 +57,18 @@ public class ChestReward : MonoBehaviour
     [Header("상자 제거 시간")]
     [SerializeField] private float _destroyDelayAfterOpen = 1.5f;
 
+    [Header("대기 VFX")]
+    [SerializeField] private GameObject _waitingVfxPrefab;
+    [SerializeField] private Vector3 _waitingVfxOffset = new Vector3(0f, 1.5f, 0f);
+    [SerializeField] private float _waitingVfxFadeDuration = 0.5f;
+
+    private GameObject _waitingVfxInstance;
+
     private bool _isOpened = false;
 
     private void Start()
     {
+        SpawnWaitingVfx();
         StartCoroutine(Co_AutoOpen());
     }
 
@@ -76,6 +84,10 @@ public class ChestReward : MonoBehaviour
             return;
 
         _isOpened = true;
+
+        if (_waitingVfxInstance != null)
+            StartCoroutine(Co_FadeOutWaitingVfx());
+
         StartCoroutine(Co_OpenChest());
     }
 
@@ -239,5 +251,67 @@ public class ChestReward : MonoBehaviour
             angle -= 360f;
 
         return angle;
+    }
+
+    private void SpawnWaitingVfx()
+    {
+        if (_waitingVfxPrefab == null)
+            return;
+
+        _waitingVfxInstance = Instantiate(
+            _waitingVfxPrefab,
+            transform.position + _waitingVfxOffset,
+            Quaternion.identity,
+            transform
+        );
+    }
+
+    private IEnumerator Co_FadeOutWaitingVfx()
+    {
+        if (_waitingVfxInstance == null)
+            yield break;
+
+        ParticleSystem[] particles = _waitingVfxInstance.GetComponentsInChildren<ParticleSystem>(true);
+
+        float time = 0f;
+
+        // 처음 색 저장
+        Color[][] originalColors = new Color[particles.Length][];
+        ParticleSystem.Particle[][] particleBuffers = new ParticleSystem.Particle[particles.Length][];
+
+        for (int i = 0; i < particles.Length; i++)
+        {
+            int maxParticles = particles[i].main.maxParticles;
+            if (maxParticles <= 0)
+                maxParticles = 1000;
+
+            particleBuffers[i] = new ParticleSystem.Particle[maxParticles];
+            originalColors[i] = new Color[maxParticles];
+        }
+
+        while (time < _waitingVfxFadeDuration)
+        {
+            time += Time.deltaTime;
+            float t = Mathf.Clamp01(time / _waitingVfxFadeDuration);
+            float alphaMultiplier = Mathf.Lerp(1f, 0f, t);
+
+            for (int i = 0; i < particles.Length; i++)
+            {
+                int aliveCount = particles[i].GetParticles(particleBuffers[i]);
+
+                for (int j = 0; j < aliveCount; j++)
+                {
+                    Color c = particleBuffers[i][j].startColor;
+                    c.a *= alphaMultiplier;
+                    particleBuffers[i][j].startColor = c;
+                }
+
+                particles[i].SetParticles(particleBuffers[i], aliveCount);
+            }
+
+            yield return null;
+        }
+
+        Destroy(_waitingVfxInstance);
     }
 }
