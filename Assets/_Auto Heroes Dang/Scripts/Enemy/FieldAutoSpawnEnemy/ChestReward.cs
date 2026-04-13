@@ -109,10 +109,10 @@ public class ChestReward : MonoBehaviour
         }
 
         // A, B 상자만 젬 가능
-        if (_chestGrade == ChestGrade.C || _chestGrade == ChestGrade.D)
-        {
-            rewardGem = 0;
-        }
+        //if (_chestGrade == ChestGrade.C || _chestGrade == ChestGrade.D)
+        //{
+        //    rewardGem = 0;
+        //}
 
         if (rewardGold > 0)
         {

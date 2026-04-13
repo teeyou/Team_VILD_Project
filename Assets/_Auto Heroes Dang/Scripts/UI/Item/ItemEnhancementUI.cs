@@ -135,6 +135,8 @@ public class ItemEnhancementUI : MonoBehaviour
 
         DataSource.Instance.UseGold(cost);
 
+        AudioManager.Instance.PlaySFX("ForgeTry");
+
         bool isSuccess = UnityEngine.Random.Range(0, 100) < successPercent;
 
         if (isSuccess)
@@ -147,10 +149,14 @@ public class ItemEnhancementUI : MonoBehaviour
             InventoryManager.Instance.ReplaceItem(item, enhanced);
             _selectedItem = enhanced;
 
+            AudioManager.Instance.PlaySFX("ForgeSuccess");
+
             Debug.Log("강화 성공");
         }
         else
         {
+            AudioManager.Instance.PlaySFX("ForgeFail");
+
             Debug.Log("강화 실패");
         }
 

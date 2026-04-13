@@ -162,6 +162,9 @@ public class DataSource : Singleton<DataSource>
             return;
 
         Gold += amount;
+
+        if (UIManager.Instance != null)
+            UIManager.Instance.ShowGoldGain(amount);
     }
 
     public bool UseGold(int amount)
@@ -182,6 +185,9 @@ public class DataSource : Singleton<DataSource>
             return;
 
         Gem += amount;
+
+        if (UIManager.Instance != null)
+            UIManager.Instance.ShowGemGain(amount);
     }
 
     public bool UseGem(int amount)
