@@ -37,9 +37,9 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (Instance == this)
-        {
-            _instance = null;
-        }
+        //if (Instance == this)
+        //{
+        //    _instance = null;
+        //}
     }
 }
