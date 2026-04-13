@@ -7,8 +7,8 @@ public static class CPCalculator
 {
     public static int CalculateCP(int atk, int def, int hp)
     {
-        float a = atk * 2f;
-        float d = def * 1.5f;
+        float a = atk * 1.5f;
+        float d = def * 1.2f;
         float h = hp * 0.1f;
 
         // 최종 전투력

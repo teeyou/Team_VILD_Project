@@ -66,6 +66,10 @@ public class BattleUIManager : Singleton<BattleUIManager>
     //[SerializeField] private Button _configButton;
     [SerializeField] private Button _statusButton;
 
+    [Header("클리어 보상 아이템 UI")]
+    [SerializeField] private Transform _rewardItemSlotParent;
+    [SerializeField] private GameObject _rewardItemPrefab;
+
     //private Dictionary<GameObject, Image> _goToSkillIcon = new Dictionary<GameObject, Image>();
     private Dictionary<GameObject, Image> _goToSkillMask = new Dictionary<GameObject, Image>();
     private Dictionary<GameObject, TMP_Text> _goToSkillCoolTimeTmp = new Dictionary<GameObject, TMP_Text>();
@@ -427,10 +431,60 @@ public class BattleUIManager : Singleton<BattleUIManager>
         SceneLoader.Instance.LoadScene(ESceneId.FieldScene);
     }
 
+    private Color Hex(string hex)
+    {
+        ColorUtility.TryParseHtmlString(hex, out Color color);
+        return color;
+    }
+
+    private void SetItemReward()
+    {
+        Color commonColor = Hex("#B1B2B5");
+        Color uncommonColor = Hex("#00A2FF");
+        Color rareColor = Hex("#9A41F6");
+
+        List<ItemData> rewardList = BattleManager.Instance.GetItemRewardDataList();
+
+        for (int i = 0; i < rewardList.Count; i++)
+        {
+            ItemData data = rewardList[i];
+
+            GameObject rewardGo = Instantiate(_rewardItemPrefab, _rewardItemSlotParent);
+
+            Image[] images = rewardGo.GetComponentsInChildren<Image>();
+            
+            for (int j = 0; j < images.Length; j++)
+            {
+                if (images[j].name == "ItemIcon")
+                {
+                    images[j].sprite = Resources.Load<Sprite>($"ItemIcon/{data.type}");
+                }
+
+                else if (images[j].name == "Bg")
+                {
+                    switch (data.grade)
+                    {
+                        case Grade.Common:
+                            images[j].color = commonColor;
+                            break;
+                        case Grade.Uncommon:
+                            images[j].color = uncommonColor;
+                            break;
+                        case Grade.Rare:
+                            images[j].color = rareColor;
+                            break;
+                    }
+                    
+                }
+            }
+        }
+    }
+
     public void ShowResultPanel(bool isVictory)
     {
         if (isVictory)
         {
+            SetItemReward();
             _victoryPanel.SetActive(true);
         }
         else

@@ -123,6 +123,7 @@ public class InventoryManager : Singleton<InventoryManager>, IItemManage
         ApplyStat(item, true);
         RemoveItem(item);
         OnChanged?.Invoke();
+        UIManager.Instance.UpdateTotalCp(); // 0413 태웅 추가
     }
 
     public void UnequipItem(ItemData item)
@@ -137,6 +138,7 @@ public class InventoryManager : Singleton<InventoryManager>, IItemManage
         _equipments[index] = default;
         AddItem(item);
         OnChanged?.Invoke();
+        UIManager.Instance.UpdateTotalCp(); // 0413 태웅 추가
     }
 
     // 스탯 반영

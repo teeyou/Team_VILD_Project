@@ -18,7 +18,7 @@ public enum EGameStage
 
 public class GameManager : Singleton<GameManager>
 {
-    private EGameStage _currentStage = EGameStage.Stage3_3;
+    private EGameStage _currentStage = EGameStage.Stage1_1;
 
     public EGameStage CurrentStage { get { return _currentStage; } set { _currentStage = value; } }
 
@@ -83,4 +83,104 @@ public class GameManager : Singleton<GameManager>
     {
         return 10 + ((int)_currentStage * 5);
     }
+
+    public ItemData GetCurrentStageItemReward(EGameStage stage)
+    {
+        return GetItemData(stage);
+    }
+
+    private ItemData GetItemData(EGameStage stage)
+    {
+        // 커먼 : 1 ~ 60
+        // 언커먼 : 61 ~ 90
+        // 레어 : 91 ~ 100
+
+        int number = 0;
+
+        if ((int)stage % 3 == 2)
+            number = UnityEngine.Random.Range(61, 101); //보스 스테이지는 언커먼 이상만 받음
+        
+        else
+            number = UnityEngine.Random.Range(1, 101);  // 1 ~ 100까지 랜덤
+
+        int type = UnityEngine.Random.Range(0, 5); //모자, 검, 갑주, 반지, 신발
+
+        if (number <= 60)
+        {
+            Grade grade = Grade.Common;
+            int value = ItemDescription.GetBaseValue(grade);
+  
+            switch (type)
+            {
+                case 0:
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 모자", ItemType.Hat, grade, 1, value, 100, "");
+
+                case 1:
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 검", ItemType.Sword, grade, 1, value, 100, "");
+
+                case 2:
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 갑주", ItemType.Armor, grade, 1, value, 100, "");
+
+                case 3:
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 반지", ItemType.Ring, grade, 1, value, 100, "");
+
+                case 4:
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 신발", ItemType.Shoes, grade, 1, value, 100, "");
+
+            }
+        }
+
+        else if (number <= 90)
+        {
+            Grade grade = Grade.Uncommon;
+            int value = ItemDescription.GetBaseValue(grade);
+
+            switch (type)
+            {
+                case 0:
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 모자", ItemType.Hat, grade, 1, value, 100, "");
+
+                case 1:
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 검", ItemType.Sword, grade, 1, value, 100, "");
+
+                case 2:
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 갑주", ItemType.Armor, grade, 1, value, 100, "");
+
+                case 3:
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 반지", ItemType.Ring, grade, 1, value, 100, "");
+
+                case 4:
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 신발", ItemType.Shoes, grade, 1, value, 100, "");
+
+            }
+        }
+
+        else
+        {
+            Grade grade = Grade.Rare;
+            int value = ItemDescription.GetBaseValue(grade);
+
+            switch (type)
+            {
+                case 0:
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 모자", ItemType.Hat, grade, 1, value, 100, "");
+
+                case 1:
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 검", ItemType.Sword, grade, 1, value, 100, "");
+
+                case 2:
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 갑주", ItemType.Armor, grade, 1, value, 100, "");
+
+                case 3:
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 반지", ItemType.Ring, grade, 1, value, 100, "");
+
+                case 4:
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 신발", ItemType.Shoes, grade, 1, value, 100, "");
+
+            }
+        }
+
+        return new ItemData();
+    }
+
 }
