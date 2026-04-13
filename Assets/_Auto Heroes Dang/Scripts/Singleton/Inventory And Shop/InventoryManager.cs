@@ -29,28 +29,11 @@ public class InventoryManager : Singleton<InventoryManager>, IItemManage
     private void Start()
     {
         // 테스트용
-        AddItem(new ItemData("흔한 모자", ItemType.Hat, Grade.Common, 1, 11, 100, "평범한 모자"));
-        AddItem(new ItemData("짱 센 갑옷", ItemType.Armor, Grade.Epic, 50, 11, 9999, "짱짱 센 갑옷"));
-        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검"));
-        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검"));
-        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검"));
-        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검"));
-        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검"));
-        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검"));
-        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검"));
-        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검"));
-        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검"));
-        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검"));
-        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검"));
-        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검"));
-        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검"));
-        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검"));
-        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검"));
-        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검"));
-        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검"));
-        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검"));
-        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검"));
-        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검"));
+        AddItem(new ItemData("흔한 모자", ItemType.Hat, Grade.Common, 1, 10, 100, "평범한 모자 \nDef +10"));
+        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검 \nAtk +10"));
+        AddItem(new ItemData("흔한 갑주", ItemType.Armor, Grade.Common, 1, 10, 200, "흔한 갑주 \nDef +10"));
+        AddItem(new ItemData("흔한 반지", ItemType.Ring, Grade.Common, 1, 10, 200, "흔한 반지 \nAtk +10"));
+        AddItem(new ItemData("흔한 신발", ItemType.Shoes, Grade.Common, 1, 10, 200, "흔한 신발 \nDef +10"));
     }
 
     public IReadOnlyList<ItemData> GetItems() => _items;
