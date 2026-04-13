@@ -113,7 +113,7 @@ public class ItemShopUI : MonoBehaviour
         _panel.SetActive(true);
 
         _nameText.text = item.name;
-        _descriptionText.text = item.description;
+        _descriptionText.text = item.FullDescription;
         _money.text = item.price.ToString("N0");
 
         _buyButton.interactable = (item.state != ItemState.SoldOut && DataSource.Instance.Gold >= item.price); 

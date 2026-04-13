@@ -28,42 +28,17 @@ public class InventoryManager : Singleton<InventoryManager>, IItemManage
 
     private void Start()
     {
-        // 테스트용
+        /*
+        // 템복사 방지를 위해 DataSource의 MakeInventoryData()의 널부분으로 변경. 이곳은 테스트 용도로만 활용.
+        
         AddItem(new ItemData("흔한 모자", ItemType.Hat, Grade.Common, 1, 10, 100, "평범한 모자 \nDef +10"));
         AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검 \nAtk +10"));
         AddItem(new ItemData("흔한 갑주", ItemType.Armor, Grade.Common, 1, 10, 200, "흔한 갑주 \nDef +10"));
         AddItem(new ItemData("흔한 반지", ItemType.Ring, Grade.Common, 1, 10, 200, "흔한 반지 \nAtk +10"));
         AddItem(new ItemData("흔한 신발", ItemType.Shoes, Grade.Common, 1, 10, 200, "흔한 신발 \nDef +10"));
 
-        AddItem(new ItemData("흔한 모자", ItemType.Hat, Grade.Common, 1, 10, 100, "평범한 모자 \nDef +10"));
-        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검 \nAtk +10"));
-        AddItem(new ItemData("흔한 갑주", ItemType.Armor, Grade.Common, 1, 10, 200, "흔한 갑주 \nDef +10"));
-        AddItem(new ItemData("흔한 반지", ItemType.Ring, Grade.Common, 1, 10, 200, "흔한 반지 \nAtk +10"));
-        AddItem(new ItemData("흔한 신발", ItemType.Shoes, Grade.Common, 1, 10, 200, "흔한 신발 \nDef +10"));
+        */
 
-        AddItem(new ItemData("흔한 모자", ItemType.Hat, Grade.Common, 1, 10, 100, "평범한 모자 \nDef +10"));
-        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검 \nAtk +10"));
-        AddItem(new ItemData("흔한 갑주", ItemType.Armor, Grade.Common, 1, 10, 200, "흔한 갑주 \nDef +10"));
-        AddItem(new ItemData("흔한 반지", ItemType.Ring, Grade.Common, 1, 10, 200, "흔한 반지 \nAtk +10"));
-        AddItem(new ItemData("흔한 신발", ItemType.Shoes, Grade.Common, 1, 10, 200, "흔한 신발 \nDef +10"));
-
-        AddItem(new ItemData("흔한 모자", ItemType.Hat, Grade.Common, 1, 10, 100, "평범한 모자 \nDef +10"));
-        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검 \nAtk +10"));
-        AddItem(new ItemData("흔한 갑주", ItemType.Armor, Grade.Common, 1, 10, 200, "흔한 갑주 \nDef +10"));
-        AddItem(new ItemData("흔한 반지", ItemType.Ring, Grade.Common, 1, 10, 200, "흔한 반지 \nAtk +10"));
-        AddItem(new ItemData("흔한 신발", ItemType.Shoes, Grade.Common, 1, 10, 200, "흔한 신발 \nDef +10"));
-
-        AddItem(new ItemData("흔한 모자", ItemType.Hat, Grade.Common, 1, 10, 100, "평범한 모자 \nDef +10"));
-        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검 \nAtk +10"));
-        AddItem(new ItemData("흔한 갑주", ItemType.Armor, Grade.Common, 1, 10, 200, "흔한 갑주 \nDef +10"));
-        AddItem(new ItemData("흔한 반지", ItemType.Ring, Grade.Common, 1, 10, 200, "흔한 반지 \nAtk +10"));
-        AddItem(new ItemData("흔한 신발", ItemType.Shoes, Grade.Common, 1, 10, 200, "흔한 신발 \nDef +10"));
-
-        AddItem(new ItemData("흔한 모자", ItemType.Hat, Grade.Common, 1, 10, 100, "평범한 모자 \nDef +10"));
-        AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검 \nAtk +10"));
-        AddItem(new ItemData("흔한 갑주", ItemType.Armor, Grade.Common, 1, 10, 200, "흔한 갑주 \nDef +10"));
-        AddItem(new ItemData("흔한 반지", ItemType.Ring, Grade.Common, 1, 10, 200, "흔한 반지 \nAtk +10"));
-        AddItem(new ItemData("흔한 신발", ItemType.Shoes, Grade.Common, 1, 10, 200, "흔한 신발 \nDef +10"));
     }
 
     public IReadOnlyList<ItemData> GetItems() => _items;
@@ -123,6 +98,10 @@ public class InventoryManager : Singleton<InventoryManager>, IItemManage
     public void Clear()
     {
         _items.Clear();
+        for (int i = 0; i < _equipments.Length; i++)
+        {
+            _equipments[i] = default;
+        }
         OnChanged?.Invoke();
     }
 
@@ -198,5 +177,43 @@ public class InventoryManager : Singleton<InventoryManager>, IItemManage
     {
         return _equipments;
     }
+
+    // 저장용
+    public ItemData[] GetEquipmentData()
+    {
+        ItemData[] copy = new ItemData[_equipments.Length];
+        Array.Copy(_equipments, copy, _equipments.Length);
+        return copy;
+    }
+
+    public void SetEquipments(ItemData[] equipments)
+    {
+        if (equipments == null)
+        {
+            Debug.LogWarning("장비 null");
+            return;
+        }
+
+        _equipments = new ItemData[equipments.Length];
+        Array.Copy(equipments, _equipments, equipments.Length);
+
+        OnChanged?.Invoke();
+    }
+
+
+    public bool ISEquipmentsEmpty()
+    {
+        if (_equipments == null)
+            return true;
+
+        for (int i = 0; i < _equipments.Length; i++)
+        {
+            if (_equipments[i].uniqueId != 0)
+                return false;
+        }
+
+        return true;
+    }
+
 
 }

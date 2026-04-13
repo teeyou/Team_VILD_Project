@@ -117,7 +117,7 @@ public class ItemInventoryUI : MonoBehaviour
         _equipButton.gameObject.SetActive(needButtonSet);
 
         _nameText.text = item.name;
-        _descriptionText.text = item.description;
+        _descriptionText.text = item.FullDescription;
 
         foreach (Transform child in _iconTransform.transform)
         {
