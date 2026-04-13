@@ -22,7 +22,7 @@ MonoBehaviour:
   _moveSpeed: 3
   _skillCool: 4
   _skillMultiplier: 1.8
-  _attackType: 1
+  _attackType: 3
   _prefab: {fileID: 2639939542224209217, guid: 3ba5ad39404ecf549a51c7db61eb225d, type: 3}
   _level: 1
   _grade: 1

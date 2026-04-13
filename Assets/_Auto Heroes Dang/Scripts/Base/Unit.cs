@@ -32,6 +32,7 @@ public enum EAttackType
     Melee,
     Range,
     Tank,
+    Magician,
 }
 
 public enum EGrade

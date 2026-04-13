@@ -42,12 +42,12 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private GameObject _toastMessageGo;
     [SerializeField] private TMP_Text _toastMessage;
 
-    [Header("왼쪽 하단 인벤토리, 상점 UI")]
+    [Header("왼쪽 하단 인벤토리, 상점, 강화 UI")]
     [SerializeField] private GameObject _inventoryPanel;
     [SerializeField] private GameObject _shopPanel;
     [SerializeField] private Button _inventoryButton;
     [SerializeField] private Button _shopButton;
-
+    [SerializeField] private GameObject _enhancedPanel;
     public Vector3 GoldTargetUIPosition => _goldTargetUI.position;
     public Vector3 GemTargetUIPosition => _gemTargetUI.position;
 
@@ -123,6 +123,7 @@ public class UIManager : Singleton<UIManager>
             if (_statusPanel.activeSelf)
             {
                 _statusPanel.SetActive(false);
+                _detailStatusPanel.SetActive(false);
             }
 
             else
@@ -159,6 +160,20 @@ public class UIManager : Singleton<UIManager>
                 _shopPanel.SetActive(true);
             }
         }
+
+        if (InputManager.Instance.IsPressedE)
+        {
+            if (_enhancedPanel.activeSelf)
+            {
+                _enhancedPanel.SetActive(false);
+            }
+
+            else
+            {
+                _enhancedPanel.SetActive(true);
+            }
+        }
+
     }
 
     private void SetProfile()
