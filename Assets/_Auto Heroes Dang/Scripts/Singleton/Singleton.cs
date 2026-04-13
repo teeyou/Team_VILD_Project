@@ -34,4 +34,12 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             return;
         }
     }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            _instance = null;
+        }
+    }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [Serializable]
 public class PosRotData
@@ -163,8 +164,20 @@ public class DataSource : Singleton<DataSource>
 
         Gold += amount;
 
-        if (UIManager.Instance != null)
+        if (SceneManager.GetActiveScene().name == ESceneId.FieldScene.ToString())
+        {
             UIManager.Instance.ShowGoldGain(amount);
+        }
+
+        //if (UIManager.Instance != null)
+        //{
+        //    UIManager.Instance.ShowGoldGain(amount);
+        //    Debug.Log("if DataSource AddGold");
+        //}
+        //else
+        //{
+        //    Debug.Log("else DataSource AddGold");
+        //}
     }
 
     public bool UseGold(int amount)
@@ -186,8 +199,13 @@ public class DataSource : Singleton<DataSource>
 
         Gem += amount;
 
-        if (UIManager.Instance != null)
+        if (SceneManager.GetActiveScene().name == ESceneId.FieldScene.ToString())
+        {
             UIManager.Instance.ShowGemGain(amount);
+        }
+
+        //if (UIManager.Instance != null)
+        //    UIManager.Instance.ShowGemGain(amount);
     }
 
     public bool UseGem(int amount)
