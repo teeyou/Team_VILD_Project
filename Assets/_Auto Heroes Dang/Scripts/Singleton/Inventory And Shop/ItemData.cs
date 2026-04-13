@@ -42,6 +42,45 @@ static class ItemDescription
                 return 0;
         }
     }
+
+    public static string GetBaseDescription(Grade grade)
+    {
+        switch (grade)
+        {
+            case Grade.Common:
+                return "흔한 싸구려 장비.\n없는 것 보다는 낫다.";
+            case Grade.Uncommon:
+                return "가성비 좋은 장비.\n많은 모험가들이 애용한다.";
+            case Grade.Rare:
+                return "아껴쓰고 싶은 귀한 장비.\n이거 진짜 좋은 거에요.";
+            case Grade.Elite:
+                return "이정도면 남들에게 자랑해도 될 것 같다.\n아무나 가질 수 없는 장비";
+            case Grade.Epic:
+                return "이걸 봤다고?\n당신은 운이 좋으신 겁니다.";
+            default:
+                return "";
+        }
+    }
+
+    public static int GetPrice(Grade grade)
+    {
+        switch (grade)
+        {
+            case Grade.Common:
+                return 500;
+            case Grade.Uncommon:
+                return 2000;
+            case Grade.Rare:
+                return 10000;
+            case Grade.Elite:
+                return 30000;
+            case Grade.Epic:
+                return 77777;
+            default:
+                return 0;
+        }
+    }
+
 }
 
 [Serializable]

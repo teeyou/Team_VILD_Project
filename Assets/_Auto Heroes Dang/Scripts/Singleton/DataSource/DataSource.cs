@@ -396,11 +396,11 @@ public class DataSource : Singleton<DataSource>
         if ((_saveData == null || _saveData.inventoryItems == null || _saveData.inventoryItems.Count == 0) && IsEquipmentEmpty()) //  
         {
             // 게임 초기 아이템 추가
-            InventoryManager.Instance.AddItem(new ItemData("흔한 모자", ItemType.Hat, Grade.Common, 1, 10, 100, "평범한 모자"));
-            InventoryManager.Instance.AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검"));
-            InventoryManager.Instance.AddItem(new ItemData("흔한 갑주", ItemType.Armor, Grade.Common, 1, 10, 200, "흔한 갑주"));
-            InventoryManager.Instance.AddItem(new ItemData("흔한 반지", ItemType.Ring, Grade.Common, 1, 10, 200, "흔한 반지"));
-            InventoryManager.Instance.AddItem(new ItemData("흔한 신발", ItemType.Shoes, Grade.Common, 1, 10, 200, "흔한 신발"));
+            InventoryManager.Instance.AddItemGrade(Grade.Common, ItemType.Sword);
+            InventoryManager.Instance.AddItemGrade(Grade.Common, ItemType.Armor);
+            InventoryManager.Instance.AddItemGrade(Grade.Common, ItemType.Hat);
+            InventoryManager.Instance.AddItemGrade(Grade.Common, ItemType.Ring);
+            InventoryManager.Instance.AddItemGrade(Grade.Common, ItemType.Shoes);
 
             return;
         }

@@ -49,6 +49,29 @@ public class InventoryManager : Singleton<InventoryManager>, IItemManage
         OnChanged?.Invoke();
     }
 
+    public void AddItemGrade(Grade grade, ItemType type)
+    {
+        int value = ItemDescription.GetBaseValue(grade);
+        int price = ItemDescription.GetPrice(grade);
+        string dis = ItemDescription.GetBaseDescription(grade);
+
+        string name;
+        switch (type)
+        {
+            case ItemType.Sword: name = "검"; break;
+            case ItemType.Hat: name = "모자";break;
+            case ItemType.Armor: name = "갑주"; break;
+            case ItemType.Shoes: name = "신발"; break;
+            case ItemType.Ring: name = "반지"; break;
+            default: name = "모자"; break;
+        }
+
+        AddItem(new ItemData($"{ItemName.GetPrefix(grade)} {name}", type, grade, 1, value, price, dis));
+
+    }
+
+
+
     public void RemoveItem(ItemData item)
     {
         int index = _items.FindIndex(x => x.uniqueId == item.uniqueId);

@@ -396,5 +396,9 @@ public class AudioManager : Singleton<AudioManager>
             _configCanvas.SetActive(false);
     }
 
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 
 }

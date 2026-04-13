@@ -159,6 +159,7 @@ public class UIManager : Singleton<UIManager>
             if (_shopPanel.activeSelf)
             {
                 _shopPanel.SetActive(false);
+                ShopManagerEquip.Instance.SetShopItem();
             }
 
             else
