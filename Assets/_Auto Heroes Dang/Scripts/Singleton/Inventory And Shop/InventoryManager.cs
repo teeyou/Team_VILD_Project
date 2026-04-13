@@ -200,20 +200,4 @@ public class InventoryManager : Singleton<InventoryManager>, IItemManage
         OnChanged?.Invoke();
     }
 
-
-    public bool ISEquipmentsEmpty()
-    {
-        if (_equipments == null)
-            return true;
-
-        for (int i = 0; i < _equipments.Length; i++)
-        {
-            if (_equipments[i].uniqueId != 0)
-                return false;
-        }
-
-        return true;
-    }
-
-
 }

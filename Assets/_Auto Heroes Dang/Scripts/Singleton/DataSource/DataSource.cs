@@ -109,12 +109,16 @@ public class DataSource : Singleton<DataSource>
         if (_saveData == null)
         {
             GameManager.Instance.IsSave = false;
+            
         }
 
         else
         {
             GameManager.Instance.IsSave = true;
         }
+
+        MakeInventoryData(); // 0413 추가 내용. 초기 아이템 지급
+
     }
 
     public void SetSaveData()
@@ -359,7 +363,9 @@ public class DataSource : Singleton<DataSource>
     // 0413 아이템 저장용 추가
     private void MakeInventoryData()
     {
-        if (_saveData.inventoryItems.Count == 0 && !InventoryManager.Instance.ISEquipmentsEmpty())
+        InventoryManager.Instance.Clear();
+
+        if ((_saveData == null || _saveData.inventoryItems == null || _saveData.inventoryItems.Count == 0) && IsEquipmentEmpty()) //  
         {
             // 게임 초기 아이템 추가
             InventoryManager.Instance.AddItem(new ItemData("흔한 모자", ItemType.Hat, Grade.Common, 1, 10, 100, "평범한 모자"));
@@ -371,12 +377,9 @@ public class DataSource : Singleton<DataSource>
             return;
         }
 
-        if (_saveData.inventoryItems != null)
+        foreach (ItemData item in _saveData.inventoryItems)
         {
-            foreach (ItemData item in _saveData.inventoryItems)
-            {
-                InventoryManager.Instance.AddItem(item);
-            }
+            InventoryManager.Instance.AddItem(item);
         }
 
         if (_saveData.equipments != null)
@@ -399,4 +402,19 @@ public class DataSource : Singleton<DataSource>
         }
 
     }
+
+    private bool IsEquipmentEmpty()
+    {
+        if (_saveData == null || _saveData.equipments == null)
+            return true;
+
+        for (int i = 0; i < 5; i++)
+        {
+            if (_saveData.equipments[i].uniqueId != 0)
+                return false;
+        }
+
+        return true;
+    }
+
 }
