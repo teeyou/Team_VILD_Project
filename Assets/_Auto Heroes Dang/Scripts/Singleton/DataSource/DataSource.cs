@@ -131,6 +131,7 @@ public class DataSource : Singleton<DataSource>
         GameManager.Instance.IsFirstPoint = _saveData.isFirstPoint;
         GameManager.Instance.IsStageClear = _saveData.isStageClear;
         // isSpawnPossible은 필드매니저에서 세팅
+        MakeInventoryData(); // 0413 아이템 데이터 저장용
     }
 
     public SaveData GetSaveData => _saveData;
@@ -353,5 +354,49 @@ public class DataSource : Singleton<DataSource>
     public SaveData Load()
     {
         return _saveSystem.Load();
+    }
+
+    // 0413 아이템 저장용 추가
+    private void MakeInventoryData()
+    {
+        if (_saveData.inventoryItems.Count == 0 && !InventoryManager.Instance.ISEquipmentsEmpty())
+        {
+            // 게임 초기 아이템 추가
+            InventoryManager.Instance.AddItem(new ItemData("흔한 모자", ItemType.Hat, Grade.Common, 1, 10, 100, "평범한 모자"));
+            InventoryManager.Instance.AddItem(new ItemData("흔한 검", ItemType.Sword, Grade.Common, 1, 10, 200, "흔한 검"));
+            InventoryManager.Instance.AddItem(new ItemData("흔한 갑주", ItemType.Armor, Grade.Common, 1, 10, 200, "흔한 갑주"));
+            InventoryManager.Instance.AddItem(new ItemData("흔한 반지", ItemType.Ring, Grade.Common, 1, 10, 200, "흔한 반지"));
+            InventoryManager.Instance.AddItem(new ItemData("흔한 신발", ItemType.Shoes, Grade.Common, 1, 10, 200, "흔한 신발"));
+
+            return;
+        }
+
+        if (_saveData.inventoryItems != null)
+        {
+            foreach (ItemData item in _saveData.inventoryItems)
+            {
+                InventoryManager.Instance.AddItem(item);
+            }
+        }
+
+        if (_saveData.equipments != null)
+        {
+            InventoryManager.Instance.SetEquipments(_saveData.equipments);
+
+            // 스탯 적용
+            foreach (ItemData item in _saveData.equipments)
+            {
+                if (item.uniqueId != 0)
+                {
+                    bool isAtk = item.type == ItemType.Sword || item.type == ItemType.Ring;
+
+                    if (isAtk)
+                        IncreaseAtk(item.value);
+                    else
+                        IncreaseDef(item.value);
+                }
+            }
+        }
+
     }
 }

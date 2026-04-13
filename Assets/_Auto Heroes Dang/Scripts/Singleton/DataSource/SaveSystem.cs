@@ -29,6 +29,8 @@ public class SaveData
     public bool isFirstPoint;
     public bool isStageClear;
     public bool isSpawnPossible;
+    public List<ItemData> inventoryItems;   // 0413 아이템 및 장비 추가
+    public ItemData[] equipments;
 }
 
 public class SaveSystem
@@ -49,7 +51,9 @@ public class SaveSystem
             playerRuntimeDataList = DataSource.Instance.GetPlayerRuntimeDataList(),
             isFirstPoint = GameManager.Instance.IsFirstPoint,
             isStageClear = GameManager.Instance.IsStageClear,
-            isSpawnPossible = FieldManager.Instance.IsSpawnPossible
+            isSpawnPossible = FieldManager.Instance.IsSpawnPossible,
+            inventoryItems = new List<ItemData>(InventoryManager.Instance.Items), //0413 아이템 및 장비 추가 부분
+            equipments = InventoryManager.Instance.GetEquipmentData()
         };
 
         string json = JsonUtility.ToJson(data, true);

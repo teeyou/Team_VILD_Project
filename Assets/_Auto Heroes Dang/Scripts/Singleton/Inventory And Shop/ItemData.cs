@@ -46,6 +46,17 @@ public struct ItemData
 
     public ItemState state;
 
+    public string FullDescription // 0413 추가
+    {
+        get
+        {
+            bool isAtk = type == ItemType.Sword || type == ItemType.Ring || type == ItemType.AtkBuff;
+            string stat = isAtk ? "Atk" : "Def";
+
+            return $"{description}\n{stat} +{value}";
+        }
+    }
+
     public ItemData(
         string name,
         ItemType type,
