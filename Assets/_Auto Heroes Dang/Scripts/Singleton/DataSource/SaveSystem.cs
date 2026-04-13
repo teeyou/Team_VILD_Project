@@ -31,6 +31,8 @@ public class SaveData
     public bool isSpawnPossible;
     public List<ItemData> inventoryItems;   // 0413 아이템 및 장비 추가
     public ItemData[] equipments;
+    public bool atkPotionOn;
+    public bool defPotionOn;
 }
 
 public class SaveSystem
@@ -53,7 +55,10 @@ public class SaveSystem
             isStageClear = GameManager.Instance.IsStageClear,
             isSpawnPossible = FieldManager.Instance.IsSpawnPossible,
             inventoryItems = new List<ItemData>(InventoryManager.Instance.Items), //0413 아이템 및 장비 추가 부분
-            equipments = InventoryManager.Instance.GetEquipmentData()
+            equipments = InventoryManager.Instance.GetEquipmentData(),
+            atkPotionOn = DataSource.Instance.atkPotionOn,
+            defPotionOn = DataSource.Instance.defPotionOn
+
         };
 
         string json = JsonUtility.ToJson(data, true);

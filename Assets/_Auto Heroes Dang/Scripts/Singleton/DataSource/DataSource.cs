@@ -80,6 +80,9 @@ public class DataSource : Singleton<DataSource>
     public int AtkBuff { get; set; } = 0;
     public int DefBuff { get; set; } = 0;
 
+    public bool atkPotionOn { get; set; } // 0413 추가. 포션 버프 두줄.
+    public bool defPotionOn { get; set; }
+
     SaveSystem _saveSystem = new SaveSystem();
 
     protected override void Awake()
@@ -115,10 +118,11 @@ public class DataSource : Singleton<DataSource>
         else
         {
             GameManager.Instance.IsSave = true;
+            ApplyPotionData();
         }
 
         MakeInventoryData(); // 0413 추가 내용. 초기 아이템 지급
-
+        ShopManagerPotion.Instance.InitializePotion();
     }
 
     public void SetSaveData()
@@ -386,7 +390,8 @@ public class DataSource : Singleton<DataSource>
         {
             InventoryManager.Instance.SetEquipments(_saveData.equipments);
 
-            // 스탯 적용
+            /*
+            스탯 적용. 현 구조에선 사용 안함
             foreach (ItemData item in _saveData.equipments)
             {
                 if (item.uniqueId != 0)
@@ -399,6 +404,7 @@ public class DataSource : Singleton<DataSource>
                         IncreaseDef(item.value);
                 }
             }
+            */
         }
 
     }
@@ -415,6 +421,21 @@ public class DataSource : Singleton<DataSource>
         }
 
         return true;
+    }
+
+    private void ApplyPotionData()
+    {
+        if (_saveData == null)
+            return;
+
+        atkPotionOn = _saveData.atkPotionOn;
+        defPotionOn = _saveData.defPotionOn;
+
+        /*
+        현 구조에선 사용 안함
+        if (atkPotionOn) IncreaseAtk(10, true);
+        if (defPotionOn) IncreaseDef(10, true);
+        */
     }
 
 }
