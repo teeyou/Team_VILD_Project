@@ -48,6 +48,12 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private Button _inventoryButton;
     [SerializeField] private Button _shopButton;
     [SerializeField] private GameObject _enhancedPanel;
+
+    [Header("재화 획득 플로팅 텍스트")]
+    [SerializeField] private CurrencyText _currencyTextPrefab;
+    [SerializeField] private RectTransform _goldGainAnchor;
+    [SerializeField] private RectTransform _gemGainAnchor;
+
     public Vector3 GoldTargetUIPosition => _goldTargetUI.position;
     public Vector3 GemTargetUIPosition => _gemTargetUI.position;
 
@@ -406,6 +412,8 @@ public class UIManager : Singleton<UIManager>
                                     data = DataSource.Instance.GetPlayerRuntimeData(chIdx);
                                     DataSource.Instance.LevelUp(chIdx, data.Grade);
 
+                                    AudioManager.Instance.PlaySFX("CharLevelUp1");
+
                                     RefreshUI(idx, data, _detailLevelTMP, _detailCpTMP, _detailAtkTMP, _detailDefTMP, _detailRequiredGoldTMP);
 
                                     _levelUpButtonRoutine = StartCoroutine(DelayLevelUpButton());
@@ -597,5 +605,29 @@ public class UIManager : Singleton<UIManager>
             animate.ResetAnimate();
             animate.PlayAnimate(0);
         }
+    }
+
+    public void ShowGoldGain(int amount)
+    {
+        if (_currencyTextPrefab == null || _goldGainAnchor == null)
+            return;
+
+        CurrencyText instance = Instantiate(_currencyTextPrefab, _goldGainAnchor.parent);
+        RectTransform rect = instance.GetComponent<RectTransform>();
+        rect.anchoredPosition = _goldGainAnchor.anchoredPosition;
+
+        instance.PlayGold($"+{amount}");
+    }
+
+    public void ShowGemGain(int amount)
+    {
+        if (_currencyTextPrefab == null || _gemGainAnchor == null)
+            return;
+
+        CurrencyText instance = Instantiate(_currencyTextPrefab, _gemGainAnchor.parent);
+        RectTransform rect = instance.GetComponent<RectTransform>();
+        rect.anchoredPosition = _gemGainAnchor.anchoredPosition;
+
+        instance.PlayGem($"+{amount}");
     }
 }

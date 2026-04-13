@@ -222,6 +222,8 @@ public class ItemCombinationUI : MonoBehaviour
             return;
         }
 
+        AudioManager.Instance.PlaySFX("ForgeTry");
+
         DataSource.Instance.UseGem(gemCost);
 
         InventoryManager.Instance.RemoveItem(left);
@@ -233,10 +235,15 @@ public class ItemCombinationUI : MonoBehaviour
         {
             ItemData result = GetFusionPreviewItem(left);
             InventoryManager.Instance.AddItem(result);
+
+            AudioManager.Instance.PlaySFX("ForgeCombination");
+
             Debug.Log("합성 성공");
         }
         else
         {
+            AudioManager.Instance.PlaySFX("ForgeFail");
+
             Debug.Log("합성 실패");
         }
 
