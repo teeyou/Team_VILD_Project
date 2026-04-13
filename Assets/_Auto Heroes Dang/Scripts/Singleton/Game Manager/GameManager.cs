@@ -109,23 +109,25 @@ public class GameManager : Singleton<GameManager>
         {
             Grade grade = Grade.Common;
             int value = ItemDescription.GetBaseValue(grade);
-  
+            string dis = ItemDescription.GetBaseDescription(grade); 
+
+
             switch (type)
             {
                 case 0:
-                    return new ItemData($"{ItemName.GetPrefix(grade)} 모자", ItemType.Hat, grade, 1, value, 100, "");
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 모자", ItemType.Hat, grade, 1, value, 100, dis);
 
                 case 1:
-                    return new ItemData($"{ItemName.GetPrefix(grade)} 검", ItemType.Sword, grade, 1, value, 100, "");
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 검", ItemType.Sword, grade, 1, value, 100, dis);
 
                 case 2:
-                    return new ItemData($"{ItemName.GetPrefix(grade)} 갑주", ItemType.Armor, grade, 1, value, 100, "");
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 갑주", ItemType.Armor, grade, 1, value, 100, dis);
 
                 case 3:
-                    return new ItemData($"{ItemName.GetPrefix(grade)} 반지", ItemType.Ring, grade, 1, value, 100, "");
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 반지", ItemType.Ring, grade, 1, value, 100, dis);
 
                 case 4:
-                    return new ItemData($"{ItemName.GetPrefix(grade)} 신발", ItemType.Shoes, grade, 1, value, 100, "");
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 신발", ItemType.Shoes, grade, 1, value, 100, dis);
 
             }
         }
@@ -134,23 +136,24 @@ public class GameManager : Singleton<GameManager>
         {
             Grade grade = Grade.Uncommon;
             int value = ItemDescription.GetBaseValue(grade);
+            string dis = ItemDescription.GetBaseDescription(grade);
 
             switch (type)
             {
                 case 0:
-                    return new ItemData($"{ItemName.GetPrefix(grade)} 모자", ItemType.Hat, grade, 1, value, 100, "");
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 모자", ItemType.Hat, grade, 1, value, 100, dis);
 
                 case 1:
-                    return new ItemData($"{ItemName.GetPrefix(grade)} 검", ItemType.Sword, grade, 1, value, 100, "");
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 검", ItemType.Sword, grade, 1, value, 100, dis);
 
                 case 2:
-                    return new ItemData($"{ItemName.GetPrefix(grade)} 갑주", ItemType.Armor, grade, 1, value, 100, "");
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 갑주", ItemType.Armor, grade, 1, value, 100, dis);
 
                 case 3:
-                    return new ItemData($"{ItemName.GetPrefix(grade)} 반지", ItemType.Ring, grade, 1, value, 100, "");
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 반지", ItemType.Ring, grade, 1, value, 100, dis);
 
                 case 4:
-                    return new ItemData($"{ItemName.GetPrefix(grade)} 신발", ItemType.Shoes, grade, 1, value, 100, "");
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 신발", ItemType.Shoes, grade, 1, value, 100, dis);
 
             }
         }
@@ -159,23 +162,24 @@ public class GameManager : Singleton<GameManager>
         {
             Grade grade = Grade.Rare;
             int value = ItemDescription.GetBaseValue(grade);
+            string dis = ItemDescription.GetBaseDescription(grade);
 
             switch (type)
             {
                 case 0:
-                    return new ItemData($"{ItemName.GetPrefix(grade)} 모자", ItemType.Hat, grade, 1, value, 100, "");
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 모자", ItemType.Hat, grade, 1, value, 100, dis);
 
                 case 1:
-                    return new ItemData($"{ItemName.GetPrefix(grade)} 검", ItemType.Sword, grade, 1, value, 100, "");
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 검", ItemType.Sword, grade, 1, value, 100, dis);
 
                 case 2:
-                    return new ItemData($"{ItemName.GetPrefix(grade)} 갑주", ItemType.Armor, grade, 1, value, 100, "");
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 갑주", ItemType.Armor, grade, 1, value, 100, dis);
 
                 case 3:
-                    return new ItemData($"{ItemName.GetPrefix(grade)} 반지", ItemType.Ring, grade, 1, value, 100, "");
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 반지", ItemType.Ring, grade, 1, value, 100, dis);
 
                 case 4:
-                    return new ItemData($"{ItemName.GetPrefix(grade)} 신발", ItemType.Shoes, grade, 1, value, 100, "");
+                    return new ItemData($"{ItemName.GetPrefix(grade)} 신발", ItemType.Shoes, grade, 1, value, 100, dis);
 
             }
         }
