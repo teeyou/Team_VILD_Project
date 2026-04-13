@@ -82,6 +82,7 @@ public class BattleManager : Singleton<BattleManager>
 
     private List<AutoAttack> _autoAttackList = new List<AutoAttack>();  // 스킬 연출에서 이벤트 구독 취소를 위한 리스트
 
+    private List<ItemData> _itemRewardList = new List<ItemData>();
     protected override void Awake()
     {
         base.Awake();
@@ -495,10 +496,13 @@ public class BattleManager : Singleton<BattleManager>
         int rewardGem = GameManager.Instance.GetCurrentStageGemReward();
 
         BattleUIManager.Instance.SetStageReward(rewardGold, rewardGem);
-        BattleUIManager.Instance.ShowResultPanel(true);
-
+        
         DataSource.Instance.AddGold(rewardGold);
         DataSource.Instance.AddGem(rewardGem);
+        
+        AddItemReward(3);
+
+        BattleUIManager.Instance.ShowResultPanel(true); // BattleUIManager에서 _victoryButton 클릭에서 다음 스테이지 증가 수행
 
         CreateMVP();
 
@@ -507,6 +511,38 @@ public class BattleManager : Singleton<BattleManager>
         DestroyAll();
 
         GameManager.Instance.IsStageClear = true;
+
     }
 
+    public void AddItemReward(int count)
+    {
+        EGameStage currentStage = GameManager.Instance.CurrentStage;
+
+        for (int i = 0; i < count; i++)
+        {
+            ItemData data = GameManager.Instance.GetCurrentStageItemReward(currentStage);
+            _itemRewardList.Add(data);
+
+            InventoryManager.Instance.AddItem(data);
+
+            Debug.Log($"인벤토리에 추가 됨 : {data.name} {data.type} {data.grade} {data.description}");
+        }
+    }
+
+
+    public ItemData GetItemRewardData(int idx)
+    {
+        if (idx >= _itemRewardList.Count)
+        {
+            Debug.Log("인덱스 범위 초과");
+            return new ItemData();
+        }
+
+        return _itemRewardList[idx];
+    }
+
+    public List<ItemData> GetItemRewardDataList()
+    {
+        return _itemRewardList;
+    }
 }

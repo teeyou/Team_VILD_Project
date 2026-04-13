@@ -1,5 +1,49 @@
 using System;
 
+static class ItemName
+{
+    public static string GetPrefix(Grade grade)
+    {
+        switch (grade)
+        {
+            case Grade.Common:
+                return "흔한";
+            case Grade.Uncommon:
+                return "쓸만한";
+            case Grade.Rare:
+                return "귀한";
+            case Grade.Elite:
+                return "영웅의";
+            case Grade.Epic:
+                return "전설의";
+            default:
+                return "NULL";
+        }
+    }
+}
+
+static class ItemDescription
+{
+    public static int GetBaseValue(Grade grade)
+    {
+        switch (grade)
+        {
+            case Grade.Common:
+                return 10;
+            case Grade.Uncommon:
+                return 60;
+            case Grade.Rare:
+                return 110;
+            case Grade.Elite:
+                return 160;
+            case Grade.Epic:
+                return 210;
+            default:
+                return 0;
+        }
+    }
+}
+
 [Serializable]
 public enum ItemType
 {

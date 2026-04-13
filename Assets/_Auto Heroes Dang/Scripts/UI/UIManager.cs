@@ -183,7 +183,7 @@ public class UIManager : Singleton<UIManager>
         UpdateTotalCp();
     }
 
-    private void UpdateTotalCp()
+    public void UpdateTotalCp()
     {
         int totalCp = 0;
 
@@ -516,7 +516,7 @@ public class UIManager : Singleton<UIManager>
 
     private IEnumerator DelayLevelUpButton()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
 
         _levelUpButtonRoutine = null;
     }
