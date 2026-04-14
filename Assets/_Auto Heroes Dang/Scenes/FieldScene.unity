@@ -8313,6 +8313,7 @@ MonoBehaviour:
   _percentText: {fileID: 710695970}
   _costText: {fileID: 34653977}
   _okButton: {fileID: 1310771239}
+  _clickCooldown: 0.5
   _factory: {fileID: 987811137}
 --- !u!1 &530767357
 GameObject:
@@ -17967,7 +17968,7 @@ Terrain:
   m_Enabled: 1
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: 88a44daf605c51f48b778af6fff265f2, type: 2}
-  m_TreeDistance: 5000
+  m_TreeDistance: 100
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
@@ -24971,6 +24972,7 @@ MonoBehaviour:
   _gemCostText: {fileID: 1131259428}
   _goldCostText: {fileID: 1286729295}
   _okButton: {fileID: 7081519345701817018}
+  _clickCooldown: 0.5
   _factory: {fileID: 580910791}
 --- !u!1 &1427959423
 GameObject:
