@@ -253,8 +253,8 @@ public class ItemCombinationUI : MonoBehaviour
 
         if (isSuccess)
         {
-            ItemData result = GetFusionPreviewItem(left);
-            InventoryManager.Instance.AddItem(result);
+            Grade nextGrade = ItemForgeHelper.GetNextGrade(left.grade);
+            InventoryManager.Instance.AddItemGrade(nextGrade, left.type);
 
             AudioManager.Instance.PlaySFX("ForgeSuccess");
 

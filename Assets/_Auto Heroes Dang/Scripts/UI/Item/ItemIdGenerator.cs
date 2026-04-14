@@ -8,4 +8,9 @@ public static class ItemIdGenerator
     {
         return _nextId++;
     }
+
+    public static void SetNextId(int nextId)
+    {
+        _nextId = Mathf.Max(1, nextId);
+    }
 }
