@@ -21,9 +21,9 @@ public class ClickToStart : MonoBehaviour
             DataSource.Instance.Gem = 10;
             DataSource.Instance.Gold = 1000;
 
-            //InventoryManager.Instance.Clear();
-            DataSource.Instance.MakeInventoryData();
             DataSource.Instance.DeleteSaveFile();
+            InventoryManager.Instance.Clear();
+            DataSource.Instance.MakeInventoryData();
 
             SceneLoader.Instance.LoadScene(ESceneId.SelectScene);
         });

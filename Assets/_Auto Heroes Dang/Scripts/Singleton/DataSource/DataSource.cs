@@ -113,7 +113,7 @@ public class DataSource : Singleton<DataSource>
         if (_saveData == null)
         {
             GameManager.Instance.IsSave = false;
-            
+            MakeInventoryData();
         }
 
         else
@@ -122,7 +122,6 @@ public class DataSource : Singleton<DataSource>
             ApplyPotionData();
         }
 
-        MakeInventoryData(); // 0413 추가 내용. 초기 아이템 지급
         ShopManagerPotion.Instance.InitializePotion();
     }
 
@@ -160,6 +159,7 @@ public class DataSource : Singleton<DataSource>
     public void DeleteSaveFile()
     {
         _saveSystem.Delete();
+        _saveData = null;
     }
 
     public void AddGold(int amount)
