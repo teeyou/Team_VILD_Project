@@ -18,6 +18,9 @@ public class ClickToStart : MonoBehaviour
     {
         _newButton.onClick.AddListener(() =>
         {
+            DataSource.Instance.Gem = 10;
+            DataSource.Instance.Gold = 1000;
+
             SceneLoader.Instance.LoadScene(ESceneId.SelectScene);
         });
 
