@@ -67,15 +67,15 @@ static class ItemDescription
         switch (grade)
         {
             case Grade.Common:
-                return 500;
+                return 1000;
             case Grade.Uncommon:
-                return 2000;
+                return 5000;
             case Grade.Rare:
-                return 10000;
+                return 20000;
             case Grade.Elite:
-                return 30000;
+                return 100000;
             case Grade.Epic:
-                return 77777;
+                return 777777;
             default:
                 return 0;
         }

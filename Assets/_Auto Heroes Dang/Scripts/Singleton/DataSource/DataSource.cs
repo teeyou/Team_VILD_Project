@@ -394,7 +394,7 @@ public class DataSource : Singleton<DataSource>
     }
 
     // 0413 아이템 저장용 추가
-    private void MakeInventoryData()
+    public void MakeInventoryData()
     {
         InventoryManager.Instance.Clear();
 

@@ -19,7 +19,7 @@ public static class ItemForgeHelper
     public static int GetEnhanceCost(ItemData item)
     {
         int baseCost = 0;             // 0강 장비 강화 시도 비용
-        int increasePerLevel = 200;   // 강화 레벨당 증가 비용
+        int increasePerLevel = 1000;   // 강화 레벨당 증가 비용
 
         return baseCost + (item.level * increasePerLevel);
     }
