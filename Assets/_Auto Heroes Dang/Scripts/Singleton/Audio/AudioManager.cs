@@ -319,24 +319,20 @@ public class AudioManager : Singleton<AudioManager>
 
     private void LoadVolumeSettings()
     {
-        float master = PlayerPrefs.GetFloat(MASTER_VOLUME_KEY, 1f);
-        float bgm = PlayerPrefs.GetFloat(BGM_VOLUME_KEY, 1f);
-        float sfx = PlayerPrefs.GetFloat(SFX_VOLUME_KEY, 1f);
+        _masterVolumeValue = PlayerPrefs.GetFloat(MASTER_VOLUME_KEY, 1f);
+        _bgmVolumeValue = PlayerPrefs.GetFloat(BGM_VOLUME_KEY, 1f);
+        _sfxVolumeValue = PlayerPrefs.GetFloat(SFX_VOLUME_KEY, 1f);
 
         ApplyAllVolumes();
 
-        ApplyVolume(_masterVolumeParameter, master);
-        ApplyVolume(_bgmVolumeParameter, bgm);
-        ApplyVolume(_sfxVolumeParameter, sfx);
-
         if (_sliderMaster != null)
-            _sliderMaster.value = master;
+            _sliderMaster.value = _masterVolumeValue;
 
         if (_sliderBGM != null)
-            _sliderBGM.value = bgm;
+            _sliderBGM.value = _bgmVolumeValue;
 
         if (_sliderSFX != null)
-            _sliderSFX.value = sfx;
+            _sliderSFX.value = _sfxVolumeValue;
     }
 
     private void ApplyAllVolumes()
