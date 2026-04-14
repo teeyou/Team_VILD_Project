@@ -83,4 +83,18 @@ public class SaveSystem
 
         return loadedData;
     }
+
+    public void Delete()
+    {
+        if (File.Exists(SavePath))
+        {
+            Debug.Log("게임 파일 삭제 완료");
+            File.Delete(SavePath);
+        }
+
+        else
+        {
+            Debug.Log("삭제할 파일 없음");
+        }
+    }
 }
