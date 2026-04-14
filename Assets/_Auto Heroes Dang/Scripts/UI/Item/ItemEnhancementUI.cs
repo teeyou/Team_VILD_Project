@@ -171,7 +171,7 @@ public class ItemEnhancementUI : MonoBehaviour
         }
         else
         {
-            AudioManager.Instance.PlaySFX("ForgeFail");
+            //AudioManager.Instance.PlaySFX("ForgeFail");
 
             if (UIManager.Instance != null)
                 UIManager.Instance.PopUpToastMessage("강화 실패", 1f);

@@ -748,6 +748,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2301333547929090413, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2350428225153172918, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -801,6 +805,18 @@ PrefabInstance:
       value: 0.101
       objectReference: {fileID: 0}
     - target: {fileID: 5680634149326623043, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
+      propertyPath: _clipList.Array.data[0].volume
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680634149326623043, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
+      propertyPath: _clipList.Array.data[1].volume
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680634149326623043, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
+      propertyPath: _clipList.Array.data[2].volume
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680634149326623043, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
       propertyPath: _clipList.Array.data[26].volume
       value: 1
       objectReference: {fileID: 0}
@@ -819,6 +835,10 @@ PrefabInstance:
     - target: {fileID: 5680634149326623043, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
       propertyPath: _clipList.Array.data[30].volume
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701578115012748719, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
+      propertyPath: m_Volume
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 5821166596922743053, guid: 5717b30dc57c6a5499e6cad5b02bd11e, type: 3}
       propertyPath: m_AnchorMax.x

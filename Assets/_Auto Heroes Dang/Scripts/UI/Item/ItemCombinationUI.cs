@@ -265,7 +265,7 @@ public class ItemCombinationUI : MonoBehaviour
         }
         else
         {
-            AudioManager.Instance.PlaySFX("ForgeFail");
+            //AudioManager.Instance.PlaySFX("ForgeFail");
 
             if (UIManager.Instance != null)
                 UIManager.Instance.PopUpToastMessage("합성 실패", 1f);
