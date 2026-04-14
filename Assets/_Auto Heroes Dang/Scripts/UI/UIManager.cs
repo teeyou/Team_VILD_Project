@@ -391,13 +391,13 @@ public class UIManager : Singleton<UIManager>
                             // 레벨업 로직
                             if (DataSource.Instance.Gold >= requiredGold)
                             {
-                                Debug.Log($"requiredGold : {requiredGold}");
-                                Debug.Log($"DataSource.Instance.Gold : {DataSource.Instance.Gold}");
+                                //Debug.Log($"requiredGold : {requiredGold}");
+                                //Debug.Log($"DataSource.Instance.Gold : {DataSource.Instance.Gold}");
 
                                 if (_levelUpButtonRoutine == null)
                                 {
                                     DataSource.Instance.Gold -= requiredGold;
-                                    Debug.Log($"DataSource.Instance.Gold : {DataSource.Instance.Gold}");
+                                    //Debug.Log($"DataSource.Instance.Gold : {DataSource.Instance.Gold}");
                                     int chIdx = -1;
                                     //PlayerRuntimeData data;
                                     if (idx == 0)
@@ -413,6 +413,7 @@ public class UIManager : Singleton<UIManager>
                                     data = DataSource.Instance.GetPlayerRuntimeData(chIdx);
                                     DataSource.Instance.LevelUp(chIdx, data.Grade);
 
+                                    PopUpToastMessage("레벨이 올랐습니다.", 1f);
                                     AudioManager.Instance.PlaySFX("CharLevelUp1");
 
                                     RefreshUI(idx, data, _detailLevelTMP, _detailCpTMP, _detailAtkTMP, _detailDefTMP, _detailRequiredGoldTMP);
