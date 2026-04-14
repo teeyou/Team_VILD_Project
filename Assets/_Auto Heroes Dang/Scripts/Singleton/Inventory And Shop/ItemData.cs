@@ -151,7 +151,7 @@ public struct ItemData
         ItemState state = ItemState.Available,
         int uniqueId = -1)
     {
-        this.uniqueId = uniqueId < 0 ? ItemIdGenerator.GetNextId() : uniqueId;
+        this.uniqueId = uniqueId < 0 ? GenerateLongID() : uniqueId;
 
         this.name = name;
         this.type = type;
@@ -162,4 +162,12 @@ public struct ItemData
         this.description = description;
         this.state = state;
     }
+
+    public static int GenerateLongID()
+    {
+        byte[] i = Guid.NewGuid().ToByteArray();
+        return BitConverter.ToInt32(i, 0);
+    }
+
+
 }
