@@ -79,34 +79,8 @@ public class SaveSystem
         string loadedJson = File.ReadAllText(SavePath);
         SaveData loadedData = JsonUtility.FromJson<SaveData>(loadedJson);
 
-        SyncNextItemId(loadedData);
-
         Debug.Log("게임 데이터 로드");
 
         return loadedData;
-    }
-
-    private void SyncNextItemId(SaveData loadedData)
-    {
-        int maxId = 0;
-
-        if (loadedData.inventoryItems != null)
-        {
-            for (int i = 0; i < loadedData.inventoryItems.Count; i++)
-            {
-                maxId = Mathf.Max(maxId, loadedData.inventoryItems[i].uniqueId);
-            }
-        }
-
-        if (loadedData.equipments != null)
-        {
-            for (int i = 0; i < loadedData.equipments.Length; i++)
-            {
-                maxId = Mathf.Max(maxId, loadedData.equipments[i].uniqueId);
-            }
-        }
-
-        ItemIdGenerator.SetNextId(maxId + 1);
-        Debug.Log($"다음 아이템 ID 동기화: {maxId + 1}");
     }
 }
