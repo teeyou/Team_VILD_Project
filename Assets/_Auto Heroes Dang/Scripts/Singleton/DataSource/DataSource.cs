@@ -157,6 +157,11 @@ public class DataSource : Singleton<DataSource>
         CurrencySaveSystem.Save(_gem, _gold);
     }
 
+    public void DeleteSaveFile()
+    {
+        _saveSystem.Delete();
+    }
+
     public void AddGold(int amount)
     {
         if (amount <= 0)
