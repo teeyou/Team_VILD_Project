@@ -64,8 +64,8 @@ public class ShopManagerPotion : Singleton<ShopManagerPotion>, IItemManage
     {
         _items.Clear();
 
-        ItemData atkItem = new ItemData("고기", ItemType.AtkBuff, Grade.AtkBuff, 5, 11, 0, "힘이 세지는 고기");
-        ItemData defItem = new ItemData("풀", ItemType.DefBuff, Grade.DefBuff, 1, 11, 999, "방어가 강해지는 풀");
+        ItemData atkItem = new ItemData("고기", ItemType.AtkBuff, Grade.AtkBuff, 5, 10, 1000, "힘이 세지는 고기");
+        ItemData defItem = new ItemData("풀", ItemType.DefBuff, Grade.DefBuff, 1, 10, 1000, "방어가 강해지는 풀");
 
         if (DataSource.Instance.atkPotionOn)
             atkItem.state = ItemState.SoldOut;
