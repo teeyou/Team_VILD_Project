@@ -11,8 +11,8 @@ public class EndingMotion : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _animator.SetTrigger("Victory");
-        Invoke("Stop", _delayTime);
+        // _animator.SetTrigger("Victory");
+        // Invoke("Stop", _delayTime);
     }
     void Update()
     {
@@ -32,5 +32,11 @@ public class EndingMotion : MonoBehaviour
     private void Stop()
     {
         _animator.enabled = false;
+    }
+
+    public void MotionStart()
+    {
+        _animator.SetTrigger("Victory");
+        Invoke("Stop", _delayTime);
     }
 }

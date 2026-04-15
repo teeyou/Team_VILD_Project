@@ -11,25 +11,21 @@ public class CharacterCapture : MonoBehaviour
 
     public void ExportToPNG(string fileName = "")
     {
-
-        // 저장 경로 설정, 택1
-
+        /*
         string folder = "_Auto Heroes Dang/Resources/CharacterSprite/ScreenShot";
         string folderCheck = Path.Combine(Application.dataPath, folder);
-
-        /*
+        */
         string folder = Path.Combine(Application.persistentDataPath, "Screenshots");
 
         if (!Directory.Exists(folder))
         {
             Directory.CreateDirectory(folder);
         }
-        */
 
         string date = System.DateTime.Now.ToString("yyyyMMdd_HHmmss");
-
         string fileNameDate = $"{fileName}_{date}.png";
-        string path = Path.Combine(folderCheck, fileNameDate);
+
+        string path = Path.Combine(folder, fileNameDate);
 
         // -------------------------- 여기까지 파일 이름, 경로 설정
 
@@ -52,12 +48,6 @@ public class CharacterCapture : MonoBehaviour
 
         Destroy(texture);
 
-
-        /* 에디터 새로고침용
-#if UNITY_EDITOR
-        UnityEditor.AssetDatabase.Refresh();
-#endif
-        */
     }
 
 }
