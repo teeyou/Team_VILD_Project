@@ -14,7 +14,7 @@ public class EndingCredit : MonoBehaviour
     [SerializeField] private EndingMotion[] _characters;
     [SerializeField] private ParticleSystem _fire;
 
-    Canvas _audioCanvas;
+    private Canvas _audioCanvas;
 
     // 시간 캐싱용
     private WaitForSeconds _showTime;
