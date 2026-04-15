@@ -14,6 +14,8 @@ public class EndingCredit : MonoBehaviour
     [SerializeField] private EndingMotion[] _characters;
     [SerializeField] private ParticleSystem _fire;
 
+    Canvas _audioCanvas;
+
     // 시간 캐싱용
     private WaitForSeconds _showTime;
     private WaitForSeconds _waitTime;
@@ -24,6 +26,9 @@ public class EndingCredit : MonoBehaviour
         _waitTime = new WaitForSeconds(_wait);
 
         foreach (CanvasGroup cg in _canvasGroups) if (cg != null) cg.alpha = 0f;
+
+        _audioCanvas = Object.FindObjectOfType<Canvas>();
+        if (_audioCanvas != null) _audioCanvas.gameObject.SetActive(false);
     }
 
     private IEnumerator Start()
@@ -68,6 +73,7 @@ public class EndingCredit : MonoBehaviour
         }
         canvas.alpha = 0f;
         _canvasOff.gameObject.SetActive(false);
+        if(_audioCanvas!=null) _audioCanvas.gameObject.SetActive(true); // 오디오 버튼 활성화
 
         yield return new WaitForSeconds(_endDelay);
 
