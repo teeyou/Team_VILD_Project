@@ -75,6 +75,11 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField] private GameObject _configPanel;
     [SerializeField] private GameObject _settingButtonObject;
 
+    private Coroutine _forceCharacterCaptureBgmRoutine;
+    [SerializeField] private string _characterCaptureSceneName = "CharacterCapture";
+    [SerializeField] private string _characterCaptureBgmName = "Ending";
+    [SerializeField] private string _fieldBgmName = "FieldBGM";
+
     private float _masterVolumeValue = 1f;
     private float _bgmVolumeValue = 1f;
     private float _sfxVolumeValue = 1f;
@@ -153,6 +158,29 @@ public class AudioManager : Singleton<AudioManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        StopLoopSFX();
+
+        if (_forceCharacterCaptureBgmRoutine != null)
+        {
+            StopCoroutine(_forceCharacterCaptureBgmRoutine);
+            _forceCharacterCaptureBgmRoutine = null;
+        }
+
+        if (scene.name == _characterCaptureSceneName)
+        {
+            if (_bgmSource != null)
+            {
+                _bgmSource.Stop();
+                _bgmSource.clip = null;
+            }
+
+            _currentBgmName = string.Empty;
+            PlayBGM(_characterCaptureBgmName);
+
+            _forceCharacterCaptureBgmRoutine = StartCoroutine(Co_ForceCharacterCaptureBGM());
+            return;
+        }
+
         bool isLoadingScene = scene.name == _loadingSceneName;
 
         _muteSfxByScene = isLoadingScene;
@@ -222,6 +250,9 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlayFieldBGM()
     {
+        if (SceneManager.GetActiveScene().name == _characterCaptureSceneName)
+            return;
+
         PlayBGM(_defaultFieldBgmName);
     }
 
@@ -381,6 +412,29 @@ public class AudioManager : Singleton<AudioManager>
 
         _audioMixer.SetFloat(parameterName, mixerValue);
     }
+
+    private IEnumerator Co_ForceCharacterCaptureBGM()
+    {
+        while (SceneManager.GetActiveScene().name == _characterCaptureSceneName)
+        {
+            if (_currentBgmName == _fieldBgmName || !_bgmSource.isPlaying)
+            {
+                if (_bgmSource != null)
+                {
+                    _bgmSource.Stop();
+                    _bgmSource.clip = null;
+                }
+
+                _currentBgmName = string.Empty;
+                PlayBGM(_characterCaptureBgmName);
+            }
+
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        _forceCharacterCaptureBgmRoutine = null;
+    }
+
 
     public void OpenConfig()
     {
